@@ -1,25 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Image from 'next/image';
+import { EyesOff, EyesOn } from '@/../public/images';
+
+const EYE_ON = {
+  src: EyesOn,
+  alt: '비밀번호 보이는 아이콘',
+};
+
+const EYE_OFF = {
+  src: EyesOff,
+  alt: '비밀번호 안 보이는 아이콘',
+};
 
 export default function PasswordInput({ labelName, error, ...rest }) {
+  const [eyes, setEyes] = useState(EYE_OFF);
+  const changeEye = () => {
+    if (eyes.alt === EYE_OFF.alt) {
+      setEyes(EYE_ON);
+      return;
+    }
+    setEyes(EYE_OFF);
+  };
   let className =
-    'px-4 py-15px rounded-lg bg-white focus:border-blue-55 focus:outline-none ';
+    'px-4 py-15px rounded-lg bg-white focus:border-blue-55 focus:outline-none w-full ';
   className += error ? 'border-red-d6' : 'border-gray-d9';
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 w-full">
       <label
         className="text-base text-black-33 font-normal"
         htmlFor={labelName}
       >
         {labelName}
       </label>
-      <input
-        className={className}
-        type="password"
-        id={labelName}
-        placeholder="비밀번호를 입력해주세요"
-        autoComplete="password"
-        {...rest}
-      />
+      <div className="relative w-full">
+        <input
+          className={className}
+          type={eyes.alt === EYE_ON.alt ? 'text' : 'password'}
+          id={labelName}
+          placeholder="비밀번호를 입력해주세요"
+          autoComplete="password"
+          {...rest}
+        />
+        <Image
+          className="absolute top-3 -right-5 cursor-pointer"
+          onClick={changeEye}
+          width={24}
+          height={24}
+          src={eyes.src}
+          alt={eyes.alt}
+        />
+      </div>
       <span className="text-sm font-normal text-red-600">{error}</span>
     </div>
   );

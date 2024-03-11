@@ -7,7 +7,7 @@ export default function EmailInput({ error, ...rest }) {
   return (
     <div className="flex flex-col gap-2">
       <label className="text-base text-black-33 font-normal" htmlFor="email">
-        email
+        이메일
       </label>
       <input
         className={className}
@@ -16,7 +16,7 @@ export default function EmailInput({ error, ...rest }) {
         placeholder="이메일을 입력해주세요"
         {...rest}
       />
-      <span className="text-sm font-normal text-red-600">{error}</span>
+      <span className="text-sm font-normal text-red-600">{error} </span>
     </div>
   );
 }

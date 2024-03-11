@@ -22,8 +22,9 @@ export default function SignInPage() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <PasswordInput labelName="비밀번호" />
-        <PasswordInput labelName="비밀번호 확인" />
+        <PasswordInput labelName="비밀번호" error="" />
+        <PasswordInput labelName="비밀번호 확인" error="" />
+        <button type="submit">확인</button>
       </form>
     </div>
   );
