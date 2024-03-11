@@ -17,8 +17,15 @@
   .text-black-33 {
     color: #333236;
   }
+  .max-w-520px {
+    max-width: 520px;
+  }
 }
 input[type='password']::-ms-reveal,
 input[type='password']::-ms-clear {
   display: none;
+}
+
+* {
+  box-sizing: border-box;
 }

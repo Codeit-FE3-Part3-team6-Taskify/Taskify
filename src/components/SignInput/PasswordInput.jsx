@@ -12,6 +12,15 @@ const EYE_OFF = {
   alt: '비밀번호 안 보이는 아이콘',
 };
 
+/**
+ *
+ * @param {string} labelName : 비밀번호, 비밀번호 확인
+ * @param {string} error : errormessage
+ * @param {*} ...rest : input 로직
+ * @returns label-passwordInput
+ */
+
+// Todo(노진석) : 완성
 export default function PasswordInput({ labelName, error, ...rest }) {
   const [eyes, setEyes] = useState(EYE_OFF);
   const changeEye = () => {
@@ -42,7 +51,7 @@ export default function PasswordInput({ labelName, error, ...rest }) {
           {...rest}
         />
         <Image
-          className="absolute top-3 -right-5 cursor-pointer"
+          className="absolute top-3 right-4 cursor-pointer"
           onClick={changeEye}
           width={24}
           height={24}
