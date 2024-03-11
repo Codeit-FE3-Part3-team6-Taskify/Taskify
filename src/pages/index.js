@@ -6,6 +6,7 @@ import {
   LogoImg,
   CombinedLogo,
   TempProfile,
+  CrownIcon,
 } from '../../public/images';
 
 export default function Home() {
@@ -24,9 +25,7 @@ export default function Home() {
       <Header
         hasSpace
         title="대시보드"
-        ownerIcon={
-          <Image src="/images/CrownIcon.svg" alt="" width={20} height={16} />
-        }
+        ownerIcon={<Image src={CrownIcon} alt="" width={20} height={16} />}
         buttons={
           <>
             <button
