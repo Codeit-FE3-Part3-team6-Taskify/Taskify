@@ -26,8 +26,8 @@ export default function SignInPage() {
   return (
     <main className="w-full  max-w-520px m-auto mt-12 mb-12">
       <div className="flex flex-col items-center gap-7">
-        <Image src={LogoImg} width={164} height={189} />
-        <Image src={Logo} width={198} height={55} />
+        <Image src={LogoImg} width={164} height={189} alt="로고이미지" />
+        <Image src={Logo} width={198} height={55} alt="로고이름" />
       </div>
       <h3 className="mt-3 mb-4 text-center font-medium text-xl ">
         오늘도 만나서 반가워요!
@@ -54,7 +54,7 @@ export default function SignInPage() {
       </form>
       <p className="text-center">
         회원이 아니신가요?
-        <Link className="ml-2" href="/">
+        <Link className="ml-2" href="/signup">
           <span>회원가입하기</span>
         </Link>
       </p>
