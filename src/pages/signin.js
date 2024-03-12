@@ -24,7 +24,7 @@ export default function SignInPage() {
     setPasswordError(message);
   };
   return (
-    <main className="w-full m-auto mt-12 mb-12 max-w-[351px] md:max-w-[520px]">
+    <main className="w-full m-auto mt-36 mb-12 max-w-[351px] md:max-w-[520px] md:mt-60 lg:mt-[223px]">
       <div className="flex flex-col items-center gap-[18px] md:gap-[30px]">
         <Image
           className="ml-9 w-[98px] h-[113px] md:w-[164px] md:h-[189px]"
