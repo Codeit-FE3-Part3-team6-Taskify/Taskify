@@ -1,3 +1,3 @@
 export default function Home() {
-  return <>6팀 화이팅~</>;
+  return <>6팀 화이팅</>;
 }
