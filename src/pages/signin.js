@@ -5,6 +5,7 @@ import PasswordInput from '@/components/SignInput/PasswordInput';
 import UserInformationInput from '@/components/SignInput/UserInformationInput';
 import { checkLoginEmail, checkLoginPassword } from '@/utils/validation';
 import { Logo, LogoImg } from '../../public/images';
+import { signInUser } from '@/features/user';
 
 // Todo(노진석) : (미완성)api로직 등 추가해야함.
 export default function SignInPage() {
@@ -14,6 +15,7 @@ export default function SignInPage() {
   const [passwordError, setPasswordError] = useState('');
   const onSubmit = (e) => {
     e.preventDefault();
+    signInUser({ email, password });
   };
   const handleEmailBlur = () => {
     const message = checkLoginEmail(email);

@@ -5,7 +5,7 @@ const axiosInstance = axios.create({
   timeout: 5000,
   headers: {
     Accept: 'application/json',
-    'Content-Type': 'application/json;charset=UTF-8;',
+    'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
   },
 });
@@ -44,18 +44,18 @@ export const axiosGet = async (url) => {
   }
 };
 
-export const axiosPost = async (url, object) => {
+export const axiosPost = async (url, body) => {
   try {
-    const { data } = await axiosInstance.post(url, object);
+    const { data } = await axiosInstance.post(url, body);
     return data;
   } catch (e) {
     return `api post error : ${e}`;
   }
 };
 
-export const axiosPut = async (url, object) => {
+export const axiosPut = async (url, body) => {
   try {
-    const { data } = await axiosInstance.put(url, object);
+    const { data } = await axiosInstance.put(url, body);
     return data;
   } catch (e) {
     return `api put error : ${e}`;
