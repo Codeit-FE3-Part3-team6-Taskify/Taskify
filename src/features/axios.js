@@ -49,7 +49,8 @@ export const axiosPost = async (url, body) => {
     const { data } = await axiosInstance.post(url, body);
     return data;
   } catch (e) {
-    return `api post error : ${e}`;
+    console.log(`api post error : ${e}`);
+    return e.response;
   }
 };
 

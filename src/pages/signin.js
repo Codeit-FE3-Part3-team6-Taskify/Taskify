@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import PasswordInput from '@/components/SignInput/PasswordInput';
 import UserInformationInput from '@/components/SignInput/UserInformationInput';
 import { checkLoginEmail, checkLoginPassword } from '@/utils/validation';
@@ -9,13 +10,14 @@ import { signInUser } from '@/features/user';
 
 // Todo(노진석) : (미완성)api로직 등 추가해야함.
 export default function SignInPage() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const onSubmit = (e) => {
     e.preventDefault();
-    signInUser({ email, password });
+    signInUser({ email, password }, setEmailError, setPasswordError, router);
   };
   const handleEmailBlur = () => {
     const message = checkLoginEmail(email);
@@ -27,7 +29,10 @@ export default function SignInPage() {
   };
   return (
     <main className="w-full m-auto mt-36 mb-12 max-w-[351px] md:max-w-[520px] md:mt-60 lg:mt-[223px]">
-      <div className="flex flex-col items-center gap-[18px] md:gap-[30px]">
+      <Link
+        href="/"
+        className="flex flex-col items-center gap-[18px] md:gap-[30px]"
+      >
         <Image
           className="ml-9 w-[98px] h-[113px] md:w-[164px] md:h-[189px]"
           src={LogoImg}
@@ -38,7 +43,7 @@ export default function SignInPage() {
           src={Logo}
           alt="로고이름"
         />
-      </div>
+      </Link>
       <h3 className="mt-[8px] mb-10  text-center font-medium text-xl  md:mb-[60px]">
         오늘도 만나서 반가워요!
       </h3>
