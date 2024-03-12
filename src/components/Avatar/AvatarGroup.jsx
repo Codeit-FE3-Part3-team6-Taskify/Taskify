@@ -1,5 +1,6 @@
 import Avatar from './Avatar';
 
+// Todo(조예진) : 완성
 export default function AvatarGroup({ isMobile, participants }) {
   const number = isMobile ? 2 : 4;
   const backgroundColors = [

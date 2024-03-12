@@ -1,3 +1,4 @@
+// Todo(조예진) : 완성
 export default function CommonHeader({
   isLanding,
   smallLogo,
