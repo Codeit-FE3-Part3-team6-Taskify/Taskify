@@ -24,16 +24,24 @@ export default function SignInPage() {
     setPasswordError(message);
   };
   return (
-    <main className="w-full  max-w-520px m-auto mt-12 mb-12">
-      <div className="flex flex-col items-center gap-7">
-        <Image src={LogoImg} width={164} height={189} alt="로고이미지" />
-        <Image src={Logo} width={198} height={55} alt="로고이름" />
+    <main className="w-full m-auto mt-12 mb-12 max-w-[351px] md:max-w-[520px]">
+      <div className="flex flex-col items-center gap-[18px] md:gap-[30px]">
+        <Image
+          className="ml-9 w-[98px] h-[113px] md:w-[164px] md:h-[189px]"
+          src={LogoImg}
+          alt="로고이미지"
+        />
+        <Image
+          className="w-[119px] h-[33px] md:w-[198px] md:h-[55px]"
+          src={Logo}
+          alt="로고이름"
+        />
       </div>
-      <h3 className="mt-3 mb-4 text-center font-medium text-xl ">
+      <h3 className="mt-[8px] mb-10  text-center font-medium text-xl  md:mb-[60px]">
         오늘도 만나서 반가워요!
       </h3>
 
-      <form onSubmit={onSubmit} className="w-full m-auto">
+      <form onSubmit={onSubmit} className="flex flex-col w-full m-auto gap-4">
         <UserInformationInput
           labelName="이메일"
           error={emailError}
@@ -48,11 +56,11 @@ export default function SignInPage() {
           onChange={(e) => setPassword(e.target.value)}
           onBlur={handlePasswordBlur}
         />
-        <button className="w-full mt-5" type="submit">
+        <button className="w-full mt-1" type="submit">
           확인
         </button>
       </form>
-      <p className="text-center">
+      <p className="text-center mt-6 text-base font-normal">
         회원이 아니신가요?
         <Link className="ml-2" href="/signup">
           <span>회원가입하기</span>

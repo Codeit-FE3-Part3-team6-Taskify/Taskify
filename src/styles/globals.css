@@ -1,26 +1,11 @@
 @tailwind utilities;
 
 @layer utilities {
-  .py-15px {
-    padding-top: 15px;
-    padding-bottom: 15px;
-  }
-  .border-gray-d9 {
-    border: 1px solid #d9d9d9;
-  }
-  .border-blue-55 {
-    border: 1px solid #5534da;
-  }
-  .border-red-d6 {
-    border: 1px solid #d6173a;
-  }
-  .text-black-33 {
-    color: #333236;
-  }
-  .max-w-520px {
-    max-width: 520px;
+  .sign-input-base {
+    @apply px-4 py-[15px] outline-none border-solid border-[1px] rounded-lg bg-white focus:border-blue_5534da w-full;
   }
 }
+
 input[type='password']::-ms-reveal,
 input[type='password']::-ms-clear {
   display: none;

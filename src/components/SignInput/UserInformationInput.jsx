@@ -10,13 +10,12 @@ import React from 'react';
 
 // Todo(노진석) : 완성
 export default function UserInformationInput({ labelName, error, ...rest }) {
-  let className =
-    'px-4 py-15px rounded-lg bg-white focus:border-blue-55 focus:outline-none w-full ';
-  className += error ? 'border-red-d6' : 'border-gray-d9';
+  let className = 'sign-input-base ';
+  className += error ? 'border-red_D6173A' : 'border-gray_D9D9D9';
   return (
     <div className="flex flex-col gap-2 w-full">
       <label
-        className="text-base text-black-33 font-normal"
+        className="text-base text-black_4B4B4B font-normal"
         htmlFor={labelName}
       >
         {labelName}
@@ -28,7 +27,9 @@ export default function UserInformationInput({ labelName, error, ...rest }) {
         placeholder={`${labelName}을 입력해주세요`}
         {...rest}
       />
-      <span className="text-sm font-normal text-red-600">{error} </span>
+      <span className="text-sm font-normal leading-normal not-italic text-red-600 ">
+        {error}
+      </span>
     </div>
   );
 }
