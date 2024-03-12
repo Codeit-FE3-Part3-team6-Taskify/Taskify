@@ -1,4 +1,5 @@
 import Avatar from '../Avatar/Avatar';
+import AvatarGroup from '../Avatar/AvatarGroup';
 
 export default function CommonHeader({
   buttons,
@@ -23,47 +24,11 @@ export default function CommonHeader({
         <div className="flex items-center gap-3 md:gap-6 lg:gap-8">
           {/* 모바일 */}
           <div className="relative flex left-5 md:hidden">
-            {participants && (
-              <>
-                {participants.slice(0, 2).map((p, index) => (
-                  <span
-                    key={p.id}
-                    style={{
-                      position: 'relative',
-                      left: `-${index * 10}px`,
-                      zIndex: `${index}`,
-                    }}
-                  >
-                    <Avatar text={p.email.charAt(0).toUpperCase()} />
-                  </span>
-                ))}
-                <span className="relative -left-[20px] z-20">
-                  <Avatar text={`+${participants.length - 2}`} />
-                </span>
-              </>
-            )}
+            <AvatarGroup isMobile participants={participants} />
           </div>
           {/* 태블릿, pc */}
           <div className="relative hidden left-10 md:flex">
-            {participants && (
-              <>
-                {participants.slice(0, 4).map((p, index) => (
-                  <span
-                    key={p.id}
-                    style={{
-                      position: 'relative',
-                      left: `-${index * 10}px`,
-                      zIndex: `${index}`,
-                    }}
-                  >
-                    <Avatar text={p.email.charAt(0).toUpperCase()} />
-                  </span>
-                ))}
-                <span className="relative -left-[40px] z-40">
-                  <Avatar text={`+${participants.length - 4}`} />
-                </span>
-              </>
-            )}
+            <AvatarGroup participants={participants} />
           </div>
           {divider && (
             <span className="relative w-[1px] h-[34px] md:h-[38px] bg-gray_D9D9D9" />
