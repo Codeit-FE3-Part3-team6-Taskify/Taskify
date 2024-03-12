@@ -5,7 +5,6 @@ import LogoWhite from './Logo_white.svg';
 import CombinedLogo from './CombinedLogo.svg';
 import CombinedLogoWhite from './CombinedLogoWhite.svg';
 import TempProfile from './temp-profile.svg';
-import Divider from './Divider.svg';
 import AddButtonEmpty from './AddButton_empty.svg';
 import AddButtonFill from './AddButton_fill.svg';
 import CalendarIcon from './CalendarIcon.svg';
@@ -32,7 +31,6 @@ export {
   CombinedLogo,
   CombinedLogoWhite,
   TempProfile,
-  Divider,
   AddButtonEmpty,
   AddButtonFill,
   CalendarIcon,
