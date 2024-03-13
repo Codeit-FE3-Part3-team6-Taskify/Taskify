@@ -25,6 +25,7 @@
       },
     ],
     "import/prefer-default-export": "off",
+    "react/button-has-type": "off",
   },
   "env": {
     "browser": true,
