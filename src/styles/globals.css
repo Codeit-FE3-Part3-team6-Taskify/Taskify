@@ -1,1 +1,7 @@
 @tailwind utilities;
+
+@layer utilities {
+  .button-reset {
+    @apply outline-none border-solid border;
+  }
+}

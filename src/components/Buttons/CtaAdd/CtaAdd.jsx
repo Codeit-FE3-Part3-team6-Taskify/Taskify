@@ -22,7 +22,7 @@ export default function CtaAdd({ children, onClick, size }) {
     <button
       type="button"
       onClick={onClick}
-      className={`outline-none bg-white w-full flex justify-center items-center gap-2.5 border-solid border border-gray_D9D9D9 font-bold  ${sizeClass}`}
+      className={`button-reset bg-white w-full flex justify-center items-center gap-2.5   border-gray_D9D9D9 font-bold  ${sizeClass}`}
     >
       {children}
       <span className="flex justify-center items-center bg-violet_8% rounded">

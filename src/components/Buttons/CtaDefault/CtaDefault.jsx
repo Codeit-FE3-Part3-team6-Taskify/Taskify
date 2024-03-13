@@ -9,7 +9,7 @@
  * @returns button
  */
 
-// Todo(심은주) : 완료. 추후 large 같은 경우 w-full이 아닌 임의 사이즈 지정을 해야 할 수도 있음. (부모 박스에 따라)
+// Todo(심은주) : 기본형 완료. 추후 여유가 된다면 호버 액션 추가
 export default function CtaDefault({
   children,
   onClick,
@@ -19,7 +19,7 @@ export default function CtaDefault({
   type = 'button',
 }) {
   const COLOR_VIOLET = 'bg-violet_5534DA text-white border-transparent';
-  const COLOR_WHITE = 'bg-white text-violet_5534DA border border-gray_D9D9D9';
+  const COLOR_WHITE = 'bg-white text-violet_5534DA  border-gray_D9D9D9';
 
   const sizeStyles = {
     small:
@@ -36,7 +36,7 @@ export default function CtaDefault({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`outline-none font-medium border-solid disabled:text-white disabled:bg-gray_9FA6B2 ${color ? COLOR_WHITE : COLOR_VIOLET} ${sizeClass}`}
+      className={`button-reset font-medium disabled:text-white disabled:bg-gray_9FA6B2 ${color ? COLOR_WHITE : COLOR_VIOLET} ${sizeClass}`}
     >
       {children}
     </button>
