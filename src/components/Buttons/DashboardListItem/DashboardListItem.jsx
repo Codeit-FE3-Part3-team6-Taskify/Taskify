@@ -16,7 +16,13 @@ export default function DashboardListItem({ url, title, color, createdByMe }) {
         <h2 className="m-0 md:text-base sm:text-sm">
           타이틀내용 {/* title */}
           {createdByMe && (
-            <Image width={18} height={15} src={CrownIcon} alt="왕관 아이콘" />
+            <Image
+              width={18}
+              height={18}
+              src={CrownIcon}
+              alt="왕관 아이콘"
+              className="inline"
+            />
           )}
         </h2>
         <Image
