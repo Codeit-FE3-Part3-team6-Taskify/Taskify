@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import PasswordInput from '@/components/SignInput/PasswordInput';
 import UserInformationInput from '@/components/SignInput/UserInformationInput';
-import { checkSignEmail, checkLoginPassword } from '@/utils/validation';
+import { checkSignEmail, checkSignPassword } from '@/utils/validation';
 import { Logo, LogoImg } from '../../public/images';
 import { signInUser } from '@/features/user';
 
@@ -24,7 +24,7 @@ export default function SignInPage() {
     setEmailError(message);
   };
   const handlePasswordBlur = () => {
-    const message = checkLoginPassword(password);
+    const message = checkSignPassword(password);
     setPasswordError(message);
   };
   return (
@@ -63,13 +63,16 @@ export default function SignInPage() {
           onChange={(e) => setPassword(e.target.value)}
           onBlur={handlePasswordBlur}
         />
-        <button className="w-full mt-1" type="submit">
+        <button
+          className="border-[1px] border-solid border-black w-full mt-1"
+          type="submit"
+        >
           확인
         </button>
       </form>
       <p className="text-center mt-6 text-base font-normal">
         회원이 아니신가요?
-        <Link className="ml-2" href="/signup">
+        <Link className="ml-2 text-violet_5534DA underline " href="/signup">
           <span>회원가입하기</span>
         </Link>
       </p>

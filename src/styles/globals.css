@@ -1,4 +1,5 @@
 @tailwind utilities;
+@tailwind base;
 
 @layer utilities {
   .button-reset {
@@ -6,7 +7,7 @@
   }
 
   .sign-input-base {
-    @apply px-4 py-[15px] outline-none border-solid border-[1px] rounded-lg bg-white focus:border-blue_5534DA w-full;
+    @apply px-4 py-[15px] outline-none border-solid border-[1px] rounded-lg bg-white focus:border-violet_5534DA w-full;
   }
 }
 

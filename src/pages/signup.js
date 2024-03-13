@@ -110,15 +110,19 @@ export default function SignUpPage() {
             value={formValues.checkbox}
             onChange={() => onChange('checkbox', !formValues.checkbox)}
           />
-          <label htmlFor="checkbox">이용약관에 동의하십니까?</label>
+          <label htmlFor="checkbox">이용약관에 동의합니다.</label>
         </div>
-        <button className="w-full mt-1" type="submit" disabled={!disable}>
+        <button
+          className="border-[1px] border-solid border-black w-full mt-1"
+          type="submit"
+          disabled={!disable}
+        >
           확인
         </button>
       </form>
       <p className="text-center mt-[21px] text-base font-normal">
         이미 가입하셨나요?
-        <Link className="ml-2" href="/signin">
+        <Link className="ml-2 text-violet_5534DA underline " href="/signin">
           <span>로그인하기</span>
         </Link>
       </p>
