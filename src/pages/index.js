@@ -1,7 +1,38 @@
+// import CtaAdd from '@/components/Buttons/CtaAdd/CtaAdd';
+// import CtaIcon from '@/components/Buttons/CtaIcon/CtaIcon';
+// import DashboardDelete from '@/components/Buttons/DashboardDelete/DashboardDelete';
+// import PagenationArrow from '@/components/Buttons/PagenationArrow/PagenationArrow';
+// import DashboardListItem from '@/components/Buttons/DashboardListItem/DashboardListItem';
+
+// export default function Home() {
+//   return (
+//     <div>
+//       <div className="max-w-xl mt-32 mx-auto">
+//         <CtaAdd />
+//       </div>
+//       <div className="max-w-xl mt-32 mx-auto">
+//         <DashboardDelete />
+//       </div>
+//       <div className="max-w-xl mt-32 mx-auto">
+//         <CtaIcon color="violet" imageSrc={SettingIcon}>
+//           관리
+//         </CtaIcon>
+//       </div>
+//       <div className="max-w-xl mt-32 mx-auto">
+//         <PagenationArrow direction="prev" />
+//         <PagenationArrow disabled="disabled" />
+//       </div>
+//       <div className="max-w-xl mt-32 mx-auto">
+//         <DashboardListItem createdByMe={true} />
+//       </div>
+//     </div>
+//   );
+// }
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import DashboardHeader from '@/components/Header/DashboardHeader';
 import DefaultHeader from '@/components/Header/DefaultHeader';
+import CtaIcon from '@/components/Buttons/CtaIcon/CtaIcon';
 
 import {
   LogoImg,
@@ -9,6 +40,8 @@ import {
   CombinedLogo,
   CombinedLogoWhite,
   CrownIcon,
+  SettingIcon,
+  AddButtonEmpty,
 } from '../../public/images';
 
 export default function Home() {
@@ -116,18 +149,8 @@ export default function Home() {
         ownerIcon={<Image src={CrownIcon} alt="" width={20} height={16} />}
         buttons={
           <>
-            <button
-              type="button"
-              className="text-gray_787486 text-sm font-medium"
-            >
-              관리
-            </button>
-            <button
-              type="button"
-              className="text-gray_787486 text-sm font-medium"
-            >
-              초대하기
-            </button>
+            <CtaIcon imageSrc={SettingIcon}>관리</CtaIcon>
+            <CtaIcon imageSrc={AddButtonEmpty}>초대하기</CtaIcon>
           </>
         }
         participants={participants}

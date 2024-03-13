@@ -1,4 +1,5 @@
 @tailwind utilities;
+@tailwind base;
 
 @layer utilities {
   .button-reset {
@@ -17,4 +18,5 @@ input[type='password']::-ms-clear {
 
 * {
   box-sizing: border-box;
+  margin: 0;
 }
