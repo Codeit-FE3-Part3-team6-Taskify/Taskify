@@ -1,3 +1,15 @@
+/**
+ *
+ * @param {string} children : 버튼 텍스트
+ * @param {function} onClick : 버튼 클릭시 동작할 로직
+ * @param {boolean} disabled : disabled 여부. 상위 컴포넌트에서 컨트롤 해야함
+ * @param {string} color : 컬러 설정 - violet / white (기본값 violet)
+ * @param {string} size : 사이즈 선택 - small / medium / large (기본값 medium)
+ * @param {string} type : 버튼 타입 지정 (기본값 button)
+ * @returns button
+ */
+
+// Todo(심은주) : 완료. 추후 large 같은 경우 w-full이 아닌 임의 사이즈 지정을 해야 할 수도 있음. (부모 박스에 따라)
 export default function CtaDefault({
   children,
   onClick,
@@ -6,13 +18,14 @@ export default function CtaDefault({
   size,
   type = 'button',
 }) {
-  const colorViolet = 'bg-violet_5534DA text-white border-transparent';
-  const colorWhite = 'bg-white text-violet_5534DA border border-gray_D9D9D9';
+  const COLOR_VIOLET = 'bg-violet_5534DA text-white border-transparent';
+  const COLOR_WHITE = 'bg-white text-violet_5534DA border border-gray_D9D9D9';
 
   const sizeStyles = {
     small:
-      'text-sm rounded w-[84px] h-[32px] lg:w-[72px] lg:h-[30px] md:w-[109px] md:h-[28px]',
-    medium: 'text-base rounded w-[120px] h-[48px] md:w-[138px] md:h-[48px]',
+      'md:text-sm sm:text-xs rounded lg:w-[84px] lg:h-[32px] md:w-[72px] md:h-[30px] sm:w-[109px] sm:h-[28px]',
+    medium:
+      'md:text-base sm:text-sm rounded w-full md:w-[120px] md:h-[48px] sm:w-[138px] sm:h-[48px]',
     large: 'text-lg rounded-lg w-full h-[50px]',
   };
 
@@ -23,7 +36,7 @@ export default function CtaDefault({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`outline-none font-medium border-solid disabled:text-white disabled:bg-gray_9FA6B2 ${color ? colorWhite : colorViolet} ${sizeClass}`}
+      className={`outline-none font-medium border-solid disabled:text-white disabled:bg-gray_9FA6B2 ${color ? COLOR_WHITE : COLOR_VIOLET} ${sizeClass}`}
     >
       {children}
     </button>
