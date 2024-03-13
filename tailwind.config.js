@@ -25,6 +25,7 @@ module.exports = {
         purple_760DDE: { DEFAULT: '#760DDE' },
         orange_FFA500: { DEFAULT: '#FFA500' },
         blue_76A6EA: { DEFAULT: '#76A5EA' },
+        blue_5534DA: { DEFAULT: '#5534DA' },
         pink_E876EA: { DEFAULT: '#E876EA' },
       },
       screens: {
