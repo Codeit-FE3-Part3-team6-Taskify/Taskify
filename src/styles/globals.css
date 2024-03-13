@@ -5,3 +5,16 @@
     @apply outline-none border-solid border;
   }
 }
+  .sign-input-base {
+    @apply px-4 py-[15px] outline-none border-solid border-[1px] rounded-lg bg-white focus:border-blue_5534da w-full;
+  }
+}
+
+input[type='password']::-ms-reveal,
+input[type='password']::-ms-clear {
+  display: none;
+}
+
+* {
+  box-sizing: border-box;
+}

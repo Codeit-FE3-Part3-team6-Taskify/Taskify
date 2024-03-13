@@ -2,6 +2,12 @@
   "extends": ["airbnb", "plugin:prettier/recommended"],
   "plugins": ["react", "jsx-a11y", "import"],
   "rules": {
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "controlComponents": ["Input"],
+      },
+    ],
     "import/no-unresolved": "off",
     "import/extensions": "off",
     "react/destructuring-assignment": "off",
