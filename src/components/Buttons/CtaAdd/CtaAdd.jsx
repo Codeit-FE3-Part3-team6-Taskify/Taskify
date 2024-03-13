@@ -26,7 +26,7 @@ export default function CtaAdd({ children, onClick, size }) {
     >
       {children}
       <span className="flex justify-center items-center bg-violet_8% rounded">
-        <Image width={20} height={20} src={AddButtonFill} />
+        <Image width={20} height={20} src={AddButtonFill} alt="플러스 아이콘" />
       </span>
     </button>
   );

@@ -36,9 +36,16 @@ export default function CtaIcon({ children, onClick, imageSrc, color, size }) {
           height={20}
           src={imageSrc}
           className="md:inline sm:hidden"
+          alt="버튼 아이콘"
         />
       ) : (
-        <Image width={16} height={16} src={imageSrc} />
+        <Image
+          width={16}
+          height={16}
+          src={imageSrc}
+          className="brightness-[100]"
+          alt="버튼 아이콘"
+        />
       )}
       {children}
     </button>

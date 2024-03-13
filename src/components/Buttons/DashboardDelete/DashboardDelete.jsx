@@ -5,7 +5,7 @@
  */
 
 // Todo(심은주) : 완료.
-export default function CtaDefault({ onClick }) {
+export default function DashboardDelete({ onClick }) {
   return (
     <button
       type="button"

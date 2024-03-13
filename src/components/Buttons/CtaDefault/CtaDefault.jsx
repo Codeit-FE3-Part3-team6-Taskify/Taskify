@@ -2,7 +2,7 @@
  *
  * @param {string} children : 버튼 텍스트
  * @param {function} onClick : 버튼 클릭시 동작할 로직
- * @param {boolean} disabled : disabled 여부. 상위 컴포넌트에서 컨트롤 해야함
+ * @param {string} disabled : disabled 여부. 상위 컴포넌트에서 컨트롤 해야함
  * @param {string} color : 컬러 설정 - violet / white (기본값 violet)
  * @param {string} size : 사이즈 선택 - small / medium / large (기본값 medium)
  * @param {string} type : 버튼 타입 지정 (기본값 button)
