@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import PasswordInput from '@/components/SignInput/PasswordInput';
 import UserInformationInput from '@/components/SignInput/UserInformationInput';
-import { checkLoginEmail, checkLoginPassword } from '@/utils/validation';
+import { checkSignEmail, checkLoginPassword } from '@/utils/validation';
 import { Logo, LogoImg } from '../../public/images';
 import { signInUser } from '@/features/user';
 
@@ -20,7 +20,7 @@ export default function SignInPage() {
     signInUser({ email, password }, setEmailError, setPasswordError, router);
   };
   const handleEmailBlur = () => {
-    const message = checkLoginEmail(email);
+    const message = checkSignEmail(email);
     setEmailError(message);
   };
   const handlePasswordBlur = () => {
