@@ -34,6 +34,7 @@ export default function CtaIcon({ children, onClick, imageSrc, color, size }) {
         width={size ? 20 : 16}
         height={size ? 20 : 16}
         src={imageSrc}
+        className={color === 'violet' ? 'brightness-[100]' : ''}
         alt="버튼 아이콘"
       />
       {children}
