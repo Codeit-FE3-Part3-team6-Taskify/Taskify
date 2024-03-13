@@ -2,6 +2,8 @@ import LogoImg from './LogoImg.svg';
 import LogoImgWhite from './LogoImg_white.svg';
 import Logo from './Logo.svg';
 import LogoWhite from './Logo_white.svg';
+import CombinedLogo from './CombinedLogo.svg';
+import CombinedLogoWhite from './CombinedLogoWhite.svg';
 import AddButtonEmpty from './AddButton_empty.svg';
 import AddButtonFill from './AddButton_fill.svg';
 import CalendarIcon from './CalendarIcon.svg';
@@ -25,6 +27,8 @@ export {
   Logo,
   LogoImgWhite,
   LogoWhite,
+  CombinedLogo,
+  CombinedLogoWhite,
   AddButtonEmpty,
   AddButtonFill,
   CalendarIcon,
