@@ -10,7 +10,7 @@ module.exports = {
       colors: {
         black_000000: { DEFAULT: '#000000' },
         black_171717: { DEFAULT: '#171717' },
-        black_333236: { DEFAULT: '#333236', 1: '#2순위컬러' },
+        black_333236: { DEFAULT: '#333236' },
         black_4B4B4B: { DEFAULT: '#4B4B4B' },
         gray_787486: { DEFAULT: '#787486' },
         gray_9FA6B2: { DEFAULT: '#9FA6B2' },
@@ -29,6 +29,7 @@ module.exports = {
         pink_E876EA: { DEFAULT: '#E876EA' },
       },
       screens: {
+        sm: '320px',
         md: '768px',
         lg: '1024px',
       },
