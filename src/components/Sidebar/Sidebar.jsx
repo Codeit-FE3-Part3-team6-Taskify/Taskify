@@ -13,7 +13,6 @@ export default function Sidebar({ dashboards }) {
       width: '8px',
       height: '8px',
       borderRadius: '50%',
-      marginRight: '1rem',
       backgroundColor: color,
     };
 
@@ -21,26 +20,42 @@ export default function Sidebar({ dashboards }) {
   };
 
   return (
-    <div className="flex flex-col w-[30rem] flex-shrink-0 border-r h-screen">
-      <div className="flex flex-row mt-8 ml-8 mb-24">
+    <div className="flex flex-col border-r items-center h-screen mt-5 w-[67px] md:w-[160px] lg:w-[300px]">
+      <div className="flex flex-row md:w-full mb-9 md:mb-14 md:pl-6">
         <Image src={LogoImg} width={29} height={33} alt="로고이미지" />
-        <Image src={Logo} width={80} height={22} alt="로고" />
+        <Image
+          className="hidden md:inline"
+          src={Logo}
+          width={80}
+          height={22}
+          alt="로고"
+        />
       </div>
-      <div className="flex flex-row mx-8 justify-between mb-8">
-        <p className="text-gray_787486 text-[1.2rem] font-bold">Dash Boards</p>
+      <div className="flex md:w-full md:justify-between md:px-6">
+        <p className="text-gray_787486 text-[12px] font-bold hidden md:inline ">
+          Dash Boards
+        </p>
         <Image src={AddButtonEmpty} width={20} height={20} alt="더하기 버튼" />
       </div>
-      <div className="flex flex-col h-full mx-8">
+      <div className="flex flex-col h-full mt-3 md:pl-6 md:w-full">
         {dashboards && dashboards.length > 0 ? (
           dashboards.map((dashboard) => (
             <div
               key={dashboard.id}
-              className="flex items-center gap-x-3 h-16 text-gray_787486 font-medium text-3xl"
+              className="flex items-center gap-x-2 h-12 lg:h-14"
             >
               {dashboard.color && createCircle(dashboard.color)}
-              <p>{dashboard.title}</p>
+              <p className="hidden  text-gray_787486 md:inline ml-2 md:text-sm lg:text-lg">
+                {dashboard.title}
+              </p>
               {dashboard.createdByMe && (
-                <Image src={CrownIcon} width={17.5} height={14} alt="왕관" />
+                <Image
+                  className="hidden md:inline"
+                  src={CrownIcon}
+                  width={17.5}
+                  height={14}
+                  alt="왕관"
+                />
               )}
             </div>
           ))
