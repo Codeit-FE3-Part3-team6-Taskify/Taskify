@@ -28,6 +28,7 @@ module.exports = {
         pink_E876EA: { DEFAULT: '#E876EA' },
       },
       screens: {
+        sm: '320px',
         md: '768px',
         lg: '1024px',
       },
