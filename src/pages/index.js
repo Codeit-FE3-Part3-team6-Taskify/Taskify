@@ -158,7 +158,7 @@ export default function Home() {
         userInfo={userInfo}
       />
 
-      <DashboardHeader hasSpace title="계정관리" userInfo={userInfo} />
+      <DashboardHeader title="계정관리" userInfo={userInfo} />
     </div>
   );
 }
