@@ -1,7 +1,7 @@
 import CtaAdd from '@/components/Buttons/CtaAdd/CtaAdd';
 import CtaIcon from '@/components/Buttons/CtaIcon/CtaIcon';
 import DashboardDelete from '@/components/Buttons/DashboardDelete/DashboardDelete';
-import PagenationArrow from '@/components/Buttons/PagenationArrow/PagenationArrow';
+import PaginationButton from '@/components/Buttons/PaginationButton/PaginationButton';
 import DashboardListItem from '@/components/Buttons/DashboardListItem/DashboardListItem';
 import { SettingIcon } from '@/../public/images';
 
@@ -20,8 +20,8 @@ export default function Home() {
         </CtaIcon>
       </div>
       <div className="max-w-xl mt-32 mx-auto">
-        <PagenationArrow direction="prev" />
-        <PagenationArrow disabled="disabled" />
+        <PaginationButton direction="prev" />
+        <PaginationButton disabled="disabled" />
       </div>
       <div className="max-w-xl mt-32 mx-auto">
         <DashboardListItem createdByMe={true} />

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useDispatch } from 'react-redux';
 import PasswordInput from '@/components/SignInput/PasswordInput';
 import UserInformationInput from '@/components/SignInput/UserInformationInput';
 import { checkSignEmail, checkSignPassword } from '@/utils/validation';
@@ -9,6 +11,7 @@ import SignLink from '@/components/SignLink/SignLink';
 
 // Todo(노진석) : (미완성)api로직 등 추가해야함.
 export default function SignInPage() {
+  const dispatch = useDispatch();
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -16,7 +19,13 @@ export default function SignInPage() {
   const [passwordError, setPasswordError] = useState('');
   const onSubmit = (e) => {
     e.preventDefault();
-    signInUser({ email, password }, setEmailError, setPasswordError, router);
+    signInUser({
+      data: { email, password },
+      setEmailError,
+      setPasswordError,
+      router,
+      dispatch,
+    });
   };
   const handleEmailBlur = () => {
     const message = checkSignEmail(email);

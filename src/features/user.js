@@ -1,14 +1,16 @@
 /* eslint-disable no-useless-return */
 import { axiosPost } from './axios';
 import { checkSignEmail, checkSignPassword } from '@/utils/validation';
+import { addUserInfo } from './userInfoSlice';
 
-// Todo (노진석) : 나중에 모달 + user데이터 + accessToken 넣기
-export const signInUser = async (
+// Todo (노진석) : 나중에 모달넣기
+export const signInUser = async ({
   data,
   setEmailError,
   setPasswordError,
   router,
-) => {
+  dispatch,
+}) => {
   const emailErrorMessage = checkSignEmail(data.email);
   const passwordErrorMessage = checkSignPassword(data.password);
   setEmailError(emailErrorMessage);
@@ -18,9 +20,10 @@ export const signInUser = async (
   }
   const res = await axiosPost('auth/login', data);
   if (!res.status) {
-    // 나중에 유저 정보를 툴킷 데이터에 담기
-    // 임시로 alert로 대체
+    const { user } = res;
+    dispatch(addUserInfo(user));
     localStorage.setItem('accessToken', res.accessToken);
+    // 임시로 alert로 대체
     alert('로그인 성공');
     router.push('/');
     return;
