@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind utilities;
+
+@layer utilities {
+  .button-reset {
+    @apply outline-none border-solid border;
+  }
+
+  .sign-input-base {
+    @apply px-4 py-[15px] outline-none border-solid border-[1px] rounded-lg bg-white focus:border-violet_5534DA w-full;
+  }
+}
+
+input[type='password']::-ms-reveal,
+input[type='password']::-ms-clear {
+  display: none;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
