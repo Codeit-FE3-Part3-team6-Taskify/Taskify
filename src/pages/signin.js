@@ -8,6 +8,7 @@ import { checkSignEmail, checkSignPassword } from '@/utils/validation';
 import { signInUser } from '@/features/user';
 import SignLogo from '@/components/SignLogo/SignLogo';
 import SignLink from '@/components/SignLink/SignLink';
+import CtaDefault from '@/components/Buttons/CtaDefault/CtaDefault';
 
 // Todo(노진석) : (미완성)api로직 등 추가해야함.
 export default function SignInPage() {
@@ -53,12 +54,9 @@ export default function SignInPage() {
           onChange={(e) => setPassword(e.target.value)}
           onBlur={handlePasswordBlur}
         />
-        <button
-          className="border-[1px] border-solid border-black w-full mt-1"
-          type="submit"
-        >
-          확인
-        </button>
+        <CtaDefault size="large" type="submit">
+          로그인
+        </CtaDefault>
       </form>
       <SignLink
         text="회원이 아니신가요?"

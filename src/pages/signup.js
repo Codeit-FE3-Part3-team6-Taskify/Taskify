@@ -11,6 +11,7 @@ import {
 import { signUpUser } from '@/features/user';
 import SignLogo from '@/components/SignLogo/SignLogo';
 import SignLink from '@/components/SignLink/SignLink';
+import CtaDefault from '@/components/Buttons/CtaDefault/CtaDefault';
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -38,7 +39,7 @@ export default function SignUpPage() {
   const onChange = (formValueType, value) => {
     setFormValues((prev) => ({ ...prev, [formValueType]: value }));
   };
-  const disable =
+  const disabled =
     Object.values(formValues).every((value) => !!value) &&
     Object.values(errors).every((error) => !error);
   return (
@@ -97,13 +98,9 @@ export default function SignUpPage() {
           />
           <label htmlFor="checkbox">이용약관에 동의합니다.</label>
         </div>
-        <button
-          className="border-[1px] border-solid border-black w-full mt-1"
-          type="submit"
-          disabled={!disable}
-        >
-          확인
-        </button>
+        <CtaDefault size="large" type="submit" disabled={!disabled}>
+          회원가입
+        </CtaDefault>
       </form>
       <SignLink
         text="이미 가입하셨나요?"

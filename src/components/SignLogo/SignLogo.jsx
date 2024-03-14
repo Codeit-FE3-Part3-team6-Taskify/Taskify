@@ -8,7 +8,7 @@ export default function SignLogo() {
     <>
       <Link
         href="/"
-        className="flex flex-col items-center gap-[18px] md:gap-[30px]"
+        className="m-auto max-w-[198px] flex flex-col items-center gap-[18px] md:gap-[30px]"
       >
         <Image
           className="ml-9 w-[98px] h-[113px] md:w-[164px] md:h-[189px]"
