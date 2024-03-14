@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { Logo, LogoImg } from '../../public/images';
 import UserInformationInput from '@/components/SignInput/UserInformationInput';
@@ -10,8 +11,10 @@ import {
   checkSignEmail,
   checkSignPassword,
 } from '@/utils/validation';
+import { signUpUser } from '@/features/user';
 
 export default function SignUpPage() {
+  const router = useRouter();
   const [formValues, setFormValues] = useState({
     email: '',
     nickname: '',
@@ -27,6 +30,7 @@ export default function SignUpPage() {
   });
   const onSubmit = (e) => {
     e.preventDefault();
+    signUpUser(formValues, setErrors, router);
   };
   const handleBlur = (validateFunction, errorType, ...param) => {
     const result = validateFunction(...param);
