@@ -29,7 +29,7 @@ export default function PagenationArrow({
         height={16}
         src={PaginationArrow}
         alt={direction}
-        className={`${disabled ? 'opacity-40' : ''}`}
+        className={`text-center mx-auto ${disabled ? 'opacity-40' : ''}`}
       />
       <span className="hidden">{direction}</span>
     </button>
