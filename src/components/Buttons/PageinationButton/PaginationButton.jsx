@@ -10,7 +10,7 @@ import { PaginationArrow } from '@/../public/images';
  */
 
 // Todo(심은주): css 적용에서 애를 먹고 있음...
-export default function PagenationArrow({
+export default function PaginationButton({
   onClick,
   disabled,
   direction = 'next',

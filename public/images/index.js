@@ -21,6 +21,7 @@ import NoMailIcon from './NomailIcon.svg';
 import PaginationArrow from './PaginationArrow.svg';
 import PenIcon from './PenIcon.svg';
 import SettingIcon from './SettingIcon.svg';
+import SearchIcon from './SearchIcon.svg';
 
 export {
   LogoImg,
@@ -46,4 +47,5 @@ export {
   PaginationArrow,
   PenIcon,
   SettingIcon,
+  SearchIcon,
 };
