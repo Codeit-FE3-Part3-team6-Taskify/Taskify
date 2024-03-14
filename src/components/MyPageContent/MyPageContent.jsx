@@ -40,7 +40,7 @@ export default function MyPageContent() {
             </div>
 
             <div className="relative flex justify-end">
-              <CtaDefault size="small">저장</CtaDefault>
+              <CtaDefault size="xsmall">저장</CtaDefault>
             </div>
           </div>
         </TableBox>
@@ -64,7 +64,7 @@ export default function MyPageContent() {
               />
             </div>
             <div className="relative flex justify-end">
-              <CtaDefault size="small">변경</CtaDefault>
+              <CtaDefault size="xsmall">변경</CtaDefault>
             </div>
           </div>
         </TableBox>

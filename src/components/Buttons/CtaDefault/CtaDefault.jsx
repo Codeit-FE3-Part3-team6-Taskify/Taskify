@@ -22,6 +22,7 @@ export default function CtaDefault({
   const COLOR_WHITE = 'bg-white text-violet_5534DA  border-gray_D9D9D9';
 
   const sizeStyles = {
+    xsmall: 'text-xs md:text-sm rounded md:h-[32px] w-[84px] h-[28px]',
     small:
       'md:text-sm sm:text-xs rounded lg:w-[84px] lg:h-[32px] md:w-[72px] md:h-[30px] sm:w-[109px] sm:h-[28px]',
     medium:
