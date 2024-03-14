@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import PasswordInput from '@/components/SignInput/PasswordInput';
 import UserInformationInput from '@/components/SignInput/UserInformationInput';
 import { checkSignEmail, checkSignPassword } from '@/utils/validation';
-import { Logo, LogoImg } from '../../public/images';
 import { signInUser } from '@/features/user';
+import SignLogo from '@/components/SignLogo/SignLogo';
+import SignLink from '@/components/SignLink/SignLink';
 
 // Todo(노진석) : (미완성)api로직 등 추가해야함.
 export default function SignInPage() {
@@ -29,25 +28,7 @@ export default function SignInPage() {
   };
   return (
     <main className="w-full m-auto mt-36 mb-12 max-w-[351px] md:max-w-[520px] md:mt-60 lg:mt-[223px]">
-      <Link
-        href="/"
-        className="flex flex-col items-center gap-[18px] md:gap-[30px]"
-      >
-        <Image
-          className="ml-9 w-[98px] h-[113px] md:w-[164px] md:h-[189px]"
-          src={LogoImg}
-          alt="로고이미지"
-        />
-        <Image
-          className="w-[119px] h-[33px] md:w-[198px] md:h-[55px]"
-          src={Logo}
-          alt="로고이름"
-        />
-      </Link>
-      <h3 className="mt-[8px] mb-10  text-center font-medium text-xl  md:mb-[60px]">
-        오늘도 만나서 반가워요!
-      </h3>
-
+      <SignLogo />
       <form onSubmit={onSubmit} className="flex flex-col w-full m-auto gap-4">
         <UserInformationInput
           labelName="이메일"
@@ -70,12 +51,11 @@ export default function SignInPage() {
           확인
         </button>
       </form>
-      <p className="text-center mt-6 text-base font-normal">
-        회원이 아니신가요?
-        <Link className="ml-2 text-violet_5534DA underline " href="/signup">
-          <span>회원가입하기</span>
-        </Link>
-      </p>
+      <SignLink
+        text="회원이 아니신가요?"
+        spanText="회원가입하기"
+        href="/signup"
+      />
     </main>
   );
 }
