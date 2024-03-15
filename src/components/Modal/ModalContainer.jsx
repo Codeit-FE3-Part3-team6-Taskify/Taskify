@@ -1,12 +1,10 @@
 import { createPortal } from 'react-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { modalSelector, closeModal } from '@/features/modalSlice';
-import SampleModalOne from '@/components/Modal/SampleModalOne/SampleModalOne';
-import SampleModalTwo from '@/components/Modal/SampleModalTwo/SampleModalTwo';
+import AlertModal from '@/components/Modal/AlertModal/AlertModal';
 
 const MODAL_COMPONENTS = {
-  first: SampleModalOne,
-  second: SampleModalTwo,
+  alert: AlertModal,
 };
 
 export default function ModalContainer() {
@@ -24,9 +22,7 @@ export default function ModalContainer() {
   const Modal = MODAL_COMPONENTS[type];
 
   return createPortal(
-    <>
-      <Modal {...props} onClose={handleCloseModal} />
-    </>,
+    <Modal {...props} onClose={handleCloseModal} />,
     document.getElementById('modal'),
   );
 }

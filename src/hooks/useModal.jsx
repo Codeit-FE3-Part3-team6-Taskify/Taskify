@@ -8,7 +8,7 @@ function useModal() {
     dispatch(openModal({ type, props }));
   };
 
-  const handleCloseModal = (type) => {
+  const handleCloseModal = () => {
     dispatch(closeModal());
   };
 

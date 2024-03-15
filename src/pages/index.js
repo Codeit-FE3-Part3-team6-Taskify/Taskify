@@ -5,20 +5,15 @@ export default function Home() {
   const { openModal } = useModal();
 
   const onClickButton1 = () => {
-    openModal({ type: 'first' });
-  };
-
-  const onClickButton2 = () => {
-    openModal({ type: 'second' });
+    openModal({
+      type: 'alert',
+      props: { text: '비밀번호가 일치하지 않습니다.' },
+    });
   };
 
   return (
-    <>
-      <div className="mx-auto mt-32 text-center">
-        <CtaDefault onClick={onClickButton1}>첫번째 모달 열기</CtaDefault>
-        <CtaDefault onClick={onClickButton2}>두번째 모달 열기</CtaDefault>
-      </div>
-      <div id="modal"></div>
-    </>
+    <div className="mx-auto mt-32 text-center">
+      <CtaDefault onClick={onClickButton1}>모달 열기</CtaDefault>
+    </div>
   );
 }
