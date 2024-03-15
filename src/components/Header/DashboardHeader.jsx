@@ -2,7 +2,7 @@ import Avatar from '../Avatar/Avatar';
 import AvatarGroup from '../Avatar/AvatarGroup';
 
 // Todo(조예진) : 미완성- 관리, 초대하기 버튼 스타일 적용
-export default function CommonHeader({
+export default function DashboardHeader({
   buttons,
   title,
   ownerIcon,
