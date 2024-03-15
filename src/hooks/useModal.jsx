@@ -8,7 +8,8 @@ function useModal() {
     dispatch(openModal({ type, props }));
   };
 
-  const handleCloseModal = () => {
+  // eslint-disable-next-line no-unused-vars
+  const handleCloseModal = (type) => {
     dispatch(closeModal());
   };
 
