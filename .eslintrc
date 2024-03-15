@@ -31,7 +31,10 @@
       },
     ],
     "import/prefer-default-export": "off",
+<<<<<<< HEAD
     "react/button-has-type": "off",
+=======
+>>>>>>> c3abd151ef06c1c129276b489df440792ecab7c4
   },
   "env": {
     "browser": true,
