@@ -37,7 +37,7 @@ export default function CtaDefault({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`button-reset font-medium disabled:text-white disabled:bg-gray_9FA6B2 ${color ? COLOR_WHITE : COLOR_VIOLET} ${sizeClass}`}
+      className={`cursor-pointer button-reset font-medium disabled:text-white disabled:bg-gray_9FA6B2 ${color ? COLOR_WHITE : COLOR_VIOLET} ${sizeClass}`}
     >
       {children}
     </button>
