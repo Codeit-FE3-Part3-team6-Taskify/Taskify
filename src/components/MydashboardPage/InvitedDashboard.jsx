@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { SearchIcon } from '../../../public/images';
 import CtaDefault from '../Buttons/CtaDefault/CtaDefault';
 
+// 송상훈 TODO : 키값 나중에 바꿀것
 export default function InvitedDashboard({ invitations }) {
   return (
     <section className="bg-white max-w-[1022px] h-auto rounded-[8px] shadow-sm py-[24px] px-[16px]">
@@ -28,7 +29,10 @@ export default function InvitedDashboard({ invitations }) {
 
       <div className="flex flex-col gap-y-2 h-[400px] overflow-y-scroll rounded-[8px]">
         {invitations.map((invitation) => (
-          <div className="flex flex-col border-b pb-[20px] gap-y-2 md:flex-row md:items-center md:grid md:grid-cols-3 md:pt-[20px] ">
+          <div
+            key={invitation.id}
+            className="flex flex-col border-b pb-[20px] gap-y-2 md:flex-row md:items-center md:grid md:grid-cols-3 md:pt-[20px] "
+          >
             <div className="flex">
               <p className="w-[60px] text-gray_9FA6B2 md:hidden lg:hidden">
                 이름
