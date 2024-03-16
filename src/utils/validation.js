@@ -21,6 +21,19 @@ export const checkSignPassword = (password) => {
   return '';
 };
 
+export const checkNewPassword = (currentPassword, newPassword) => {
+  if (newPassword === '') {
+    return '비밀번호를 입력해주세요';
+  }
+  if (newPassword.length < 8) {
+    return '8자 이상 작성해주세요.';
+  }
+  if (currentPassword === newPassword) {
+    return '기존 비밀번호와 동일합니다.';
+  }
+  return '';
+};
+
 export const checkPasswordConfirmed = (password, passwordConfirmed) => {
   if (passwordConfirmed === '') {
     return '비밀번호를 입력해주세요!';
