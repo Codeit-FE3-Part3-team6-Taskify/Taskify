@@ -5,11 +5,16 @@ export default function Document() {
     <Html lang="ko">
       <Head>
         <link
+          href="https://fonts.cdnfonts.com/css/montserrat"
+          rel="stylesheet"
+        />
+        <link
           rel="stylesheet"
           as="style"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
         />
       </Head>
+
       <body>
         <Main />
         <NextScript />
