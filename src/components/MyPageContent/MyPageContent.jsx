@@ -15,11 +15,10 @@ export default function MyPageContent() {
             alt="back"
           />
         </span>
-
         <span className="">돌아가기</span>
       </div>
       <UpdateProfile />
-      <UpdatePassword />
+      <UpdatePassword password="sprint101" />
     </div>
   );
 }
