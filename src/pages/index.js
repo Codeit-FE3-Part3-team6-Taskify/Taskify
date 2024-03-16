@@ -87,7 +87,7 @@ export default function Home({ imgData }) {
             <span className="text-[18px] md:text-[22px] text-gray_9FA6B2">
               Point 1
             </span>
-            <h3 className="text-4xl font-bold leading-[64px] md:text-5xl">
+            <h3 className="text-4xl font-bold leading-[50px] md:leading-[64px] md:text-5xl">
               일의 우선순위를
               <br /> 관리하세요
             </h3>
@@ -99,7 +99,7 @@ export default function Home({ imgData }) {
             alt="우선순위 관리 이미지"
           />
         </section>
-        <section className="m-auto pt-[103px] text-center gap-[192px] lg:pl-[108px] mt-[59px] flex flex-col w-full max-w-[343px] md:max-w-[664px] md:gap-[100px] lg:max-w-[1200px] lg:flex-row bg-black_171717">
+        <section className="m-auto pt-[60px] lg:pt-[103px] text-center gap-[192px] lg:pl-[108px] mt-[59px] flex flex-col w-full max-w-[343px] md:max-w-[664px] md:gap-[100px] lg:max-w-[1200px] lg:flex-row bg-black_171717">
           <Image
             className="order-1 self-center w-full max-w-[217px] md:max-w-[436px] md:max-h-[502px] object-contain"
             src={imgData.LandingImg3}
@@ -109,7 +109,7 @@ export default function Home({ imgData }) {
             <span className="text-[18px] text-gray_9FA6B2 md:text-[22px]">
               Point 2
             </span>
-            <h3 className="text-4xl font-bold leading-[64px] md:text-5xl">
+            <h3 className="text-4xl font-bold leading-[50px] md:leading-[64px] md:text-5xl ">
               해야 할 일을
               <br /> 등록하세요
             </h3>
