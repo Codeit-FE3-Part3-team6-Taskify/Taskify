@@ -15,7 +15,7 @@ export default function MyPageContent() {
             alt="back"
           />
         </span>
-        <span className="">돌아가기</span>
+        <span className="text-sm md:text-base font-medium">돌아가기</span>
       </div>
       <UpdateProfile />
       <UpdatePassword password="sprint101" />

@@ -54,46 +54,60 @@ export default function UpdatePassword({ password }) {
     <>
       <TableBox>
         <div className="flex flex-col gap-4 md:gap-6">
-          <div className="mb-2">비밀번호 변경</div>
+          <div className="mb-2 text-xl md:text-2xl font-bold">
+            비밀번호 변경
+          </div>
           <div className="flex flex-col gap-4">
-            <div>현재 비밀번호</div>
-
-            <PasswordInput
-              labelName="현재 비밀번호"
-              placeholder="현재 비밀번호 입력"
-              value={formValues.currentPassword}
-              onChange={(e) => onChange('currentPassword', e.target.value)}
-            />
-            <PasswordInput
-              labelName="새 비밀번호"
-              placeholder="새 비밀번호 입력"
-              value={formValues.newPassword}
-              onChange={(e) => onChange('newPassword', e.target.value)}
-              onBlur={() =>
-                handleBlur(
-                  checkNewPassword,
-                  'newPasswordError',
-                  formValues.currentPassword,
-                  formValues.newPassword,
-                )
-              }
-              error={errors.newPasswordError}
-            />
-            <PasswordInput
-              labelName="새 비밀번호 확인"
-              placeholder="새 비밀번호 입력"
-              value={formValues.newPasswordConfirmed}
-              onChange={(e) => onChange('newPasswordConfirmed', e.target.value)}
-              onBlur={() =>
-                handleBlur(
-                  checkPasswordConfirmed,
-                  'newPasswordConfirmedError',
-                  formValues.newPassword,
-                  formValues.newPasswordConfirmed,
-                )
-              }
-              error={errors.newPasswordConfirmedError}
-            />
+            <div>
+              <span className="text-base md:text-lg font-medium">
+                현재 비밀번호
+              </span>
+              <PasswordInput
+                placeholder="현재 비밀번호 입력"
+                value={formValues.currentPassword}
+                onChange={(e) => onChange('currentPassword', e.target.value)}
+              />
+            </div>
+            <div>
+              <span className="text-base md:text-lg font-medium">
+                새 비밀번호
+              </span>
+              <PasswordInput
+                placeholder="새 비밀번호 입력"
+                value={formValues.newPassword}
+                onChange={(e) => onChange('newPassword', e.target.value)}
+                onBlur={() =>
+                  handleBlur(
+                    checkNewPassword,
+                    'newPasswordError',
+                    formValues.currentPassword,
+                    formValues.newPassword,
+                  )
+                }
+                error={errors.newPasswordError}
+              />
+            </div>
+            <div>
+              <span className="text-base md:text-lg font-medium">
+                새 비밀번호 확인
+              </span>
+              <PasswordInput
+                placeholder="새 비밀번호 입력"
+                value={formValues.newPasswordConfirmed}
+                onChange={(e) =>
+                  onChange('newPasswordConfirmed', e.target.value)
+                }
+                onBlur={() =>
+                  handleBlur(
+                    checkPasswordConfirmed,
+                    'newPasswordConfirmedError',
+                    formValues.newPassword,
+                    formValues.newPasswordConfirmed,
+                  )
+                }
+                error={errors.newPasswordConfirmedError}
+              />
+            </div>
             <div className="relative flex justify-end">
               <CtaDefault onClick={onSubmit} size="xsmall" disabled={!disabled}>
                 변경

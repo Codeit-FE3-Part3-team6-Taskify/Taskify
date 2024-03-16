@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { axiosPostFormData, axiosPut, axiosGet } from '@/features/axios';
@@ -76,7 +78,7 @@ export default function UpdateProfile() {
   return (
     <TableBox>
       <div className="relative flex flex-col gap-4 md:gap-6">
-        <div className="mb-2">프로필</div>
+        <div className="mb-2 text-xl md:text-2xl font-bold">프로필</div>
 
         <div className="flex flex-col md:flex-row gap-6 md:gap-4">
           <div>
@@ -87,7 +89,7 @@ export default function UpdateProfile() {
               onChange={handleFileUpload}
             />
             <div
-              className="relative overflow-hidden flex justify-center items-center w-[100px] h-[100px] md:w-[182px] md:h-[182px] rounded-[6px] bg-[#F5F5F5] cursor-pointer"
+              className="relative overflow-hidden flex justify-center items-center w-[100px] h-[100px] md:w-[200px] md:h-[200px] rounded-[6px] bg-[#F5F5F5] cursor-pointer"
               onClick={() => fileInputRef.current.click()}
             >
               {selectedFile ? (
@@ -101,18 +103,22 @@ export default function UpdateProfile() {
               )}
             </div>
           </div>
-          <div className="flex flex-col gap-4">
-            {/* // TODO: 이메일 클릭했을 때 테두리 없애기 */}
-            <UserInformationInput
-              labelName="이메일"
-              placeholder={myInfo.email}
-              readOnly
-            />
-            <UserInformationInput
-              labelName="닉네임"
-              value={nextNickname}
-              onChange={(e) => setNextNickname(e.target.value)}
-            />
+          <div className="flex flex-col gap-[10px] flex-grow">
+            <div>
+              <span className="text-base md:text-lg font-medium">이메일</span>
+              <UserInformationInput
+                placeholder={myInfo.email}
+                style={{ outline: 'none', borderColor: '#D9D9D9' }}
+                readOnly
+              />
+            </div>
+            <div>
+              <span className="text-base md:text-lg font-medium">닉네임</span>
+              <UserInformationInput
+                value={nextNickname}
+                onChange={(e) => setNextNickname(e.target.value)}
+              />
+            </div>
           </div>
         </div>
 
