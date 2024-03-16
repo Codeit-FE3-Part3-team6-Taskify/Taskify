@@ -25,7 +25,7 @@ export default function CtaDefault({
     small:
       'md:text-sm sm:text-xs rounded lg:w-[84px] lg:h-[32px] md:w-[72px] md:h-[30px] sm:w-[109px] sm:h-[28px]',
     medium:
-      'md:text-base sm:text-sm rounded w-full md:w-[120px] md:h-[48px] sm:w-[138px] sm:h-[48px]',
+      'md:text-base sm:text-sm rounded-lg w-full md:w-[120px] md:h-[48px] sm:w-[138px] sm:h-[48px]',
     large: 'text-lg rounded-lg w-full h-[50px]',
   };
 
