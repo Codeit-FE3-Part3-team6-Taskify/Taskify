@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-return */
-import { axiosPost } from './axios';
+import { axiosPostJason } from './axios';
 import { checkSignEmail, checkSignPassword } from '@/utils/validation';
 import { addUserInfo } from './userInfoSlice';
 
@@ -18,7 +18,7 @@ export const signInUser = async ({
   if (emailErrorMessage !== '' || passwordErrorMessage !== '') {
     return;
   }
-  const res = await axiosPost('auth/login', data);
+  const res = await axiosPostJason('auth/login', data);
   if (!res.status) {
     const { user } = res;
     dispatch(addUserInfo(user));
@@ -38,7 +38,7 @@ export const signInUser = async ({
 };
 
 export const signUpUser = async (formValues, setErrors, router) => {
-  const res = await axiosPost('users', {
+  const res = await axiosPostJason('users', {
     email: formValues.email,
     password: formValues.password,
     nickname: formValues.nickname,

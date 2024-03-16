@@ -1,5 +1,5 @@
 // Todo(조예진) : 완성
-export default function CommonHeader({
+export default function DefaultHeader({
   isLanding,
   smallLogo,
   largeLogo,
