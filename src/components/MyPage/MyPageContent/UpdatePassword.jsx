@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { axiosPut } from '@/features/axios';
+import useModal from '@/hooks/useModal';
 import TableBox from '../../Table/TableBox';
 import CtaDefault from '@/components/Buttons/CtaDefault/CtaDefault';
 import PasswordInput from '../../SignInput/PasswordInput';
 import { checkNewPassword, checkPasswordConfirmed } from '@/utils/validation';
 
 export default function UpdatePassword() {
+  const { openModal } = useModal();
+
   const [formValues, setFormValues] = useState({
     currentPassword: '',
     newPassword: '',
@@ -16,8 +19,6 @@ export default function UpdatePassword() {
     newPasswordError: '',
     newPasswordConfirmedError: '',
   });
-
-  const [showModal, setShowModal] = useState(false);
 
   const handleBlur = (validateFunction, errorType, ...param) => {
     const result = validateFunction(...param);
@@ -35,7 +36,10 @@ export default function UpdatePassword() {
     });
 
     if (!res.status) {
-      alert('비밀번호 변경 완료');
+      openModal({
+        type: 'alert',
+        props: { text: '비밀번호가 변경되었습니다.' },
+      });
       setFormValues({
         currentPassword: '',
         newPassword: '',
@@ -46,7 +50,10 @@ export default function UpdatePassword() {
     }
 
     if (res.status === 400) {
-      setShowModal(true);
+      openModal({
+        type: 'alert',
+        props: { text: '현재 비밀번호가 틀렸습니다.' },
+      });
     }
   };
 
@@ -55,73 +62,65 @@ export default function UpdatePassword() {
     Object.values(errors).every((error) => !error);
 
   return (
-    <>
-      <TableBox>
-        <div className="flex flex-col gap-4 md:gap-6">
-          <div className="mb-2 text-xl md:text-2xl font-bold">
-            비밀번호 변경
+    <TableBox>
+      <div className="flex flex-col gap-4 md:gap-6">
+        <div className="mb-2 text-xl md:text-2xl font-bold">비밀번호 변경</div>
+        <div className="flex flex-col gap-4">
+          <div>
+            <span className="text-base md:text-lg font-medium">
+              현재 비밀번호
+            </span>
+            <PasswordInput
+              placeholder="현재 비밀번호 입력"
+              value={formValues.currentPassword}
+              onChange={(e) => onChange('currentPassword', e.target.value)}
+            />
           </div>
-          <div className="flex flex-col gap-4">
-            <div>
-              <span className="text-base md:text-lg font-medium">
-                현재 비밀번호
-              </span>
-              <PasswordInput
-                placeholder="현재 비밀번호 입력"
-                value={formValues.currentPassword}
-                onChange={(e) => onChange('currentPassword', e.target.value)}
-              />
-            </div>
-            <div>
-              <span className="text-base md:text-lg font-medium">
-                새 비밀번호
-              </span>
-              <PasswordInput
-                placeholder="새 비밀번호 입력"
-                value={formValues.newPassword}
-                onChange={(e) => onChange('newPassword', e.target.value)}
-                onBlur={() =>
-                  handleBlur(
-                    checkNewPassword,
-                    'newPasswordError',
-                    formValues.currentPassword,
-                    formValues.newPassword,
-                  )
-                }
-                error={errors.newPasswordError}
-              />
-            </div>
-            <div>
-              <span className="text-base md:text-lg font-medium">
-                새 비밀번호 확인
-              </span>
-              <PasswordInput
-                placeholder="새 비밀번호 입력"
-                value={formValues.newPasswordConfirmed}
-                onChange={(e) =>
-                  onChange('newPasswordConfirmed', e.target.value)
-                }
-                onBlur={() =>
-                  handleBlur(
-                    checkPasswordConfirmed,
-                    'newPasswordConfirmedError',
-                    formValues.newPassword,
-                    formValues.newPasswordConfirmed,
-                  )
-                }
-                error={errors.newPasswordConfirmedError}
-              />
-            </div>
-            <div className="relative flex justify-end">
-              <CtaDefault onClick={onSubmit} size="xsmall" disabled={!disabled}>
-                변경
-              </CtaDefault>
-            </div>
+          <div>
+            <span className="text-base md:text-lg font-medium">
+              새 비밀번호
+            </span>
+            <PasswordInput
+              placeholder="새 비밀번호 입력"
+              value={formValues.newPassword}
+              onChange={(e) => onChange('newPassword', e.target.value)}
+              onBlur={() =>
+                handleBlur(
+                  checkNewPassword,
+                  'newPasswordError',
+                  formValues.currentPassword,
+                  formValues.newPassword,
+                )
+              }
+              error={errors.newPasswordError}
+            />
+          </div>
+          <div>
+            <span className="text-base md:text-lg font-medium">
+              새 비밀번호 확인
+            </span>
+            <PasswordInput
+              placeholder="새 비밀번호 입력"
+              value={formValues.newPasswordConfirmed}
+              onChange={(e) => onChange('newPasswordConfirmed', e.target.value)}
+              onBlur={() =>
+                handleBlur(
+                  checkPasswordConfirmed,
+                  'newPasswordConfirmedError',
+                  formValues.newPassword,
+                  formValues.newPasswordConfirmed,
+                )
+              }
+              error={errors.newPasswordConfirmedError}
+            />
+          </div>
+          <div className="relative flex justify-end">
+            <CtaDefault onClick={onSubmit} size="xsmall" disabled={!disabled}>
+              변경
+            </CtaDefault>
           </div>
         </div>
-      </TableBox>
-      {/* // TODO(조예진): 모달 컴포넌트 추가할것 */}
-      {showModal && <div>현재 비밀번호가 틀렸습니다.</div>}
-    </>
+      </div>
+    </TableBox>
   );
 }
