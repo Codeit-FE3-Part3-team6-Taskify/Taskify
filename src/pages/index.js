@@ -14,9 +14,9 @@ import {
   LandingImg5,
   LandingImg6,
 } from '@/../public/images';
-import LandingFooter from '@/components/LandingFooter/LandingFooter';
+import LandingFooter from '@/components/LandingPage/LandingFooter/LandingFooter';
 import CtaDefault from '@/components/Buttons/CtaDefault/CtaDefault';
-import LandingCard from '@/components/LandingCard/LandingCard';
+import LandingCard from '@/components/LandingPage/LandingCard/LandingCard';
 
 export async function getStaticProps() {
   const imgData = {
