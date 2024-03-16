@@ -63,6 +63,7 @@ export default function SignUpPage() {
           onBlur={() =>
             handleBlur(checkNickname, 'nicknameError', formValues.nickname)
           }
+          placeholder="10자 이하로 작성해주세요"
         />
         <PasswordInput
           labelName="비밀번호"

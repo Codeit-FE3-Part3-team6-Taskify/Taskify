@@ -49,7 +49,7 @@ export const checkNickname = (nickname) => {
     return '닉네임을 입력해주세요';
   }
   if (nickname.length > 10) {
-    return '10자 이하로 작성해줏요';
+    return '10자 이하로 작성해주세요';
   }
   return '';
 };
