@@ -82,7 +82,8 @@ export const axiosPut = async (url, body) => {
     });
     return data;
   } catch (e) {
-    return `api put error : ${e}`;
+    console.log(`api put error : ${e.message}`);
+    return e.response;
   }
 };
 

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { axiosPut } from '@/features/axios';
-import TableBox from '../Table/TableBox';
+import TableBox from '../../Table/TableBox';
 import CtaDefault from '@/components/Buttons/CtaDefault/CtaDefault';
-import PasswordInput from '../SignInput/PasswordInput';
+import PasswordInput from '../../SignInput/PasswordInput';
 import { checkNewPassword, checkPasswordConfirmed } from '@/utils/validation';
 
-export default function UpdatePassword({ password }) {
+export default function UpdatePassword() {
   const [formValues, setFormValues] = useState({
     currentPassword: '',
     newPassword: '',
@@ -29,20 +29,24 @@ export default function UpdatePassword({ password }) {
   };
 
   const onSubmit = async () => {
-    // TODO(조예진):
-    // 지금은 임시적으로 prop으로 비밀번호를 보내줬지만 현재 비밀번호 값을 어디서 가져오지..?
-    // 일단 put 요청을 보내고 error response가 오면 모달을 띄워야 하나..
-    if (formValues.currentPassword !== password) {
-      setShowModal(true);
-      return;
-    }
-    const updatedMyPassword = await axiosPut('auth/password', {
+    const res = await axiosPut('auth/password', {
       password: formValues.currentPassword,
       newPassword: formValues.newPassword,
     });
-    if (!updatedMyPassword.status) {
-      // 비밀번호 state값 변경해줌
+
+    if (!res.status) {
       alert('비밀번호 변경 완료');
+      setFormValues({
+        currentPassword: '',
+        newPassword: '',
+        newPasswordConfirmed: '',
+      });
+
+      return;
+    }
+
+    if (res.status === 400) {
+      setShowModal(true);
     }
   };
 

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { PaginationArrow } from '../../../public/images';
+import { PaginationArrow } from '../../../../public/images';
 import UpdateProfile from './UpdateProfile';
 import UpdatePassword from './UpdatePassword';
 
@@ -18,7 +18,7 @@ export default function MyPageContent() {
         <span className="text-sm md:text-base font-medium">돌아가기</span>
       </div>
       <UpdateProfile />
-      <UpdatePassword password="sprint101" />
+      <UpdatePassword />
     </div>
   );
 }

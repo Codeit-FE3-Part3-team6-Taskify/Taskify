@@ -3,10 +3,10 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { axiosPostFormData, axiosPut, axiosGet } from '@/features/axios';
-import TableBox from '../Table/TableBox';
+import TableBox from '../../Table/TableBox';
 import CtaDefault from '@/components/Buttons/CtaDefault/CtaDefault';
 import UserInformationInput from '@/components/SignInput/UserInformationInput';
-import { AddImg } from '../../../public/images';
+import { AddImg } from '../../../../public/images';
 
 export default function UpdateProfile() {
   const fileInputRef = useRef(null);
@@ -24,9 +24,24 @@ export default function UpdateProfile() {
 
   const handleUpload = async () => {
     try {
-      if (!selectedFile) {
-        console.log('파일 선택 안함');
-        // 사진 없애는건 못하나..?
+      // 닉네임만 변경하는 경우
+      if (!selectedFile && nextNickname) {
+        try {
+          const updatedMyInfo = await axiosPut('users/me', {
+            nickname: nextNickname,
+            profileImageUrl: myInfo.profileImageUrl,
+          });
+
+          if (!updatedMyInfo.status) {
+            setMyInfo((prev) => ({
+              ...prev,
+              nickname: nextNickname,
+            }));
+          }
+        } catch (e) {
+          console.log('내 정보 업데이트 실패');
+        }
+        return;
       }
 
       const formData = new FormData();
@@ -50,7 +65,7 @@ export default function UpdateProfile() {
             }));
           }
         } catch (e) {
-          console.log('업데이트 실패');
+          console.log('내 정보 업데이트 실패');
         }
       }
     } catch (error) {

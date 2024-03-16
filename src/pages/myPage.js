@@ -1,8 +1,8 @@
 import Sidebar from '@/components/Sidebar/Sidebar';
 import DashboardHeader from '@/components/Header/DashboardHeader';
-import MyPageContent from '@/components/MyPageContent/MyPageContent';
+import MyPageContent from '@/components/MyPage/MyPageContent/MyPageContent';
 
-// TODO(조예진) : 미완성 -  비밀번호 수정 기능 추가
+// TODO(조예진) : 완성
 export default function MyPage() {
   // mock data
   const userInfo = { nickname: '곰도리', email: 'gomdoll@codeit.com' };
