@@ -3,13 +3,14 @@ import DashboardList from '@/components/MydashboardPage/DashboardList';
 import InvitedDashboard from '@/components/MydashboardPage/InvitedDashboard';
 import Sidebar from '@/components/Sidebar/Sidebar';
 import useGetDashboards from '@/hooks/useGetDashboards';
+import useGetInvitedDashboards from '@/hooks/useGetInvitedDashboards';
 import useGetUsers from '@/hooks/useGetUsers';
-import { invitations } from '@/utils/text';
 
 export default function myDashboard() {
   const { userData } = useGetUsers();
   const { dashboardsData, allDashboardsData, nextPage, prevPage, currentPage } =
     useGetDashboards();
+  const { invitedDashboardData } = useGetInvitedDashboards();
 
   return (
     <div className="flex ">
@@ -27,7 +28,7 @@ export default function myDashboard() {
               prevPage={prevPage}
               currentPage={currentPage}
             />
-            <InvitedDashboard invitations={invitations} />
+            <InvitedDashboard invitations={invitedDashboardData.invitations} />
           </div>
         </main>
       </div>
