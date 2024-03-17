@@ -1,9 +1,20 @@
+import { useRef } from 'react';
 import Image from 'next/image';
 import { SearchIcon } from '../../../public/images';
 import CtaDefault from '../Buttons/CtaDefault/CtaDefault';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 
 // 송상훈 TODO :invitations가 없을때 맨아래 div가 뜨는데 그럼 로딩때는..?
-export default function InvitedDashboard({ invitations }) {
+export default function InvitedDashboard({ invitations, fetchMore, loading }) {
+  const observerRef = useRef(null);
+  const scrollContainerRef = useRef(null);
+
+  useIntersectionObserver(observerRef, scrollContainerRef, () => {
+    if (!loading) {
+      fetchMore();
+    }
+  });
+
   return (
     <section className="bg-white max-w-[1022px] h-auto rounded-[8px] shadow-sm py-[24px] px-[16px]">
       <h2 className="text-xl font-bold mb-5 ">초대받은 대시보드</h2>
@@ -27,33 +38,39 @@ export default function InvitedDashboard({ invitations }) {
         <p>수락 여부</p>
       </div>
 
-      <div className="flex flex-col gap-y-2 h-[400px] overflow-y-scroll rounded-[8px]">
+      <div
+        ref={scrollContainerRef}
+        className="flex flex-col gap-y-2 h-[400px] overflow-y-scroll rounded-[8px]"
+      >
         {invitations ? (
-          invitations.map((invitation) => (
-            <div
-              key={invitation.id}
-              className="flex flex-col border-b pb-[20px] gap-y-2 md:flex-row md:items-center md:grid md:grid-cols-3 md:pt-[20px] "
-            >
-              <div className="flex">
-                <p className="w-[60px] text-gray_9FA6B2 md:hidden lg:hidden">
-                  이름
-                </p>
-                <span>{invitation.dashboard.title}</span>
+          <>
+            {invitations.map((invitation) => (
+              <div
+                key={invitation.id}
+                className="flex flex-col border-b pb-[20px] gap-y-2 md:flex-row md:items-center md:grid md:grid-cols-3 md:pt-[20px] "
+              >
+                <div className="flex">
+                  <p className="w-[60px] text-gray_9FA6B2 md:hidden lg:hidden">
+                    이름
+                  </p>
+                  <span>{invitation.dashboard.title}</span>
+                </div>
+                <div className="flex">
+                  <p className="w-[60px] text-gray_9FA6B2 md:hidden lg:hidden">
+                    초대자
+                  </p>
+                  <span>{invitation.inviter.nickname}</span>
+                </div>
+                <div className="flex gap-x-3">
+                  <CtaDefault size="small">수락</CtaDefault>
+                  <CtaDefault size="small" color="white">
+                    거절
+                  </CtaDefault>
+                </div>
               </div>
-              <div className="flex">
-                <p className="w-[60px] text-gray_9FA6B2 md:hidden lg:hidden">
-                  초대자
-                </p>
-                <span>{invitation.inviter.nickname}</span>
-              </div>
-              <div className="flex gap-x-3">
-                <CtaDefault size="small">수락</CtaDefault>
-                <CtaDefault size="small" color="white">
-                  거절
-                </CtaDefault>
-              </div>
-            </div>
-          ))
+            ))}
+            <div ref={observerRef} className="h-[1px]" />
+          </>
         ) : (
           <div>초대받은 대시보드가 없습니다</div>
         )}

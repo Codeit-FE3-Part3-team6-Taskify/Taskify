@@ -15,7 +15,7 @@ export default function DashboardList({
     <section className="bg-white max-w-[1022px] h-auto rounded-[8px] shadow-sm py-[24px] px-[16px]">
       <h2 className="text-xl font-bold mb-5">대시보드 목록</h2>
 
-      <div className="flex flex-col h-[148px] gap-y-2 md:grid md:grid-cols-2 gap-[10px] lg:grid-cols-3">
+      <div className="flex flex-col h-[388px] gap-y-2 md:grid md:grid-cols-2 gap-[10px] lg:grid-cols-3 md:h-[220px] lg:h-[148px]">
         {dashboards ? (
           dashboards.map((dashboard) => (
             <DashboardListItem

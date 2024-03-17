@@ -10,7 +10,8 @@ export default function myDashboard() {
   const { userData } = useGetUsers();
   const { dashboardsData, allDashboardsData, nextPage, prevPage, currentPage } =
     useGetDashboards();
-  const { invitedDashboardData } = useGetInvitedDashboards();
+  const { invitedDashboardData, loading, fetchMore } =
+    useGetInvitedDashboards();
 
   return (
     <div className="flex ">
@@ -28,7 +29,11 @@ export default function myDashboard() {
               prevPage={prevPage}
               currentPage={currentPage}
             />
-            <InvitedDashboard invitations={invitedDashboardData.invitations} />
+            <InvitedDashboard
+              invitations={invitedDashboardData}
+              loading={loading}
+              fetchMore={fetchMore}
+            />
           </div>
         </main>
       </div>
