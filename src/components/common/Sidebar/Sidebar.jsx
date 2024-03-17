@@ -1,10 +1,5 @@
 import Image from 'next/image';
-import {
-  Logo,
-  LogoImg,
-  AddButtonEmpty,
-  CrownIcon,
-} from '../../../public/images';
+import { Logo, LogoImg, AddButtonEmpty, CrownIcon } from '@/../public/images';
 
 export default function Sidebar({ dashboards }) {
   // 송상훈 Todo: 나중에 재사용될 가능성 있는 함수, 그때 보고 분리해서 따로 만들어도 될듯

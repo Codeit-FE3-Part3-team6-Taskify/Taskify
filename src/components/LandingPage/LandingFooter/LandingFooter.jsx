@@ -8,7 +8,9 @@ export default function LandingFooter({ imgData }) {
       <span>@codeit - 2023</span>
       <div>
         <Link href="/privacypolicy">Privacy Policy</Link>
-        <Link href="/faq">FAQ</Link>
+        <Link className="ml-5 md:ml-8" href="/faq">
+          FAQ
+        </Link>
       </div>
       <div className="flex gap-[14px] self-center mt-[56px] md:mt-0">
         <Link
