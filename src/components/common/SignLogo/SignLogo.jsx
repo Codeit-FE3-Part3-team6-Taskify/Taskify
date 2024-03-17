@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { Logo, LogoImg } from '../../../public/images';
+import { Logo, LogoImg } from '@/../public/images';
 
 export default function SignLogo() {
   return (

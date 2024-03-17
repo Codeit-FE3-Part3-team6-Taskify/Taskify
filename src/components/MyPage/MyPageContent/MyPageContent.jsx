@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { PaginationArrow } from '../../../../public/images';
+import { PaginationArrow } from '@/../public/images';
 import UpdateProfile from './UpdateProfile';
 import UpdatePassword from './UpdatePassword';
 
