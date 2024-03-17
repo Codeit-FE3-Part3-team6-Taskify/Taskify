@@ -50,7 +50,7 @@ export default function PasswordInput({ labelName, error, ...rest }) {
           {...rest}
         />
         <Image
-          className="absolute top-3 right-4 cursor-pointer"
+          className="absolute top-4 right-4 cursor-pointer"
           onClick={changeEye}
           width={24}
           height={24}

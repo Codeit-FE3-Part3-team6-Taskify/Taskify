@@ -5,7 +5,6 @@ const axiosInstance = axios.create({
   timeout: 5000,
   headers: {
     Accept: 'application/json',
-    'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
   },
 });
@@ -44,9 +43,29 @@ export const axiosGet = async (url) => {
   }
 };
 
-export const axiosPost = async (url, body) => {
+export const axiosPostJason = async (url, body) => {
   try {
-    const { data } = await axiosInstance.post(url, body);
+    const { data } = await axiosInstance.post(url, body, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return data;
+  } catch (e) {
+    console.log(`api post error : ${e}`);
+    return e.response;
+  }
+};
+
+// FormData를 사용하여 멀티파트 폼 데이터를 보내는 요청
+export const axiosPostFormData = async (url, body) => {
+  try {
+    const { data } = await axiosInstance.post(url, body, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    console.log('data:', data);
     return data;
   } catch (e) {
     console.log(`api post error : ${e}`);
@@ -56,10 +75,15 @@ export const axiosPost = async (url, body) => {
 
 export const axiosPut = async (url, body) => {
   try {
-    const { data } = await axiosInstance.put(url, body);
+    const { data } = await axiosInstance.put(url, body, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
     return data;
   } catch (e) {
-    return `api put error : ${e}`;
+    console.log(`api put error : ${e.message}`);
+    return e.response;
   }
 };
 
