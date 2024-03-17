@@ -24,22 +24,32 @@ export const signInUser = async ({ data, router, dispatch, openModal }) => {
   });
 };
 
-export const signUpUser = async (formValues, setErrors, router) => {
+export const signUpUser = async ({
+  formValues,
+  setErrors,
+  router,
+  openModal,
+}) => {
   const res = await axiosPostJason('users', {
     email: formValues.email,
     password: formValues.password,
     nickname: formValues.nickname,
   });
   if (!res.status) {
-    // 나중에 모달 로직 들어갈 예정
-    alert('가입이 완료되었습니다.');
+    openModal({
+      type: 'alert',
+      props: {
+        text: '가입이 완료되었습니다!',
+      },
+    });
     router.push('/signin');
     return;
   }
   if (res.status === 409) {
-    // 여기도 모달 대체 예정
+    openModal({
+      type: 'alert',
+      props: { text: '이미 사용 중인 이메일입니다.' },
+    });
     setErrors((prev) => ({ ...prev, emailError: res.data.message }));
-    return;
   }
-  return;
 };
