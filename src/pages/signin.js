@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useDispatch } from 'react-redux';
-import PasswordInput from '@/components/SignInput/PasswordInput';
-import UserInformationInput from '@/components/SignInput/UserInformationInput';
+import PasswordInput from '@/components/common/SignInput/PasswordInput';
+import UserInformationInput from '@/components/common/SignInput/UserInformationInput';
 import { checkSignEmail, checkSignPassword } from '@/utils/validation';
 import { signInUser } from '@/features/user';
-import SignLogo from '@/components/SignLogo/SignLogo';
-import SignLink from '@/components/SignLink/SignLink';
-import CtaDefault from '@/components/Buttons/CtaDefault/CtaDefault';
+import SignLogo from '@/components/common/SignLogo/SignLogo';
+import SignLink from '@/components/common/SignLink/SignLink';
+import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
+import useModal from '@/hooks/useModal';
 
 // Todo(노진석) : (미완성)api로직 등 추가해야함.
 export default function SignInPage() {
@@ -18,14 +19,21 @@ export default function SignInPage() {
   const [emailError, setEmailError] = useState('');
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const { openModal } = useModal();
   const onSubmit = (e) => {
     e.preventDefault();
+    const emailErrorMessage = checkSignEmail(email);
+    const passwordErrorMessage = checkSignPassword(password);
+    setEmailError(emailErrorMessage);
+    setPasswordError(passwordErrorMessage);
+    if (emailErrorMessage !== '' || passwordErrorMessage !== '') {
+      return;
+    }
     signInUser({
       data: { email, password },
-      setEmailError,
-      setPasswordError,
       router,
       dispatch,
+      openModal,
     });
   };
   const handleEmailBlur = () => {

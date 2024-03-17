@@ -8,7 +8,6 @@ import { checkNewPassword, checkPasswordConfirmed } from '@/utils/validation';
 
 export default function UpdatePassword() {
   const { openModal } = useModal();
-
   const [formValues, setFormValues] = useState({
     currentPassword: '',
     newPassword: '',
@@ -40,6 +39,7 @@ export default function UpdatePassword() {
         type: 'alert',
         props: { text: '비밀번호가 변경되었습니다.' },
       });
+
       setFormValues({
         currentPassword: '',
         newPassword: '',
