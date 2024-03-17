@@ -1,22 +1,41 @@
-/* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useState, useRef } from 'react';
-import Image from 'next/image';
-import Select, { components } from 'react-select';
+import { useState } from 'react';
 import Modal from '../Modal/Modal';
 import UserInformationInput from '../SignInput/UserInformationInput';
 import CtaDefault from '@/components/Buttons/CtaDefault/CtaDefault';
 import Avatar from '../Avatar/Avatar';
-import { AddImg, CheckIcon } from '../../../public/images';
+import SelectMenu from '../SelectMenu/SelectMenu';
+import FileUpload from '../FileUpload/FileUpload';
+import { axiosPostFormData } from '@/features/axios';
 
 // Todo(조예진) : 이미지업로드, 태그 추가, date-picker
 export default function CreateTodoModal({ onClose }) {
-  const fileInputRef = useRef(null);
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [formValues, setFormValues] = useState({
+    assigneeUserId: 0,
+    dashboardId: 0,
+    columnId: 0,
+    title: '',
+    description: '',
+    dueDate: '',
+    tags: [''],
+    imageUrl: '',
+  });
 
-  const handleFileUpload = (event) => {
-    setSelectedFile(event.target.files[0]);
+  const handleImageSelect = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append('image', file);
+
+      const res = await axiosPostFormData('users/me/image', formData);
+      if (!res.status) {
+        setFormValues((prev) => ({ ...prev, imageUrl: res.profileImageUrl }));
+      }
+    } catch (error) {
+      console.error('이미지를 업로드하는데 실패했습니다.', error);
+    }
+  };
+
+  const handleCreate = async () => {
+    console.log('할일 카드를 생성함');
   };
 
   // mock data
@@ -26,8 +45,6 @@ export default function CreateTodoModal({ onClose }) {
     { value: '강아지', label: '강아지' },
     { value: '고양이', label: '고양이' },
   ];
-
-  const [selectedOption, setSelectedOption] = useState(null);
 
   const customStyles = {
     control: (provided, state) => ({
@@ -62,28 +79,7 @@ export default function CreateTodoModal({ onClose }) {
   );
   const getOptionValue = (option) => option.value;
 
-  const CustomOption = ({ data, isSelected, ...props }) => (
-    <components.Option {...props}>
-      <div
-        className={`flex items-center gap-[6px]  ${isSelected ? 'pl-0' : 'pl-[41px]'} `}
-      >
-        {isSelected && (
-          <Image
-            src={CheckIcon}
-            style={{ marginLeft: 8, marginRight: 5 }}
-            width={22}
-            height={22}
-            alt="selected"
-          />
-        )}
-        <span className="">
-          <Avatar text={data.label.charAt(0)} />
-        </span>
-
-        <span>{data.label}</span>
-      </div>
-    </components.Option>
-  );
+  const disabled = Object.values(formValues).every((value) => !!value);
 
   return (
     <Modal onClose={onClose}>
@@ -91,17 +87,11 @@ export default function CreateTodoModal({ onClose }) {
         <div className="text-xl md:text-2xl font-bold ">할 일 생성</div>
         <div className="w-full">
           <div className="mb-2">담당자</div>
-          <Select
-            value={selectedOption}
-            onChange={setSelectedOption}
+          <SelectMenu
             options={options}
-            placeholder="이름을 입력해 주세요"
-            styles={customStyles}
+            customStyles={customStyles}
             getOptionLabel={getOptionLabel}
             getOptionValue={getOptionValue}
-            components={{
-              Option: CustomOption,
-            }}
           />
         </div>
 
@@ -125,35 +115,16 @@ export default function CreateTodoModal({ onClose }) {
         </div>
         <div>
           <span>이미지</span>
-          <div>
-            <input
-              type="file"
-              ref={fileInputRef}
-              style={{ display: 'none' }}
-              onChange={handleFileUpload}
-            />
-            <div
-              className="relative overflow-hidden flex w-[58px] h-[58px] md:w-[76px] md:h-[76px] rounded-[6px] bg-[#F5F5F5] cursor-pointer"
-              onClick={() => fileInputRef.current.click()}
-            >
-              {selectedFile ? (
-                <Image
-                  fill
-                  src={URL.createObjectURL(selectedFile)}
-                  alt="Selected"
-                />
-              ) : (
-                <Image fill src={AddImg} alt="add" />
-              )}
-            </div>
-          </div>
+          <FileUpload onSelectFile={handleImageSelect} />
         </div>
         <div className="flex justify-center md:justify-end w-full">
           <div className="flex gap-[11px]">
             <CtaDefault color="white" onClick={onClose}>
               취소
             </CtaDefault>
-            <CtaDefault onClick={onClose}>확인</CtaDefault>
+            <CtaDefault onClick={handleCreate} disabled={!disabled}>
+              생성
+            </CtaDefault>
           </div>
         </div>
       </div>

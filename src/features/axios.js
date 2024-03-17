@@ -65,7 +65,6 @@ export const axiosPostFormData = async (url, body) => {
         'Content-Type': 'multipart/form-data',
       },
     });
-    console.log('data:', data);
     return data;
   } catch (e) {
     console.log(`api post error : ${e}`);
