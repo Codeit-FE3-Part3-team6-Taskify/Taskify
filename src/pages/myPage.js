@@ -1,5 +1,5 @@
-import Sidebar from '@/components/Sidebar/Sidebar';
-import DashboardHeader from '@/components/Header/DashboardHeader';
+import Sidebar from '@/components/common/Sidebar/Sidebar';
+import DashboardHeader from '@/components/common/Header/DashboardHeader';
 import MyPageContent from '@/components/MyPage/MyPageContent/MyPageContent';
 
 // TODO(조예진) : 완성

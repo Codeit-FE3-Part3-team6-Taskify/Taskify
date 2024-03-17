@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import DefaultHeader from '@/components/Header/DefaultHeader';
+import DefaultHeader from '@/components/common/Header/DefaultHeader';
 import {
   FacebookIcon,
   InstaIcon,
@@ -15,7 +15,7 @@ import {
   LandingImg6,
 } from '@/../public/images';
 import LandingFooter from '@/components/LandingPage/LandingFooter/LandingFooter';
-import CtaDefault from '@/components/Buttons/CtaDefault/CtaDefault';
+import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
 import LandingCard from '@/components/LandingPage/LandingCard/LandingCard';
 
 export async function getStaticProps() {

@@ -3,10 +3,10 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { axiosPostFormData, axiosPut, axiosGet } from '@/features/axios';
-import TableBox from '../../Table/TableBox';
-import CtaDefault from '@/components/Buttons/CtaDefault/CtaDefault';
-import UserInformationInput from '@/components/SignInput/UserInformationInput';
-import { AddImg } from '../../../../public/images';
+import TableBox from '@/components/common/Table/TableBox';
+import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
+import UserInformationInput from '@/components/common/SignInput/UserInformationInput';
+import { AddImg } from '@/../public/images';
 
 export default function UpdateProfile() {
   const fileInputRef = useRef(null);
