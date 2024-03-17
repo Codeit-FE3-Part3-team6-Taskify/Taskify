@@ -1,19 +1,37 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import { SearchIcon } from '../../../public/images';
 import CtaDefault from '../Buttons/CtaDefault/CtaDefault';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 
 // 송상훈 TODO :invitations가 없을때 맨아래 div가 뜨는데 그럼 로딩때는..?
-export default function InvitedDashboard({ invitations, fetchMore, loading }) {
+export default function InvitedDashboard({
+  invitations,
+  fetchMore,
+  loading,
+  updateTitle,
+}) {
   const observerRef = useRef(null);
   const scrollContainerRef = useRef(null);
+  const [inputValue, setInputValue] = useState(''); // 입력 값 임시저장
+  const [searchTerm, setSearchTerm] = useState(''); // 확정된 입력 값
 
   useIntersectionObserver(observerRef, scrollContainerRef, () => {
     if (!loading) {
       fetchMore();
     }
   });
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value); // 입력 값 임시 저장
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      setSearchTerm(inputValue);
+      updateTitle(searchTerm);
+    }
+  };
 
   return (
     <section className="bg-white max-w-[1022px] h-auto rounded-[8px] shadow-sm py-[24px] px-[16px]">
@@ -25,6 +43,9 @@ export default function InvitedDashboard({ invitations, fetchMore, loading }) {
             className="w-full rounded-[6px] border-2 h-[40px] pl-10"
             type="text"
             placeholder="Search"
+            value={inputValue}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
           />
           <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
             <Image src={SearchIcon} width={24} height={24} alt="돋보기아이콘" />

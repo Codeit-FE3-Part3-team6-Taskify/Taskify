@@ -10,7 +10,7 @@ export default function myDashboard() {
   const { userData } = useGetUsers();
   const { dashboardsData, allDashboardsData, nextPage, prevPage, currentPage } =
     useGetDashboards();
-  const { invitedDashboardData, loading, fetchMore } =
+  const { invitedDashboardData, loading, fetchMore, updateTitle } =
     useGetInvitedDashboards();
 
   return (
@@ -33,6 +33,7 @@ export default function myDashboard() {
               invitations={invitedDashboardData}
               loading={loading}
               fetchMore={fetchMore}
+              updateTitle={updateTitle}
             />
           </div>
         </main>
