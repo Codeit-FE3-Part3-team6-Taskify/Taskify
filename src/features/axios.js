@@ -52,7 +52,7 @@ export const axiosPostJason = async (url, body) => {
     });
     return data;
   } catch (e) {
-    console.log(`api post error : ${e}`);
+    console.log(`api post error : ${e.response.data.message}`);
     return e.response;
   }
 };

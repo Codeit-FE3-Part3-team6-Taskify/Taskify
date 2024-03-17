@@ -5,7 +5,7 @@ export default function TagItem({ tag, onDelete }) {
   const [color, setColor] = useState({});
 
   useEffect(() => {
-    const newColor = getRandomColorPair(color);
+    const newColor = getRandomColorPair();
     setColor(newColor);
   }, []);
 

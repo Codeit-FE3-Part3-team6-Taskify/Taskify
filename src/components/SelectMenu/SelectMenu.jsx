@@ -10,8 +10,17 @@ const SelectMenu = ({
   customStyles,
   getOptionLabel,
   getOptionValue,
+  setFormValues,
 }) => {
   const [selectedOption, setSelectedOption] = useState(null);
+
+  const handleOptionChange = (option) => {
+    setSelectedOption(option);
+    setFormValues((prev) => ({
+      ...prev,
+      assigneeUserId: option ? option.id : 0,
+    }));
+  };
 
   const CustomOption = ({ data, isSelected, ...props }) => (
     <components.Option {...props}>
@@ -39,7 +48,7 @@ const SelectMenu = ({
   return (
     <Select
       value={selectedOption}
-      onChange={setSelectedOption}
+      onChange={handleOptionChange}
       options={options}
       placeholder="이름을 입력해 주세요"
       styles={customStyles}
