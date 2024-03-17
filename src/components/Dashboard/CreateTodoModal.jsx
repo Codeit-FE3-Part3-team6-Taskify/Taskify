@@ -1,13 +1,17 @@
 import { useState } from 'react';
+
 import Modal from '../Modal/Modal';
+
 import UserInformationInput from '../SignInput/UserInformationInput';
 import CtaDefault from '@/components/Buttons/CtaDefault/CtaDefault';
 import Avatar from '../Avatar/Avatar';
 import SelectMenu from '../SelectMenu/SelectMenu';
+import CustomDatePicker from '../CustomDatePicker/CustomDatePicker';
 import FileUpload from '../FileUpload/FileUpload';
+
 import { axiosPostFormData } from '@/features/axios';
 
-// Todo(조예진) : 이미지업로드, 태그 추가, date-picker
+// Todo(조예진) :  태그 추가, date-picker
 export default function CreateTodoModal({ onClose }) {
   const [formValues, setFormValues] = useState({
     assigneeUserId: 0,
@@ -50,7 +54,7 @@ export default function CreateTodoModal({ onClose }) {
     control: (provided, state) => ({
       ...provided,
       width: '100%',
-      height: '60px',
+      height: '100%',
       borderRadius: '8px',
       padding: '11px 16px',
       fontSize: '16px',
@@ -79,14 +83,22 @@ export default function CreateTodoModal({ onClose }) {
   );
   const getOptionValue = (option) => option.value;
 
+  const [selectedDate, setSelectedDate] = useState(null);
+
   const disabled = Object.values(formValues).every((value) => !!value);
 
   return (
     <Modal onClose={onClose}>
+      <div>
+        {selectedDate && (
+          <p>You selected: {selectedDate.toLocaleDateString()}</p>
+        )}
+      </div>
       <div className="flex flex-col items-start py-7 px-5 md:py-8 md:px-7 gap-6 text-base md:text-lg font-medium text-black_333236 w-[327px] md:w-[506px] ">
         <div className="text-xl md:text-2xl font-bold ">할 일 생성</div>
         <div className="w-full">
           <div className="mb-2">담당자</div>
+
           <SelectMenu
             options={options}
             customStyles={customStyles}
@@ -107,7 +119,7 @@ export default function CreateTodoModal({ onClose }) {
         </div>
         <div className="w-full">
           <span>마감일</span>
-          <UserInformationInput placeholder="날짜를 입력해 주세요" />
+          <CustomDatePicker />
         </div>
         <div className="w-full">
           <span>태그</span>
