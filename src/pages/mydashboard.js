@@ -18,9 +18,9 @@ export default function myDashboard() {
       <aside>
         <Sidebar dashboards={allDashboardsData} />
       </aside>
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full min-h-screen">
         <DashboardHeader title="내 대시보드" userInfo={userData} />
-        <main className="bg-gray_FAFAFA h-full w-full p-[24px] md:p-[40px]">
+        <main className="bg-gray_FAFAFA flex-1 w-full p-[24px] md:p-[40px]">
           <div className="flex flex-col gap-y-16">
             <DashboardList
               dashboards={dashboardsData.dashboards}
