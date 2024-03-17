@@ -1,40 +1,27 @@
 /* eslint-disable no-useless-return */
 import { axiosPostJason } from './axios';
-import { checkSignEmail, checkSignPassword } from '@/utils/validation';
 import { addUserInfo } from './userInfoSlice';
 
 // Todo (노진석) : 나중에 모달넣기
-export const signInUser = async ({
-  data,
-  setEmailError,
-  setPasswordError,
-  router,
-  dispatch,
-}) => {
-  const emailErrorMessage = checkSignEmail(data.email);
-  const passwordErrorMessage = checkSignPassword(data.password);
-  setEmailError(emailErrorMessage);
-  setPasswordError(passwordErrorMessage);
-  if (emailErrorMessage !== '' || passwordErrorMessage !== '') {
-    return;
-  }
+export const signInUser = async ({ data, router, dispatch, openModal }) => {
   const res = await axiosPostJason('auth/login', data);
   if (!res.status) {
     const { user } = res;
     dispatch(addUserInfo(user));
     localStorage.setItem('accessToken', res.accessToken);
-    // 임시로 alert로 대체
-    alert('로그인 성공');
-    router.push('/');
+    router.push('/myDashboard');
     return;
   }
+  let message = '';
   if (res.status === 400) {
-    // 모달로직 들어올 예정
-    setPasswordError('비밀번호가 일치하지 않습니다.');
-    return;
+    message = '비밀번호가 일치하지 않습니다.';
+  } else {
+    message = '존재하지 않는 이메일입니다.';
   }
-  setEmailError('존재하지 않는 유저입니다.');
-  return;
+  openModal({
+    type: 'alert',
+    props: { text: message },
+  });
 };
 
 export const signUpUser = async (formValues, setErrors, router) => {
