@@ -3,7 +3,7 @@ import Image from 'next/image';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { CalendarIcon } from '../../../public/images';
+import { CalendarIcon } from '@/../public/images';
 
 export default function CustomDatePicker() {
   const [selectedDate, setSelectedDate] = useState(new Date());

@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useRef, useState } from 'react';
 import Image from 'next/image';
-import { AddImg } from '../../../public/images';
+import { AddImg } from '@/../public/images';
 
 export default function FileUpload({ onSelectFile, imageUrl }) {
   const fileInputRef = useRef(null);

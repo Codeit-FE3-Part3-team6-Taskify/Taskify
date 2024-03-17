@@ -6,7 +6,7 @@ import TableBox from '../../Table/TableBox';
 import CtaDefault from '@/components/Buttons/CtaDefault/CtaDefault';
 import UserInformationInput from '@/components/SignInput/UserInformationInput';
 import FileUpload from '@/components/FileUpload/FileUpload';
-import { AddImg } from '../../../../public/images';
+import { AddImg } from '@/../public/images';
 
 export default function UpdateProfile() {
   const [myInfo, setMyInfo] = useState({

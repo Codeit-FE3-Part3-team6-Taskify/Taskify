@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Select, { components } from 'react-select';
 import Avatar from '../Avatar/Avatar';
-import { CheckIcon } from '../../../public/images';
+import { CheckIcon } from '@/../public/images';
 
 const SelectMenu = ({
   options,

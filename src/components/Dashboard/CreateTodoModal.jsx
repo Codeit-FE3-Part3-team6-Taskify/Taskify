@@ -1,14 +1,12 @@
 import { useState } from 'react';
-
 import Modal from '../Modal/Modal';
-
 import UserInformationInput from '../SignInput/UserInformationInput';
-import CtaDefault from '@/components/Buttons/CtaDefault/CtaDefault';
 import Avatar from '../Avatar/Avatar';
 import SelectMenu from '../SelectMenu/SelectMenu';
 import CustomDatePicker from '../CustomDatePicker/CustomDatePicker';
+import TagInput from '../Tag/TagInput';
 import FileUpload from '../FileUpload/FileUpload';
-
+import CtaDefault from '@/components/Buttons/CtaDefault/CtaDefault';
 import { axiosPostFormData } from '@/features/axios';
 
 // Todo(조예진) :  태그 추가, date-picker
@@ -23,6 +21,7 @@ export default function CreateTodoModal({ onClose }) {
     tags: [''],
     imageUrl: '',
   });
+  // console.log('formValues', formValues);
 
   const handleImageSelect = async (file) => {
     try {
@@ -123,7 +122,7 @@ export default function CreateTodoModal({ onClose }) {
         </div>
         <div className="w-full">
           <span>태그</span>
-          <UserInformationInput placeholder="입력 후 Enter" />
+          <TagInput setFormValues={setFormValues} />
         </div>
         <div>
           <span>이미지</span>
