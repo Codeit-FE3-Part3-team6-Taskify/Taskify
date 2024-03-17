@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { axiosPut } from '@/features/axios';
 import useModal from '@/hooks/useModal';
-import TableBox from '../../Table/TableBox';
-import CtaDefault from '@/components/Buttons/CtaDefault/CtaDefault';
-import PasswordInput from '../../SignInput/PasswordInput';
+import TableBox from '@/components/common/Table/TableBox';
+import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
+import PasswordInput from '@/components/common/SignInput/PasswordInput';
 import { checkNewPassword, checkPasswordConfirmed } from '@/utils/validation';
 
 export default function UpdatePassword() {

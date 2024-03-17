@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 import TagItem from './TagItem';
 
 export default function TagInput({ setFormValues }) {
+  // TODO(조예진): 태그가 1개 이상 있을 땐 placeholder 없애기
   const inputRef = useRef(null);
   const [tagList, setTagList] = useState([]);
   const [tagItem, setTagItem] = useState('');

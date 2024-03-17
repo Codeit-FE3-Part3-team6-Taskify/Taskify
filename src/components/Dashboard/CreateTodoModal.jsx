@@ -1,13 +1,13 @@
 /* eslint-disable object-shorthand */
 import { useEffect, useState } from 'react';
-import Modal from '../Modal/Modal';
-import UserInformationInput from '../SignInput/UserInformationInput';
-import Avatar from '../Avatar/Avatar';
-import SelectMenu from '../SelectMenu/SelectMenu';
-import CustomDatePicker from '../CustomDatePicker/CustomDatePicker';
-import TagInput from '../Tag/TagInput';
-import FileUpload from '../FileUpload/FileUpload';
-import CtaDefault from '@/components/Buttons/CtaDefault/CtaDefault';
+import Modal from '../common/Modal/Modal';
+import UserInformationInput from '../common/SignInput/UserInformationInput';
+import Avatar from '../common/Avatar/Avatar';
+import SelectMenu from '../common/SelectMenu/SelectMenu';
+import CustomDatePicker from '../common/CustomDatePicker/CustomDatePicker';
+import TagInput from '../common/Tag/TagInput';
+import FileUpload from '../common/FileUpload/FileUpload';
+import CtaDefault from '../common/Buttons/CtaDefault/CtaDefault';
 import { axiosPostJason, axiosPostFormData } from '@/features/axios';
 
 // Todo(조예진) : 미완성- CustomDatePicker 디자인 수정
@@ -149,15 +149,15 @@ export default function CreateTodoModal({ onClose, dashboardId, columnId }) {
             placeholder="설명을 입력해 주세요"
           />
         </div>
-        <div className="w-full">
+        <div className="flex flex-col w-full">
           <span>마감일</span>
           <CustomDatePicker setFormValues={setFormValues} />
         </div>
-        <div className="w-full">
+        <div className="flex flex-col w-full">
           <span>태그</span>
           <TagInput setFormValues={setFormValues} />
         </div>
-        <div>
+        <div className="flex flex-col w-full">
           <span>이미지</span>
           <FileUpload onSelectFile={handleImageSelect} />
         </div>

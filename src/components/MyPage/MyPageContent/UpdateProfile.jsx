@@ -2,10 +2,10 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState, useEffect } from 'react';
 import { axiosPostFormData, axiosPut, axiosGet } from '@/features/axios';
-import TableBox from '../../Table/TableBox';
-import CtaDefault from '@/components/Buttons/CtaDefault/CtaDefault';
-import UserInformationInput from '@/components/SignInput/UserInformationInput';
-import FileUpload from '@/components/FileUpload/FileUpload';
+import TableBox from '@/components/common/Table/TableBox';
+import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
+import UserInformationInput from '@/components/common/SignInput/UserInformationInput';
+import FileUpload from '@/components/common/FileUpload/FileUpload';
 import { AddImg } from '@/../public/images';
 
 export default function UpdateProfile() {
