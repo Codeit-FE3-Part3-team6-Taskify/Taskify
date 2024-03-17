@@ -1,5 +1,5 @@
 import Modal from '../Modal';
-import CtaDefault from '@/components/Buttons/CtaDefault/CtaDefault';
+import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
 
 export default function AlertModal({ onClose, text }) {
   return (
