@@ -1,17 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialValue = { userInfo: {} };
+const initialValue = {
+  id: 0,
+  email: '',
+  nickname: '',
+  profileImageUrl: '',
+  createdAt: '',
+};
 
 const userInfo = createSlice({
   name: 'userInfo',
   initialState: initialValue,
   reducers: {
     addUserInfo: (state, action) => {
-      // eslint-disable-next-line no-param-reassign
-      state.userInfo = { ...state.userInfo, ...action.payload };
+      return { ...action.payload };
     },
     reset: () => {
       return initialValue;
+    },
+    changeNickname: (state, action) => {
+      // eslint-disable-next-line no-param-reassign
+      state.nickname = action.payload.nickname;
     },
   },
 });
