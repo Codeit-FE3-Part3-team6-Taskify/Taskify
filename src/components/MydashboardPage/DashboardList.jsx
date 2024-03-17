@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import { AddButtonEmpty, NoMailIcon } from '../../../public/images';
-import DashboardListItem from '../Buttons/DashboardListItem/DashboardListItem';
-import PaginationButton from '../Buttons/PaginationButton/PaginationButton';
+import { AddButtonEmpty, NoMailIcon } from '@/../public/images';
+import DashboardListItem from '../common/Buttons/DashboardListItem/DashboardListItem';
+import PaginationButton from '../common/Buttons/PaginationButton/PaginationButton';
 
 // Todo(송상훈): 모달 컴포넌트 연동시기에 버튼 컴포넌트에 연동 해야함
 export default function DashboardList({

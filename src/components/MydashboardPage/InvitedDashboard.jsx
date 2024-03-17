@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 import Image from 'next/image';
-import { NoMailIcon, SearchIcon } from '../../../public/images';
-import CtaDefault from '../Buttons/CtaDefault/CtaDefault';
+import { NoMailIcon, SearchIcon } from '@/../public/images';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
+import CtaDefault from '../common/Buttons/CtaDefault/CtaDefault';
 
 // 송상훈 TODO :invitations가 없을때 맨아래 div가 뜨는데 그럼 로딩때는..?
 export default function InvitedDashboard({
