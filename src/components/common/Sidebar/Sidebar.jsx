@@ -15,7 +15,7 @@ export default function Sidebar({ dashboards }) {
   };
 
   return (
-    <div className="flex flex-col border-r items-center h-screen mt-5 w-[67px] md:w-[160px] lg:w-[300px]">
+    <div className="flex flex-col border-r bg-white items-center h-full pt-5 w-[67px] md:w-[160px] lg:w-[300px]">
       <div className="flex flex-row md:w-full mb-9 md:mb-14 md:pl-6">
         <Image src={LogoImg} width={29} height={33} alt="로고이미지" />
         <Image

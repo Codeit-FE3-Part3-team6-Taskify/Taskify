@@ -34,10 +34,14 @@ export default function DashboardHeader({
           {divider && (
             <span className="relative w-[1px] h-[34px] md:h-[38px] bg-gray_D9D9D9" />
           )}
-          <div className="flex justify-between items-center gap-3">
-            <Avatar text={userInfo.email.charAt(0).toUpperCase()} />
-            <span className="hidden md:block">{userInfo.nickname}</span>
-          </div>
+          {userInfo && userInfo.email && userInfo.nickname ? (
+            <div className="flex justify-between items-center gap-3">
+              <Avatar text={userInfo.email.charAt(0).toUpperCase()} />
+              <span className="hidden md:block">{userInfo.nickname}</span>
+            </div>
+          ) : (
+            <div>Loading...</div>
+          )}
         </div>
       </div>
     </div>
