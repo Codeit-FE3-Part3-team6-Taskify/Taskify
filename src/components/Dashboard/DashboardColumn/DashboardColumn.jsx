@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { axiosGet } from '@/features/axios';
 import CtaAdd from '@/components/common/Buttons/CtaAdd/CtaAdd';
 import { SettingIcon } from '@/../public/images';
+import DashboardCard from '../DashboardCard/DashboardCard';
 
 export default function DashboardColumn({ title, id }) {
   const [cardList, setCardList] = useState();
@@ -22,7 +23,7 @@ export default function DashboardColumn({ title, id }) {
   }, [id]);
 
   return (
-    <section className="flex flex-col gap-[10px] md:gap-4 lg:min-w-[354px] ">
+    <section className="flex flex-col gap-[10px] md:gap-4 lg:min-w-[354px] lg:h-full lg:overflow-y-auto">
       <div className="flex gap-2 items-center mb-2 md:mb-[9px] w-full">
         <div className="w-2 h-2 bg-violet_5534DA rounded-full" />
         <h4 className="text-4 font-bold">{title}</h4>
@@ -39,7 +40,7 @@ export default function DashboardColumn({ title, id }) {
 
       <CtaAdd />
       {cardList &&
-        cardList.map((card) => <div key={card.id}>{card.title}</div>)}
+        cardList.map((card) => <DashboardCard key={card.id} cardInfo={card} />)}
     </section>
   );
 }
