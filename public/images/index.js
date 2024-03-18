@@ -29,6 +29,8 @@ import LandingImg3 from './Landing3.png';
 import LandingImg4 from './Landing4.png';
 import LandingImg5 from './Landing5.png';
 import LandingImg6 from './Landing6.png';
+import EditIcon from './Edit.svg';
+import DeleteIcon from './DeleteIcon.jpg';
 
 export {
   LogoImg,
@@ -62,4 +64,6 @@ export {
   LandingImg5,
   LandingImg6,
   SearchIcon,
+  EditIcon,
+  DeleteIcon,
 };
