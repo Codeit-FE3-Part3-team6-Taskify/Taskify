@@ -5,9 +5,7 @@ export default function useDashboardList() {
   const [dashboardList, setDashboardList] = useState();
 
   const getDashboard = async () => {
-    const res = await axiosGet(
-      `/dashboards?navigationMethod=infiniteScroll&page=1&size=10`,
-    );
+    const res = await axiosGet(`/dashboards?navigationMethod=infiniteScroll`);
     setDashboardList(res.dashboards);
   };
 
