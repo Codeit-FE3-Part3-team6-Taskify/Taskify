@@ -1,10 +1,12 @@
 import { createPortal } from 'react-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { modalSelector, closeModal } from '@/features/modalSlice';
-import AlertModal from '@/components/common/Modal/AlertModal/AlertModal';
+import AlertModal from './AlertModal/AlertModal';
+import CreateTodoModal from '@/components/Dashboard/CreateTodoModal';
 
 const MODAL_COMPONENTS = {
   alert: AlertModal,
+  createTodo: CreateTodoModal,
 };
 
 export default function ModalContainer() {

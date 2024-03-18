@@ -14,7 +14,7 @@ export default function Modal({ onClose, children }) {
     <>
       <div
         ref={modalRef}
-        className="rounded-lg bg-white fixed z-50 fixed left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 "
+        className="rounded-lg bg-white fixed z-50 left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 "
       >
         {children}
       </div>

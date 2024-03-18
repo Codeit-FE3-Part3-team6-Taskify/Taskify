@@ -8,6 +8,7 @@
         "controlComponents": ["Input"],
       },
     ],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "import/no-unresolved": "off",
     "import/extensions": "off",
     "react/destructuring-assignment": "off",
