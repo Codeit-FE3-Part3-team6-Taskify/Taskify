@@ -110,9 +110,9 @@ export default function InvitedDashboard({
                   거절
                 </CtaDefault>
               </div>
+              <div ref={observerRef} className="h-[1px]" />
             </div>
           ))}
-          <div ref={observerRef} className="h-[1px]" />
         </div>
       )}
     </section>
