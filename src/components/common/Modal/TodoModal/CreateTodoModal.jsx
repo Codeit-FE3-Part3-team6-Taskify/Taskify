@@ -1,13 +1,13 @@
 /* eslint-disable object-shorthand */
 import { useEffect, useState } from 'react';
-import Modal from '../common/Modal/Modal';
-import UserInformationInput from '../common/SignInput/UserInformationInput';
-import Avatar from '../common/Avatar/Avatar';
-import SelectMenu from '../common/SelectMenu/SelectMenu';
-import CustomDatePicker from '../common/CustomDatePicker/CustomDatePicker';
-import TagInput from '../common/Tag/TagInput';
-import FileUpload from '../common/FileUpload/FileUpload';
-import CtaDefault from '../common/Buttons/CtaDefault/CtaDefault';
+import Modal from '../Modal';
+import UserInformationInput from '../../SignInput/UserInformationInput';
+import Avatar from '../../Avatar/Avatar';
+import SelectMenu from '../../SelectMenu/SelectMenu';
+import CustomDatePicker from '../../CustomDatePicker/CustomDatePicker';
+import TagInput from '../../Tag/TagInput';
+import FileUpload from '../../FileUpload/FileUpload';
+import CtaDefault from '../../Buttons/CtaDefault/CtaDefault';
 import { axiosPostJason, axiosPostFormData } from '@/features/axios';
 
 // Todo(조예진) : 미완성- CustomDatePicker 디자인 수정
