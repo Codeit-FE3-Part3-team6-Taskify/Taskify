@@ -13,6 +13,13 @@ export default function test() {
     });
   };
 
+  const handleOpenModalAlert = () => {
+    openModal({
+      type: 'alert',
+      props: { text: '모달테스트' },
+    });
+  };
+
   const participants = [
     { id: 1, email: 'example1@example.com', nickname: '김' },
     { id: 2, email: 'xample2@example.com', nickname: '이' },
@@ -43,6 +50,10 @@ export default function test() {
 
       <button type="button" onClick={handleOpenModal}>
         모달열기
+      </button>
+
+      <button type="button" onClick={handleOpenModalAlert}>
+        모달열기2
       </button>
     </>
   );
