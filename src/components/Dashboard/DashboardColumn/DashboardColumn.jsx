@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { axiosGet } from '@/features/axios';
 import CtaAdd from '@/components/common/Buttons/CtaAdd/CtaAdd';
-import { SettingIcon } from '../../../../public/images';
+import { SettingIcon } from '@/../public/images';
 
 export default function DashboardColumn({ title, id }) {
   const [cardList, setCardList] = useState();
@@ -22,8 +22,8 @@ export default function DashboardColumn({ title, id }) {
   }, [id]);
 
   return (
-    <section className="flex flex-col gap-[10px] md:gap-4 lg:min-w-[354px] lg:h-screen">
-      <div className="flex gap-2 items-center mb-2 md:mb-[9px]">
+    <section className="flex flex-col gap-[10px] md:gap-4 lg:min-w-[354px] ">
+      <div className="flex gap-2 items-center mb-2 md:mb-[9px] w-full">
         <div className="w-2 h-2 bg-violet_5534DA rounded-full" />
         <h4 className="text-4 font-bold">{title}</h4>
         <span className="ml-1 pt-[3px] pb-[3px] pl-[6px] pr-[6px] bg-gray_EEEEEE text-xs font-medium text-gray_787486 ">

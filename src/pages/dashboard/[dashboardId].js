@@ -26,11 +26,11 @@ export default function DashboardPage({ dashboardId }) {
   const { dashboardInfo, memberList, columns } = useDashboardInfo(dashboardId);
 
   return (
-    <div className="flex ">
+    <div className="flex w-full ">
       <aside>
         <Sidebar dashboards={dashboardList} />
       </aside>
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-5/6 ">
         <header>
           <DashboardHeader
             title={dashboardInfo ? dashboardInfo.title : ''}
@@ -54,14 +54,14 @@ export default function DashboardPage({ dashboardId }) {
             }
           />
         </header>
-        <main className="bg-gray_FAFAFA h-full w-full flex flex-col gap-y-16 p-[24px] md:p-[40px]">
-          <div className="flex flex-col gap-[30px] md:gap-10 lg:flex-row lg:overflow-scroll">
+        <main className="bg-gray_FAFAFA h-full w-full flex flex-col gap-y-16 p-[24px] md:p-[40px]  ">
+          <div className="flex flex-col gap-[30px] md:gap-10 lg:flex-row lg:overflow-x-auto lg:pb-20">
             {columns &&
               columns.map((column) => (
                 // eslint-disable-next-line react/self-closing-comp
                 <DashboardColumn {...column} key={column.id}></DashboardColumn>
               ))}
-            <div className=" lg:min-w-[354px] lg:mt-7">
+            <div className="lg:min-w-[354px] lg:mt-7">
               <CtaAdd size="large">새로운 컬럼 추가하기</CtaAdd>
             </div>
           </div>
