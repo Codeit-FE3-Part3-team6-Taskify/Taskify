@@ -8,7 +8,7 @@ export default function DashboardColumnForm({
   handleReset,
 }) {
   return (
-    <form className="w-full flex gap-4" onSubmit={handleSubmit}>
+    <form className="w-full flex items-center gap-4" onSubmit={handleSubmit}>
       <input
         className=" solid border-[1px] rounded-[1px] outline-none border-blue_76A6EA p-[6px] lg:w-[150px]"
         value={columnName}
