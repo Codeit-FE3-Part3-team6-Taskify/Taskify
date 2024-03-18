@@ -1,4 +1,3 @@
-import { axiosPostJason } from '@/features/axios';
 import useModal from '@/hooks/useModal';
 
 export default function test() {
@@ -10,29 +9,13 @@ export default function test() {
     });
   };
 
-  // 칼럼 추가 모달 : api 관련 로직은 바깥에서 (모달 안에서 선언x)
-  // columns를 가져오고 있다는 전제 하에 조건
-
-  const postColumn = async (inputValue) => {
-    try {
-      await axiosPostJason('/columns', {
-        title: inputValue,
-        dashboardId: 4939,
-      });
-    } catch (error) {
-      console.error('데이터 전송 실패:', error);
-    }
-  };
-
+  // columns를 가져오고 있다는 전제
   const handleOpenAddColumnsModal = () => {
     openModal({
-      type: 'input',
+      type: 'createColumn',
       props: {
-        title: '새 칼럼 생성',
-        labelName: '이름',
         dashboardId: 4939,
-        handleConfirm: postColumn,
-        submitButtonText: '생성',
+        columns: columns,
       },
     });
   };
