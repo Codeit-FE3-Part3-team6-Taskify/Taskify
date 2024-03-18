@@ -10,14 +10,14 @@ import { TAG_COLORS } from '@/constants/colors';
 // Todo(노진석) : 카드 기능완성하기
 export default function DashboardCard({ cardInfo }) {
   const { title, dueDate, tags, imageUrl, assignee } = cardInfo;
-  const handleModal = () => {
+  const openCardModal = () => {
     // 모달 들어올 예정
   };
 
   return (
     <article
-      onClick={handleModal}
-      className=" flex flex-col gap-[6px] p-3 rounded-md border-solid border-[1px] border-gray_D9D9D9 md:flex-row md:gap-5 md:p-5 lg:flex-col"
+      onClick={openCardModal}
+      className="cursor-pointer flex flex-col gap-[6px] p-3 rounded-md border-solid border-[1px] border-gray_D9D9D9 md:flex-row md:gap-5 md:p-5 lg:flex-col"
     >
       <section className="relative w-full h-[160px] md:w-[123px] md:h-[68px] lg:w-full lg:h-[160px]">
         <Image
