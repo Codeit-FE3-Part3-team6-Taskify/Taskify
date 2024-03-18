@@ -22,6 +22,7 @@ import NoMailIcon from './NomailIcon.svg';
 import PaginationArrow from './PaginationArrow.svg';
 import PenIcon from './PenIcon.svg';
 import SettingIcon from './SettingIcon.svg';
+import SearchIcon from './SearchIcon.svg';
 import LandingImg1 from './Landing1.png';
 import LandingImg2 from './Landing2.png';
 import LandingImg3 from './Landing3.png';
@@ -60,4 +61,5 @@ export {
   LandingImg4,
   LandingImg5,
   LandingImg6,
+  SearchIcon,
 };

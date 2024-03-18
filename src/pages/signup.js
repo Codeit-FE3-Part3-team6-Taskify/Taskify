@@ -12,6 +12,7 @@ import { signUpUser } from '@/features/user';
 import SignLogo from '@/components/common/SignLogo/SignLogo';
 import SignLink from '@/components/common/SignLink/SignLink';
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
+import useModal from '@/hooks/useModal';
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -28,16 +29,25 @@ export default function SignUpPage() {
     passwordError: '',
     passwordConfirmedError: '',
   });
-  const onSubmit = (e) => {
-    e.preventDefault();
-    signUpUser(formValues, setErrors, router);
-  };
+  const { openModal } = useModal();
   const handleBlur = (validateFunction, errorType, ...param) => {
     const result = validateFunction(...param);
     setErrors((prev) => ({ ...prev, [errorType]: result }));
   };
   const onChange = (formValueType, value) => {
     setFormValues((prev) => ({ ...prev, [formValueType]: value }));
+  };
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const message = checkPasswordConfirmed(
+      formValues.password,
+      formValues.passwordConfirmed,
+    );
+    if (message !== '') {
+      setErrors((prev) => ({ ...prev, passwordConfirmedError: message }));
+      return;
+    }
+    signUpUser({ formValues, setErrors, router, openModal });
   };
   const disabled =
     Object.values(formValues).every((value) => !!value) &&
