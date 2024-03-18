@@ -1,4 +1,8 @@
+import Image from 'next/image';
+import DashboardHeader from '@/components/common/Header/DashboardHeader';
 import useModal from '@/hooks/useModal';
+import CtaIcon from '@/components/common/Buttons/CtaIcon/CtaIcon';
+import { CrownIcon, SettingIcon, AddButtonEmpty } from '../../public/images';
 
 export default function test() {
   const { openModal } = useModal();
@@ -8,9 +12,38 @@ export default function test() {
       props: { dashboardId: 4939, columnId: 16636 },
     });
   };
+
+  const participants = [
+    { id: 1, email: 'example1@example.com', nickname: '김' },
+    { id: 2, email: 'xample2@example.com', nickname: '이' },
+    { id: 3, email: 'ample3@example.com', nickname: '박' },
+    { id: 4, email: 'example1@example.com', nickname: '김' },
+    { id: 5, email: 'xample2@example.com', nickname: '이' },
+    { id: 6, email: 'ample3@example.com', nickname: '박' },
+    // { id: 6, email: 'ample3@example.com', nickname: '박' },
+  ];
+  const userInfo = { nickname: 'yejin', email: 'yejiniee@codeit.com' };
+
   return (
-    <button type="button" onClick={handleOpenModal}>
-      모달열기
-    </button>
+    <>
+      <DashboardHeader
+        hasSpace
+        title="대시보드"
+        ownerIcon={<Image src={CrownIcon} alt="" width={20} height={16} />}
+        buttons={
+          <>
+            <CtaIcon imageSrc={SettingIcon}>관리</CtaIcon>
+            <CtaIcon imageSrc={AddButtonEmpty}>초대하기</CtaIcon>
+          </>
+        }
+        participants={participants}
+        divider
+        userInfo={userInfo}
+      />
+
+      <button type="button" onClick={handleOpenModal}>
+        모달열기
+      </button>
+    </>
   );
 }
