@@ -1,31 +1,48 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
+import { useState, useEffect } from 'react';
 import { axiosPostFormData, axiosPut, axiosGet } from '@/features/axios';
 import TableBox from '@/components/common/Table/TableBox';
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
 import UserInformationInput from '@/components/common/SignInput/UserInformationInput';
+import FileUpload from '@/components/common/FileUpload/FileUpload';
 import { AddImg } from '@/../public/images';
 
 export default function UpdateProfile() {
-  const fileInputRef = useRef(null);
   const [myInfo, setMyInfo] = useState({
     email: '',
     nickname: '',
     profileImageUrl: AddImg,
   });
   const [nextNickname, setNextNickname] = useState('');
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  const handleFileUpload = (event) => {
-    setSelectedFile(event.target.files[0]);
+  useEffect(() => {
+    const getMyInfo = async () => {
+      try {
+        const { email, nickname, profileImageUrl } =
+          await axiosGet('/users/me');
+        setMyInfo({
+          email,
+          nickname,
+          profileImageUrl,
+        });
+        setNextNickname(nickname);
+      } catch (e) {
+        console.error('나의 정보를 가져오지 못했습니다.: ', e);
+      }
+    };
+    getMyInfo();
+  }, []);
+
+  const handleImageSelect = (image) => {
+    setSelectedImage(image);
   };
 
   const handleUpload = async () => {
     try {
       // 닉네임만 변경하는 경우
-      if (!selectedFile && nextNickname) {
+      if (!selectedImage && nextNickname) {
         try {
           const updatedMyInfo = await axiosPut('users/me', {
             nickname: nextNickname,
@@ -45,7 +62,7 @@ export default function UpdateProfile() {
       }
 
       const formData = new FormData();
-      formData.append('image', selectedFile);
+      formData.append('image', selectedImage);
 
       const res = await axiosPostFormData('users/me/image', formData);
 
@@ -73,51 +90,16 @@ export default function UpdateProfile() {
     }
   };
 
-  useEffect(() => {
-    const getMyInfo = async () => {
-      try {
-        const { email, nickname, profileImageUrl } =
-          await axiosGet('/users/me');
-        setMyInfo({
-          email,
-          nickname,
-          profileImageUrl,
-        });
-        setNextNickname(nickname);
-      } catch (e) {
-        console.error('나의 정보를 가져오지 못했습니다.: ', e);
-      }
-    };
-    getMyInfo();
-  }, []);
   return (
     <TableBox>
       <div className="relative flex flex-col gap-4 md:gap-6">
         <div className="mb-2 text-xl md:text-2xl font-bold">프로필</div>
 
         <div className="flex flex-col md:flex-row gap-6 md:gap-4">
-          <div>
-            <input
-              type="file"
-              ref={fileInputRef}
-              style={{ display: 'none' }}
-              onChange={handleFileUpload}
-            />
-            <div
-              className="relative overflow-hidden flex justify-center items-center w-[100px] h-[100px] md:w-[200px] md:h-[200px] rounded-[6px] bg-[#F5F5F5] cursor-pointer"
-              onClick={() => fileInputRef.current.click()}
-            >
-              {selectedFile ? (
-                <Image
-                  fill
-                  src={URL.createObjectURL(selectedFile)}
-                  alt="Selected"
-                />
-              ) : (
-                <Image fill src={myInfo.profileImageUrl} alt="add" />
-              )}
-            </div>
-          </div>
+          <FileUpload
+            onSelectFile={handleImageSelect}
+            imageUrl={myInfo.profileImageUrl}
+          />
           <div className="flex flex-col gap-[10px] flex-grow">
             <div>
               <span className="text-base md:text-lg font-medium">이메일</span>
