@@ -14,7 +14,7 @@ export default function DashboardColumnForm({
         value={columnName}
         onChange={(e) => setColumnName(e.target.value)}
       />
-      <div className="ml-auto w-full flex gap-4 lg:gap-1">
+      <div className="ml-auto flex gap-4 lg:gap-1">
         <CtaDefault disabled={columnName === ''} size="xsmall" type="submit">
           수정
         </CtaDefault>
