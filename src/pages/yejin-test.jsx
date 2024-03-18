@@ -3,6 +3,7 @@ import DashboardHeader from '@/components/common/Header/DashboardHeader';
 import useModal from '@/hooks/useModal';
 import CtaIcon from '@/components/common/Buttons/CtaIcon/CtaIcon';
 import { CrownIcon, SettingIcon, AddButtonEmpty } from '../../public/images';
+// import TodoModal from '@/components/common/Modal/TodoModal/TodoModal';
 
 export default function test() {
   const { openModal } = useModal();
@@ -10,7 +11,7 @@ export default function test() {
     openModal({
       type: 'createTodo',
       // props: { dashboardId: 4939, columnId: 16636 },
-      props: { dashboardId: 4925, columnId: 16588 },
+      props: { isUpdate: true, dashboardId: 4925, columnId: 16588 },
     });
   };
 
@@ -50,11 +51,13 @@ export default function test() {
       />
 
       <button type="button" onClick={handleOpenModal}>
-        모달열기
+        할일 생성 모달
       </button>
+      <br />
 
+      <br />
       <button type="button" onClick={handleOpenModalAlert}>
-        모달열기2
+        경고 모달
       </button>
     </>
   );

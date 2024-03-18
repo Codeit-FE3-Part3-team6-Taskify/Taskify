@@ -10,9 +10,15 @@ import FileUpload from '../../FileUpload/FileUpload';
 import CtaDefault from '../../Buttons/CtaDefault/CtaDefault';
 import { axiosPostJason, axiosPostFormData } from '@/features/axios';
 import { DEFAULT_IMAGE_URL } from '@/constants/defaultImageUrl';
+import DropdownMenu from '../../DropdownMenu/DropdownMenu';
 
 // Todo(조예진) : 미완성- CustomDatePicker 디자인 수정
-export default function CreateTodoModal({ onClose, dashboardId, columnId }) {
+export default function CreateTodoModal({
+  isUpdate,
+  onClose,
+  dashboardId,
+  columnId,
+}) {
   // 모달을 클릭했을 때 dashboardId, columnId도 넘겨준다고 가정
   const [formValues, setFormValues] = useState({
     assigneeUserId: 0,
@@ -110,10 +116,39 @@ export default function CreateTodoModal({ onClose, dashboardId, columnId }) {
 
   const disabled = Object.values(formValues).every((value) => !!value);
 
+  // ========= 할일 수정
+  const [selectedOption, setSelectedOption] = useState(null);
+  const statusOptions = [
+    { value: 'To Do', label: 'To Do' }, // test2 id
+    { value: 'On Progress', label: 'On Progress' },
+    { value: 'Done', label: 'Done' },
+  ];
+
+  const handleStatusSelect = (option) => {
+    setSelectedOption(option);
+  };
+
+  // ========
+
   return (
     <Modal onClose={onClose}>
       <div className="flex flex-col items-start py-7 px-5 md:py-8 md:px-7 gap-6 text-base md:text-lg font-medium text-black_333236 w-[327px] md:w-[506px] ">
-        <div className="text-xl md:text-2xl font-bold ">할 일 생성</div>
+        <div className="text-xl md:text-2xl font-bold ">
+          {isUpdate ? '할 일 수정' : '할 일 생성'}
+        </div>
+        {isUpdate && (
+          <div className="w-full">
+            <div className="mb-2">상태</div>
+            <h2>
+              Selected option: {selectedOption ? selectedOption.label : 'None'}
+            </h2>
+            <DropdownMenu
+              options={statusOptions}
+              onSelect={handleStatusSelect}
+            />
+          </div>
+        )}
+
         <div className="w-full">
           <div className="mb-2">담당자</div>
 
