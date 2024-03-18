@@ -9,6 +9,7 @@ import TagInput from '../../Tag/TagInput';
 import FileUpload from '../../FileUpload/FileUpload';
 import CtaDefault from '../../Buttons/CtaDefault/CtaDefault';
 import { axiosPostJason, axiosPostFormData } from '@/features/axios';
+import { DEFAULT_IMAGE_URL } from '@/constants/defaultImageUrl';
 
 // Todo(조예진) : 미완성- CustomDatePicker 디자인 수정
 export default function CreateTodoModal({ onClose, dashboardId, columnId }) {
@@ -29,6 +30,7 @@ export default function CreateTodoModal({ onClose, dashboardId, columnId }) {
       ...prev,
       dashboardId: dashboardId,
       columnId: columnId,
+      imageUrl: DEFAULT_IMAGE_URL,
     }));
   }, []);
 
@@ -50,13 +52,13 @@ export default function CreateTodoModal({ onClose, dashboardId, columnId }) {
     }
   };
 
-  // 모든 인풋이 채워지면 버튼 활성화..? 이럴거면 제목이랑 설명란에 *는 왜있는거임;; 다 필순데?
   const handleCreate = async () => {
     try {
       const res = await axiosPostJason('cards', formValues);
 
       if (!res.status) {
         console.log('생성완료');
+        console.log('응답:', res);
         onClose();
       }
     } catch (e) {
@@ -67,10 +69,10 @@ export default function CreateTodoModal({ onClose, dashboardId, columnId }) {
 
   // mock data- id: 대시보드 멤버 목록 조회-userId 사용
   const options = [
-    { id: 1244, value: '곰돌이', label: '곰돌이' },
-    { id: 6801, value: '토끼', label: '토끼' },
+    { id: 1244, value: '곰돌이', label: '곰돌이' }, // test id
+    { id: 1288, value: '토끼', label: '토끼' }, // test2 id
     { id: 1244, value: '강아지', label: '강아지' },
-    { id: 6801, value: '고양이', label: '고양이' },
+    { id: 1288, value: '고양이', label: '고양이' },
   ];
 
   const customStyles = {
