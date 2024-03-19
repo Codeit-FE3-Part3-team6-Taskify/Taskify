@@ -24,7 +24,6 @@ export default function DashboardPage({ dashboardId }) {
   const userInfo = useUserGet();
   const { dashboardList } = useDashboardList();
   const { dashboardInfo, memberList, columns } = useDashboardInfo(dashboardId);
-
   return (
     <div className="flex w-full ">
       <aside>
