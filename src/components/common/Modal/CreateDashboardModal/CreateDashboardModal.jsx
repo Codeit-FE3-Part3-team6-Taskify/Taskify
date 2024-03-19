@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import Image from 'next/image';
+import { useDispatch } from 'react-redux';
+
 import Modal from '@/components/common/Modal/Modal';
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
 import { CheckIconWhite } from '@/../public/images';
 import { circleColorList } from '@/utils/circleColorList';
 import { axiosPostJason } from '@/features/axios';
-import { addDashboard } from '@/features/dashboardListSlice';
+import { addDashboard } from '@/features/DashboardListSlice';
 
 export default function CreateDashboardModal({ onClose }) {
   const [inputValue, setInputValue] = useState('');
@@ -40,6 +41,7 @@ export default function CreateDashboardModal({ onClose }) {
         body,
       );
       dispatch(addDashboard(response));
+
       onClose();
     } catch (error) {
       // eslint-disable-next-line no-alert

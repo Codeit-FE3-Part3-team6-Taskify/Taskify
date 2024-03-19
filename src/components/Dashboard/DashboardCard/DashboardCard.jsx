@@ -19,16 +19,19 @@ export default function DashboardCard({ cardInfo }) {
       onClick={openCardModal}
       className="cursor-pointer flex flex-col gap-[6px] p-3 rounded-md border-solid border-[1px] border-gray_D9D9D9 md:flex-row md:gap-5 md:p-5 lg:flex-col"
     >
-      <section className="relative w-full h-[160px] md:w-[123px] md:h-[68px] lg:w-full lg:h-[160px]">
-        <Image
-          className="rounded-md"
-          fill
-          src={imageUrl}
-          alt={`${title} 이미지`}
-          priority
-          sizes="fill"
-        />
-      </section>
+      {imageUrl ? (
+        <section className="relative w-full h-[160px] md:w-[123px] md:h-[68px] lg:w-full lg:h-[160px]">
+          <Image
+            className="rounded-md"
+            fill
+            src={imageUrl}
+            alt={`${title} 이미지`}
+            priority
+            sizes="fill"
+          />
+        </section>
+      ) : null}
+
       <section className="flex flex-col gap-[6px] md:w-full">
         <h5 className="text-lg font-medium mt-1 ">{title}</h5>
         <div className="flex flex-col md:flex-row md:items-center md:w-full md:gap-4 lg:flex-col lg:items-stretch lg:gap-0">
