@@ -4,7 +4,6 @@ import { AddButtonEmpty, NoMailIcon } from '@/../public/images';
 import DashboardListItem from '../../common/Buttons/DashboardListItem/DashboardListItem';
 import PaginationButton from '../../common/Buttons/PaginationButton/PaginationButton';
 import { openModal } from '@/features/modalSlice';
-import store from '@/features/store';
 
 // Todo(송상훈):
 export default function DashboardList({ prevPage, nextPage, currentPage }) {
@@ -20,7 +19,6 @@ export default function DashboardList({ prevPage, nextPage, currentPage }) {
     dispatch(openModal({ type: 'createDashboard' }));
   };
 
-  console.log(store.getState().dashboardList);
   return (
     <section className="bg-white max-w-[1022px] h-auto rounded-[8px] shadow-sm py-[24px] px-[16px]">
       <div className="flex justify-between mb-5">
@@ -55,6 +53,7 @@ export default function DashboardList({ prevPage, nextPage, currentPage }) {
                 title={dashboard.title}
                 color={dashboard.color}
                 createdByMe={dashboard.createdByMe}
+                id={dashboard.id}
               />
             ))}
           </div>

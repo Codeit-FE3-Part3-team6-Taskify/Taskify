@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { CrownIcon, PaginationArrow } from '@/../public/images';
 
 // Todo(심은주): 예상 props가 짜는 사람마다 다를것같아 일단 임의로만 세팅해놓음.
-export default function DashboardListItem({ url, title, color, createdByMe }) {
+export default function DashboardListItem({ title, color, createdByMe, id }) {
   const createCircle = (dotColor) => {
     const circleStyle = {
       width: '8px',
@@ -18,7 +18,7 @@ export default function DashboardListItem({ url, title, color, createdByMe }) {
   return (
     <li className="list-none p-0 m-0">
       <Link
-        href="/"
+        href={`/dashboard/${id}`}
         className="flex justify-between items-center no-underline rounded-lg px-5 border border-solid border-gray_D9D9D9 h-[58px] md:h-[68px] lg:h-[70px]"
       >
         {/* href에 url */}
