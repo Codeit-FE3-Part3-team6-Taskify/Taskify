@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
-
 import Modal from '@/components/common/Modal/Modal';
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
 import { CheckIconWhite } from '@/../public/images';
 import { circleColorList } from '@/utils/circleColorList';
 import { axiosPostJason } from '@/features/axios';
-import { addDashboard } from '@/features/DashboardListSlice';
+import { addDashboard } from '@/features/dashboardListSlice';
 
 export default function CreateDashboardModal({ onClose }) {
   const [inputValue, setInputValue] = useState('');
