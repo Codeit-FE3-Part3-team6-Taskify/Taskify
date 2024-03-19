@@ -16,25 +16,8 @@ export default function useDashboardCardGet(id) {
     }
     try {
       setIsLoading(true);
-      const res = await axiosGet(`cards?columnId=${id}&size=4`);
-      setCardList(res.cards);
-      setCardCount(res.totalCount);
-      setCursorId(res.cursorId);
-    } catch (e) {
-      console.error(e);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const getCardMore = async () => {
-    if (cursorId === null) {
-      return;
-    }
-    setIsLoading(true);
-    try {
       const res = await axiosGet(
-        `cards?columnId=${id}&cursorId=${cursorId}&size=4`,
+        `cards?columnId=${id}&size=4${cursorId ? `&cursorId=${cursorId}` : ''}`,
       );
       setCursorId(res.cursorId);
       setCardList((prev) => {
@@ -44,6 +27,7 @@ export default function useDashboardCardGet(id) {
         });
         return resultCardList;
       });
+      setCardCount(res.totalCount);
     } catch (e) {
       console.error(e);
     } finally {
@@ -59,8 +43,8 @@ export default function useDashboardCardGet(id) {
   }, [id]);
 
   useIntersectionObserver(observerRef, scrollContainerRef, () => {
-    if (!isLoading) {
-      getCardMore();
+    if (cursorId !== null) {
+      getCard();
     }
   });
 
