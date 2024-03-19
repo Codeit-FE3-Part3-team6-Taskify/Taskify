@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { Logo, LogoImg, AddButtonEmpty, CrownIcon } from '@/../public/images';
 
 export default function Sidebar({ dashboards }) {
@@ -16,7 +17,7 @@ export default function Sidebar({ dashboards }) {
 
   return (
     <div className="flex flex-col border-r bg-white items-center h-full pt-5 w-[67px] md:w-[160px] lg:w-[300px]">
-      <div className="flex flex-row md:w-full mb-9 md:mb-14 md:pl-6">
+      <Link href="/" className="flex flex-row md:w-full mb-9 md:mb-14 md:pl-6">
         <Image src={LogoImg} width={29} height={33} alt="로고이미지" />
         <Image
           className="hidden md:inline"
@@ -25,13 +26,15 @@ export default function Sidebar({ dashboards }) {
           height={22}
           alt="로고"
         />
-      </div>
+      </Link>
+
       <div className="flex md:w-full md:justify-between md:px-6">
         <p className="text-gray_787486 text-[12px] font-bold hidden md:inline ">
           Dash Boards
         </p>
         <Image src={AddButtonEmpty} width={20} height={20} alt="더하기 버튼" />
       </div>
+
       <div className="flex flex-col h-full mt-3 md:pl-6 md:w-full">
         {dashboards && dashboards.length > 0 ? (
           dashboards.map((dashboard) => (

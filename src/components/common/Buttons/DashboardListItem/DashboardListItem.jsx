@@ -21,7 +21,6 @@ export default function DashboardListItem({ title, color, createdByMe, id }) {
         href={`/dashboard/${id}`}
         className="flex justify-between items-center no-underline rounded-lg px-5 border border-solid border-gray_D9D9D9 h-[58px] md:h-[68px] lg:h-[70px]"
       >
-        {/* href에 url */}
         <div className="flex items-center gap-x-2">
           <span>{color && createCircle(color)}</span>
           <h2 className="ml-2 md:text-base sm:text-sm ">{title}</h2>
