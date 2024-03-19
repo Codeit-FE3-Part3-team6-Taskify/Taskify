@@ -1,11 +1,12 @@
 /* eslint-disable react/no-unstable-nested-components */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Select, { components } from 'react-select';
 import Avatar from '../Avatar/Avatar';
 import { CheckIcon } from '@/../public/images';
 
 const SelectMenu = ({
+  assigneeUserId,
   options,
   customStyles,
   getOptionLabel,
@@ -13,6 +14,11 @@ const SelectMenu = ({
   setFormValues,
 }) => {
   const [selectedOption, setSelectedOption] = useState(null);
+
+  useEffect(() => {
+    const findOption = options.find((option) => option.id === assigneeUserId);
+    setSelectedOption(findOption || null);
+  }, [assigneeUserId, options]);
 
   const handleOptionChange = (option) => {
     setSelectedOption(option);

@@ -1,14 +1,19 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import StatusTag from '../StatusTag/StatusTag';
 import { DropDownArrow, CheckIcon } from '@/../public/images/index';
 
-export default function DropdownMenu({ options, onSelect }) {
+export default function DropdownMenu({ initialStatus, options, onSelect }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
+
+  useEffect(() => {
+    const findOption = options.find((option) => option.value === initialStatus);
+    setSelectedOption(findOption);
+  }, [initialStatus, options]);
 
   const handleSelect = (option) => {
     onSelect(option);

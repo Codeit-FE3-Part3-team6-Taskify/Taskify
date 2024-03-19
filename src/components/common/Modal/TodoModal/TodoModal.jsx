@@ -1,45 +1,26 @@
-/* eslint-disable object-shorthand */
-import { useEffect, useState } from 'react';
 import Modal from '../Modal';
 import UserInformationInput from '../../SignInput/UserInformationInput';
-import Avatar from '../../Avatar/Avatar';
 import SelectMenu from '../../SelectMenu/SelectMenu';
 import CustomDatePicker from '../../CustomDatePicker/CustomDatePicker';
 import TagInput from '../../Tag/TagInput';
 import FileUpload from '../../FileUpload/FileUpload';
 import CtaDefault from '../../Buttons/CtaDefault/CtaDefault';
-import { axiosPostJason, axiosPostFormData } from '@/features/axios';
-import { DEFAULT_IMAGE_URL } from '@/constants/defaultImageUrl';
-import DropdownMenu from '../../DropdownMenu/DropdownMenu';
+import Avatar from '../../Avatar/Avatar';
+import { axiosPostFormData } from '@/features/axios';
 
-// Todo(조예진) : 미완성- CustomDatePicker 디자인 수정
-export default function CreateTodoModal({
+// TODO(조예진): 미완성- CustomDatePicker 디자인 수정
+
+export default function TodoModal({
   isUpdate,
   onClose,
-  dashboardId,
+  formValues,
+  setFormValues,
+  onSubmit,
+  assigneeOptions,
+  dropdownMenu,
+  disabled,
   columnId,
 }) {
-  // 모달을 클릭했을 때 dashboardId, columnId도 넘겨준다고 가정
-  const [formValues, setFormValues] = useState({
-    assigneeUserId: 0,
-    dashboardId: 0,
-    columnId: 0,
-    title: '',
-    description: '',
-    dueDate: '',
-    tags: [''],
-    imageUrl: '',
-  });
-
-  useEffect(() => {
-    setFormValues((prev) => ({
-      ...prev,
-      dashboardId: dashboardId,
-      columnId: columnId,
-      imageUrl: DEFAULT_IMAGE_URL,
-    }));
-  }, []);
-
   const handleImageSelect = async (file) => {
     try {
       const formData = new FormData();
@@ -58,28 +39,9 @@ export default function CreateTodoModal({
     }
   };
 
-  const handleCreate = async () => {
-    try {
-      const res = await axiosPostJason('cards', formValues);
-
-      if (!res.status) {
-        console.log('생성완료');
-        console.log('응답:', res);
-        onClose();
-      }
-    } catch (e) {
-      console.log(e);
-      console.log('할 일 생성 실패');
-    }
+  const handleSubmit = () => {
+    onSubmit(formValues);
   };
-
-  // mock data- id: 대시보드 멤버 목록 조회-userId 사용
-  const options = [
-    { id: 1244, value: '곰돌이', label: '곰돌이' }, // test id
-    { id: 1288, value: '토끼', label: '토끼' }, // test2 id
-    { id: 1244, value: '강아지', label: '강아지' },
-    { id: 1288, value: '고양이', label: '고양이' },
-  ];
 
   const customStyles = {
     control: (provided, state) => ({
@@ -114,22 +76,6 @@ export default function CreateTodoModal({
   );
   const getOptionValue = (option) => option.value;
 
-  const disabled = Object.values(formValues).every((value) => !!value);
-
-  // ========= 할일 수정
-  const [selectedOption, setSelectedOption] = useState(null);
-  const statusOptions = [
-    { value: 'To Do', label: 'To Do' }, // test2 id
-    { value: 'On Progress', label: 'On Progress' },
-    { value: 'Done', label: 'Done' },
-  ];
-
-  const handleStatusSelect = (option) => {
-    setSelectedOption(option);
-  };
-
-  // ========
-
   return (
     <Modal onClose={onClose}>
       <div className="flex flex-col items-start py-7 px-5 md:py-8 md:px-7 gap-6 text-base md:text-lg font-medium text-black_333236 w-[327px] md:w-[506px] ">
@@ -139,13 +85,7 @@ export default function CreateTodoModal({
         {isUpdate && (
           <div className="w-full">
             <div className="mb-2">상태</div>
-            <h2>
-              Selected option: {selectedOption ? selectedOption.label : 'None'}
-            </h2>
-            <DropdownMenu
-              options={statusOptions}
-              onSelect={handleStatusSelect}
-            />
+            {dropdownMenu}
           </div>
         )}
 
@@ -153,7 +93,9 @@ export default function CreateTodoModal({
           <div className="mb-2">담당자</div>
 
           <SelectMenu
-            options={options}
+            formValues={formValues}
+            assigneeUserId={formValues.assigneeUserId}
+            options={assigneeOptions}
             customStyles={customStyles}
             getOptionLabel={getOptionLabel}
             getOptionValue={getOptionValue}
@@ -188,11 +130,17 @@ export default function CreateTodoModal({
         </div>
         <div className="flex flex-col w-full">
           <span>마감일</span>
-          <CustomDatePicker setFormValues={setFormValues} />
+          <CustomDatePicker
+            dueDate={formValues.dueDate}
+            setFormValues={setFormValues}
+          />
         </div>
         <div className="flex flex-col w-full">
           <span>태그</span>
-          <TagInput setFormValues={setFormValues} />
+          <TagInput
+            initialTag={formValues.tags}
+            setFormValues={setFormValues}
+          />
         </div>
         <div className="flex flex-col w-full">
           <span>이미지</span>
@@ -203,8 +151,8 @@ export default function CreateTodoModal({
             <CtaDefault color="white" onClick={onClose}>
               취소
             </CtaDefault>
-            <CtaDefault onClick={handleCreate} disabled={!disabled}>
-              생성
+            <CtaDefault onClick={handleSubmit} disabled={!disabled}>
+              {isUpdate ? '수정' : '생성'}
             </CtaDefault>
           </div>
         </div>

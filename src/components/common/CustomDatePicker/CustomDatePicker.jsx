@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -6,8 +6,13 @@ import dayjs from 'dayjs';
 
 import { CalendarIcon } from '@/../public/images';
 
-export default function CustomDatePicker({ setFormValues }) {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+export default function CustomDatePicker({ dueDate, setFormValues }) {
+  const initialDate = dueDate ? new Date(dueDate) : new Date();
+  const [selectedDate, setSelectedDate] = useState(initialDate);
+
+  useEffect(() => {
+    setSelectedDate(initialDate);
+  }, [dueDate]);
 
   const handleDateChange = (date) => {
     const formattedDate = dayjs(date).format('YYYY-MM-DD HH:mm');
