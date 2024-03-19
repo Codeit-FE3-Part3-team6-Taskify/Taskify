@@ -3,11 +3,13 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { axiosDelete, axiosPut } from '@/features/axios';
+
 import CtaAdd from '@/components/common/Buttons/CtaAdd/CtaAdd';
 import DashboardCard from '../DashboardCard/DashboardCard';
 import { DeleteIcon, EditIcon } from '../../../../public/images';
 import DashboardColumnForm from '../DashboardColumnForm/DashboardColumnForm';
 import { changeColumnName, deleteColumn } from '@/features/columnsSlice';
+
 import useDashboardCardGet from '@/hooks/useDashboardCardGet';
 
 // Todo(노진석) : 모달 추가하기
