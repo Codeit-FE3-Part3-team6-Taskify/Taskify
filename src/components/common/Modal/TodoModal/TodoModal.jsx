@@ -147,7 +147,7 @@ export default function TodoModal({
         <div className="flex flex-col w-full">
           <span>이미지</span>
           <FileUpload
-            imageUrl={formValues.imageUrl}
+            imageUrl={formValues.imageUrl || null}
             onSelectFile={handleImageSelect}
           />
         </div>

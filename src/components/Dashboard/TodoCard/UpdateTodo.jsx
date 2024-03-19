@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import TodoModal from '../../common/Modal/TodoModal/TodoModal';
 import { axiosGet, axiosPut } from '@/features/axios';
 import DropdownMenu from '../../common/DropdownMenu/DropdownMenu';
@@ -12,31 +12,25 @@ export default function UpdateTodo({ onClose, cardId }) {
     description: '',
     dueDate: '',
     tags: [],
-    imageUrl: '',
   });
-
-  // mock data- id: 대시보드 멤버 목록 조회-userId 사용
-  const assigneeOptions = [
-    { id: 1244, value: '곰돌이', label: '곰돌이' }, // test id
-    { id: 1288, value: '토끼', label: '토끼' }, // test2 id
-    { id: 1244, value: '강아지', label: '강아지' },
-    { id: 1288, value: '고양이', label: '고양이' },
-  ];
-
-  // mock data- 추후 수정
-  const statusOptions = [
-    { value: '16636', label: 'To Do' }, // columnnId
-    { value: '16637', label: 'On Progress' },
-    { value: '16764', label: 'Done' },
-  ];
-
+  const [initialFormValues, setInitialFormValues] = useState(null);
   useEffect(() => {
     const getTodoData = async () => {
       try {
         const res = await axiosGet(`/cards/${cardId}`);
         if (!res.status) {
-          // console.log('res', res);
           setFormValues({
+            assigneeUserId: res.assignee.id,
+            dashboardId: res.dashboardId,
+            columnId: res.columnId,
+            title: res.title,
+            description: res.description,
+            dueDate: res.dueDate,
+            tags: res.tags,
+            imageUrl: res.imageUrl,
+          });
+          // 처음 가져온 값 저장
+          setInitialFormValues({
             assigneeUserId: res.assignee.id,
             dashboardId: res.dashboardId,
             columnId: res.columnId,
@@ -54,6 +48,25 @@ export default function UpdateTodo({ onClose, cardId }) {
     getTodoData();
   }, []);
 
+  const prevFormValuesRef = useRef(null);
+  useEffect(() => {
+    prevFormValuesRef.current = formValues;
+  }, [formValues]);
+
+  // 값이 변경되었는지 확인하는 함수
+  const isFormValuesChanged = () => {
+    if (!initialFormValues) return false;
+
+    return Object.keys(formValues).some(
+      (key) => formValues[key] !== initialFormValues[key],
+    );
+  };
+
+  const disabled =
+    isFormValuesChanged() &&
+    formValues.title.trim() !== '' &&
+    formValues.description.trim() !== '';
+
   const handleStatusSelect = (option) => {
     // 컬럼 선택
     setFormValues((prev) => ({
@@ -61,6 +74,21 @@ export default function UpdateTodo({ onClose, cardId }) {
       columnId: Number(option.value),
     }));
   };
+
+  // mock data- id: 대시보드 멤버 목록 조회-userId 사용
+  const assigneeOptions = [
+    { id: 1244, value: '곰돌이', label: '곰돌이' }, // test id
+    { id: 1288, value: '토끼', label: '토끼' }, // test2 id
+    { id: 1244, value: '강아지', label: '강아지' },
+    { id: 1288, value: '고양이', label: '고양이' },
+  ];
+
+  // mock data- 추후 수정
+  const statusOptions = [
+    { value: '16636', label: 'To Do' }, // columnnId
+    { value: '16637', label: 'On Progress' },
+    { value: '16764', label: 'Done' },
+  ];
 
   const handleUpdate = async (updatedFormValues) => {
     try {
@@ -76,9 +104,6 @@ export default function UpdateTodo({ onClose, cardId }) {
       console.log('할 일 생성 실패');
     }
   };
-
-  // TODO(조예진) : 제목, 설명 필수, 상태 고르면 수정 버튼 활성화
-  const disabled = Object.values(formValues).every((value) => !!value);
 
   return (
     <TodoModal

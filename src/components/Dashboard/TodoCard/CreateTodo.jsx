@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import TodoModal from '../../common/Modal/TodoModal/TodoModal';
 import { axiosPostJason } from '@/features/axios';
-import { DEFAULT_IMAGE_URL } from '@/constants/defaultImageUrl';
 
 export default function CreateTodo({ onClose, dashboardId, columnId }) {
   const [formValues, setFormValues] = useState({
@@ -13,7 +12,6 @@ export default function CreateTodo({ onClose, dashboardId, columnId }) {
     description: '',
     dueDate: '',
     tags: [],
-    imageUrl: '',
   });
 
   useEffect(() => {
@@ -21,7 +19,6 @@ export default function CreateTodo({ onClose, dashboardId, columnId }) {
       ...prev,
       dashboardId: dashboardId,
       columnId: columnId,
-      imageUrl: DEFAULT_IMAGE_URL,
     }));
   }, []);
 
