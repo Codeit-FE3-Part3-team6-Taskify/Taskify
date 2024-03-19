@@ -10,6 +10,7 @@ export default function CustomDatePicker({ dueDate, setFormValues }) {
   const initialDate = dueDate ? new Date(dueDate) : new Date();
   const [selectedDate, setSelectedDate] = useState(initialDate);
 
+  // 할일 수정 - 마감일을 가져옴
   useEffect(() => {
     setSelectedDate(initialDate);
   }, [dueDate]);
@@ -24,6 +25,14 @@ export default function CustomDatePicker({ dueDate, setFormValues }) {
 
     setSelectedDate(date);
   };
+
+  //  할일 생성 - 날짜 선택 안 하면 현재시각을 마감일로 지정
+  useEffect(() => {
+    if (!dueDate) {
+      handleDateChange(new Date());
+    }
+  }, [dueDate]);
+
   return (
     <DatePicker
       showIcon
