@@ -117,7 +117,8 @@ export default function TodoModal({
         <div className="w-full">
           <span>설명 </span>
           <span className="text-violet_5534DA">*</span>
-          <UserInformationInput
+          <textarea
+            className="sign-input-base"
             value={formValues.description}
             onChange={(e) =>
               setFormValues((prev) => ({
@@ -126,6 +127,7 @@ export default function TodoModal({
               }))
             }
             placeholder="설명을 입력해 주세요"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           />
         </div>
         <div className="flex flex-col w-full">
