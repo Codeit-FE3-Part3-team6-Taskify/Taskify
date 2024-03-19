@@ -2,11 +2,13 @@ import { createPortal } from 'react-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { modalSelector, closeModal } from '@/features/modalSlice';
 import AlertModal from './AlertModal/AlertModal';
+import CreateColumnModal from './CreateColumnModal/CreateColumnModal';
 import CreateTodo from '../../Dashboard/TodoCard/CreateTodo';
 import UpdateTodo from '../../Dashboard/TodoCard/UpdateTodo';
 
 const MODAL_COMPONENTS = {
   alert: AlertModal,
+  createColumn: CreateColumnModal,
   createTodo: CreateTodo,
   updateTodo: UpdateTodo,
 };

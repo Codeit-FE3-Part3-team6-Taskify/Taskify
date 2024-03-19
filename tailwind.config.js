@@ -18,7 +18,7 @@ module.exports = {
         gray_787486: { DEFAULT: '#787486' },
         gray_9FA6B2: { DEFAULT: '#9FA6B2' },
         gray_D9D9D9: { DEFAULT: '#D9D9D9' },
-        gray_EEEEEE: { DEFAULT: 'EEEEEE' },
+        gray_EEEEEE: { DEFAULT: '#EEEEEE' },
         gray_FAFAFA: { DEFAULT: '#FAFAFA' },
         white_FFFFFF: { DEFAULT: '#FFFFFF' },
         violet_5534DA: { DEFAULT: '#5534DA' },
