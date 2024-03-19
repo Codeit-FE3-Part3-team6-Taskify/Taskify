@@ -5,12 +5,14 @@ import AlertModal from './AlertModal/AlertModal';
 import CreateColumnModal from './CreateColumnModal/CreateColumnModal';
 import CreateTodo from '../../Dashboard/TodoCard/CreateTodo';
 import UpdateTodo from '../../Dashboard/TodoCard/UpdateTodo';
+import CreateDashboardModal from './CreateDashboardModal/CreateDashboardModal';
 
 const MODAL_COMPONENTS = {
   alert: AlertModal,
   createColumn: CreateColumnModal,
   createTodo: CreateTodo,
   updateTodo: UpdateTodo,
+  createDashboard: CreateDashboardModal,
 };
 
 export default function ModalContainer() {

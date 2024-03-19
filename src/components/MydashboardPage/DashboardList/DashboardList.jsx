@@ -1,7 +1,9 @@
+import { useDispatch } from 'react-redux';
 import Image from 'next/image';
 import { AddButtonEmpty, NoMailIcon } from '@/../public/images';
-import DashboardListItem from '../common/Buttons/DashboardListItem/DashboardListItem';
-import PaginationButton from '../common/Buttons/PaginationButton/PaginationButton';
+import DashboardListItem from '../../common/Buttons/DashboardListItem/DashboardListItem';
+import PaginationButton from '../../common/Buttons/PaginationButton/PaginationButton';
+import { openModal } from '@/features/modalSlice';
 
 // Todo(송상훈): 모달 컴포넌트 연동시기에 버튼 컴포넌트에 연동 해야함
 export default function DashboardList({
@@ -14,6 +16,12 @@ export default function DashboardList({
   const totalPage = totalCount ? Math.ceil(totalCount / 6) : 0;
   const isEmpty = !dashboards || dashboards.length === 0;
 
+  const dispatch = useDispatch();
+
+  const handleOpenCreateDashboardModal = () => {
+    dispatch(openModal({ type: 'createDashboard' }));
+  };
+
   return (
     <section className="bg-white max-w-[1022px] h-auto rounded-[8px] shadow-sm py-[24px] px-[16px]">
       <div className="flex justify-between mb-5">
@@ -21,6 +29,7 @@ export default function DashboardList({
         <button
           className="flex items-center gap-2 h-[28px] md:border p-4 rounded"
           type="button"
+          onClick={handleOpenCreateDashboardModal}
         >
           <span className="hidden text-sm  md:block">새로운 대시보드</span>
           <Image width={25} height={25} src={AddButtonEmpty} alt="더하기버튼" />
