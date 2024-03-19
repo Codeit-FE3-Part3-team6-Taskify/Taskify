@@ -26,7 +26,7 @@ const memberList = createSlice({
     },
     deleteMember: (state, action) => {
       const filterMember = state.members.filter(
-        (member) => member.id === action.payload.id,
+        (member) => member.id !== action.payload.id,
       );
       state.members = filterMember;
       state.totalCount -= 1;
