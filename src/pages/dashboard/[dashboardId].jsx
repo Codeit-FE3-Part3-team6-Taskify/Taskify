@@ -23,15 +23,13 @@ export async function getServerSideProps(context) {
 export default function DashboardPage({ dashboardId }) {
   const userInfo = useUserGet();
   const { dashboardList } = useDashboardList();
-  const { dashboardInfo, memberList, columns, setColumns } =
-    useDashboardInfo(dashboardId);
-
+  const { dashboardInfo, memberList, columns } = useDashboardInfo(dashboardId);
   return (
     <div className="flex w-full ">
       <aside>
         <Sidebar dashboards={dashboardList} />
       </aside>
-      <div className="flex flex-col w-5/6 ">
+      <div className="flex flex-col w-full ">
         <header>
           <DashboardHeader
             title={dashboardInfo ? dashboardInfo.title : ''}
@@ -57,15 +55,11 @@ export default function DashboardPage({ dashboardId }) {
           />
         </header>
         <main className="bg-gray_FAFAFA h-full w-full flex flex-col gap-y-16 p-[24px] md:p-[40px] flex-auto  ">
-          <div className="flex flex-col gap-[30px] md:gap-10 lg:flex-row lg:overflow-x-auto lg:pb-20 lg:h-screen ">
+          <div className="flex flex-col gap-[30px] md:gap-10 lg:flex-row lg:overflow-x-auto lg:pb-20 lg:h-[80vh] ">
             {columns &&
               columns.map((column) => (
                 // eslint-disable-next-line react/self-closing-comp
-                <DashboardColumn
-                  setColumns={setColumns}
-                  {...column}
-                  key={column.id}
-                ></DashboardColumn>
+                <DashboardColumn {...column} key={column.id}></DashboardColumn>
               ))}
             <div className=" lg:min-w-[354px] lg:mt-7">
               <CtaAdd size="large">새로운 컬럼 추가하기</CtaAdd>
