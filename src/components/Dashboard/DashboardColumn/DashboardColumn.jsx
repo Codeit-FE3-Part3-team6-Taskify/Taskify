@@ -1,29 +1,32 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { axiosDelete, axiosGet, axiosPut } from '@/features/axios';
+import { axiosDelete, axiosPut } from '@/features/axios';
+
 import CtaAdd from '@/components/common/Buttons/CtaAdd/CtaAdd';
 import DashboardCard from '../DashboardCard/DashboardCard';
 import { DeleteIcon, EditIcon } from '../../../../public/images';
 import DashboardColumnForm from '../DashboardColumnForm/DashboardColumnForm';
 import { changeColumnName, deleteColumn } from '@/features/columnsSlice';
 
+import useDashboardCardGet from '@/hooks/useDashboardCardGet';
+
 // Todo(노진석) : 모달 추가하기
-export default function DashboardColumn({ title, id }) {
-  const [cardList, setCardList] = useState();
-  const [cardCount, setCardCount] = useState();
+export default function DashboardColumn({ title, id, dashboardId, openModal }) {
   const [isEdit, setIsEdit] = useState(false);
   const [columnName, setColumnName] = useState(title);
   const dispatch = useDispatch();
-  const getCard = async () => {
-    const res = await axiosGet(`cards?columnId=${id}`);
-    setCardList(res.cards);
-    setCardCount(res.totalCount);
-  };
 
+  const { cardList, setCardList, cardCount, observerRef, scrollContainerRef } =
+    useDashboardCardGet(id);
+
+  // 모달 넘어오면 수정예정
   const openAddCardModal = () => {
-    // 모달 추가
+    // openModal({
+    //   type: 'createTodo',
+    //   props: { dashboardId, columnId: id, setCard: setCardList },
+    // });
   };
 
   const toggleIsEdit = () => {
@@ -46,13 +49,6 @@ export default function DashboardColumn({ title, id }) {
     setColumnName(title);
     toggleIsEdit();
   };
-
-  useEffect(() => {
-    if (!id) {
-      return;
-    }
-    getCard();
-  }, [id]);
 
   return (
     <section className="flex flex-col gap-[10px] h-[470px] md:gap-4 lg:min-w-[354px] md:h-[346px] lg:h-full">
@@ -93,11 +89,18 @@ export default function DashboardColumn({ title, id }) {
       <div>
         <CtaAdd onClick={openAddCardModal} />
       </div>
-      <div className="flex flex-col gap-[10px] overflow-y-auto md:gap-4">
+      <div
+        ref={scrollContainerRef}
+        className="flex flex-col gap-[10px] overflow-y-auto md:gap-4"
+      >
         {cardList &&
           cardList.map((card) => (
             <DashboardCard key={card.id} cardInfo={card} />
           ))}
+
+        <div ref={observerRef} className="w-full h-[1px] opacity-0">
+          마지막
+        </div>
       </div>
     </section>
   );
