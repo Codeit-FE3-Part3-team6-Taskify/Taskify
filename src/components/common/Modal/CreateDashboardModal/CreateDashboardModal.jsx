@@ -4,6 +4,7 @@ import Modal from '@/components/common/Modal/Modal';
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
 import { CheckIconWhite } from '@/../public/images';
 import { circleColorList } from '@/utils/circleColorList';
+import { axiosPostJason } from '@/features/axios';
 
 export default function CreateDashboardModal({ onClose }) {
   const [inputValue, setInputValue] = useState('');
@@ -21,7 +22,27 @@ export default function CreateDashboardModal({ onClose }) {
       setSelectedColor(selectedColor === color ? null : color);
     }
   };
-  console.log(inputValue);
+
+  const handleCreateClick = async () => {
+    const colorCode = circleColorList[selectedColor];
+
+    try {
+      const body = {
+        title: inputValue,
+        color: colorCode,
+      };
+      await axiosPostJason(
+        'https://sp-taskify-api.vercel.app/3-6/dashboards',
+        body,
+      );
+      onClose();
+    } catch (error) {
+      // eslint-disable-next-line no-alert
+      alert('대시보드 생성에 실패했습니다. 다시 시도해주세요.');
+    }
+  };
+
+  const isDisabled = !inputValue || !selectedColor;
 
   return (
     <Modal onClose={onClose}>
@@ -67,7 +88,13 @@ export default function CreateDashboardModal({ onClose }) {
           <CtaDefault size="medium" color="white" onClick={onClose}>
             취소
           </CtaDefault>
-          <CtaDefault size="medium">생성</CtaDefault>
+          <CtaDefault
+            size="medium"
+            onClick={handleCreateClick}
+            disabled={isDisabled}
+          >
+            생성
+          </CtaDefault>
         </div>
       </div>
     </Modal>

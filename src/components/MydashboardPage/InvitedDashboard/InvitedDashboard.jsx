@@ -5,7 +5,7 @@ import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import CtaDefault from '../../common/Buttons/CtaDefault/CtaDefault';
 import useDebounce from '@/hooks/useDebounce';
 
-// 송상훈 TODO :invitations가 없을때 맨아래 div가 뜨는데 그럼 로딩때는..?
+// 송상훈 TODO :
 export default function InvitedDashboard({
   invitations,
   fetchMore,

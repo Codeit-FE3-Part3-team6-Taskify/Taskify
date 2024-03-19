@@ -19,7 +19,7 @@ export default function DashboardList({
   const dispatch = useDispatch();
 
   const handleOpenCreateDashboardModal = () => {
-    dispatch(openModal({ type: 'createDashboard' })); // 'createDashboard'는 MODAL_COMPONENTS에 추가한 키와 일치해야 합니다.
+    dispatch(openModal({ type: 'createDashboard' }));
   };
 
   return (
