@@ -10,7 +10,7 @@ import DashboardColumnForm from '../DashboardColumnForm/DashboardColumnForm';
 import { changeColumnName, deleteColumn } from '@/features/columnsSlice';
 
 // Todo(노진석) : 모달 추가하기
-export default function DashboardColumn({ title, id }) {
+export default function DashboardColumn({ title, id, dashboardId, openModal }) {
   const [cardList, setCardList] = useState();
   const [cardCount, setCardCount] = useState();
   const [isEdit, setIsEdit] = useState(false);
@@ -22,8 +22,12 @@ export default function DashboardColumn({ title, id }) {
     setCardCount(res.totalCount);
   };
 
+  // 모달 넘어오면 수정예정
   const openAddCardModal = () => {
-    // 모달 추가
+    // openModal({
+    //   type: 'createTodo',
+    //   props: { dashboardId, columnId: id, setCard: setCardList },
+    // });
   };
 
   const toggleIsEdit = () => {

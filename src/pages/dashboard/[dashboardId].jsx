@@ -16,7 +16,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      dashboardId,
+      dashboardId: +dashboardId,
     },
   };
 }
@@ -30,7 +30,7 @@ export default function DashboardPage({ dashboardId }) {
     openModal({
       type: 'createColumn',
       props: {
-        dashboardId: +dashboardId,
+        dashboardId,
       },
     });
   };
@@ -70,7 +70,12 @@ export default function DashboardPage({ dashboardId }) {
             {columns &&
               columns.map((column) => (
                 // eslint-disable-next-line react/self-closing-comp
-                <DashboardColumn {...column} key={column.id}></DashboardColumn>
+                <DashboardColumn
+                  {...column}
+                  dashboardId={dashboardId}
+                  openModal={openModal}
+                  key={column.id}
+                ></DashboardColumn>
               ))}
             <div className=" lg:min-w-[354px] lg:mt-7">
               <CtaAdd onClick={handleOpenAddColumnsModal} size="large">
