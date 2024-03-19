@@ -9,7 +9,7 @@ export const signInUser = async ({ data, router, dispatch, openModal }) => {
     const { user } = res;
     dispatch(addUserInfo(user));
     localStorage.setItem('accessToken', res.accessToken);
-    router.push('/myDashboard');
+    router.push('/mydashboard');
     return;
   }
   let message = '';
