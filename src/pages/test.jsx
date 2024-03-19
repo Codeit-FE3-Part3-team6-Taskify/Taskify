@@ -9,16 +9,16 @@ export default function test() {
     });
   };
 
-  // columns를 가져오고 있다는 전제
-  const handleOpenAddColumnsModal = () => {
-    openModal({
-      type: 'createColumn',
-      props: {
-        dashboardId: 4939,
-        columns: columns,
-      },
-    });
-  };
+  // // columns를 가져오고 있다는 전제
+  // const handleOpenAddColumnsModal = () => {
+  //   openModal({
+  //     type: 'createColumn',
+  //     props: {
+  //       dashboardId: 4939,
+  //       columns: columns,
+  //     },
+  //   });
+  // };
 
   return (
     // 할 일 추가 모달
@@ -30,11 +30,11 @@ export default function test() {
       </div>
 
       {/* 칼럼 추가 예시 */}
-      <div>
+      {/* <div>
         <button type="button" onClick={handleOpenAddColumnsModal}>
           칼럼 추가 모달 열기
         </button>
-      </div>
+      </div> */}
     </>
   );
 }

@@ -1,17 +1,21 @@
 /* eslint-disable object-shorthand */
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { axiosPostJason } from '@/features/axios';
 import Modal from '../Modal';
 import UserInformationInput from '@/components/common/SignInput/UserInformationInput';
 import ToastNotification from '../../ToastNotification/ToastNotification';
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
+import { addColumn } from '@/features/columnsSlice';
 
-export default function InputModal({ onClose, dashboardId, columns }) {
+export default function InputModal({ onClose, dashboardId }) {
+  const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState('');
   const [toastState, setToastState] = useState({
     isVisible: false,
     message: '',
   });
+  const columns = useSelector((state) => state.columnList);
   const titles = columns.map((column) => column.title);
   const isInputEmpty = inputValue.trim() === '';
 
@@ -19,10 +23,11 @@ export default function InputModal({ onClose, dashboardId, columns }) {
 
   const postColumn = async () => {
     try {
-      await axiosPostJason('/columns', {
+      const res = await axiosPostJason('/columns', {
         title: inputValue,
-        dashboardId: dashboardId,
+        dashboardId,
       });
+      dispatch(addColumn({ data: res }));
     } catch (error) {
       console.error('데이터 전송 실패:', error);
     }
