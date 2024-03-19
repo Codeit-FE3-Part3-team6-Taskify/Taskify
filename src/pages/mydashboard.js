@@ -1,6 +1,6 @@
 import DashboardHeader from '@/components/common/Header/DashboardHeader';
 import Sidebar from '@/components/common/Sidebar/Sidebar';
-import DashboardList from '@/components/MydashboardPage/DashboardPage/DashboardList';
+import DashboardList from '@/components/MydashboardPage/DashboardList/DashboardList';
 import InvitedDashboard from '@/components/MydashboardPage/InvitedDashboard/InvitedDashboard';
 import useGetDashboards from '@/hooks/useGetDashboards';
 import useGetInvitedDashboards from '@/hooks/useGetInvitedDashboards';
