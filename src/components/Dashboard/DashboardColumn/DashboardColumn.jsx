@@ -1,18 +1,21 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { axiosDelete, axiosGet, axiosPut } from '@/features/axios';
 import CtaAdd from '@/components/common/Buttons/CtaAdd/CtaAdd';
 import DashboardCard from '../DashboardCard/DashboardCard';
 import { DeleteIcon, EditIcon } from '../../../../public/images';
 import DashboardColumnForm from '../DashboardColumnForm/DashboardColumnForm';
+import { changeColumnName, deleteColumn } from '@/features/columnsSlice';
 
 // Todo(노진석) : 모달 추가하기
-export default function DashboardColumn({ title, id, setColumns }) {
+export default function DashboardColumn({ title, id }) {
   const [cardList, setCardList] = useState();
   const [cardCount, setCardCount] = useState();
   const [isEdit, setIsEdit] = useState(false);
   const [columnName, setColumnName] = useState(title);
+  const dispatch = useDispatch();
   const getCard = async () => {
     const res = await axiosGet(`cards?columnId=${id}`);
     setCardList(res.cards);
@@ -27,18 +30,15 @@ export default function DashboardColumn({ title, id, setColumns }) {
     setIsEdit((prev) => !prev);
   };
 
-  const deleteColumn = () => {
+  const handleDeleteColumn = () => {
     axiosDelete(`columns/${id}`);
-    setColumns((prev) => prev.filter((column) => column.id !== id));
+    dispatch(deleteColumn({ id }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await axiosPut(`columns/${id}`, { title: columnName });
-    setColumns((prev) => {
-      const findIndex = prev.findIndex((column) => column.id === id);
-      return [...prev.slice(0, findIndex), res, ...prev.slice(findIndex + 1)];
-    });
+    dispatch(changeColumnName({ data: res, id }));
     toggleIsEdit();
   };
 
@@ -79,7 +79,7 @@ export default function DashboardColumn({ title, id, setColumns }) {
                 alt="컬럼 수정 아이콘"
               />
             </button>
-            <button onClick={deleteColumn} type="button">
+            <button onClick={handleDeleteColumn} type="button">
               <Image
                 width={22}
                 height={22}
