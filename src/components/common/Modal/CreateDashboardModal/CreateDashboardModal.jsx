@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Image from 'next/image';
 import Modal from '@/components/common/Modal/Modal';
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
 import { CheckIconWhite } from '@/../public/images';
 import { circleColorList } from '@/utils/circleColorList';
 import { axiosPostJason } from '@/features/axios';
+import { addDashboard } from '@/features/dashboardListSlice';
 
 export default function CreateDashboardModal({ onClose }) {
   const [inputValue, setInputValue] = useState('');
   const [selectedColor, setSelectedColor] = useState(null);
 
+  const dispatch = useDispatch();
+
   const handleInputChange = (event) => {
-    setInputValue(event.target.value); // 입력 값 임시 저장
+    setInputValue(event.target.value);
   };
 
   const handleColorSelectClick = (color) => {
@@ -31,10 +35,11 @@ export default function CreateDashboardModal({ onClose }) {
         title: inputValue,
         color: colorCode,
       };
-      await axiosPostJason(
+      const response = await axiosPostJason(
         'https://sp-taskify-api.vercel.app/3-6/dashboards',
         body,
       );
+      dispatch(addDashboard(response));
       onClose();
     } catch (error) {
       // eslint-disable-next-line no-alert
