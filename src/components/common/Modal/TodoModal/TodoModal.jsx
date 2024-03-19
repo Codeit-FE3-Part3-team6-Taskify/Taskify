@@ -144,7 +144,10 @@ export default function TodoModal({
         </div>
         <div className="flex flex-col w-full">
           <span>이미지</span>
-          <FileUpload onSelectFile={handleImageSelect} />
+          <FileUpload
+            imageUrl={formValues.imageUrl}
+            onSelectFile={handleImageSelect}
+          />
         </div>
         <div className="flex justify-center md:justify-end w-full">
           <div className="flex gap-[11px]">
