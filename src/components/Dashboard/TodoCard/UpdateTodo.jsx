@@ -11,7 +11,7 @@ export default function UpdateTodo({ onClose, cardId }) {
     title: '',
     description: '',
     dueDate: '',
-    tags: [''],
+    tags: [],
     imageUrl: '',
   });
 

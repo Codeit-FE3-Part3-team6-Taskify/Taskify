@@ -12,7 +12,7 @@ export default function CreateTodo({ onClose, dashboardId, columnId }) {
     title: '',
     description: '',
     dueDate: '',
-    tags: [''],
+    tags: [],
     imageUrl: '',
   });
 

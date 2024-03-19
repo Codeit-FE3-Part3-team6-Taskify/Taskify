@@ -3,8 +3,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import TagItem from './TagItem';
 
 export default function TagInput({ initialTag, setFormValues }) {
-  // TODO(조예진): 태그가 1개 이상 있을 땐 placeholder 없애기
-
   const inputRef = useRef(null);
   const [tagList, setTagList] = useState([]);
   const [tagItem, setTagItem] = useState('');
@@ -51,21 +49,19 @@ export default function TagInput({ initialTag, setFormValues }) {
       <div className="flex gap-[6px] ">
         {/* flex-wrap */}
         {tagList &&
-          tagList
-            .filter((tag) => tag.trim() !== '')
-            .map((tag, index) => {
-              return (
-                <TagItem
-                  key={index}
-                  tag={tag}
-                  onDelete={() => deleteTagItem(tag)}
-                />
-              );
-            })}
+          tagList.map((tag, index) => {
+            return (
+              <TagItem
+                key={index}
+                tag={tag}
+                onDelete={() => deleteTagItem(tag)}
+              />
+            );
+          })}
         <input
           ref={inputRef}
           type="text"
-          placeholder="입력 후 Enter"
+          placeholder={tagList.length > 0 ? '' : '입력 후 Enter'}
           className="flex w-full bg-transparent focus:border-0 focus:outline-none cursor-text"
           value={tagItem}
           onChange={(e) => setTagItem(e.target.value)}
