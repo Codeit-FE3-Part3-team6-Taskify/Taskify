@@ -1,10 +1,14 @@
+import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { axiosGet } from '@/features/axios';
+import { setMembers } from '@/features/memberSlice';
+import { setColumn } from '@/features/columnsSlice';
 
 export default function useDashboardInfo(dashboardId) {
   const [dashboardInfo, setDashboardInfo] = useState();
-  const [memberList, setMemberList] = useState();
-  const [columns, setColumns] = useState();
+  const memberList = useSelector((state) => state.memberList.members);
+  const columns = useSelector((state) => state.columnList);
+  const dispatch = useDispatch();
 
   const getDashboardInfo = async () => {
     const res = await axiosGet(`/dashboards/${dashboardId}`);
@@ -14,11 +18,11 @@ export default function useDashboardInfo(dashboardId) {
     const res = await axiosGet(
       `members?page=1&size=20&dashboardId=${dashboardId}`,
     );
-    setMemberList(res.members);
+    dispatch(setMembers({ members: res.members, totalCount: res.totalCount }));
   };
   const getColumns = async () => {
     const res = await axiosGet(`columns?dashboardId=${dashboardId}`);
-    setColumns(res.data);
+    dispatch(setColumn({ data: res.data }));
   };
   useEffect(() => {
     getDashboardInfo();
@@ -26,5 +30,5 @@ export default function useDashboardInfo(dashboardId) {
     getColumns();
   }, []);
 
-  return { dashboardInfo, memberList, columns, setColumns };
+  return { dashboardInfo, memberList, columns };
 }
