@@ -41,6 +41,14 @@ export default function DashboardPage({ dashboardId }) {
       },
     });
   };
+  const handleOpenInvitation = () => {
+    openModal({
+      type: 'inviteDashboard',
+      props: {
+        dashboardId,
+      },
+    });
+  };
 
   const onDragEnd = async (result) => {
     const { destination, source, draggableId } = result;
@@ -105,7 +113,12 @@ export default function DashboardPage({ dashboardId }) {
               // 기능 넣기
               <div className="flex gap-[16px]">
                 <CtaIcon imageSrc={SettingIcon}>관리</CtaIcon>
-                <CtaIcon imageSrc={AddButtonEmpty}>초대하기</CtaIcon>
+                <CtaIcon
+                  onClick={handleOpenInvitation}
+                  imageSrc={AddButtonEmpty}
+                >
+                  초대하기
+                </CtaIcon>
               </div>
             }
           />

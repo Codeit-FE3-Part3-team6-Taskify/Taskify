@@ -24,10 +24,10 @@ export default function DashboardColumn({ title, id, dashboardId, openModal }) {
 
   // 모달 넘어오면 수정예정
   const openAddCardModal = () => {
-    // openModal({
-    //   type: 'createTodo',
-    //   props: { dashboardId, columnId: id, setCard: setCardList },
-    // });
+    openModal({
+      type: 'createTodo',
+      props: { dashboardId, columnId: id },
+    });
   };
 
   const toggleIsEdit = () => {
