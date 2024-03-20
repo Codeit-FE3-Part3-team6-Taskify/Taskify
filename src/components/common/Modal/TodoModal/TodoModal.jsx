@@ -66,6 +66,10 @@ export default function TodoModal({
       padding: 0,
     }),
     indicatorSeparator: () => null,
+    dropdownIndicator: (provided) => ({
+      ...provided,
+      padding: 0, // 패딩값을 0으로 설정하여 없앱니다.
+    }),
   };
 
   const getOptionLabel = (option) => (
@@ -78,7 +82,7 @@ export default function TodoModal({
 
   return (
     <Modal onClose={onClose}>
-      <div className="flex flex-col items-start py-7 px-5 md:py-8 md:px-7 gap-6 text-base md:text-lg font-medium text-black_333236 w-[327px] md:w-[506px] ">
+      <div className="flex flex-col w-full items-start py-7 px-5 md:py-8 md:px-7 gap-6 text-base md:text-lg font-medium text-black_333236 ">
         <div className="text-xl md:text-2xl font-bold ">
           {isUpdate ? '할 일 수정' : '할 일 생성'}
         </div>

@@ -6,6 +6,7 @@ export default function TagInput({ initialTag, setFormValues }) {
   const inputRef = useRef(null);
   const [tagList, setTagList] = useState([]);
   const [tagItem, setTagItem] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     if (initialTag && initialTag.length > 0) {
@@ -45,7 +46,12 @@ export default function TagInput({ initialTag, setFormValues }) {
   };
 
   return (
-    <div className="sign-input-base">
+    <div
+      className="sign-input-base"
+      style={{ borderColor: isFocused ? '#5534DA' : '#D9D9D9' }}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+    >
       <div className="flex gap-[6px] ">
         {/* flex-wrap */}
         {tagList &&
