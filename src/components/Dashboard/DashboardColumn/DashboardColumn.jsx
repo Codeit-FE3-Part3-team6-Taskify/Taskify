@@ -18,7 +18,7 @@ export default function DashboardColumn({ title, id, dashboardId, openModal }) {
   const [columnName, setColumnName] = useState(title);
   const dispatch = useDispatch();
 
-  const { cardList, setCardList, cardCount, observerRef, scrollContainerRef } =
+  const { cardList, cardCount, observerRef, scrollContainerRef } =
     useDashboardCardGet(id);
 
   // 모달 넘어오면 수정예정

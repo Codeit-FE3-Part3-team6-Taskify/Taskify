@@ -1,7 +1,13 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialValue = [];
+const initialValue = [
+  {
+    id: 0,
+    title: '',
+    cardList: [],
+  },
+];
 
 const columnList = createSlice({
   name: 'columnList',
@@ -26,16 +32,62 @@ const columnList = createSlice({
     changeColumnName: (state, action) => {
       const { data, id } = action.payload;
       const findColumn = state.findIndex((column) => column.id === id);
-      return [
-        ...state.slice(0, findColumn),
-        data,
-        ...state.slice(findColumn + 1),
-      ];
+      state[findColumn].title = data.title;
+    },
+    addCard: (state, action) => {
+      const { data, columnId } = action.payload;
+      const findColumn = state.findIndex((column) => column.id === columnId);
+      if (state[findColumn].cardList) {
+        const cards = [...state[findColumn].cardList, ...data];
+        const resultCardList = cards.filter((card, index) => {
+          return index === cards.findIndex((item) => item.id === card.id);
+        });
+        state[findColumn].cardList = resultCardList;
+      } else {
+        state[findColumn].cardList = data;
+      }
+    },
+    deleteCard: (state, action) => {
+      const { columnId, id } = action.payload;
+      const findColumn = state.findIndex((column) => column.id === columnId);
+      const findCard = state[findColumn].card.filter((card) => card.id !== id);
+      state[findColumn].cardList = findCard;
+    },
+    changeCard: (state, action) => {
+      const { data, columnId, id } = action.payload;
+      const findColumn = state.findIndex((column) => column.id === columnId);
+      const findCard = state[findColumn].card.findIndex(
+        (card) => card.id === id,
+      );
+      if (findColumn === data.columnId) {
+        const result = [
+          ...state[findColumn].cardList.slice(0, findCard),
+          data,
+          ...state[findColumn].cardList.slice(findCard + 1),
+        ];
+        state[findColumn].cardList = result;
+      } else {
+        const findChangeColumn = state.findIndex(
+          (column) => column.id === data.columnId,
+        );
+        state[findChangeColumn].cardList = [
+          ...state[findChangeColumn].cardList,
+          data,
+        ];
+      }
     },
   },
 });
 
-export const { setColumn, addColumn, reset, deleteColumn, changeColumnName } =
-  columnList.actions;
+export const {
+  setColumn,
+  addColumn,
+  reset,
+  deleteColumn,
+  changeColumnName,
+  addCard,
+  deleteCard,
+  changeCard,
+} = columnList.actions;
 
 export default columnList;

@@ -1,9 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { axiosGet } from '@/features/axios';
 import useIntersectionObserver from './useIntersectionObserver';
+import { addCard } from '@/features/columnsSlice';
 
 export default function useDashboardCardGet(id) {
-  const [cardList, setCardList] = useState([]);
+  const cardList = useSelector((state) => {
+    const findIdx = state.columnList.findIndex((column) => column.id === id);
+    if (findIdx < 0) {
+      return [];
+    }
+    return state.columnList[findIdx].cardList;
+  });
+  const dispatch = useDispatch();
   const [cardCount, setCardCount] = useState();
   const [cursorId, setCursorId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -20,13 +29,7 @@ export default function useDashboardCardGet(id) {
         `cards?columnId=${id}&size=4${cursorId ? `&cursorId=${cursorId}` : ''}`,
       );
       setCursorId(res.cursorId);
-      setCardList((prev) => {
-        const cards = [...prev, ...res.cards];
-        const resultCardList = cards.filter((card, index) => {
-          return index === cards.findIndex((item) => item.id === card.id);
-        });
-        return resultCardList;
-      });
+      dispatch(addCard({ columnId: id, data: res.cards }));
       setCardCount(res.totalCount);
     } catch (e) {
       console.error(e);
@@ -48,5 +51,5 @@ export default function useDashboardCardGet(id) {
     }
   });
 
-  return { cardList, setCardList, cardCount, scrollContainerRef, observerRef };
+  return { cardList, cardCount, scrollContainerRef, observerRef };
 }
