@@ -7,7 +7,7 @@ import {
 } from '@/features/sidebarDashboardListSlice';
 
 const useGetDashboardsSidebar = () => {
-  const currentPage = useSelector(
+  const sidebarCurrentPage = useSelector(
     (state) => state.sidebarDashboardList.sidebarCurrentPage,
   );
   const [loading, setLoading] = useState(true);
@@ -18,15 +18,14 @@ const useGetDashboardsSidebar = () => {
     const fetchData = async () => {
       try {
         const data = await axiosGet(
-          `/dashboards?navigationMethod=pagination&page=${currentPage}&size=10`,
+          `/dashboards?navigationMethod=pagination&page=${sidebarCurrentPage}&size=10`,
         );
         dispatch(
           setSidebarDashboards({
             sidebarDashboards: data.dashboards,
-            totalCount: data.totalCount,
+            sidebarTotalCount: data.totalCount,
           }),
         );
-        console.log(data.dashboards);
       } catch (catchError) {
         setError(catchError);
       } finally {
@@ -35,18 +34,19 @@ const useGetDashboardsSidebar = () => {
     };
 
     fetchData();
-  }, [currentPage, dispatch]);
+  }, [sidebarCurrentPage, dispatch]);
 
   const sidebarNextPage = () =>
-    dispatch(setSidebarCurrentPage(currentPage + 1));
+    dispatch(setSidebarCurrentPage(sidebarCurrentPage + 1));
   const sidebarPrevPage = () =>
-    dispatch(setSidebarCurrentPage(Math.max(1, currentPage - 1)));
+    dispatch(setSidebarCurrentPage(Math.max(1, sidebarCurrentPage - 1)));
 
   return {
     loading,
     error,
     sidebarNextPage,
     sidebarPrevPage,
+    sidebarCurrentPage,
   };
 };
 

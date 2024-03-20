@@ -1,11 +1,16 @@
 import Image from 'next/image';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import { Logo, LogoImg, AddButtonEmpty, CrownIcon } from '@/../public/images';
 import PaginationButton from '../Buttons/PaginationButton/PaginationButton';
+import { openModal } from '@/features/modalSlice';
 
-export default function Sidebar({ sidebarNextPage, sidebarPrevPage }) {
-  // 송상훈 Todo: 나중에 재사용될 가능성 있는 함수, 그때 보고 분리해서 따로 만들어도 될듯
+export default function Sidebar({
+  sidebarNextPage,
+  sidebarPrevPage,
+  sidebarCurrentPage,
+}) {
+  // 송상훈 Todo:
   const createCircle = (color) => {
     const circleStyle = {
       width: '8px',
@@ -20,12 +25,15 @@ export default function Sidebar({ sidebarNextPage, sidebarPrevPage }) {
   const dashboards = useSelector(
     (state) => state.sidebarDashboardList.sidebarDashboards,
   );
-  const currentPage = useSelector(
-    (state) => state.sidebarDashboardList.sidebarCurrentPage,
-  );
   const totalCount = useSelector(
-    (state) => state.sidebarDashboardList.totalCount,
+    (state) => state.sidebarDashboardList.sidebarTotalCount,
   );
+
+  const dispatch = useDispatch();
+
+  const handleOpenCreateDashboardModal = () => {
+    dispatch(openModal({ type: 'createDashboard' }));
+  };
 
   return (
     <div className="flex flex-col border-r bg-white items-center h-full pt-5 w-[67px] md:w-[160px] lg:w-[300px]">
@@ -44,49 +52,58 @@ export default function Sidebar({ sidebarNextPage, sidebarPrevPage }) {
         <p className="text-gray_787486 text-[12px] font-bold hidden md:inline ">
           Dash Boards
         </p>
-        <Image src={AddButtonEmpty} width={20} height={20} alt="더하기 버튼" />
+        <button type="button" onClick={handleOpenCreateDashboardModal}>
+          <Image
+            src={AddButtonEmpty}
+            width={20}
+            height={20}
+            alt="더하기 버튼"
+          />
+        </button>
       </div>
 
-      <div className="flex flex-col h-full mt-3 md:pl-6 md:w-full">
-        {dashboards && dashboards.length > 0 ? (
-          dashboards.map((dashboard) => (
-            <div
-              key={dashboard.id}
-              className="flex items-center gap-x-2 h-12 lg:h-14"
-            >
-              {dashboard.color && createCircle(dashboard.color)}
-              <p className="hidden truncate text-gray_787486 md:inline ml-2 md:text-sm lg:text-lg  md:max-w-[70px] lg:max-w-[170px]">
-                {dashboard.title}
-              </p>
-              {dashboard.createdByMe && (
-                <Image
-                  className="hidden md:inline"
-                  src={CrownIcon}
-                  width={17.5}
-                  height={14}
-                  alt="왕관"
-                />
-              )}
+      <div className="flex flex-col w-full items-center h-full mt-3 md:pl-6 md:items-start">
+        <div className="h-[480px] lg:h-[560px]">
+          {dashboards && dashboards.length > 0 ? (
+            dashboards.map((dashboard) => (
+              <div
+                key={dashboard.id}
+                className="flex items-center gap-x-2 h-12 lg:h-14"
+              >
+                {dashboard.color && createCircle(dashboard.color)}
+                <p className="hidden truncate text-gray_787486 md:inline ml-2 md:text-sm lg:text-lg  md:max-w-[70px] lg:max-w-[170px]">
+                  {dashboard.title}
+                </p>
+                {dashboard.createdByMe && (
+                  <Image
+                    className="hidden md:inline"
+                    src={CrownIcon}
+                    width={17.5}
+                    height={14}
+                    alt="왕관"
+                  />
+                )}
+              </div>
+            ))
+          ) : (
+            <div>
+              <p>No</p>
             </div>
-          ))
-        ) : (
-          <div>
-            <p>No</p>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
 
-      <div className="flex justify-end items-center mt-6">
-        <PaginationButton
-          direction="prev"
-          onClick={sidebarPrevPage}
-          disabled={currentPage === 1}
-        />
-        <PaginationButton
-          direction="next"
-          onClick={sidebarNextPage}
-          disabled={currentPage >= Math.ceil(totalCount / 6)}
-        />
+        <div className="flex justify-center mt-6 w-full">
+          <PaginationButton
+            direction="prev"
+            onClick={sidebarPrevPage}
+            disabled={sidebarCurrentPage === 1}
+          />
+          <PaginationButton
+            direction="next"
+            onClick={sidebarNextPage}
+            disabled={sidebarCurrentPage >= Math.ceil(totalCount / 10)}
+          />
+        </div>
       </div>
     </div>
   );

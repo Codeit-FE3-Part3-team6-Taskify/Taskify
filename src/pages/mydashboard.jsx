@@ -10,7 +10,8 @@ import useGetUsers from '@/hooks/useGetUsers';
 export default function myDashboard() {
   const { userData } = useGetUsers();
   const { nextPage, prevPage, currentPage } = useGetDashboards();
-  const { sidebarNextPage, sidebarPrevPage } = useGetDashboardsSidebar();
+  const { sidebarNextPage, sidebarPrevPage, sidebarCurrentPage } =
+    useGetDashboardsSidebar();
   const { invitedDashboardData, loading, fetchMore, updateTitle } =
     useGetInvitedDashboards();
 
@@ -20,6 +21,7 @@ export default function myDashboard() {
         <Sidebar
           sidebarNextPage={sidebarNextPage}
           sidebarPrevPage={sidebarPrevPage}
+          sidebarCurrentPage={sidebarCurrentPage}
         />
       </aside>
       <div className="flex flex-col w-full min-h-screen">
