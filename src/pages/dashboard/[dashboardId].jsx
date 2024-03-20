@@ -1,4 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
+import { DragDropContext } from 'react-beautiful-dnd';
 import Image from 'next/image';
 import DashboardHeader from '@/components/common/Header/DashboardHeader';
 import Sidebar from '@/components/common/Sidebar/Sidebar';
@@ -10,6 +12,8 @@ import useDashboardInfo from '@/hooks/useDashboardInfo';
 import DashboardColumn from '@/components/Dashboard/DashboardColumn/DashboardColumn';
 import CtaAdd from '@/components/common/Buttons/CtaAdd/CtaAdd';
 import useModal from '@/hooks/useModal';
+import { changeCard, deleteCard } from '@/features/columnsSlice';
+import { axiosPut } from '@/features/axios';
 
 export async function getServerSideProps(context) {
   const { dashboardId } = context.params;
@@ -25,7 +29,8 @@ export default function DashboardPage({ dashboardId }) {
   const { openModal } = useModal();
   const userInfo = useUserGet();
   const { dashboardList } = useDashboardList();
-  const { dashboardInfo, memberList, columns } = useDashboardInfo(dashboardId);
+  const { dashboardInfo, memberList, columns, dispatch } =
+    useDashboardInfo(dashboardId);
   const handleOpenAddColumnsModal = () => {
     openModal({
       type: 'createColumn',
@@ -34,13 +39,51 @@ export default function DashboardPage({ dashboardId }) {
       },
     });
   };
+  const onDragEnd = async (result) => {
+    const { destination, source, draggableId } = result;
+    if (!destination) {
+      return;
+    }
+    if (
+      destination.droppableId === source.droppableId &&
+      source.index === destination.index
+    ) {
+      return;
+    }
+    const dragColumnIndex = columns.findIndex(
+      (column) => column.id === +source.droppableId,
+    );
+    const findCard = columns[dragColumnIndex].cardList.find(
+      (card) => card.id === +draggableId,
+    );
+    dispatch(
+      deleteCard({
+        columnId: +source.droppableId,
+        id: findCard.id,
+      }),
+    );
+    const body = {
+      ...findCard,
+      columnId: +destination.droppableId,
+    };
+    dispatch(
+      changeCard({
+        data: body,
+        columnId: +source.droppableId,
+        id: findCard.id,
+        index: destination.index,
+      }),
+    );
+    console.log(result);
+    await axiosPut(`cards/${findCard.id}`, body);
+  };
 
   return (
-    <div className="flex w-full ">
+    <div className="flex w-screen">
       <aside>
         <Sidebar dashboards={dashboardList} />
       </aside>
-      <div className="flex flex-col w-full ">
+      <div className="flex flex-col w-5/6 ">
         <header>
           <DashboardHeader
             title={dashboardInfo ? dashboardInfo.title : ''}
@@ -66,17 +109,19 @@ export default function DashboardPage({ dashboardId }) {
           />
         </header>
         <main className="bg-gray_FAFAFA h-full w-full flex flex-col gap-y-16 p-[24px] md:p-[40px] flex-auto  ">
-          <div className="flex flex-col gap-[30px] md:gap-10 lg:flex-row lg:overflow-x-auto lg:pb-20 lg:h-[80vh] ">
-            {columns &&
-              columns.map((column) => (
-                // eslint-disable-next-line react/self-closing-comp
-                <DashboardColumn
-                  {...column}
-                  dashboardId={dashboardId}
-                  openModal={openModal}
-                  key={column.id}
-                ></DashboardColumn>
-              ))}
+          <div className="flex flex-col gap-[30px] md:gap-10 lg:flex-row lg:overflow-x-scroll lg:pb-20 lg:h-[80vh] ">
+            <DragDropContext onDragEnd={onDragEnd}>
+              {columns &&
+                columns.map((column) => (
+                  // eslint-disable-next-line react/self-closing-comp
+                  <DashboardColumn
+                    {...column}
+                    dashboardId={dashboardId}
+                    openModal={openModal}
+                    key={column.id}
+                  ></DashboardColumn>
+                ))}
+            </DragDropContext>
             <div className=" lg:min-w-[354px] lg:mt-7">
               <CtaAdd onClick={handleOpenAddColumnsModal} size="large">
                 새로운 컬럼 추가하기

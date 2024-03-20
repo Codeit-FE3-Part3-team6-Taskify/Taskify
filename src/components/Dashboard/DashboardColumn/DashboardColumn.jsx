@@ -1,15 +1,15 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import Image from 'next/image';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { axiosDelete, axiosPut } from '@/features/axios';
-
 import CtaAdd from '@/components/common/Buttons/CtaAdd/CtaAdd';
 import DashboardCard from '../DashboardCard/DashboardCard';
 import { DeleteIcon, EditIcon } from '../../../../public/images';
 import DashboardColumnForm from '../DashboardColumnForm/DashboardColumnForm';
 import { changeColumnName, deleteColumn } from '@/features/columnsSlice';
-
 import useDashboardCardGet from '@/hooks/useDashboardCardGet';
 
 // Todo(노진석) : 모달 추가하기
@@ -51,7 +51,7 @@ export default function DashboardColumn({ title, id, dashboardId, openModal }) {
   };
 
   return (
-    <section className="flex flex-col gap-[10px] h-[470px] md:gap-4 lg:min-w-[354px] md:h-[346px] lg:h-full">
+    <section className="flex flex-col gap-[10px] h-[470px] md:gap-4 lg:min-w-[354px] md:h-[346px] lg:h-full ">
       <div className="flex gap-2 items-center mb-2 md:mb-[9px] w-full">
         <div className="w-2 h-2 bg-violet_5534DA rounded-full" />
         {isEdit ? (
@@ -86,22 +86,46 @@ export default function DashboardColumn({ title, id, dashboardId, openModal }) {
           </>
         )}
       </div>
+
       <div>
         <CtaAdd onClick={openAddCardModal} />
       </div>
-      <div
-        ref={scrollContainerRef}
-        className="flex flex-col gap-[10px] overflow-y-auto md:gap-4"
-      >
-        {cardList &&
-          cardList.map((card) => (
-            <DashboardCard key={card.id} cardInfo={card} />
-          ))}
 
-        <div ref={observerRef} className="w-full h-[1px] opacity-0">
-          마지막
-        </div>
-      </div>
+      <Droppable droppableId={id.toString()}>
+        {(provided) => (
+          <div
+            ref={scrollContainerRef}
+            className="flex flex-col gap-[10px] overflow-y-auto md:gap-4 mt-[-10px] md-[-16px]"
+          >
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              {cardList &&
+                cardList.map((card, index) => (
+                  <Draggable
+                    key={card.id}
+                    draggableId={card.id.toString()}
+                    index={index}
+                  >
+                    {(provided) => (
+                      <div
+                        className="mt-[10px] md:mt-4"
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <DashboardCard cardInfo={card} />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+
+              <div ref={observerRef} className="w-full h-[1px] opacity-0">
+                마지막
+              </div>
+              {provided.placeholder}
+            </div>
+          </div>
+        )}
+      </Droppable>
     </section>
   );
 }

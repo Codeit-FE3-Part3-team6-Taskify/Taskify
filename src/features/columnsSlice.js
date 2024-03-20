@@ -44,13 +44,15 @@ const columnList = createSlice({
     deleteCard: (state, action) => {
       const { columnId, id } = action.payload;
       const findColumn = state.findIndex((column) => column.id === columnId);
-      const findCard = state[findColumn].card.filter((card) => card.id !== id);
-      state[findColumn].cardList = findCard;
+      const filterCard = state[findColumn].cardList.filter(
+        (card) => card.id !== id,
+      );
+      state[findColumn].cardList = filterCard;
     },
     changeCard: (state, action) => {
       const { data, columnId, id } = action.payload;
       const findColumn = state.findIndex((column) => column.id === columnId);
-      const findCard = state[findColumn].card.findIndex(
+      const findCard = state[findColumn].cardList.findIndex(
         (card) => card.id === id,
       );
       if (findColumn === data.columnId) {
@@ -64,9 +66,11 @@ const columnList = createSlice({
         const findChangeColumn = state.findIndex(
           (column) => column.id === data.columnId,
         );
+        const { index } = action.payload;
         state[findChangeColumn].cardList = [
-          ...state[findChangeColumn].cardList,
+          ...state[findChangeColumn].cardList.slice(0, index),
           data,
+          ...state[findChangeColumn].cardList.slice(index),
         ];
       }
     },
