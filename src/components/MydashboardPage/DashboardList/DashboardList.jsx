@@ -1,18 +1,15 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Image from 'next/image';
 import { AddButtonEmpty, NoMailIcon } from '@/../public/images';
 import DashboardListItem from '../../common/Buttons/DashboardListItem/DashboardListItem';
 import PaginationButton from '../../common/Buttons/PaginationButton/PaginationButton';
 import { openModal } from '@/features/modalSlice';
 
-// Todo(송상훈): 모달 컴포넌트 연동시기에 버튼 컴포넌트에 연동 해야함
-export default function DashboardList({
-  dashboards,
-  totalCount,
-  prevPage,
-  nextPage,
-  currentPage,
-}) {
+// Todo(송상훈):
+export default function DashboardList({ prevPage, nextPage, currentPage }) {
+  const dashboards = useSelector((state) => state.dashboardList.dashboards);
+  const totalCount = useSelector((state) => state.dashboardList.totalCount);
+
   const totalPage = totalCount ? Math.ceil(totalCount / 6) : 0;
   const isEmpty = !dashboards || dashboards.length === 0;
 

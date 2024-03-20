@@ -2,6 +2,15 @@
   "extends": ["airbnb", "plugin:prettier/recommended"],
   "plugins": ["react", "jsx-a11y", "import"],
   "rules": {
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": [
+          "state", // Redux Toolkit에서 사용되는 state 객체에 대한 수정을 허용
+        ],
+      },
+    ],
     "jsx-a11y/label-has-associated-control": [
       "error",
       {
