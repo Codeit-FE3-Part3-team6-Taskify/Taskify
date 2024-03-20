@@ -10,9 +10,11 @@ import SignLogo from '@/components/common/SignLogo/SignLogo';
 import SignLink from '@/components/common/SignLink/SignLink';
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
 import useModal from '@/hooks/useModal';
+import useRedirectWithAccessToken from '@/hooks/useRedirectWithAccessToken';
 
 // Todo(노진석) : (미완성)api로직 등 추가해야함.
 export default function SignInPage() {
+  useRedirectWithAccessToken();
   const dispatch = useDispatch();
   const router = useRouter();
   const [email, setEmail] = useState('');
