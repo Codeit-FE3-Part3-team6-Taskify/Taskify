@@ -4,14 +4,9 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import TodoModal from '../../common/Modal/TodoModal/TodoModal';
 import { axiosPostJason } from '@/features/axios';
-import { addCard } from '@/features/columnsSlice';
+import { addCard, plusCount } from '@/features/columnsSlice';
 
-export default function CreateTodo({
-  onClose,
-  dashboardId,
-  columnId,
-  setCardCount,
-}) {
+export default function CreateTodo({ onClose, dashboardId, columnId }) {
   const dispatch = useDispatch();
   const [formValues, setFormValues] = useState({
     assigneeUserId: 0,
@@ -38,8 +33,8 @@ export default function CreateTodo({
       if (!res.status) {
         console.log('생성완료');
         console.log('응답:', res);
-        dispatch(addCard({ data: [res], columnId }));
-        setCardCount((prev) => prev + 1);
+        dispatch(addCard({ data: res, columnId }));
+        dispatch(plusCount({ columnId, count: 1 }));
         onClose();
       }
     } catch (e) {

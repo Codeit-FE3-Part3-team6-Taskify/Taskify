@@ -19,14 +19,14 @@ export default function DashboardColumn({ title, id, dashboardId, openModal }) {
   const [isEdit, setIsEdit] = useState(false);
   const [columnName, setColumnName] = useState(title);
   const dispatch = useDispatch();
-  const { cardList, cardCount, setCardCount, observerRef, scrollContainerRef } =
+  const { cardList, cardCount, observerRef, scrollContainerRef } =
     useDashboardCardGet(id);
 
   // 모달 넘어오면 수정예정
   const openAddCardModal = () => {
     openModal({
       type: 'createTodo',
-      props: { dashboardId, columnId: id, setCardCount },
+      props: { dashboardId, columnId: id },
     });
   };
 

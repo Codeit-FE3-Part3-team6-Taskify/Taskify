@@ -12,7 +12,7 @@ import useDashboardInfo from '@/hooks/useDashboardInfo';
 import DashboardColumn from '@/components/Dashboard/DashboardColumn/DashboardColumn';
 import CtaAdd from '@/components/common/Buttons/CtaAdd/CtaAdd';
 import useModal from '@/hooks/useModal';
-import { changeCard, deleteCard } from '@/features/columnsSlice';
+import { changeCard, deleteCard, plusCount } from '@/features/columnsSlice';
 import { axiosPut } from '@/features/axios';
 
 export async function getServerSideProps(context) {
@@ -73,6 +73,12 @@ export default function DashboardPage({ dashboardId }) {
         id: findCard.id,
       }),
     );
+    dispatch(
+      plusCount({
+        count: -1,
+        columnId: +source.droppableId,
+      }),
+    );
     const body = {
       ...findCard,
       columnId: +destination.droppableId,
@@ -83,6 +89,12 @@ export default function DashboardPage({ dashboardId }) {
         columnId: +source.droppableId,
         id: findCard.id,
         index: destination.index,
+      }),
+    );
+    dispatch(
+      plusCount({
+        count: 1,
+        columnId: +destination.droppableId,
       }),
     );
     await axiosPut(`cards/${findCard.id}`, body);
