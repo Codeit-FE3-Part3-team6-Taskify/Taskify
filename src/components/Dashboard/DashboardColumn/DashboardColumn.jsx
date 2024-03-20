@@ -52,7 +52,7 @@ export default function DashboardColumn({ title, id, dashboardId, openModal }) {
   };
 
   return (
-    <section className="m-auto flex flex-col gap-[10px] w-[308px] h-[470px] md:w-full md:gap-4 lg:min-w-[354px] md:h-[346px] lg:h-full ">
+    <section className="m-auto flex flex-col gap-[10px] w-[308px] h-[470px] md:w-full md:gap-4 lg:min-w-[354px] lg:max-w-[354px] lg:m-0 md:h-[346px]  lg:h-full ">
       <div className="flex gap-2 items-center mb-2 md:mb-[9px] w-full">
         <div className="w-2 h-2 bg-violet_5534DA rounded-full" />
         {isEdit ? (
