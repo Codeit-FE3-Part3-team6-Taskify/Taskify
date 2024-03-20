@@ -98,7 +98,11 @@ export default function DashboardColumn({ title, id, dashboardId, openModal }) {
             ref={scrollContainerRef}
             className="flex flex-col gap-[10px] overflow-y-auto md:gap-4 mt-[-10px] md-[-16px]"
           >
-            <div ref={provided.innerRef} {...provided.droppableProps}>
+            <div
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              className="min-h-10"
+            >
               {cardList &&
                 cardList.map((card, index) => (
                   <Draggable
@@ -119,7 +123,7 @@ export default function DashboardColumn({ title, id, dashboardId, openModal }) {
                   </Draggable>
                 ))}
 
-              <div ref={observerRef} className="w-full h-[1px] opacity-0">
+              <div ref={observerRef} className="w-full h-[5px] opacity-0">
                 마지막
               </div>
               {provided.placeholder}
