@@ -95,13 +95,13 @@ export default function DashboardColumn({ title, id, dashboardId, openModal }) {
       <Droppable droppableId={id.toString()}>
         {(provided) => (
           <div
-            ref={scrollContainerRef}
-            className="flex flex-col gap-[10px] overflow-y-auto md:gap-4 mt-[-10px] md-[-16px]"
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            className=" min-h-10 h-5/6"
           >
             <div
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-              className="min-h-10"
+              ref={scrollContainerRef}
+              className=" flex flex-col gap-[10px] overflow-y-auto md:gap-4 mt-[-10px] md-[-16px] h-full"
             >
               {cardList &&
                 cardList.map((card, index) => (
