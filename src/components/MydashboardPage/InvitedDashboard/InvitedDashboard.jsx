@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Image from 'next/image';
 import { NoMailIcon, SearchIcon } from '@/../public/images';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import CtaDefault from '../../common/Buttons/CtaDefault/CtaDefault';
 import useDebounce from '@/hooks/useDebounce';
+import { axiosPut } from '@/features/axios';
+import { removeInvitations } from '@/features/invitationsDashboardListSlice';
 
 // 송상훈 TODO :
 export default function InvitedDashboard({ fetchMore, loading, updateTitle }) {
@@ -12,6 +14,8 @@ export default function InvitedDashboard({ fetchMore, loading, updateTitle }) {
   const scrollContainerRef = useRef(null);
   const [inputValue, setInputValue] = useState('');
   const debouncedSearchTerm = useDebounce(inputValue, 700);
+
+  const dispatch = useDispatch();
 
   const invitations = useSelector(
     (state) => state.invitationsDashboardList.invitations,
@@ -36,6 +40,38 @@ export default function InvitedDashboard({ fetchMore, loading, updateTitle }) {
       fetchMore();
     }
   });
+
+  const handleAcceptClick = async (invitationId) => {
+    try {
+      const body = {
+        inviteAccepted: true,
+      };
+      const response = await axiosPut(
+        `https://sp-taskify-api.vercel.app/3-6/invitations/${invitationId}`,
+        body,
+      );
+      dispatch(removeInvitations(response));
+    } catch (error) {
+      // eslint-disable-next-line no-alert
+      alert('다시 시도해주세요.');
+    }
+  };
+
+  const handleRejectClick = async (invitationId) => {
+    try {
+      const body = {
+        inviteAccepted: false,
+      };
+      const response = await axiosPut(
+        `https://sp-taskify-api.vercel.app/3-6/invitations/${invitationId}`,
+        body,
+      );
+      dispatch(removeInvitations(response));
+    } catch (error) {
+      // eslint-disable-next-line no-alert
+      alert('다시 시도해주세요.');
+    }
+  };
 
   return (
     <section className="bg-white max-w-[1022px] h-auto rounded-[8px] shadow-sm py-[24px] px-[16px]">
@@ -97,8 +133,17 @@ export default function InvitedDashboard({ fetchMore, loading, updateTitle }) {
                 <span>{invitation.inviter.nickname}</span>
               </div>
               <div className="flex gap-x-3">
-                <CtaDefault size="small">수락</CtaDefault>
-                <CtaDefault size="small" color="white">
+                <CtaDefault
+                  size="small"
+                  onClick={() => handleAcceptClick(invitation.id)}
+                >
+                  수락
+                </CtaDefault>
+                <CtaDefault
+                  size="small"
+                  color="white"
+                  onClick={() => handleRejectClick(invitation.id)}
+                >
                   거절
                 </CtaDefault>
               </div>

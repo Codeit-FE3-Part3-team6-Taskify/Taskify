@@ -16,8 +16,14 @@ export const invitationsDashboardList = createSlice({
       const { newInvitations } = action.payload;
       state.invitations = [...state.invitations, ...newInvitations];
     },
+    removeInvitations: (state, action) => {
+      const { id } = action.payload;
+      state.invitations = state.invitations.filter(
+        (invitation) => invitation.id !== id,
+      );
+    },
   },
 });
 
-export const { setInvitations, addInvitations } =
+export const { setInvitations, addInvitations, removeInvitations } =
   invitationsDashboardList.actions;
