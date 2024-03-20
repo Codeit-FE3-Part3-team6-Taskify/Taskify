@@ -12,8 +12,8 @@ import { AddButtonFill } from '@/../public/images';
 // Todo(심은주) : 완료.
 export default function CtaAdd({ children, onClick, size }) {
   const sizeStyles = {
-    medium: 'text-base rounded-md md:h-[48px] sm:h-[32px] ',
-    large: 'md:text-lg sm:text-base  rounded-lg lg:h-[70px]',
+    medium: 'text-base rounded-md md:h-[40px] sm:h-[32px] ',
+    large: 'md:text-lg sm:text-base  rounded-lg md:h-[70px] sm:h-[60px]',
   };
 
   const sizeClass = sizeStyles[size] || sizeStyles.medium;
@@ -22,7 +22,7 @@ export default function CtaAdd({ children, onClick, size }) {
     <button
       type="button"
       onClick={onClick}
-      className={`button-reset bg-white w-full flex justify-center items-center gap-2.5   border-gray_D9D9D9 font-bold  ${sizeClass}`}
+      className={`button-reset bg-white w-full flex justify-center items-center gap-2.5 border-gray_D9D9D9 font-bold  ${sizeClass}`}
     >
       {children}
       <span className="flex justify-center items-center bg-violet_8% rounded">

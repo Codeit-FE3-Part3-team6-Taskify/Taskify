@@ -15,6 +15,13 @@ export default function TagInput({ initialTag, setFormValues }) {
     }
   }, [initialTag]);
 
+  useEffect(() => {
+    if (initialTag && initialTag.length > 0) {
+      // 초기 태그가 있으면 태그 리스트에 설정
+      setTagList(initialTag);
+    }
+  }, [initialTag]);
+
   const addTagItem = () => {
     const updatedTagList = [...tagList];
     updatedTagList.push(tagItem);

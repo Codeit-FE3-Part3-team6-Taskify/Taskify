@@ -19,7 +19,7 @@ export default function Modal({ onClose, children }) {
         {children}
       </div>
 
-      <div className="w-screen h-screen bg-black bg-opacity-70 fixed left-0 top-0" />
+      <div className="w-full h-full bg-black bg-opacity-70 fixed left-0 top-0" />
     </>
   );
 }
