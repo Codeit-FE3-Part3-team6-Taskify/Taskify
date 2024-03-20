@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import getRandomColorPair from '@/utils/getRandomColorPair';
 
-export default function TagItem({ tag, onDelete }) {
+export default function TagItem({ hasDelete, tag, onDelete }) {
   const [color, setColor] = useState({});
 
   useEffect(() => {
@@ -15,13 +15,15 @@ export default function TagItem({ tag, onDelete }) {
       style={{ backgroundColor: color?.background, color: color?.text }}
     >
       <span>{tag}</span>
-      <button
-        onClick={() => onDelete(tag)}
-        className="ml-2 w-4 h-4 flex justify-center items-center rounded-full bg-white"
-        style={{ color: color?.text }}
-      >
-        &times;
-      </button>
+      {hasDelete && (
+        <button
+          onClick={() => onDelete(tag)}
+          className="ml-2 w-4 h-4 flex justify-center items-center rounded-full bg-white"
+          style={{ color: color?.text }}
+        >
+          &times;
+        </button>
+      )}
     </div>
   );
 }

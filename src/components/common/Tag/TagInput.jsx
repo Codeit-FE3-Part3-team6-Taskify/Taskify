@@ -65,6 +65,7 @@ export default function TagInput({ initialTag, setFormValues }) {
           tagList.map((tag, index) => {
             return (
               <TagItem
+                hasDelete
                 key={index}
                 tag={tag}
                 onDelete={() => deleteTagItem(tag)}

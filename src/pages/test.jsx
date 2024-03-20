@@ -16,7 +16,12 @@ export default function test() {
       props: { cardId: 3910 },
     });
   };
-
+  const handleOpenCardModal = () => {
+    openModal({
+      type: 'todoCard',
+      props: { cardId: 3910, columnTitle: 'To Do' },
+    });
+  };
   // // columns를 가져오고 있다는 전제
   // const handleOpenAddColumnsModal = () => {
   //   openModal({
@@ -48,6 +53,11 @@ export default function test() {
 
       <button type="button" onClick={handleOpenUpdateModal}>
         할일 수정 모달 열기
+      </button>
+      <br />
+
+      <button type="button" onClick={handleOpenCardModal}>
+        할일 카드 모달 열기
       </button>
       <br />
 
