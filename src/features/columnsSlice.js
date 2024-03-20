@@ -1,13 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialValue = [
-  {
-    id: 0,
-    title: '',
-    cardList: [],
-  },
-];
+const initialValue = [];
 
 const columnList = createSlice({
   name: 'columnList',

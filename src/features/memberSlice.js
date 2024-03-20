@@ -1,10 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialValue = {
-  members: [],
-  totalCount: 0,
-};
+const initialValue = {};
 
 const memberList = createSlice({
   name: 'memberList',
