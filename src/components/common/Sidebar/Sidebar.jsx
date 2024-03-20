@@ -1,8 +1,10 @@
 import Image from 'next/image';
+import { useSelector } from 'react-redux';
 import Link from 'next/link';
 import { Logo, LogoImg, AddButtonEmpty, CrownIcon } from '@/../public/images';
+import PaginationButton from '../Buttons/PaginationButton/PaginationButton';
 
-export default function Sidebar({ dashboards }) {
+export default function Sidebar({ sidebarNextPage, sidebarPrevPage }) {
   // 송상훈 Todo: 나중에 재사용될 가능성 있는 함수, 그때 보고 분리해서 따로 만들어도 될듯
   const createCircle = (color) => {
     const circleStyle = {
@@ -14,6 +16,16 @@ export default function Sidebar({ dashboards }) {
 
     return <div style={circleStyle} />;
   };
+
+  const dashboards = useSelector(
+    (state) => state.sidebarDashboardList.sidebarDashboards,
+  );
+  const currentPage = useSelector(
+    (state) => state.sidebarDashboardList.sidebarCurrentPage,
+  );
+  const totalCount = useSelector(
+    (state) => state.sidebarDashboardList.totalCount,
+  );
 
   return (
     <div className="flex flex-col border-r bg-white items-center h-full pt-5 w-[67px] md:w-[160px] lg:w-[300px]">
@@ -43,7 +55,7 @@ export default function Sidebar({ dashboards }) {
               className="flex items-center gap-x-2 h-12 lg:h-14"
             >
               {dashboard.color && createCircle(dashboard.color)}
-              <p className="hidden  text-gray_787486 md:inline ml-2 md:text-sm lg:text-lg">
+              <p className="hidden truncate text-gray_787486 md:inline ml-2 md:text-sm lg:text-lg  md:max-w-[70px] lg:max-w-[170px]">
                 {dashboard.title}
               </p>
               {dashboard.createdByMe && (
@@ -62,6 +74,19 @@ export default function Sidebar({ dashboards }) {
             <p>No</p>
           </div>
         )}
+      </div>
+
+      <div className="flex justify-end items-center mt-6">
+        <PaginationButton
+          direction="prev"
+          onClick={sidebarPrevPage}
+          disabled={currentPage === 1}
+        />
+        <PaginationButton
+          direction="next"
+          onClick={sidebarNextPage}
+          disabled={currentPage >= Math.ceil(totalCount / 6)}
+        />
       </div>
     </div>
   );

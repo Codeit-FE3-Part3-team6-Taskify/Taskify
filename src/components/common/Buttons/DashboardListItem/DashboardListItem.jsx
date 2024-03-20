@@ -16,7 +16,7 @@ export default function DashboardListItem({ title, color, createdByMe, id }) {
   };
 
   return (
-    <li className="list-none p-0 m-0">
+    <li className="list-none p-0 m-0 h-[58px] md:h-[68px] lg:h-[70px]">
       <Link
         href={`/dashboard/${id}`}
         className="flex justify-between items-center no-underline rounded-lg px-5 border border-solid border-gray_D9D9D9 h-[58px] md:h-[68px] lg:h-[70px]"
