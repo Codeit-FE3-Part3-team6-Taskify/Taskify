@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Image from 'next/image';
 import { NoMailIcon, SearchIcon } from '@/../public/images';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
@@ -6,16 +7,15 @@ import CtaDefault from '../../common/Buttons/CtaDefault/CtaDefault';
 import useDebounce from '@/hooks/useDebounce';
 
 // 송상훈 TODO :
-export default function InvitedDashboard({
-  invitations,
-  fetchMore,
-  loading,
-  updateTitle,
-}) {
+export default function InvitedDashboard({ fetchMore, loading, updateTitle }) {
   const observerRef = useRef(null);
   const scrollContainerRef = useRef(null);
   const [inputValue, setInputValue] = useState('');
   const debouncedSearchTerm = useDebounce(inputValue, 700);
+
+  const invitations = useSelector(
+    (state) => state.invitationsDashboardList.invitations,
+  );
 
   const isEmpty = !invitations || invitations.length === 0;
 
