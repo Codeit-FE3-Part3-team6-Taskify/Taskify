@@ -17,12 +17,12 @@ export default function DashboardCard({ cardInfo }) {
   return (
     <article
       onClick={openCardModal}
-      className="cursor-pointer flex flex-col gap-[6px] p-3 rounded-md border-solid border-[1px] border-gray_D9D9D9 md:flex-row md:gap-5 md:p-5 lg:flex-col"
+      className=" cursor-pointer flex flex-col gap-[6px] p-3 rounded-md border-solid border-[1px] border-gray_D9D9D9 md:flex-row md:gap-5 md:p-5 lg:flex-col"
     >
       {imageUrl ? (
-        <section className="relative w-full h-[160px] md:w-[123px] md:h-[68px] lg:w-full lg:h-[160px]">
+        <section className="m-auto relative w-full h-[151px] md:w-[123px] md:h-[68px] lg:w-full lg:h-[160px]">
           <Image
-            className="rounded-md"
+            className="rounded-md object-cover "
             fill
             src={imageUrl}
             alt={`${title} 이미지`}
