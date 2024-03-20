@@ -13,8 +13,10 @@ import SignLogo from '@/components/common/SignLogo/SignLogo';
 import SignLink from '@/components/common/SignLink/SignLink';
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
 import useModal from '@/hooks/useModal';
+import useRedirectWithAccessToken from '@/hooks/useRedirectWithAccessToken';
 
 export default function SignUpPage() {
+  useRedirectWithAccessToken();
   const router = useRouter();
   const [formValues, setFormValues] = useState({
     email: '',
