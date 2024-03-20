@@ -28,7 +28,7 @@ export default function CtaIcon({ children, onClick, imageSrc, color, size }) {
     <button
       type="button"
       onClick={onClick}
-      className={`button-reset font-medium flex justify-center items-center gap-2 ${color ? COLOR_VIOLET : COLOR_WHITE} ${sizeClass}`}
+      className={`button-reset font-medium flex justify-center items-center gap-2 whitespace-nowrap ${color ? COLOR_VIOLET : COLOR_WHITE} ${sizeClass}`}
     >
       <Image
         width={size ? 20 : 16}

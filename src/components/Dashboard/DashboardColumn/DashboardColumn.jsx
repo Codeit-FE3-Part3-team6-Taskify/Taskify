@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import Image from 'next/image';
@@ -5,6 +6,7 @@ import { Draggable, Droppable } from 'react-beautiful-dnd';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { axiosDelete, axiosPut } from '@/features/axios';
+
 import CtaAdd from '@/components/common/Buttons/CtaAdd/CtaAdd';
 import DashboardCard from '../DashboardCard/DashboardCard';
 import { DeleteIcon, EditIcon } from '../../../../public/images';
@@ -17,7 +19,6 @@ export default function DashboardColumn({ title, id, dashboardId, openModal }) {
   const [isEdit, setIsEdit] = useState(false);
   const [columnName, setColumnName] = useState(title);
   const dispatch = useDispatch();
-
   const { cardList, cardCount, observerRef, scrollContainerRef } =
     useDashboardCardGet(id);
 

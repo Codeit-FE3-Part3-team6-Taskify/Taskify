@@ -13,6 +13,7 @@ export default function useDashboardCardGet(id) {
     return state.columnList[findIdx].cardList;
   });
   const dispatch = useDispatch();
+
   const [cardCount, setCardCount] = useState();
   const [cursorId, setCursorId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);

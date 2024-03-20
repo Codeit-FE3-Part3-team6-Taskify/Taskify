@@ -3,12 +3,14 @@ import userInfo from './userInfoSlice';
 import { modalSlice } from './modalSlice';
 import memberList from './memberSlice';
 import columnList from './columnsSlice';
+import { dashboardList } from './dashboardListSlice';
 
 const rootReducer = {
   userInfo: userInfo.reducer,
   modal: modalSlice.reducer,
   memberList: memberList.reducer,
   columnList: columnList.reducer,
+  dashboardList: dashboardList.reducer,
 };
 
 const store = configureStore({

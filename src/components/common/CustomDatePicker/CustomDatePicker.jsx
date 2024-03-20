@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -6,8 +6,14 @@ import dayjs from 'dayjs';
 
 import { CalendarIcon } from '@/../public/images';
 
-export default function CustomDatePicker({ setFormValues }) {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+export default function CustomDatePicker({ dueDate, setFormValues }) {
+  const initialDate = dueDate ? new Date(dueDate) : new Date();
+  const [selectedDate, setSelectedDate] = useState(initialDate);
+
+  // 할일 수정 - 마감일을 가져옴
+  useEffect(() => {
+    setSelectedDate(initialDate);
+  }, [dueDate]);
 
   const handleDateChange = (date) => {
     const formattedDate = dayjs(date).format('YYYY-MM-DD HH:mm');
@@ -19,6 +25,14 @@ export default function CustomDatePicker({ setFormValues }) {
 
     setSelectedDate(date);
   };
+
+  //  할일 생성 - 날짜 선택 안 하면 현재시각을 마감일로 지정
+  useEffect(() => {
+    if (!dueDate) {
+      handleDateChange(new Date());
+    }
+  }, [dueDate]);
+
   return (
     <DatePicker
       showIcon

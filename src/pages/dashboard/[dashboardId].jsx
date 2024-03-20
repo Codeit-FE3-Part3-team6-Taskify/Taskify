@@ -29,8 +29,10 @@ export default function DashboardPage({ dashboardId }) {
   const { openModal } = useModal();
   const userInfo = useUserGet();
   const { dashboardList } = useDashboardList();
+
   const { dashboardInfo, memberList, columns, dispatch } =
     useDashboardInfo(dashboardId);
+
   const handleOpenAddColumnsModal = () => {
     openModal({
       type: 'createColumn',
@@ -39,6 +41,7 @@ export default function DashboardPage({ dashboardId }) {
       },
     });
   };
+
   const onDragEnd = async (result) => {
     const { destination, source, draggableId } = result;
     if (!destination) {
@@ -74,7 +77,6 @@ export default function DashboardPage({ dashboardId }) {
         index: destination.index,
       }),
     );
-    console.log(result);
     await axiosPut(`cards/${findCard.id}`, body);
   };
 
