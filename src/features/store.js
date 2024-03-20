@@ -4,6 +4,7 @@ import { modalSlice } from './modalSlice';
 import memberList from './memberSlice';
 import columnList from './columnsSlice';
 import { dashboardList } from './dashboardListSlice';
+import { sidebarDashboardList } from './sidebarDashboardListSlice';
 
 const rootReducer = {
   userInfo: userInfo.reducer,
@@ -11,6 +12,7 @@ const rootReducer = {
   memberList: memberList.reducer,
   columnList: columnList.reducer,
   dashboardList: dashboardList.reducer,
+  sidebarDashboardList: sidebarDashboardList.reducer,
 };
 
 const store = configureStore({

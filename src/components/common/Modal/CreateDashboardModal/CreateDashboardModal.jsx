@@ -7,6 +7,7 @@ import { CheckIconWhite } from '@/../public/images';
 import { circleColorList } from '@/utils/circleColorList';
 import { axiosPostJason } from '@/features/axios';
 import { addDashboard } from '@/features/dashboardListSlice';
+import { addSidebarDashboard } from '@/features/sidebarDashboardListSlice';
 
 export default function CreateDashboardModal({ onClose }) {
   const [inputValue, setInputValue] = useState('');
@@ -40,11 +41,13 @@ export default function CreateDashboardModal({ onClose }) {
         body,
       );
       dispatch(addDashboard(response));
+      dispatch(addSidebarDashboard(response));
 
       onClose();
     } catch (error) {
       // eslint-disable-next-line no-alert
       alert('대시보드 생성에 실패했습니다. 다시 시도해주세요.');
+      console.log(error);
     }
   };
 

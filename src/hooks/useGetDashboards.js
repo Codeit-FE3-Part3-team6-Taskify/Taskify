@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { axiosGet } from '@/features/axios';
-import { setDashboards } from '@/features/dashboardListSlice';
+import { setCurrentPage, setDashboards } from '@/features/dashboardListSlice';
 
 const useGetDashboards = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [dashboardsData, setDashboardsData] = useState({});
+  const currentPage = useSelector((state) => state.dashboardList.currentPage);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
@@ -16,7 +15,6 @@ const useGetDashboards = () => {
         const data = await axiosGet(
           `/dashboards?navigationMethod=pagination&page=${currentPage}&size=6`,
         );
-        setDashboardsData(data);
         dispatch(
           setDashboards({
             dashboards: data.dashboards,
@@ -31,13 +29,12 @@ const useGetDashboards = () => {
     };
 
     fetchData();
-  }, [currentPage]);
+  }, [currentPage, dispatch]);
 
-  const nextPage = () => setCurrentPage((prev) => prev + 1);
-  const prevPage = () => setCurrentPage((prev) => (prev > 1 ? prev - 1 : 1));
+  const nextPage = () => dispatch(setCurrentPage(currentPage + 1));
+  const prevPage = () => dispatch(setCurrentPage(Math.max(1, currentPage - 1)));
 
   return {
-    dashboardsData,
     loading,
     error,
     nextPage,

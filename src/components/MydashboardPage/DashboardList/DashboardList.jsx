@@ -45,7 +45,7 @@ export default function DashboardList({ prevPage, nextPage, currentPage }) {
         </div>
       ) : (
         <>
-          <div className="flex flex-col h-[388px] gap-y-2 md:grid md:grid-cols-2 gap-[10px] lg:grid-cols-3 md:h-[220px] lg:h-[148px]">
+          <div className="flex flex-col h-[388px] gap-y-2 md:grid md:grid-cols-2 md:grid-rows-3 gap-[10px] lg:grid-cols-3 lg:grid-rows-2 md:max-h-[220px] lg:max-h-[148px]">
             {dashboards.map((dashboard) => (
               <DashboardListItem
                 key={dashboard.id}
@@ -53,6 +53,7 @@ export default function DashboardList({ prevPage, nextPage, currentPage }) {
                 title={dashboard.title}
                 color={dashboard.color}
                 createdByMe={dashboard.createdByMe}
+                id={dashboard.id}
               />
             ))}
           </div>
