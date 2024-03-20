@@ -20,9 +20,7 @@ export default function AvatarGroup({ isMobile, participants }) {
             <span
               key={p.id}
               style={{
-                position: 'relative',
-                left: `-${index * 10}px`,
-                zIndex: `${index}`,
+                marginLeft: `-${index > 0 ? 10 : 0}px`,
               }}
             >
               <Avatar
@@ -31,19 +29,19 @@ export default function AvatarGroup({ isMobile, participants }) {
               />
             </span>
           ))}
-          <span
-            style={{
-              position: 'relative',
-              left: `-${number * 10}px`,
-              zIndex: `${number}`,
-            }}
-          >
-            <Avatar
-              text={`+${participants.length - number}`}
-              backgroundColor={backgroundColors[backgroundColors.length - 1]}
-              textColorRed
-            />
-          </span>
+          {participants.length > number && (
+            <span
+              style={{
+                marginLeft: '-10px',
+              }}
+            >
+              <Avatar
+                text={`+${participants.length - number}`}
+                backgroundColor={backgroundColors[backgroundColors.length - 1]}
+                textColorRed
+              />
+            </span>
+          )}
         </>
       )}
     </>
