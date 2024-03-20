@@ -6,6 +6,7 @@ import CreateColumnModal from './CreateColumnModal/CreateColumnModal';
 import CreateTodo from '../../Dashboard/TodoCard/CreateTodo';
 import UpdateTodo from '../../Dashboard/TodoCard/UpdateTodo';
 import CreateDashboardModal from './CreateDashboardModal/CreateDashboardModal';
+import handleOpenInviteModal from './InviteDashboardModal/InviteDashboardModal';
 
 const MODAL_COMPONENTS = {
   alert: AlertModal,
@@ -13,6 +14,7 @@ const MODAL_COMPONENTS = {
   createTodo: CreateTodo,
   updateTodo: UpdateTodo,
   createDashboard: CreateDashboardModal,
+  inviteDashboard: handleOpenInviteModal,
 };
 
 export default function ModalContainer() {
