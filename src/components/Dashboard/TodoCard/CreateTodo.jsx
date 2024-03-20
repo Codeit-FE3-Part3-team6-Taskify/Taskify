@@ -1,9 +1,13 @@
 /* eslint-disable object-shorthand */
+/* eslint-disable import/order */
 import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import TodoModal from '../../common/Modal/TodoModal/TodoModal';
 import { axiosPostJason } from '@/features/axios';
+import { addCard } from '@/features/columnsSlice';
 
 export default function CreateTodo({ onClose, dashboardId, columnId }) {
+  const dispatch = useDispatch();
   const [formValues, setFormValues] = useState({
     assigneeUserId: 0,
     dashboardId: 0,
@@ -29,6 +33,7 @@ export default function CreateTodo({ onClose, dashboardId, columnId }) {
       if (!res.status) {
         console.log('생성완료');
         console.log('응답:', res);
+        dispatch(addCard({ data: [res], columnId }));
         onClose();
       }
     } catch (e) {
@@ -44,6 +49,7 @@ export default function CreateTodo({ onClose, dashboardId, columnId }) {
     { id: 1244, value: '강아지', label: '강아지' },
     { id: 1288, value: '고양이', label: '고양이' },
   ];
+  const options = useSelector((state) => state.memberList.members);
 
   const disabled = Object.values(formValues).every((value) => !!value);
 

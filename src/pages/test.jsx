@@ -28,14 +28,14 @@ export default function test() {
   //   });
   // };
 
-  const handleOpenInviteModal = () => {
-    openModal({
-      type: 'inviteDashboard',
-      props: {
-        dashboardId: 4939,
-      },
-    });
-  };
+  // const handleOpenInviteModal = () => {
+  //   openModal({
+  //     type: 'inviteDashboard',
+  //     props: {
+  //       dashboardId: 4939,
+  //     },
+  //   });
+  // };
 
   return (
     <>
@@ -59,11 +59,11 @@ export default function test() {
       </div> */}
 
       {/* 초대하기 예시 */}
-      <div>
+      {/* <div>
         <button type="button" onClick={handleOpenInviteModal}>
           초대하기 열기
         </button>
-      </div>
+      </div> */}
     </>
   );
 }
