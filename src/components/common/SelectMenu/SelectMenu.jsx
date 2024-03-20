@@ -16,7 +16,9 @@ const SelectMenu = ({
   const [selectedOption, setSelectedOption] = useState(null);
 
   useEffect(() => {
-    const findOption = options.find((option) => option.id === assigneeUserId);
+    const findOption = options.find(
+      (option) => option.userId === assigneeUserId,
+    );
     setSelectedOption(findOption || null);
   }, [assigneeUserId, options]);
 
