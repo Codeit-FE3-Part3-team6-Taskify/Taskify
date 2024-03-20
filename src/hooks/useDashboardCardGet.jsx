@@ -52,5 +52,5 @@ export default function useDashboardCardGet(id) {
     }
   });
 
-  return { cardList, cardCount, scrollContainerRef, observerRef };
+  return { cardList, cardCount, setCardCount, scrollContainerRef, observerRef };
 }
