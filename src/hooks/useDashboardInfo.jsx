@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { axiosGet } from '@/features/axios';
 import { setMembers } from '@/features/memberSlice';
-import { setColumn } from '@/features/columnsSlice';
+import { reset, setColumn } from '@/features/columnsSlice';
 
 export default function useDashboardInfo(dashboardId) {
   const [dashboardInfo, setDashboardInfo] = useState();
@@ -21,6 +21,7 @@ export default function useDashboardInfo(dashboardId) {
     dispatch(setMembers({ members: res.members, totalCount: res.totalCount }));
   };
   const getColumns = async () => {
+    dispatch(reset());
     const res = await axiosGet(`columns?dashboardId=${dashboardId}`);
     dispatch(setColumn({ data: res.data }));
   };
@@ -28,7 +29,7 @@ export default function useDashboardInfo(dashboardId) {
     getDashboardInfo();
     getMemberList();
     getColumns();
-  }, []);
+  }, [dashboardId]);
 
   return { dashboardInfo, memberList, columns, dispatch };
 }

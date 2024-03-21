@@ -31,6 +31,9 @@ const columnList = createSlice({
     addCardList: (state, action) => {
       const { data, columnId } = action.payload;
       const findColumn = state.findIndex((column) => column.id === columnId);
+      if (findColumn < 0) {
+        return;
+      }
       if (state[findColumn].cardList) {
         const cards = [...state[findColumn].cardList, ...data];
         const resultCardList = cards.filter((card, index) => {
@@ -90,11 +93,17 @@ const columnList = createSlice({
     setCount: (state, action) => {
       const { count, columnId } = action.payload;
       const findColumn = state.findIndex((column) => column.id === columnId);
+      if (findColumn < 0) {
+        return;
+      }
       state[findColumn].totalCount = count;
     },
     plusCount: (state, action) => {
       const { count, columnId } = action.payload;
       const findColumn = state.findIndex((column) => column.id === columnId);
+      if (findColumn < 0) {
+        return;
+      }
       if (state[findColumn].totalCount >= 0) {
         state[findColumn].totalCount += count;
       } else {
