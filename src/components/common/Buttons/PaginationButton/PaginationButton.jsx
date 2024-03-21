@@ -14,15 +14,18 @@ export default function PaginationButton({
   onClick,
   disabled,
   direction = 'next',
+  borderHide = 'no',
 }) {
   const isPrev = direction === 'prev';
+
+  const isBorder = borderHide !== 'yes';
 
   return (
     <button
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className={`w-8 h-8 button-reset border-gray_D9D9D9 bg-white inline-block rounded-tr rounded-br transform ${isPrev && 'scale-x-[-1]'} `}
+      className={`w-8 h-8 ${isBorder && 'button-reset'} border-gray_D9D9D9 bg-white inline-block rounded-tr rounded-br  transform ${isPrev && 'scale-x-[-1]'} `}
     >
       <Image
         width={16}
