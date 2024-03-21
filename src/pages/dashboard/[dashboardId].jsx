@@ -10,10 +10,8 @@ import { AddButtonEmpty, CrownIcon, SettingIcon } from '@/../public/images';
 import useDashboardInfo from '@/hooks/useDashboardInfo';
 import DashboardColumn from '@/components/Dashboard/DashboardColumn/DashboardColumn';
 import CtaAdd from '@/components/common/Buttons/CtaAdd/CtaAdd';
-import useModal from '@/hooks/useModal';
-import { changeCard, deleteCard, plusCount } from '@/features/columnsSlice';
-import { axiosPut } from '@/features/axios';
 import useGetDashboardsSidebar from '@/hooks/useGetDashboardsSidebar';
+import useDashboardUtilityFunctions from '@/hooks/useDashboardUtilityFunctions';
 
 export async function getServerSideProps(context) {
   const { dashboardId } = context.params;
@@ -26,80 +24,17 @@ export async function getServerSideProps(context) {
 }
 
 export default function DashboardPage({ dashboardId }) {
-  const { openModal } = useModal();
   const userInfo = useUserGet();
   const { sidebarNextPage, sidebarPrevPage, sidebarCurrentPage } =
     useGetDashboardsSidebar();
 
-  const { dashboardInfo, memberList, columns, dispatch } =
-    useDashboardInfo(dashboardId);
-
-  const handleOpenAddColumnsModal = () => {
-    openModal({
-      type: 'createColumn',
-      props: {
-        dashboardId,
-      },
-    });
-  };
-  const handleOpenInvitation = () => {
-    openModal({
-      type: 'inviteDashboard',
-      props: {
-        dashboardId,
-      },
-    });
-  };
-
-  const onDragEnd = async (result) => {
-    const { destination, source, draggableId } = result;
-    if (!destination) {
-      return;
-    }
-    if (
-      destination.droppableId === source.droppableId &&
-      source.index === destination.index
-    ) {
-      return;
-    }
-    const dragColumnIndex = columns.findIndex(
-      (column) => column.id === +source.droppableId,
-    );
-    const findCard = columns[dragColumnIndex].cardList.find(
-      (card) => card.id === +draggableId,
-    );
-    dispatch(
-      deleteCard({
-        columnId: +source.droppableId,
-        id: findCard.id,
-      }),
-    );
-    dispatch(
-      plusCount({
-        count: -1,
-        columnId: +source.droppableId,
-      }),
-    );
-    const body = {
-      ...findCard,
-      columnId: +destination.droppableId,
-    };
-    dispatch(
-      changeCard({
-        data: body,
-        columnId: +source.droppableId,
-        id: findCard.id,
-        index: destination.index,
-      }),
-    );
-    dispatch(
-      plusCount({
-        count: 1,
-        columnId: +destination.droppableId,
-      }),
-    );
-    await axiosPut(`cards/${findCard.id}`, body);
-  };
+  const { dashboardInfo, memberList, columns } = useDashboardInfo(dashboardId);
+  const {
+    onDragEnd,
+    handleOpenInvitation,
+    handleOpenAddColumnsModal,
+    openModal,
+  } = useDashboardUtilityFunctions(dashboardId, columns);
 
   return (
     <div className="flex w-screen">
@@ -128,7 +63,6 @@ export default function DashboardPage({ dashboardId }) {
               ) : null
             }
             buttons={
-              // 기능 넣기
               <div className="flex gap-[16px]">
                 <CtaIcon imageSrc={SettingIcon}>관리</CtaIcon>
                 <CtaIcon
@@ -146,13 +80,12 @@ export default function DashboardPage({ dashboardId }) {
             <DragDropContext onDragEnd={onDragEnd}>
               {columns &&
                 columns.map((column) => (
-                  // eslint-disable-next-line react/self-closing-comp
                   <DashboardColumn
                     {...column}
                     dashboardId={dashboardId}
                     openModal={openModal}
                     key={column.id}
-                  ></DashboardColumn>
+                  />
                 ))}
             </DragDropContext>
             <div className=" lg:min-w-[354px] lg:mt-7">

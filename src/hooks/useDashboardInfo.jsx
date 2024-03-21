@@ -31,5 +31,5 @@ export default function useDashboardInfo(dashboardId) {
     getColumns();
   }, [dashboardId]);
 
-  return { dashboardInfo, memberList, columns, dispatch };
+  return { dashboardInfo, memberList, columns };
 }
