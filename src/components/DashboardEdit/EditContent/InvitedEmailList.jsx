@@ -12,8 +12,6 @@ export default function InvitedEmailList({ dashboardId }) {
   const totalCount = useSelector((state) => state.invitedEmailList.totalCount);
   const totalPage = totalCount ? Math.ceil(totalCount / 4) : 0;
 
-  console.log(emails);
-
   let content = null;
   if (loading) {
     content = <div>Loading...</div>;

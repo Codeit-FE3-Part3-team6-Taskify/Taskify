@@ -1,12 +1,27 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { PaginationArrow } from '@/../public/images';
+import { useRouter } from 'next/router';
 import DashboardEditPanel from './DashboardEditPanel';
 import MemberListEdit from './MemberListEdit';
 import InvitedEmailList from './InvitedEmailList';
 import DashboardDelete from '@/components/common/Buttons/DashboardDelete/DashboardDelete';
+import { axiosDelete } from '@/features/axios';
 
 export default function EditContent({ dashboardId, dashboardInfo }) {
+  const router = useRouter();
+
+  const handleDashboardDelete = async () => {
+    try {
+      await axiosDelete(`/dashboards/${dashboardId}/`, {
+        dashboardId,
+      });
+      router.push('/mydashboard');
+    } catch (error) {
+      console.error('데이터 전송 실패:', error);
+    }
+  };
+
   return (
     <>
       <Link
@@ -29,7 +44,7 @@ export default function EditContent({ dashboardId, dashboardInfo }) {
       />
       <MemberListEdit dashboardId={dashboardId} />
       <InvitedEmailList dashboardId={dashboardId} />
-      <DashboardDelete />
+      <DashboardDelete onClick={handleDashboardDelete} />
     </>
   );
 }
