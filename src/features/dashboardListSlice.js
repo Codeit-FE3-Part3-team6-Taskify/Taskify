@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialValue = {
   dashboards: [],
   totalCount: 0,
+  currentPage: 1,
 };
 
 export const dashboardList = createSlice({
@@ -15,13 +16,18 @@ export const dashboardList = createSlice({
       state.totalCount = totalCount;
     },
     addDashboard: (state, action) => {
-      const newDashboards = [action.payload, ...state.dashboards];
-      state.dashboards = newDashboards.slice(0, 6);
-
       state.totalCount += 1;
+
+      if (state.currentPage === 1) {
+        const newDashboards = [action.payload, ...state.dashboards];
+        state.dashboards = newDashboards.slice(0, 6);
+      }
     },
-    // 나중에 필요한 리듀서 있으면 추가 하기
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
   },
 });
 
-export const { setDashboards, addDashboard } = dashboardList.actions;
+export const { setDashboards, addDashboard, setCurrentPage } =
+  dashboardList.actions;

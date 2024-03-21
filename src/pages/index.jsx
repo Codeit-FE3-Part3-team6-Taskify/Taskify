@@ -43,6 +43,7 @@ export async function getStaticProps() {
 
 export default function Home({ imgData }) {
   useRedirectWithAccessToken('/mydashboard');
+
   return (
     <div className="bg-black w-full ">
       <DefaultHeader

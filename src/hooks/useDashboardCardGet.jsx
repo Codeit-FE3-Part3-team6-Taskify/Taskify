@@ -13,7 +13,6 @@ export default function useDashboardCardGet(id) {
     return state.columnList[findIdx].cardList;
   });
   const dispatch = useDispatch();
-
   // const [cardCount, setCardCount] = useState();
   const cardCount = useSelector((state) => {
     const findIdx = state.columnList.findIndex((column) => column.id === id);

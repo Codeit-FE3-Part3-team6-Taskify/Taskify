@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Select, { components } from 'react-select';
 import Avatar from '../Avatar/Avatar';
-import { CheckIcon } from '@/../public/images';
+import { DropDownArrow, CheckIcon } from '@/../public/images';
 
 const SelectMenu = ({
   assigneeUserId,
@@ -53,6 +53,12 @@ const SelectMenu = ({
     </components.Option>
   );
 
+  const CustomDropdownIndicator = (props) => (
+    <components.DropdownIndicator {...props}>
+      <Image src={DropDownArrow} alt="arrow" width={26} height={26} />
+    </components.DropdownIndicator>
+  );
+
   return (
     <Select
       value={selectedOption}
@@ -64,6 +70,7 @@ const SelectMenu = ({
       getOptionValue={getOptionValue}
       components={{
         Option: CustomOption,
+        DropdownIndicator: CustomDropdownIndicator,
       }}
     />
   );

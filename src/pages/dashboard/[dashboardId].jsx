@@ -7,13 +7,13 @@ import Sidebar from '@/components/common/Sidebar/Sidebar';
 import useUserGet from '@/hooks/useUserGet';
 import CtaIcon from '@/components/common/Buttons/CtaIcon/CtaIcon';
 import { AddButtonEmpty, CrownIcon, SettingIcon } from '@/../public/images';
-import useDashboardList from '@/hooks/useDashboardList';
 import useDashboardInfo from '@/hooks/useDashboardInfo';
 import DashboardColumn from '@/components/Dashboard/DashboardColumn/DashboardColumn';
 import CtaAdd from '@/components/common/Buttons/CtaAdd/CtaAdd';
 import useModal from '@/hooks/useModal';
 import { changeCard, deleteCard, plusCount } from '@/features/columnsSlice';
 import { axiosPut } from '@/features/axios';
+import useGetDashboardsSidebar from '@/hooks/ useGetDashboardsSidebar';
 
 export async function getServerSideProps(context) {
   const { dashboardId } = context.params;
@@ -28,7 +28,8 @@ export async function getServerSideProps(context) {
 export default function DashboardPage({ dashboardId }) {
   const { openModal } = useModal();
   const userInfo = useUserGet();
-  const { dashboardList } = useDashboardList();
+  const { sidebarNextPage, sidebarPrevPage, sidebarCurrentPage } =
+    useGetDashboardsSidebar();
 
   const { dashboardInfo, memberList, columns, dispatch } =
     useDashboardInfo(dashboardId);
@@ -103,7 +104,11 @@ export default function DashboardPage({ dashboardId }) {
   return (
     <div className="flex w-screen">
       <aside>
-        <Sidebar dashboards={dashboardList} />
+        <Sidebar
+          sidebarNextPage={sidebarNextPage}
+          sidebarPrevPage={sidebarPrevPage}
+          sidebarCurrentPage={sidebarCurrentPage}
+        />
       </aside>
       <div className="flex flex-col w-5/6 ">
         <header>

@@ -35,6 +35,7 @@ export default function CreateTodo({ onClose, dashboardId, columnId }) {
         console.log('응답:', res);
         dispatch(addCard({ data: res, columnId }));
         dispatch(plusCount({ columnId, count: 1 }));
+
         onClose();
       }
     } catch (e) {
