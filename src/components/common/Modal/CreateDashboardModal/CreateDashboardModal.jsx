@@ -54,7 +54,7 @@ export default function CreateDashboardModal({ onClose }) {
   const isDisabled = !inputValue || !selectedColor;
 
   return (
-    <Modal onClose={onClose}>
+    <Modal onClose={onClose} width="300">
       <div className="flex flex-col w-[327px] h-[293px] py-[28px] px-[20px] md:w-[540px]">
         <h2 className="text-xl font-bold mb-6">새로운 대시보드</h2>
         <div>

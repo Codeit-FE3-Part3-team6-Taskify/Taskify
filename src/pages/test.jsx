@@ -22,6 +22,7 @@ export default function test() {
       props: { cardId: 3979, columnTitle: 'To Do' },
     });
   };
+
   // // columns를 가져오고 있다는 전제
   // const handleOpenAddColumnsModal = () => {
   //   openModal({
