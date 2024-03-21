@@ -1,33 +1,24 @@
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
-import { Logo, LogoImg, AddButtonEmpty, CrownIcon } from '@/../public/images';
+import { Logo, LogoImg, AddButtonEmpty } from '@/../public/images';
 import PaginationButton from '../Buttons/PaginationButton/PaginationButton';
 import { openModal } from '@/features/modalSlice';
+import SidebarDashboardListItem from './SidebarDashboardListItem/SidebarDashboardListItem';
 
 export default function Sidebar({
   sidebarNextPage,
   sidebarPrevPage,
   sidebarCurrentPage,
 }) {
-  // 송상훈 Todo:
-  const createCircle = (color) => {
-    const circleStyle = {
-      width: '8px',
-      height: '8px',
-      borderRadius: '50%',
-      backgroundColor: color,
-    };
-
-    return <div style={circleStyle} />;
-  };
-
   const dashboards = useSelector(
     (state) => state.sidebarDashboardList.sidebarDashboards,
   );
   const totalCount = useSelector(
     (state) => state.sidebarDashboardList.sidebarTotalCount,
   );
+
+  const isEmpty = !dashboards || dashboards.length === 0;
 
   const dispatch = useDispatch();
 
@@ -62,49 +53,38 @@ export default function Sidebar({
         </button>
       </div>
 
-      <div className="flex flex-col w-full items-center h-full mt-3 md:pl-6 md:items-start">
-        <div className="h-[480px] lg:h-[560px]">
-          {dashboards && dashboards.length > 0 ? (
-            dashboards.map((dashboard) => (
-              <div
+      {isEmpty ? (
+        <div>No</div>
+      ) : (
+        <>
+          <div className="flex flex-col items-center mt-8 w-full md:items-start">
+            {dashboards.map((dashboard) => (
+              <SidebarDashboardListItem
                 key={dashboard.id}
-                className="flex items-center gap-x-2 h-12 lg:h-14"
-              >
-                {dashboard.color && createCircle(dashboard.color)}
-                <p className="hidden truncate text-gray_787486 md:inline ml-2 md:text-sm lg:text-lg  md:max-w-[70px] lg:max-w-[170px]">
-                  {dashboard.title}
-                </p>
-                {dashboard.createdByMe && (
-                  <Image
-                    className="hidden md:inline"
-                    src={CrownIcon}
-                    width={17.5}
-                    height={14}
-                    alt="왕관"
-                  />
-                )}
-              </div>
-            ))
-          ) : (
-            <div>
-              <p>No</p>
-            </div>
-          )}
-        </div>
+                title={dashboard.title}
+                color={dashboard.color}
+                createdByMe={dashboard.createdByMe}
+                id={dashboard.id}
+              />
+            ))}
+          </div>
 
-        <div className="flex justify-center mt-6 w-full">
-          <PaginationButton
-            direction="prev"
-            onClick={sidebarPrevPage}
-            disabled={sidebarCurrentPage === 1}
-          />
-          <PaginationButton
-            direction="next"
-            onClick={sidebarNextPage}
-            disabled={sidebarCurrentPage >= Math.ceil(totalCount / 10)}
-          />
-        </div>
-      </div>
+          <div className="flex justify-between mt-10 px-1 w-full md:px-[24px]">
+            <PaginationButton
+              direction="prev"
+              onClick={sidebarPrevPage}
+              disabled={sidebarCurrentPage === 1}
+              borderHide="yes"
+            />
+            <PaginationButton
+              direction="next"
+              onClick={sidebarNextPage}
+              disabled={sidebarCurrentPage >= Math.ceil(totalCount / 10)}
+              borderHide="yes"
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }

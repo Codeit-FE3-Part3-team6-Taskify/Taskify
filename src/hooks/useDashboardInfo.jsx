@@ -28,7 +28,7 @@ export default function useDashboardInfo(dashboardId) {
     getDashboardInfo();
     getMemberList();
     getColumns();
-  }, []);
+  }, [dashboardId]);
 
   return { dashboardInfo, memberList, columns, dispatch };
 }
