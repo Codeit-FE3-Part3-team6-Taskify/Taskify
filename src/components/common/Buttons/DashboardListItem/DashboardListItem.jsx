@@ -19,11 +19,11 @@ export default function DashboardListItem({ title, color, createdByMe, id }) {
     <li className="list-none p-0 m-0 h-[58px] md:h-[68px] lg:h-[70px]">
       <Link
         href={`/dashboard/${id}`}
-        className="flex justify-between items-center no-underline rounded-lg px-5 border border-solid border-gray_D9D9D9 h-[58px] md:h-[68px] lg:h-[70px]"
+        className="flex relative items-center no-underline rounded-lg px-5 shadow-md border border-solid border-gray_D9D9D9 h-[58px] md:h-[68px] lg:h-[70px]"
       >
-        <div className="flex items-center gap-x-2">
+        <div className="flex w-full pr-5 items-center gap-x-1 h-full">
           <span>{color && createCircle(color)}</span>
-          <h2 className="ml-2 md:text-base sm:text-sm ">{title}</h2>
+          <h2 className="ml-2 truncate md:text-base">{title}</h2>
           <div>
             {createdByMe && (
               <Image
@@ -31,7 +31,7 @@ export default function DashboardListItem({ title, color, createdByMe, id }) {
                 height={18}
                 src={CrownIcon}
                 alt="왕관 아이콘"
-                className="inline"
+                className="inline max-w-none ml-[10px]"
               />
             )}
           </div>
@@ -41,6 +41,7 @@ export default function DashboardListItem({ title, color, createdByMe, id }) {
           height={18}
           src={PaginationArrow}
           alt="바로가기 아이콘"
+          className="absolute right-3"
         />
       </Link>
     </li>
