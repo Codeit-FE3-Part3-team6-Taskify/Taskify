@@ -24,7 +24,7 @@ export default function DropdownMenu({ initialStatus, options, onSelect }) {
   return (
     <div className="flex flex-col gap-0.5">
       <button
-        className="flex items-start justify-between rounded-lg border border-gray_D9D9D9 py-[13px] px-4"
+        className="flex items-start justify-between rounded-lg border border-gray_D9D9D9 focus:border-violet_5534DA py-[13px] px-4"
         onClick={() => setIsOpen(!isOpen)}
       >
         {selectedOption ? (
