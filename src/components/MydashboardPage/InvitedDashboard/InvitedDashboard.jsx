@@ -74,13 +74,13 @@ export default function InvitedDashboard({ fetchMore, loading, updateTitle }) {
   };
 
   return (
-    <section className="bg-white max-w-[1022px] h-auto rounded-[8px] shadow-sm py-[24px] px-[16px]">
+    <section className="bg-white max-w-[1022px] h-auto rounded-[8px] shadow-md py-[24px] px-[16px]">
       <h2 className="text-xl font-bold mb-5 ">초대받은 대시보드</h2>
 
       <div className="flex items-center mb-[24px]">
         <div className="relative w-full ">
           <input
-            className="w-full rounded-[6px] border-2 h-[40px] pl-10"
+            className="w-full rounded-[6px] border-[1.3px] shadow-sm h-[40px] pl-10"
             type="text"
             placeholder="Search"
             value={inputValue}
