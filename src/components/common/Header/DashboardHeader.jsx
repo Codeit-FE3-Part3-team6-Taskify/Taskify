@@ -36,7 +36,10 @@ export default function DashboardHeader({
           )}
           {userInfo && userInfo.email && userInfo.nickname ? (
             <div className="flex justify-between items-center gap-3">
-              <Avatar text={userInfo.email.charAt(0).toUpperCase()} />
+              <Avatar
+                size="large"
+                text={userInfo.email.charAt(0).toUpperCase()}
+              />
               <span className="hidden md:block">{userInfo.nickname}</span>
             </div>
           ) : (

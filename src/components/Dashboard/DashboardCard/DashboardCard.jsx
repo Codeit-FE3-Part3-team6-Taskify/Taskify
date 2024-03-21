@@ -62,7 +62,7 @@ export default function DashboardCard({ cardInfo }) {
               {dueDate}
             </span>
             <span className="ml-auto">
-              <Avatar text={assignee.nickname[0].toUpperCase()} />
+              <Avatar size="small" text={assignee.nickname[0].toUpperCase()} />
             </span>
           </div>
         </div>

@@ -13,13 +13,13 @@ export default function test() {
   const handleOpenUpdateModal = () => {
     openModal({
       type: 'updateTodo',
-      props: { cardId: 3910 },
+      props: { cardId: 3979 },
     });
   };
   const handleOpenCardModal = () => {
     openModal({
       type: 'todoCard',
-      props: { cardId: 3910, columnTitle: 'To Do' },
+      props: { cardId: 3979, columnTitle: 'To Do' },
     });
   };
   // // columns를 가져오고 있다는 전제

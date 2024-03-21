@@ -50,6 +50,7 @@ export default function CreateTodo({ onClose, dashboardId, columnId }) {
     { id: 1288, value: '고양이', label: '고양이' },
   ];
   const options = useSelector((state) => state.memberList.members);
+  // console.log('createTodo', options);
 
   const disabled = Object.values(formValues).every((value) => !!value);
 
@@ -61,6 +62,7 @@ export default function CreateTodo({ onClose, dashboardId, columnId }) {
       setFormValues={setFormValues}
       onSubmit={handleCreate}
       assigneeOptions={assigneeOptions}
+      // assigneeOptions={options}
       disabled={disabled}
     />
   );
