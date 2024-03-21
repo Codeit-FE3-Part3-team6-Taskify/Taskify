@@ -9,6 +9,7 @@ import useDashboardInfo from '@/hooks/useDashboardInfo';
 import useModal from '@/hooks/useModal';
 import useGetDashboardsSidebar from '@/hooks/ useGetDashboardsSidebar';
 import EditContent from '@/components/DashboardEdit/EditContent/EditContent';
+import Link from 'next/link';
 
 export async function getServerSideProps(context) {
   const { dashboardId } = context.params;
@@ -63,7 +64,9 @@ export default function DashboardEdit({ dashboardId }) {
             buttons={
               // 기능 넣기
               <div className="flex gap-[16px]">
-                <CtaIcon imageSrc={SettingIcon}>관리</CtaIcon>
+                <Link href={`/dashboard/${dashboardId}/edit`}>
+                  <CtaIcon imageSrc={SettingIcon}>관리</CtaIcon>
+                </Link>
                 <CtaIcon
                   onClick={handleOpenInvitation}
                   imageSrc={AddButtonEmpty}
