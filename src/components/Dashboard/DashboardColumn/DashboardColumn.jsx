@@ -1,16 +1,12 @@
-/* eslint-disable no-shadow */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable jsx-a11y/control-has-associated-label */
-import { Draggable, Droppable } from 'react-beautiful-dnd';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { axiosDelete, axiosPut } from '@/features/axios';
 import CtaAdd from '@/components/common/Buttons/CtaAdd/CtaAdd';
-import DashboardCard from '../DashboardCard/DashboardCard';
 import DashboardColumnForm from '../DashboardColumnForm/DashboardColumnForm';
 import { changeColumnName, deleteColumn } from '@/features/columnsSlice';
 import useDashboardCardGet from '@/hooks/useDashboardCardGet';
 import DashboardColumnHeader from '../DashboardColumnHeader/DashboardColumnHeader';
+import DashboardCardList from '../DashboardCardList/DashboardCardList';
 
 // Todo(노진석) : 모달 추가하기
 export default function DashboardColumn({ title, id, dashboardId, openModal }) {
@@ -73,46 +69,12 @@ export default function DashboardColumn({ title, id, dashboardId, openModal }) {
       <div>
         <CtaAdd onClick={openAddCardModal} />
       </div>
-
-      <Droppable droppableId={id.toString()}>
-        {(provided) => (
-          <div
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-            className=" min-h-10 h-5/6"
-          >
-            <div
-              ref={scrollContainerRef}
-              className=" flex flex-col gap-[10px] overflow-y-auto md:gap-4 mt-[-10px] md-[-16px] h-full"
-            >
-              {cardList &&
-                cardList.map((card, index) => (
-                  <Draggable
-                    key={card.id}
-                    draggableId={card.id.toString()}
-                    index={index}
-                  >
-                    {(provided) => (
-                      <div
-                        className="mt-[10px] md:mt-4"
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                      >
-                        <DashboardCard cardInfo={card} />
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-
-              <div ref={observerRef} className="w-full h-[5px] opacity-0">
-                마지막
-              </div>
-              {provided.placeholder}
-            </div>
-          </div>
-        )}
-      </Droppable>
+      <DashboardCardList
+        cardList={cardList}
+        id={id}
+        scrollContainerRef={scrollContainerRef}
+        observerRef={observerRef}
+      />
     </section>
   );
 }
