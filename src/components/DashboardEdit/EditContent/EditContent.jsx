@@ -29,7 +29,7 @@ export default function EditContent({
         dashboardId={dashboardId}
         dashboardInfo={dashboardInfo}
       />
-      <MemberListEdit memberList={memberList} />
+      <MemberListEdit dashboardId={dashboardId} memberList={memberList} />
     </>
   );
 }

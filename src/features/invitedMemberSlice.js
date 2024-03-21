@@ -7,15 +7,15 @@ const initialValue = {
 };
 
 const memberList = createSlice({
-  name: 'memberList',
+  name: 'invitedMemberSlice',
   initialState: initialValue,
   reducers: {
-    setMembers: (state, action) => {
+    setInvitedMembers: (state, action) => {
       const { members, totalCount } = action.payload;
       state.members = members;
       state.totalCount = totalCount;
     },
-    addMember: (state, action) => {
+    addInvitedMember: (state, action) => {
       return {
         members: [...state.members, action.payload.member],
         totalCount: state.totalCount + 1,
@@ -24,7 +24,7 @@ const memberList = createSlice({
     reset: () => {
       return initialValue;
     },
-    deleteMember: (state, action) => {
+    deleteInvitedMember: (state, action) => {
       const filterMember = state.members.filter(
         (member) => member.id !== action.payload.id,
       );
@@ -37,7 +37,12 @@ const memberList = createSlice({
   },
 });
 
-export const { setMembers, addMember, reset, deleteMember, setCurrentPage } =
-  memberList.actions;
+export const {
+  setInvitedMembers,
+  addInvitedMember,
+  reset,
+  deleteInvitedMember,
+  setInvitedCurrentPage,
+} = memberList.actions;
 
 export default memberList;
