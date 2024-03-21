@@ -1,7 +1,7 @@
 import CtaIcon from '@/components/common/Buttons/CtaIcon/CtaIcon';
 import { AddButtonEmpty, SettingIcon } from '../../../../public/images';
 
-export default function DashboardHeaderButton(invitationClick) {
+export default function DashboardHeaderButton({ invitationClick }) {
   return (
     <div className="flex gap-[16px]">
       <CtaIcon imageSrc={SettingIcon}>관리</CtaIcon>

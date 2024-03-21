@@ -27,7 +27,6 @@ export default function DashboardPage({ dashboardId }) {
   const userInfo = useUserGet();
   const { sidebarNextPage, sidebarPrevPage, sidebarCurrentPage } =
     useGetDashboardsSidebar();
-
   const { dashboardInfo, memberList, columns } = useDashboardInfo(dashboardId);
   const {
     onDragEnd,
