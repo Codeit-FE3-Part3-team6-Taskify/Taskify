@@ -1,12 +1,18 @@
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { axiosGet } from '@/features/axios';
+import {
+  addInvitations,
+  setInvitations,
+} from '@/features/invitationsDashboardListSlice';
 
 const useGetInvitedDashboards = () => {
-  const [invitedDashboardData, setInvitedDashboardData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [cursorId, setCursorId] = useState(null);
   const [title, setTitle] = useState('');
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchInitialData = async () => {
@@ -15,7 +21,7 @@ const useGetInvitedDashboards = () => {
         const response = await axiosGet(
           `/invitations?size=6${title ? `&title=${title}` : ''}`,
         );
-        setInvitedDashboardData(response.invitations || []);
+        dispatch(setInvitations({ invitations: response.invitations }));
         setCursorId(response.cursorId);
       } catch (catchError) {
         setError(catchError);
@@ -25,7 +31,7 @@ const useGetInvitedDashboards = () => {
     };
 
     fetchInitialData();
-  }, [title]);
+  }, [title, dispatch]);
 
   const fetchMore = async () => {
     if (cursorId === null) return; // cursorId가 null이면 추가 데이터 요청하지 않음
@@ -35,10 +41,7 @@ const useGetInvitedDashboards = () => {
       const response = await axiosGet(
         `/invitations?size=6&cursorId=${cursorId}${title ? `&title=${title}` : ''}`,
       );
-      setInvitedDashboardData((prevData) => [
-        ...prevData,
-        ...(response.invitations || []),
-      ]);
+      dispatch(addInvitations({ newInvitations: response.invitations }));
       setCursorId(response.cursorId);
     } catch (catchError) {
       setError(catchError);
@@ -53,7 +56,6 @@ const useGetInvitedDashboards = () => {
 
   return {
     cursorId,
-    invitedDashboardData,
     loading,
     error,
     fetchMore,

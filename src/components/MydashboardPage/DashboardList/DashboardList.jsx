@@ -49,7 +49,6 @@ export default function DashboardList({ prevPage, nextPage, currentPage }) {
             {dashboards.map((dashboard) => (
               <DashboardListItem
                 key={dashboard.id}
-                url="/"
                 title={dashboard.title}
                 color={dashboard.color}
                 createdByMe={dashboard.createdByMe}

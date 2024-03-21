@@ -12,8 +12,7 @@ export default function myDashboard() {
   const { nextPage, prevPage, currentPage } = useGetDashboards();
   const { sidebarNextPage, sidebarPrevPage, sidebarCurrentPage } =
     useGetDashboardsSidebar();
-  const { invitedDashboardData, loading, fetchMore, updateTitle } =
-    useGetInvitedDashboards();
+  const { loading, fetchMore, updateTitle } = useGetInvitedDashboards();
 
   return (
     <div className="flex ">
@@ -34,7 +33,6 @@ export default function myDashboard() {
               currentPage={currentPage}
             />
             <InvitedDashboard
-              invitations={invitedDashboardData}
               loading={loading}
               fetchMore={fetchMore}
               updateTitle={updateTitle}
