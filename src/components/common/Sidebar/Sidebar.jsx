@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
-import { Logo, LogoImg, AddButtonEmpty } from '@/../public/images';
+import { Logo, LogoImg, AddButtonEmpty, NoMailIcon } from '@/../public/images';
 import PaginationButton from '../Buttons/PaginationButton/PaginationButton';
 import { openModal } from '@/features/modalSlice';
 import SidebarDashboardListItem from './SidebarDashboardListItem/SidebarDashboardListItem';
@@ -54,7 +54,9 @@ export default function Sidebar({
       </div>
 
       {isEmpty ? (
-        <div>No</div>
+        <div className="h-[80px] w-full flex justify-center">
+          <Image src={NoMailIcon} width={50} height={50} alt="대시보드 없음" />
+        </div>
       ) : (
         <>
           <div className="flex flex-col items-center mt-8 w-full md:items-start">
