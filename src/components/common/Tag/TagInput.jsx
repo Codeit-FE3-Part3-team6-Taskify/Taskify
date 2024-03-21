@@ -6,6 +6,14 @@ export default function TagInput({ initialTag, setFormValues }) {
   const inputRef = useRef(null);
   const [tagList, setTagList] = useState([]);
   const [tagItem, setTagItem] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
+
+  useEffect(() => {
+    if (initialTag && initialTag.length > 0) {
+      // 초기 태그가 있으면 태그 리스트에 설정
+      setTagList(initialTag);
+    }
+  }, [initialTag]);
 
   useEffect(() => {
     if (initialTag && initialTag.length > 0) {
@@ -45,13 +53,19 @@ export default function TagInput({ initialTag, setFormValues }) {
   };
 
   return (
-    <div className="sign-input-base">
+    <div
+      className="sign-input-base"
+      style={{ borderColor: isFocused ? '#5534DA' : '#D9D9D9' }}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+    >
       <div className="flex gap-[6px] ">
         {/* flex-wrap */}
         {tagList &&
           tagList.map((tag, index) => {
             return (
               <TagItem
+                hasDelete
                 key={index}
                 tag={tag}
                 onDelete={() => deleteTagItem(tag)}

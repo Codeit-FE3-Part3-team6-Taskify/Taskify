@@ -22,7 +22,7 @@ export default function PaginationButton({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className={`w-10 h-10 button-reset border-gray_D9D9D9 bg-white inline-block rounded-tr rounded-br transform ${isPrev && 'scale-x-[-1]'}`}
+      className={`w-8 h-8 button-reset border-gray_D9D9D9 bg-white inline-block rounded-tr rounded-br transform ${isPrev && 'scale-x-[-1]'} `}
     >
       <Image
         width={16}

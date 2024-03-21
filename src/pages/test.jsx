@@ -16,7 +16,12 @@ export default function test() {
       props: { cardId: 3910 },
     });
   };
-
+  const handleOpenCardModal = () => {
+    openModal({
+      type: 'todoCard',
+      props: { cardId: 3910, columnTitle: 'To Do' },
+    });
+  };
   // // columns를 가져오고 있다는 전제
   // const handleOpenAddColumnsModal = () => {
   //   openModal({
@@ -28,14 +33,14 @@ export default function test() {
   //   });
   // };
 
-  const handleOpenInviteModal = () => {
-    openModal({
-      type: 'inviteDashboard',
-      props: {
-        dashboardId: 4939,
-      },
-    });
-  };
+  // const handleOpenInviteModal = () => {
+  //   openModal({
+  //     type: 'inviteDashboard',
+  //     props: {
+  //       dashboardId: 4939,
+  //     },
+  //   });
+  // };
 
   return (
     <>
@@ -51,6 +56,11 @@ export default function test() {
       </button>
       <br />
 
+      <button type="button" onClick={handleOpenCardModal}>
+        할일 카드 모달 열기
+      </button>
+      <br />
+
       {/* 칼럼 추가 예시 */}
       {/* <div>
         <button type="button" onClick={handleOpenAddColumnsModal}>
@@ -59,11 +69,11 @@ export default function test() {
       </div> */}
 
       {/* 초대하기 예시 */}
-      <div>
+      {/* <div>
         <button type="button" onClick={handleOpenInviteModal}>
           초대하기 열기
         </button>
-      </div>
+      </div> */}
     </>
   );
 }

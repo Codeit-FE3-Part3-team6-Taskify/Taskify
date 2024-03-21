@@ -17,6 +17,7 @@ import {
 import LandingFooter from '@/components/LandingPage/LandingFooter/LandingFooter';
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
 import LandingCard from '@/components/LandingPage/LandingCard/LandingCard';
+import useRedirectWithAccessToken from '@/hooks/useRedirectWithAccessToken';
 
 export async function getStaticProps() {
   const imgData = {
@@ -41,6 +42,7 @@ export async function getStaticProps() {
 }
 
 export default function Home({ imgData }) {
+  useRedirectWithAccessToken();
   return (
     <div className="bg-black w-full ">
       <DefaultHeader
