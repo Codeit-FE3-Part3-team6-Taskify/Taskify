@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-export default function useRedirectWithAccessToken() {
+export default function useRedirectWithAccessToken(url) {
   if (typeof window === 'undefined') {
     return;
   }
@@ -11,7 +11,7 @@ export default function useRedirectWithAccessToken() {
     if (!token) {
       return;
     }
-    router.push('/mydashboard');
+    router.push(url);
   };
 
   useEffect(() => {

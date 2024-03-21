@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { axiosGet } from '@/features/axios';
 import useIntersectionObserver from './useIntersectionObserver';
-import { addCard } from '@/features/columnsSlice';
+import { addCardList, setCount } from '@/features/columnsSlice';
 
 export default function useDashboardCardGet(id) {
   const cardList = useSelector((state) => {
@@ -13,8 +13,14 @@ export default function useDashboardCardGet(id) {
     return state.columnList[findIdx].cardList;
   });
   const dispatch = useDispatch();
-
-  const [cardCount, setCardCount] = useState();
+  // const [cardCount, setCardCount] = useState();
+  const cardCount = useSelector((state) => {
+    const findIdx = state.columnList.findIndex((column) => column.id === id);
+    if (findIdx < 0) {
+      return 0;
+    }
+    return state.columnList[findIdx].totalCount;
+  });
   const [cursorId, setCursorId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const observerRef = useRef(null);
@@ -30,8 +36,8 @@ export default function useDashboardCardGet(id) {
         `cards?columnId=${id}&size=4${cursorId ? `&cursorId=${cursorId}` : ''}`,
       );
       setCursorId(res.cursorId);
-      dispatch(addCard({ columnId: id, data: res.cards }));
-      setCardCount(res.totalCount);
+      dispatch(addCardList({ columnId: id, data: res.cards }));
+      dispatch(setCount({ count: res.totalCount, columnId: id }));
     } catch (e) {
       console.error(e);
     } finally {

@@ -52,7 +52,7 @@ export default function DashboardColumn({ title, id, dashboardId, openModal }) {
   };
 
   return (
-    <section className="flex flex-col gap-[10px] h-[470px] md:gap-4 lg:min-w-[354px] md:h-[346px] lg:h-full ">
+    <section className="m-auto flex flex-col gap-[10px] w-[308px] h-[470px] md:w-full md:gap-4 lg:min-w-[354px] lg:max-w-[354px] lg:m-0 md:h-[346px]  lg:h-full ">
       <div className="flex gap-2 items-center mb-2 md:mb-[9px] w-full">
         <div className="w-2 h-2 bg-violet_5534DA rounded-full" />
         {isEdit ? (
@@ -95,13 +95,13 @@ export default function DashboardColumn({ title, id, dashboardId, openModal }) {
       <Droppable droppableId={id.toString()}>
         {(provided) => (
           <div
-            ref={scrollContainerRef}
-            className="flex flex-col gap-[10px] overflow-y-auto md:gap-4 mt-[-10px] md-[-16px]"
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            className=" min-h-10 h-5/6"
           >
             <div
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-              className="min-h-10"
+              ref={scrollContainerRef}
+              className=" flex flex-col gap-[10px] overflow-y-auto md:gap-4 mt-[-10px] md-[-16px] h-full"
             >
               {cardList &&
                 cardList.map((card, index) => (

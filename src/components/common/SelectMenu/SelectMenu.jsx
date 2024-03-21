@@ -16,7 +16,9 @@ const SelectMenu = ({
   const [selectedOption, setSelectedOption] = useState(null);
 
   useEffect(() => {
-    const findOption = options.find((option) => option.id === assigneeUserId);
+    const findOption = options.find(
+      (option) => option.userId === assigneeUserId,
+    );
     setSelectedOption(findOption || null);
   }, [assigneeUserId, options]);
 
@@ -24,7 +26,7 @@ const SelectMenu = ({
     setSelectedOption(option);
     setFormValues((prev) => ({
       ...prev,
-      assigneeUserId: option ? option.id : 0,
+      assigneeUserId: option ? option.userId : 0,
     }));
   };
 
@@ -43,7 +45,7 @@ const SelectMenu = ({
           />
         )}
         <span className="">
-          <Avatar text={data.label.charAt(0)} />
+          <Avatar text={data.nickname.charAt(0)} />
         </span>
 
         <span>{data.label}</span>
