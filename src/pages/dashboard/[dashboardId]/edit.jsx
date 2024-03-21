@@ -79,7 +79,6 @@ export default function DashboardEdit({ dashboardId }) {
             <EditContent
               dashboardId={dashboardId}
               dashboardInfo={dashboardInfo}
-              memberList={memberList}
             />
           </div>
         ) : (

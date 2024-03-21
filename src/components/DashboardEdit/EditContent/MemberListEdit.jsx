@@ -12,8 +12,6 @@ export default function MemberListEdit({ dashboardId }) {
   const totalCount = useSelector((state) => state.memberList.totalCount);
   const totalPage = totalCount ? Math.ceil(totalCount / 4) : 0;
 
-  console.log(members);
-
   let content = null;
   if (loading) {
     content = <div>Loading...</div>;

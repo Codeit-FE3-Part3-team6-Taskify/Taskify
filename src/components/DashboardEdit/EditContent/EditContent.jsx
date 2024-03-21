@@ -3,12 +3,10 @@ import Link from 'next/link';
 import { PaginationArrow } from '@/../public/images';
 import DashboardEditPanel from './DashboardEditPanel';
 import MemberListEdit from './MemberListEdit';
+import InvitedEmailList from './InvitedEmailList';
+import DashboardDelete from '@/components/common/Buttons/DashboardDelete/DashboardDelete';
 
-export default function EditContent({
-  dashboardId,
-  dashboardInfo,
-  memberList,
-}) {
+export default function EditContent({ dashboardId, dashboardInfo }) {
   return (
     <>
       <Link
@@ -29,7 +27,9 @@ export default function EditContent({
         dashboardId={dashboardId}
         dashboardInfo={dashboardInfo}
       />
-      <MemberListEdit dashboardId={dashboardId} memberList={memberList} />
+      <MemberListEdit dashboardId={dashboardId} />
+      <InvitedEmailList dashboardId={dashboardId} />
+      <DashboardDelete />
     </>
   );
 }

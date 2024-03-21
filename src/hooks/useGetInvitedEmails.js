@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { axiosGet } from '@/features/axios';
-import { setCurrentPage, setMembers } from '@/features/memberSlice';
+import {
+  setEmailCurrentPage,
+  setEmails,
+} from '@/features/invitedEmailListSlice';
 
-const useGetdMember = (dashboardId) => {
-  const currentPage = useSelector((state) => state.memberList.currentPage);
+const useGetInvitedEmails = (dashboardId) => {
+  const emailCurrentPage = useSelector(
+    (state) => state.invitedEmailList.emailCurrentPage,
+  );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
@@ -13,11 +18,11 @@ const useGetdMember = (dashboardId) => {
     const fetchData = async () => {
       try {
         const data = await axiosGet(
-          `members?page=${currentPage}&size=4&dashboardId=${dashboardId}`,
+          `dashboards/${dashboardId}/invitations?page=${emailCurrentPage}&size=5`,
         );
         dispatch(
-          setMembers({
-            members: data.members,
+          setEmails({
+            invitations: data.invitations,
             totalCount: data.totalCount,
           }),
         );
@@ -29,18 +34,19 @@ const useGetdMember = (dashboardId) => {
     };
 
     fetchData();
-  }, [currentPage, dispatch]);
+  }, [emailCurrentPage, dispatch]);
 
-  const nextPage = () => dispatch(setCurrentPage(currentPage + 1));
-  const prevPage = () => dispatch(setCurrentPage(Math.max(1, currentPage - 1)));
+  const nextPage = () => dispatch(setEmailCurrentPage(emailCurrentPage + 1));
+  const prevPage = () =>
+    dispatch(setEmailCurrentPage(Math.max(1, emailCurrentPage - 1)));
 
   return {
     loading,
     error,
     nextPage,
     prevPage,
-    currentPage,
+    emailCurrentPage,
   };
 };
 
-export default useGetdMember;
+export default useGetInvitedEmails;

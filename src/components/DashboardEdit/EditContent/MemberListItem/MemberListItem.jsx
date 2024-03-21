@@ -7,7 +7,7 @@ import { axiosDelete } from '@/features/axios';
 export default function MemberListItem({ nickname, email, memberId }) {
   const dispatch = useDispatch();
 
-  const handleRejectClick = async (memberId) => {
+  const handleDeleteClick = async (memberId) => {
     try {
       const res = await axiosDelete(`/members/${memberId}`, {
         memberId,
@@ -28,9 +28,9 @@ export default function MemberListItem({ nickname, email, memberId }) {
       <CtaDefault
         size="small"
         color="white"
-        onClick={() => handleRejectClick(memberId)}
+        onClick={() => handleDeleteClick(memberId)}
       >
-        거절
+        삭제
       </CtaDefault>
     </div>
   );
