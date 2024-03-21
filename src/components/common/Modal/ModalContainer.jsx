@@ -7,6 +7,7 @@ import CreateTodo from '../../Dashboard/TodoCard/CreateTodo';
 import UpdateTodo from '../../Dashboard/TodoCard/UpdateTodo';
 import CreateDashboardModal from './CreateDashboardModal/CreateDashboardModal';
 import handleOpenInviteModal from './InviteDashboardModal/InviteDashboardModal';
+import CardModal from './CardModal/CardModal';
 
 const MODAL_COMPONENTS = {
   alert: AlertModal,
@@ -15,6 +16,7 @@ const MODAL_COMPONENTS = {
   updateTodo: UpdateTodo,
   createDashboard: CreateDashboardModal,
   inviteDashboard: handleOpenInviteModal,
+  todoCard: CardModal,
 };
 
 export default function ModalContainer() {
