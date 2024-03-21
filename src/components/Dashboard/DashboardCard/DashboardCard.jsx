@@ -5,7 +5,7 @@ import Image from 'next/image';
 import React from 'react';
 import Avatar from '@/components/common/Avatar/Avatar';
 import { CalendarIcon } from '../../../../public/images';
-import { TAG_COLORS } from '@/constants/colors';
+import TagItem from '@/components/common/Tag/TagItem';
 
 // Todo(노진석) : 카드 기능완성하기
 export default function DashboardCard({ cardInfo }) {
@@ -17,12 +17,12 @@ export default function DashboardCard({ cardInfo }) {
   return (
     <article
       onClick={openCardModal}
-      className="cursor-pointer flex flex-col gap-[6px] p-3 rounded-md border-solid border-[1px] border-gray_D9D9D9 md:flex-row md:gap-5 md:p-5 lg:flex-col"
+      className=" cursor-pointer flex flex-col gap-[6px] p-3 rounded-md border-solid border-[1px] border-gray_D9D9D9 md:flex-row md:gap-5 md:p-5 lg:flex-col"
     >
       {imageUrl ? (
-        <section className="relative w-full h-[160px] md:w-[123px] md:h-[68px] lg:w-full lg:h-[160px]">
+        <section className="m-auto relative w-full h-[151px] md:w-[123px] md:h-[68px] lg:w-full lg:h-[160px]">
           <Image
-            className="rounded-md"
+            className="rounded-md object-cover "
             fill
             src={imageUrl}
             alt={`${title} 이미지`}
@@ -40,13 +40,9 @@ export default function DashboardCard({ cardInfo }) {
               tags.map((tag, i) => (
                 <div
                   className="px-[6px] py-1 text-xs font-normal"
-                  style={{
-                    background: TAG_COLORS[i].background,
-                    color: TAG_COLORS[i].text,
-                  }}
                   key={tag + i}
                 >
-                  {tag}
+                  <TagItem tag={tag} />
                 </div>
               ))}
           </div>

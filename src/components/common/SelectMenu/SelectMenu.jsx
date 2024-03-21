@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Select, { components } from 'react-select';
 import Avatar from '../Avatar/Avatar';
-import { CheckIcon } from '@/../public/images';
+import { DropDownArrow, CheckIcon } from '@/../public/images';
 
 const SelectMenu = ({
   assigneeUserId,
@@ -16,7 +16,9 @@ const SelectMenu = ({
   const [selectedOption, setSelectedOption] = useState(null);
 
   useEffect(() => {
-    const findOption = options.find((option) => option.id === assigneeUserId);
+    const findOption = options.find(
+      (option) => option.userId === assigneeUserId,
+    );
     setSelectedOption(findOption || null);
   }, [assigneeUserId, options]);
 
@@ -24,7 +26,7 @@ const SelectMenu = ({
     setSelectedOption(option);
     setFormValues((prev) => ({
       ...prev,
-      assigneeUserId: option ? option.id : 0,
+      assigneeUserId: option ? option.userId : 0,
     }));
   };
 
@@ -43,12 +45,18 @@ const SelectMenu = ({
           />
         )}
         <span className="">
-          <Avatar text={data.label.charAt(0)} />
+          <Avatar text={data.nickname.charAt(0)} />
         </span>
 
         <span>{data.label}</span>
       </div>
     </components.Option>
+  );
+
+  const CustomDropdownIndicator = (props) => (
+    <components.DropdownIndicator {...props}>
+      <Image src={DropDownArrow} alt="arrow" width={26} height={26} />
+    </components.DropdownIndicator>
   );
 
   return (
@@ -62,6 +70,7 @@ const SelectMenu = ({
       getOptionValue={getOptionValue}
       components={{
         Option: CustomOption,
+        DropdownIndicator: CustomDropdownIndicator,
       }}
     />
   );

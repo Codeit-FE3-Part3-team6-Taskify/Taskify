@@ -14,7 +14,7 @@ import useRedirectWithAccessToken from '@/hooks/useRedirectWithAccessToken';
 
 // Todo(노진석) : (미완성)api로직 등 추가해야함.
 export default function SignInPage() {
-  useRedirectWithAccessToken();
+  useRedirectWithAccessToken('/mydashboard');
   const dispatch = useDispatch();
   const router = useRouter();
   const [email, setEmail] = useState('');

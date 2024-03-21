@@ -28,7 +28,7 @@ const columnList = createSlice({
       const findColumn = state.findIndex((column) => column.id === id);
       state[findColumn].title = data.title;
     },
-    addCard: (state, action) => {
+    addCardList: (state, action) => {
       const { data, columnId } = action.payload;
       const findColumn = state.findIndex((column) => column.id === columnId);
       if (state[findColumn].cardList) {
@@ -39,6 +39,19 @@ const columnList = createSlice({
         state[findColumn].cardList = resultCardList;
       } else {
         state[findColumn].cardList = data;
+      }
+    },
+    addCard: (state, action) => {
+      const { data, columnId } = action.payload;
+      const findColumn = state.findIndex((column) => column.id === columnId);
+      if (state[findColumn].cardList) {
+        const cards = [data, ...state[findColumn].cardList];
+        const resultCardList = cards.filter((card, index) => {
+          return index === cards.findIndex((item) => item.id === card.id);
+        });
+        state[findColumn].cardList = resultCardList;
+      } else {
+        state[findColumn].cardList = [data];
       }
     },
     deleteCard: (state, action) => {
@@ -74,6 +87,20 @@ const columnList = createSlice({
         ];
       }
     },
+    setCount: (state, action) => {
+      const { count, columnId } = action.payload;
+      const findColumn = state.findIndex((column) => column.id === columnId);
+      state[findColumn].totalCount = count;
+    },
+    plusCount: (state, action) => {
+      const { count, columnId } = action.payload;
+      const findColumn = state.findIndex((column) => column.id === columnId);
+      if (state[findColumn].totalCount >= 0) {
+        state[findColumn].totalCount += count;
+      } else {
+        state[findColumn].totalCount = count;
+      }
+    },
   },
 });
 
@@ -86,6 +113,9 @@ export const {
   addCard,
   deleteCard,
   changeCard,
+  addCardList,
+  setCount,
+  plusCount,
 } = columnList.actions;
 
 export default columnList;
