@@ -5,7 +5,7 @@ import Image from 'next/image';
 import React from 'react';
 import Avatar from '@/components/common/Avatar/Avatar';
 import { CalendarIcon } from '../../../../public/images';
-import { TAG_COLORS } from '@/constants/colors';
+import TagItem from '@/components/common/Tag/TagItem';
 
 // Todo(노진석) : 카드 기능완성하기
 export default function DashboardCard({ cardInfo }) {
@@ -40,13 +40,9 @@ export default function DashboardCard({ cardInfo }) {
               tags.map((tag, i) => (
                 <div
                   className="px-[6px] py-1 text-xs font-normal"
-                  style={{
-                    background: TAG_COLORS[i].background,
-                    color: TAG_COLORS[i].text,
-                  }}
                   key={tag + i}
                 >
-                  {tag}
+                  <TagItem tag={tag} />
                 </div>
               ))}
           </div>
