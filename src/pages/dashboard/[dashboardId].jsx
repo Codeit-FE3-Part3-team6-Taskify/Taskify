@@ -5,13 +5,13 @@ import Image from 'next/image';
 import DashboardHeader from '@/components/common/Header/DashboardHeader';
 import Sidebar from '@/components/common/Sidebar/Sidebar';
 import useUserGet from '@/hooks/useUserGet';
-import CtaIcon from '@/components/common/Buttons/CtaIcon/CtaIcon';
-import { AddButtonEmpty, CrownIcon, SettingIcon } from '@/../public/images';
+import { CrownIcon } from '@/../public/images';
 import useDashboardInfo from '@/hooks/useDashboardInfo';
 import DashboardColumn from '@/components/Dashboard/DashboardColumn/DashboardColumn';
 import CtaAdd from '@/components/common/Buttons/CtaAdd/CtaAdd';
 import useGetDashboardsSidebar from '@/hooks/useGetDashboardsSidebar';
 import useDashboardUtilityFunctions from '@/hooks/useDashboardUtilityFunctions';
+import DashboardHeaderButton from '@/components/Dashboard/DashboardHeaderButton/DashboardHeaderButton';
 
 export async function getServerSideProps(context) {
   const { dashboardId } = context.params;
@@ -63,15 +63,7 @@ export default function DashboardPage({ dashboardId }) {
               ) : null
             }
             buttons={
-              <div className="flex gap-[16px]">
-                <CtaIcon imageSrc={SettingIcon}>관리</CtaIcon>
-                <CtaIcon
-                  onClick={handleOpenInvitation}
-                  imageSrc={AddButtonEmpty}
-                >
-                  초대하기
-                </CtaIcon>
-              </div>
+              <DashboardHeaderButton invitationClick={handleOpenInvitation} />
             }
           />
         </header>
