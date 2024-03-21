@@ -101,6 +101,9 @@ const columnList = createSlice({
     plusCount: (state, action) => {
       const { count, columnId } = action.payload;
       const findColumn = state.findIndex((column) => column.id === columnId);
+      if (findColumn < 0) {
+        return;
+      }
       if (state[findColumn].totalCount >= 0) {
         state[findColumn].totalCount += count;
       } else {
