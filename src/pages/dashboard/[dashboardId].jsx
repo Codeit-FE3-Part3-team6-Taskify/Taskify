@@ -113,6 +113,7 @@ export default function DashboardPage({ dashboardId }) {
       <div className="flex flex-col w-5/6 ">
         <header>
           <DashboardHeader
+            divider
             title={dashboardInfo ? dashboardInfo.title : ''}
             userInfo={userInfo}
             participants={memberList}

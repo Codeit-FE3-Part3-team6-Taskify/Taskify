@@ -57,7 +57,7 @@ export default function CreateTodo({ onClose, dashboardId, columnId }) {
 
   return (
     <TodoModal
-      columnId={16636}
+      columnId={columnId}
       onClose={onClose}
       formValues={formValues}
       setFormValues={setFormValues}
