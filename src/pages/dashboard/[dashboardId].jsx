@@ -13,7 +13,7 @@ import CtaAdd from '@/components/common/Buttons/CtaAdd/CtaAdd';
 import useModal from '@/hooks/useModal';
 import { changeCard, deleteCard, plusCount } from '@/features/columnsSlice';
 import { axiosPut } from '@/features/axios';
-import useGetDashboardsSidebar from '@/hooks/ useGetDashboardsSidebar';
+import useGetDashboardsSidebar from '@/hooks/useGetDashboardsSidebar';
 
 export async function getServerSideProps(context) {
   const { dashboardId } = context.params;

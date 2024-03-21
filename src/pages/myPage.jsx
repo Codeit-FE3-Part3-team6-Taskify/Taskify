@@ -1,7 +1,7 @@
 import Sidebar from '@/components/common/Sidebar/Sidebar';
 import DashboardHeader from '@/components/common/Header/DashboardHeader';
 import MyPageContent from '@/components/MyPage/MyPageContent/MyPageContent';
-import useGetDashboardsSidebar from '@/hooks/ useGetDashboardsSidebar';
+import useGetDashboardsSidebar from '@/hooks/useGetDashboardsSidebar';
 import useUserGet from '@/hooks/useUserGet';
 
 // TODO(조예진) : 완성
