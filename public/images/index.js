@@ -32,7 +32,7 @@ import LandingImg6 from './Landing6.png';
 import Ellipse from './Ellipse.svg';
 import CheckIconWhite from './CheckIconWhite.svg';
 import EditIcon from './Edit.svg';
-import DeleteIcon from './DeleteIcon.jpg';
+import DeleteIcon from './DeleteIcon.svg';
 
 export {
   LogoImg,
