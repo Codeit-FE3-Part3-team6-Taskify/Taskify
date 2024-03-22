@@ -1,4 +1,9 @@
-import { useEffect, useState, useRef } from 'react';
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-alert */
+/* eslint-disable object-shorthand */
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable no-shadow */
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import dayjs from 'dayjs';
 import Modal from '../Modal';
@@ -34,7 +39,6 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
   });
 
   // 댓글 관련 코드
-  const inputRef = useRef(null);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState('');
   const [editComment, setEditComment] = useState();
@@ -44,12 +48,10 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
   const getComments = async () => {
     try {
       const { comments } = await axiosGet(`/comments?cardId=${cardId}`);
-      console.log(comments);
       if (!comments.status) {
         setComments(comments);
       }
     } catch (e) {
-      // eslint-disable-next-line no-alert
       alert('댓글 불러올 수 없습니다. 다시 시도해주세요.');
     }
   };
@@ -71,13 +73,12 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
             tags: res.tags,
             imageUrl: res.imageUrl,
           });
-          console.log(cardData);
         }
 
         // 댓글 가져오기
         await getComments();
       } catch (e) {
-        console.error('나의 정보를 가져오지 못했습니다.: ', e);
+        alert('할일 데이터를 가져올 수 없습니다. 다시 시도해주세요.');
       }
     };
 
@@ -85,23 +86,21 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
   }, []);
 
   const handlePostComment = async () => {
-    console.log('댓글 입력하기');
     try {
-      const res = await axiosPostJason('/comments', {
+      await axiosPostJason('/comments', {
         content: comment,
         cardId: cardId,
         columnId: cardData.columnId,
         dashboardId: cardData.dashboardId,
       });
-      console.log('res', res);
 
       // 입력값 초기화
       setComment('');
       getComments();
+      setIsCommentBoxFocused(false);
     } catch (e) {
-      console.error(e);
+      alert('댓글을 달 수 없습니다. 다시 시도해주세요.');
     }
-    inputRef.current.focus();
   };
 
   // 팝업 메뉴
@@ -114,10 +113,9 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
   const handleDeleteComment = async (commentId) => {
     try {
       await axiosDelete(`/comments/${commentId}`);
-      console.log(commentId, '삭제합니당');
       getComments();
     } catch (e) {
-      console.error(e);
+      alert('댓글을 삭제 할 수 없습니다. 다시 시도해주세요.');
     }
   };
   const [editCommentId, setEditCommentId] = useState(-1);
@@ -126,23 +124,20 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
     setEditCommentId(commentId === editCommentId ? -1 : commentId);
     setEditComment(commentContent);
   };
-  // 댓글 수정
 
+  // 댓글 수정
   const handlePutComment = async (commentId) => {
     try {
       const res = await axiosPut(`/comments/${commentId}`, {
         content: editComment,
       });
       if (!res.status) {
-        console.log(res, '수정합니당');
-
         setEditCommentId(-1);
         getComments();
       }
     } catch (e) {
-      console.error(e);
+      alert('댓글을 수정 할 수 없습니다. 다시 시도해주세요.');
     }
-    inputRef.current.focus();
   };
 
   return (
@@ -193,7 +188,6 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
                     <Image fill src={cardData.profileImageUrl} alt="profile" />
                   </div>
                 ) : (
-                  // 이메일과id 일치하는 값 찾아서 이메일 앞글자 보냄
                   <Avatar
                     text={cardData.assigneeUserName.charAt(0).toUpperCase()}
                   />
@@ -263,7 +257,6 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
                 onBlur={() => setIsCommentBoxFocused(false)}
               />
             </div>
-
             {/* 댓글박스 */}
 
             {/* 달린댓글 */}
@@ -364,7 +357,6 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
                     <Image fill src={cardData.profileImageUrl} alt="profile" />
                   </div>
                 ) : (
-                  // 이메일과id 일치하는 값 찾아서 이메일 앞글자 보냄
                   <Avatar
                     text={cardData.assigneeUserName.charAt(0).toUpperCase()}
                   />

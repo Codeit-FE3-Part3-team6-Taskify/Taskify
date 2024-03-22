@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+/* eslint-disable object-shorthand */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useDispatch } from 'react-redux';
@@ -9,7 +11,6 @@ export default function PopupMenu({ cardId, onClose }) {
   const dispatch = useDispatch();
 
   const handleOpenUpdateModal = () => {
-    console.log('모달오픈!');
     dispatch(
       openModal({
         type: 'updateTodo',
@@ -21,10 +22,9 @@ export default function PopupMenu({ cardId, onClose }) {
   const handleDeleteTodo = async () => {
     try {
       await axiosDelete(`/cards/${cardId}`);
-      console.log(cardId, '삭제합니당');
       onClose();
     } catch (e) {
-      console.error(e);
+      alert('카드를 삭제 할 수 없습니다. 다시 시도해주세요.');
     }
   };
   return (

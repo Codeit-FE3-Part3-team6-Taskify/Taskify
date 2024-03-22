@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import { useState, useEffect, useRef } from 'react';
 import TodoModal from '../../common/Modal/TodoModal/TodoModal';
 import { axiosGet, axiosPut } from '@/features/axios';
@@ -95,13 +96,10 @@ export default function UpdateTodo({ onClose, cardId }) {
       const res = await axiosPut(`cards/${cardId}`, updatedFormValues);
 
       if (!res.status) {
-        console.log('수정완료');
-        // console.log('응답:', res);
         onClose();
       }
     } catch (e) {
-      console.log(e);
-      console.log('할 일 생성 실패');
+      alert('카드를 수정할 수 없습니다. 다시 시도해주세요.');
     }
   };
 
