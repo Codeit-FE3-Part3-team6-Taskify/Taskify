@@ -48,7 +48,7 @@ export default function SignInPage() {
   return (
     <main className="w-full m-auto mt-36 mb-12 max-w-[351px] md:max-w-[520px] md:mt-60 lg:mt-[223px]">
       <SignLogo />
-      <form onSubmit={onSubmit} className="flex flex-col w-full m-auto gap-4">
+      <form onSubmit={onSubmit} className="flex flex-col mx-3 w-full gap-4">
         <UserInformationInput
           labelName="이메일"
           error={emailError}
