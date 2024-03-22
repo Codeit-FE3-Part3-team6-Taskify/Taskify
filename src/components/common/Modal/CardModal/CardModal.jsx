@@ -109,6 +109,8 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
     setIsPopupOpen(!isPopupOpen);
   };
 
+  const editCardOptions = ['수정하기', '삭제하기'];
+
   // 댓글삭제
   const handleDeleteComment = async (commentId) => {
     try {
@@ -161,6 +163,7 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
                   onClose={onClose}
                   setIsPopupOpen={setIsPopupOpen}
                   columnId={columnId}
+                  options={editCardOptions}
                 />
               </div>
             )}

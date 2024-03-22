@@ -18,16 +18,16 @@ export default function Avatar({
 
   return (
     <div
-      className="flex items-center justify-center rounded-full border-2 border-white_FFFFFF"
+      className="flex items-center justify-center rounded-full border-2 border-white_FFFFFF cursor-pointer"
       style={{
         backgroundColor: `${bgColor}`,
         width: avatarSize,
         height: avatarSize,
       }}
+      onClick={onClick}
     >
       <span
         className={`relative ${textColorRed ? 'text-[#D25B68]' : 'text-white_FFFFFF'} text-base font-semibold`}
-        onClick={onClick}
       >
         {text}
       </span>
