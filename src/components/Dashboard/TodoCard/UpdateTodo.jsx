@@ -99,7 +99,7 @@ export default function UpdateTodo({ onClose, cardId }) {
       const res = await axiosPut(`cards/${cardId}`, updatedFormValues);
 
       if (!res.status) {
-        console.log('수정완료');
+        // console.log('수정완료');
         dispatch(
           deleteCard({ columnId: initialFormValues.columnId, id: cardId }),
         );
@@ -115,8 +115,8 @@ export default function UpdateTodo({ onClose, cardId }) {
         onClose();
       }
     } catch (e) {
-      console.log(e);
-      console.log('할 일 생성 실패');
+      console.error(e);
+      // console.log('할 일 생성 실패');
     }
   };
 

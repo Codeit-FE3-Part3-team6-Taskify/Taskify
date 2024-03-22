@@ -41,7 +41,7 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
   const getComments = async () => {
     try {
       const { comments } = await axiosGet(`/comments?cardId=${cardId}`);
-      console.log(comments);
+      // console.log(comments);
       if (!comments.status) {
         setComments(comments);
       }
@@ -101,7 +101,7 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
             tags: res.tags,
             imageUrl: res.imageUrl,
           });
-          console.log(cardData);
+          // console.log(cardData);
           // console.log('id', res.assignee.id);
           // cardData.assigneeUserId에 해당하는 이메일 찾기
           const assigneeEmail = findMemberEmailById(res.assignee.id);
@@ -157,7 +157,7 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
   // }, []);
 
   const handlePostComment = async () => {
-    console.log('댓글 입력하기');
+    // console.log('댓글 입력하기');
     try {
       const res = await axiosPostJason('/comments', {
         content: comment,
@@ -165,7 +165,7 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
         columnId: cardData.columnId,
         dashboardId: cardData.dashboardId,
       });
-      console.log('res', res);
+      // console.log('res', res);
 
       // 입력값 초기화
       setComment('');
@@ -185,7 +185,7 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
   const handleDeleteComment = async (commentId) => {
     try {
       await axiosDelete(`/comments/${commentId}`);
-      console.log(commentId, '삭제합니당');
+      // console.log(commentId, '삭제합니당');
       getComments();
     } catch (e) {
       console.error(e);
@@ -205,8 +205,7 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
         content: editComment,
       });
       if (!res.status) {
-        console.log(res, '수정합니당');
-
+        // console.log(res, '수정합니당');
         setEditCommentId(-1);
         getComments();
       }

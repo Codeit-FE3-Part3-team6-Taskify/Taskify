@@ -31,16 +31,16 @@ export default function CreateTodo({ onClose, dashboardId, columnId }) {
       const res = await axiosPostJason('cards', formValues);
 
       if (!res.status) {
-        console.log('생성완료');
-        console.log('응답:', res);
+        // console.log('생성완료');
+        // console.log('응답:', res);
         dispatch(addCard({ data: res, columnId }));
         dispatch(plusCount({ columnId, count: 1 }));
 
         onClose();
       }
     } catch (e) {
-      console.log(e);
-      console.log('할 일 생성 실패');
+      console.error(e);
+      // console.log('할 일 생성 실패');
     }
   };
 
