@@ -2,12 +2,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 // eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
 import TagItem from './TagItem';
+import getRandomColorPair from '@/utils/getRandomColorPair';
 
 export default function TagInput({ initialTag, setFormValues }) {
   const inputRef = useRef(null);
   const [tagList, setTagList] = useState([]);
   const [tagItem, setTagItem] = useState('');
   const [isFocused, setIsFocused] = useState(false);
+  const [prevColorIndex, setPrevColorIndex] = useState(-1); // 이전 색상 상태
 
   useEffect(() => {
     if (initialTag && initialTag.length > 0) {
@@ -18,7 +20,11 @@ export default function TagInput({ initialTag, setFormValues }) {
 
   const addTagItem = () => {
     const updatedTagList = [...tagList];
-    updatedTagList.push(tagItem);
+    const colorIndex = getRandomColorPair(prevColorIndex);
+    const coloredTagItem = tagItem + colorIndex;
+
+    updatedTagList.push(coloredTagItem);
+
     setTagList(updatedTagList);
     setTagItem('');
     setFormValues((prevFormValues) => ({
@@ -27,6 +33,7 @@ export default function TagInput({ initialTag, setFormValues }) {
     }));
 
     inputRef.current.focus();
+    setPrevColorIndex(colorIndex);
   };
 
   const onKeyDown = (e) => {
