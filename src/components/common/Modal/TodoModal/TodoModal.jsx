@@ -35,7 +35,7 @@ export default function TodoModal({
         setFormValues((prev) => ({ ...prev, imageUrl: res.imageUrl }));
       }
     } catch (error) {
-      console.error('이미지를 업로드하는데 실패했습니다.', error);
+      alert('이미지를 업로드하는데 실패했습니다.', error);
     }
   };
 
