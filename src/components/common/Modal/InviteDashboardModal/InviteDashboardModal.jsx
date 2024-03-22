@@ -21,7 +21,8 @@ export default function InputModal({ onClose, dashboardId }) {
         email: inputValue,
       });
     } catch (error) {
-      alert(error);
+      // eslint-disable-next-line no-alert
+      alert('데이터 전송에 실패했습니다.');
     }
   };
 

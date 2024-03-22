@@ -1,14 +1,22 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import StatusTag from '../StatusTag/StatusTag';
 import { DropDownArrow, CheckIcon } from '@/../public/images/index';
+import useOutsideClick from '@/hooks/useOutSideClick';
 
 export default function DropdownMenu({ initialStatus, options, onSelect }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
+
+  const dropdownRef = useRef(null);
+  const handleCloseDropdown = () => {
+    setIsOpen(false);
+  };
+
+  useOutsideClick(dropdownRef, handleCloseDropdown);
 
   useEffect(() => {
     const findOption = options.find((option) => option.id === initialStatus);
@@ -35,7 +43,10 @@ export default function DropdownMenu({ initialStatus, options, onSelect }) {
         <Image src={DropDownArrow} alt="arrow" width={26} height={26} />
       </button>
       {isOpen && (
-        <div className="flex flex-col items-start gap-[13px] py-[13px]  rounded-lg border border-gray_D9D9D9 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.08)] ">
+        <div
+          ref={dropdownRef}
+          className="flex flex-col items-start gap-[13px] py-[13px]  rounded-lg border border-gray_D9D9D9 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.08)] "
+        >
           {options.map((option) => (
             <div
               key={option.id}
