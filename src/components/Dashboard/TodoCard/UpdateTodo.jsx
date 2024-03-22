@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
 import TodoModal from '../../common/Modal/TodoModal/TodoModal';
@@ -78,28 +79,14 @@ export default function UpdateTodo({ onClose, cardId }) {
     }));
   };
 
-  // mock data- id: 대시보드 멤버 목록 조회-userId 사용
-  // const assigneeOptions = [
-  //   { id: 1244, value: '곰돌이', label: '곰돌이' }, // test id
-  //   { id: 1288, value: '토끼', label: '토끼' }, // test2 id
-  //   { id: 1244, value: '강아지', label: '강아지' },
-  //   { id: 1288, value: '고양이', label: '고양이' },
-  // ];
   const assigneeOptions = useSelector((state) => state.memberList.members);
   const statusOptions = useSelector((state) => state.columnList);
-  // mock data- 추후 수정
-  // const statusOptions = [
-  //   { value: '16636', label: 'To Do' }, // columnnId
-  //   { value: '16637', label: 'On Progress' },
-  //   { value: '16764', label: 'Done' },
-  // ];
 
   const handleUpdate = async (updatedFormValues) => {
     try {
       const res = await axiosPut(`cards/${cardId}`, updatedFormValues);
 
       if (!res.status) {
-        // console.log('수정완료');
         dispatch(
           deleteCard({ columnId: initialFormValues.columnId, id: cardId }),
         );
@@ -111,12 +98,10 @@ export default function UpdateTodo({ onClose, cardId }) {
           }),
         );
 
-        // console.log('응답:', res);
         onClose();
       }
     } catch (e) {
       console.error(e);
-      // console.log('할 일 생성 실패');
     }
   };
 

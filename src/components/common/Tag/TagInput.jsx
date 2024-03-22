@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect, useRef } from 'react';
 // eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
 import TagItem from './TagItem';
@@ -7,13 +8,6 @@ export default function TagInput({ initialTag, setFormValues }) {
   const [tagList, setTagList] = useState([]);
   const [tagItem, setTagItem] = useState('');
   const [isFocused, setIsFocused] = useState(false);
-
-  useEffect(() => {
-    if (initialTag && initialTag.length > 0) {
-      // 초기 태그가 있으면 태그 리스트에 설정
-      setTagList(initialTag);
-    }
-  }, [initialTag]);
 
   useEffect(() => {
     if (initialTag && initialTag.length > 0) {
