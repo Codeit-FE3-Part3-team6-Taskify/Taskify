@@ -191,12 +191,10 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
                 담당자
               </span>
               <div className="flex gap-2 items-center">
-                {cardData.profileImageUrl ? (
-                  <div className="relative rounded-full w-[26px] h-[26px] border-2 border-white_FFFFFF">
-                    <Image fill src={cardData.profileImageUrl} alt="profile" />
-                  </div>
-                ) : (
+                {cardData.profileImageUrl && (
                   <Avatar
+                    size="mediumCard"
+                    image={cardData.profileImageUrl}
                     text={cardData.assigneeUserName.charAt(0).toUpperCase()}
                   />
                 )}
@@ -271,16 +269,10 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
             {comments.length > 0 &&
               comments.map((comment, index) => (
                 <div key={index} className="flex gap-2">
-                  {comment.author.profileImageUrl ? (
-                    <div className="relative rounded-full w-[38px] h-[38px] border-2 border-white_FFFFFF">
-                      <Image
-                        fill
-                        src={comment.author.profileImageUrl}
-                        alt="profile"
-                      />
-                    </div>
-                  ) : (
+                  {comment.author.profileImageUrl && (
                     <Avatar
+                      size="mediumCard"
+                      image={comment.author.profileImageUrl}
                       text={comment.author.nickname.charAt(0).toUpperCase()}
                     />
                   )}
@@ -360,12 +352,10 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
                 담당자
               </span>
               <div className="flex gap-2 items-center">
-                {cardData.profileImageUrl ? (
-                  <div className="relative rounded-full w-[38px] h-[38px] border-2 border-white_FFFFFF">
-                    <Image fill src={cardData.profileImageUrl} alt="profile" />
-                  </div>
-                ) : (
+                {cardData.profileImageUrl && (
                   <Avatar
+                    size="mediumCard"
+                    image={cardData.profileImageUrl}
                     text={cardData.assigneeUserName.charAt(0).toUpperCase()}
                   />
                 )}
