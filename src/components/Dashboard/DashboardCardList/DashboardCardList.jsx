@@ -8,6 +8,7 @@ export default function DashboardCardList({
   id,
   scrollContainerRef,
   observerRef,
+  columnTitle,
 }) {
   return (
     <Droppable droppableId={id.toString()}>
@@ -35,7 +36,11 @@ export default function DashboardCardList({
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <DashboardCard cardInfo={card} />
+                      <DashboardCard
+                        cardInfo={card}
+                        columnTitle={columnTitle}
+                        columnId={id}
+                      />
                     </div>
                   )}
                 </Draggable>

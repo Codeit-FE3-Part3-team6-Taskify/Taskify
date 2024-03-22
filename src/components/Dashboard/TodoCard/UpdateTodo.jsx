@@ -1,10 +1,13 @@
 /* eslint-disable no-alert */
+import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
 import TodoModal from '../../common/Modal/TodoModal/TodoModal';
 import { axiosGet, axiosPut } from '@/features/axios';
 import DropdownMenu from '../../common/DropdownMenu/DropdownMenu';
+import { changeCard, deleteCard } from '@/features/columnsSlice';
 
 export default function UpdateTodo({ onClose, cardId }) {
+  const dispatch = useDispatch();
   const [formValues, setFormValues] = useState({
     assigneeUserId: 0,
     dashboardId: 0,
@@ -72,34 +75,33 @@ export default function UpdateTodo({ onClose, cardId }) {
     // 컬럼 선택
     setFormValues((prev) => ({
       ...prev,
-      columnId: Number(option.value),
+      columnId: option.id,
     }));
   };
 
-  // mock data- id: 대시보드 멤버 목록 조회-userId 사용
-  const assigneeOptions = [
-    { id: 1244, value: '곰돌이', label: '곰돌이' }, // test id
-    { id: 1288, value: '토끼', label: '토끼' }, // test2 id
-    { id: 1244, value: '강아지', label: '강아지' },
-    { id: 1288, value: '고양이', label: '고양이' },
-  ];
-
-  // mock data- 추후 수정
-  const statusOptions = [
-    { value: '16636', label: 'To Do' }, // columnnId
-    { value: '16637', label: 'On Progress' },
-    { value: '16764', label: 'Done' },
-  ];
+  const assigneeOptions = useSelector((state) => state.memberList.members);
+  const statusOptions = useSelector((state) => state.columnList);
 
   const handleUpdate = async (updatedFormValues) => {
     try {
       const res = await axiosPut(`cards/${cardId}`, updatedFormValues);
 
       if (!res.status) {
+        dispatch(
+          deleteCard({ columnId: initialFormValues.columnId, id: cardId }),
+        );
+        dispatch(
+          changeCard({
+            id: cardId,
+            columnId: initialFormValues.columnId,
+            data: res,
+          }),
+        );
+
         onClose();
       }
     } catch (e) {
-      alert('카드를 수정할 수 없습니다. 다시 시도해주세요.');
+      console.error(e);
     }
   };
 
@@ -115,7 +117,7 @@ export default function UpdateTodo({ onClose, cardId }) {
       disabled={disabled}
       dropdownMenu={
         <DropdownMenu
-          initialStatus={String(formValues.columnId)}
+          initialStatus={formValues.columnId}
           options={statusOptions}
           onSelect={handleStatusSelect}
         />

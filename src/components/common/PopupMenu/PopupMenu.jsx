@@ -7,8 +7,14 @@ import { useDispatch } from 'react-redux';
 import { openModal } from '@/features/modalSlice';
 import { axiosDelete } from '@/features/axios';
 import useOutsideClick from '@/hooks/useOutSideClick';
+import { deleteCard } from '@/features/columnsSlice';
 
-export default function PopupMenu({ cardId, onClose, setIsPopupOpen }) {
+export default function PopupMenu({
+  cardId,
+  onClose,
+  setIsPopupOpen,
+  columnId,
+}) {
   // TODO(조예진): 추후 재사용 가능하도록 수정
   const dispatch = useDispatch();
 
@@ -24,6 +30,8 @@ export default function PopupMenu({ cardId, onClose, setIsPopupOpen }) {
   const handleDeleteTodo = async () => {
     try {
       await axiosDelete(`/cards/${cardId}`);
+
+      dispatch(deleteCard({ id: cardId, columnId }));
       onClose();
     } catch (e) {
       alert('카드를 삭제 할 수 없습니다. 다시 시도해주세요.');

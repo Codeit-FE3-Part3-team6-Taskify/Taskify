@@ -19,7 +19,7 @@ export default function DropdownMenu({ initialStatus, options, onSelect }) {
   useOutsideClick(dropdownRef, handleCloseDropdown);
 
   useEffect(() => {
-    const findOption = options.find((option) => option.value === initialStatus);
+    const findOption = options.find((option) => option.id === initialStatus);
     setSelectedOption(findOption);
   }, [initialStatus, options]);
 
@@ -36,9 +36,9 @@ export default function DropdownMenu({ initialStatus, options, onSelect }) {
         onClick={() => setIsOpen(!isOpen)}
       >
         {selectedOption ? (
-          <StatusTag>{selectedOption.label}</StatusTag>
+          <StatusTag>{selectedOption.title}</StatusTag>
         ) : (
-          options.length > 0 && <StatusTag>{options[0].label}</StatusTag>
+          options.length > 0 && <StatusTag>{options[0].title}</StatusTag>
         )}
         <Image src={DropDownArrow} alt="arrow" width={26} height={26} />
       </button>
@@ -47,19 +47,19 @@ export default function DropdownMenu({ initialStatus, options, onSelect }) {
           ref={dropdownRef}
           className="flex flex-col items-start gap-[13px] py-[13px]  rounded-lg border border-gray_D9D9D9 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.08)] "
         >
-          {options.map((option, index) => (
+          {options.map((option) => (
             <div
-              key={index}
+              key={option.id}
               className="flex items-center ml-2 gap-[6px] w-full cursor-pointer"
               onClick={() => handleSelect(option)}
             >
-              {selectedOption && selectedOption.value === option.value && (
+              {selectedOption && selectedOption.id === option.id && (
                 <Image src={CheckIcon} alt="check" />
               )}
               <div
-                className={`${selectedOption && selectedOption.value === option.value ? 'ml-0' : 'ml-[28px]'}`}
+                className={`${selectedOption && selectedOption.id === option.id ? 'ml-0' : 'ml-[28px]'}`}
               >
-                <StatusTag>{option.label}</StatusTag>
+                <StatusTag>{option.title}</StatusTag>
               </div>
             </div>
           ))}

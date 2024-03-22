@@ -49,7 +49,7 @@ const SelectMenu = ({
           <Avatar text={data.nickname.charAt(0)} />
         </span>
 
-        <span>{data.label}</span>
+        <span>{data.nickname}</span>
       </div>
     </components.Option>
   );
