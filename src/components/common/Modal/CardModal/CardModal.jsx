@@ -104,9 +104,9 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
   };
 
   // 팝업 메뉴
-  const [isPopupOpen, setPopupOpen] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const togglePopup = () => {
-    setPopupOpen(!isPopupOpen);
+    setIsPopupOpen(!isPopupOpen);
   };
 
   // 댓글삭제
@@ -156,7 +156,11 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
             {/* 팝업 메뉴 */}
             {isPopupOpen && (
               <div className="relative right-2">
-                <PopupMenu cardId={cardId} onClose={onClose} />
+                <PopupMenu
+                  cardId={cardId}
+                  onClose={onClose}
+                  setIsPopupOpen={setIsPopupOpen}
+                />
               </div>
             )}
           </div>
