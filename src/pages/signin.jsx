@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { useDispatch } from 'react-redux';
 import PasswordInput from '@/components/common/SignInput/PasswordInput';
 import UserInformationInput from '@/components/common/SignInput/UserInformationInput';

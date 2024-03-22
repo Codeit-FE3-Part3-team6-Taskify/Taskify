@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { axiosGet } from '@/features/axios';
@@ -39,7 +40,7 @@ export default function useDashboardCardGet(id) {
       dispatch(addCardList({ columnId: id, data: res.cards }));
       dispatch(setCount({ count: res.totalCount, columnId: id }));
     } catch (e) {
-      console.error(e);
+      return;
     } finally {
       setIsLoading(false);
     }

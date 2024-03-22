@@ -30,7 +30,6 @@ export default function PopupMenu({
   const handleDeleteTodo = async () => {
     try {
       await axiosDelete(`/cards/${cardId}`);
-
       dispatch(deleteCard({ id: cardId, columnId }));
       onClose();
     } catch (e) {

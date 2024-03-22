@@ -1,4 +1,4 @@
-/* eslint-disable no-alert */
+/* eslint-disable no-useless-return */
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
 import TodoModal from '../../common/Modal/TodoModal/TodoModal';
@@ -46,7 +46,7 @@ export default function UpdateTodo({ onClose, cardId }) {
           });
         }
       } catch (e) {
-        console.error('나의 정보를 가져오지 못했습니다.: ', e);
+        return;
       }
     };
     getTodoData();
@@ -97,11 +97,10 @@ export default function UpdateTodo({ onClose, cardId }) {
             data: res,
           }),
         );
-
         onClose();
       }
     } catch (e) {
-      console.error(e);
+      return;
     }
   };
 
