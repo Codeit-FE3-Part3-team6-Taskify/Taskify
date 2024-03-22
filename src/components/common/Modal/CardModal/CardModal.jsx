@@ -1,11 +1,9 @@
-import { useSelector } from 'react-redux';
 import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import dayjs from 'dayjs';
 import Modal from '../Modal';
 import Avatar from '../../Avatar/Avatar';
 import TagItem from '../../Tag/TagItem';
-// import CtaDefault from '../../Buttons/CtaDefault/CtaDefault';
 import CommentBox from '../../CommentBox/CommentBox';
 import {
   axiosGet,
@@ -36,15 +34,11 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
   });
 
   // 댓글 관련 코드
+  const inputRef = useRef(null);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState('');
   const [editComment, setEditComment] = useState();
-
-  const inputRef = useRef(null);
-
-  // 댓글달기 focus 상태
   const [isCommentBoxFocused, setIsCommentBoxFocused] = useState(false);
-  // 달린 댓글 focus 상태
   const [isCommentFocused, setIsCommentFocused] = useState({});
 
   const getComments = async () => {
@@ -53,7 +47,6 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
       console.log(comments);
       if (!comments.status) {
         setComments(comments);
-        setComments(getCommentsWithEmail());
       }
     } catch (e) {
       // eslint-disable-next-line no-alert
@@ -61,52 +54,13 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
     }
   };
 
-  // TODO(조예진): 임시- 대시보드 멤버를 가져와서 담당자의 이메일을 찾도록 함
-  // 멤버 가져오기
-
-  const members = useSelector((state) => state.memberList.members);
-  // console.log('members', members);
-  // const [dashboardMembers, setDashboardMembers] = useState([]);
-  const findMemberEmailById = (userId) => {
-    const member = members.find((m) => m.userId === userId);
-    return member ? member.email : null;
-  };
-  // comments에서 작성자의 이메일 찾기
-  const getCommentsWithEmail = () => {
-    return comments.map((c) => {
-      const authorEmail = findMemberEmailById(c.author.id);
-      return {
-        ...comment,
-        author: {
-          ...comment.author,
-          email: authorEmail,
-        },
-      };
-    });
-  };
-  // const getMembers = async () => {
-  //   try {
-  //     const { members } = await axiosGet(`/members?dashboardId=4939`);
-  //     setDashboardMembers(members);
-  //     // console.log(comments);
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // 대시보드 멤버 가져오기
-        // await getMembers();
-        // const members = useSelector((state) => state.memberList.members);
-        console.log('members', members);
-        // 할 일 데이터를 가져오기
         const res = await axiosGet(`/cards/${cardId}`);
         if (!res.status) {
           setCardData({
             assigneeUserId: res.assignee.id,
-            // assigneeEmail: assigneeEmail,
             assigneeUserName: res.assignee.nickname,
             profileImageUrl: res.assignee.profileImageUrl,
             dashboardId: res.dashboardId,
@@ -118,17 +72,10 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
             imageUrl: res.imageUrl,
           });
           console.log(cardData);
-          // console.log('id', res.assignee.id);
-          // cardData.assigneeUserId에 해당하는 이메일 찾기
-          const assigneeEmail = findMemberEmailById(res.assignee.id);
-          console.log('assigneeEmail', assigneeEmail);
-          setCardData((prev) => ({ ...prev, assigneeEmail: assigneeEmail }));
         }
 
         // 댓글 가져오기
-
         await getComments();
-        // 댓글작성자의 이메일 찾아서 comments 배열에 넣기
       } catch (e) {
         console.error('나의 정보를 가져오지 못했습니다.: ', e);
       }
@@ -136,41 +83,6 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
 
     fetchData();
   }, []);
-
-  // useEffect(() => {
-  //   const getTodoData = async () => {
-  //     try {
-  //       const res = await axiosGet(`/cards/${cardId}`);
-  //       // console.log(res.assignee.profileImageUrl);
-  //       if (!res.status) {
-  //         setCardData({
-  //           assigneeUserId: res.assignee.id,
-  //           assigneeUserName: res.assignee.nickname,
-  //           profileImageUrl: res.assignee.profileImageUrl,
-  //           dashboardId: res.dashboardId,
-  //           columnId: res.columnId,
-  //           title: res.title,
-  //           description: res.description,
-  //           dueDate: res.dueDate,
-  //           tags: res.tags,
-  //           imageUrl: res.imageUrl,
-  //         });
-  //       }
-  //     } catch (e) {
-  //       console.error('나의 정보를 가져오지 못했습니다.: ', e);
-  //     }
-  //   };
-  //   getMembers();
-  //   getTodoData();
-  //   getComments();
-
-  //   // cardData.assigneeUserId에 해당하는 이메일 찾기
-  //   const assigneeEmail = findMemberEmailById(res.assignee.id);
-  //   console.log('assigneeEmail', assigneeEmail);
-  //   setCardData((prev) => ({ ...prev, assigneeEmail: assigneeEmail }));
-  //   setComments(getCommentsWithEmail());
-
-  // }, []);
 
   const handlePostComment = async () => {
     console.log('댓글 입력하기');
@@ -283,7 +195,7 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
                 ) : (
                   // 이메일과id 일치하는 값 찾아서 이메일 앞글자 보냄
                   <Avatar
-                    text={cardData?.assigneeEmail?.charAt(0).toUpperCase()}
+                    text={cardData.assigneeUserName.charAt(0).toUpperCase()}
                   />
                 )}
 
@@ -367,9 +279,8 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
                       />
                     </div>
                   ) : (
-                    // <Avatar text={comment.author.id} />
                     <Avatar
-                      text={comment.author.email.charAt(0).toUpperCase()}
+                      text={comment.author.nickname.charAt(0).toUpperCase()}
                     />
                   )}
                   <div className="flex flex-col gap[6px] flex-grow">
@@ -381,50 +292,8 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
                       </div>
                     </div>
                     {editCommentId === comment.id ? (
-                      // <div
-                      //   className="sign-input-base relative flex flex-col "
-                      //   style={{
-                      //     borderColor: isCommentFocused[comment.id]
-                      //       ? '#5534DA'
-                      //       : '#D9D9D9',
-                      //   }}
-                      //   onFocus={() =>
-                      //     setIsCommentFocused((prev) => ({
-                      //       ...prev,
-                      //       [comment.id]: true,
-                      //     }))
-                      //   }
-                      //   onBlur={() =>
-                      //     setIsCommentFocused((prev) => ({
-                      //       ...prev,
-                      //       [comment.id]: false,
-                      //     }))
-                      //   }
-                      // >
-                      //   <textarea
-                      //     className="text-xs md:text-sm resize-none max-h-[70px] md:max-h-[110px] overflow-y-auto focus:border-0 focus:outline-none cursor-text"
-                      //     value={editComment}
-                      //     onChange={(e) => setEditComment(e.target.value)}
-                      //     placeholder="댓글 작성하기"
-                      //     style={{
-                      //       scrollbarWidth: 'none',
-                      //       msOverflowStyle: 'none',
-                      //     }}
-                      //   />
-                      //   <span className="relative flex justify-end">
-                      //     <CtaDefault
-                      //       color="white"
-                      //       size="xsmall"
-                      //       onClick={() => handlePutComment(comment.id)}
-                      //       disabled={!editComment.trim()}
-                      //     >
-                      //       입력
-                      //     </CtaDefault>
-                      //   </span>
-                      // </div>
                       <CommentBox
                         isFocused={isCommentFocused[comment.id]}
-                        // setIsFocused={setIsCommentBoxFocused}
                         onClick={() => handlePutComment(comment.id)}
                         comment={editComment}
                         setComment={setEditComment}
@@ -497,7 +366,7 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
                 ) : (
                   // 이메일과id 일치하는 값 찾아서 이메일 앞글자 보냄
                   <Avatar
-                    text={cardData?.assigneeEmail?.charAt(0).toUpperCase()}
+                    text={cardData.assigneeUserName.charAt(0).toUpperCase()}
                   />
                 )}
 
