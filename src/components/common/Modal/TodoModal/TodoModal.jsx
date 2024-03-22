@@ -75,10 +75,10 @@ export default function TodoModal({
   const getOptionLabel = (option) => (
     <div className="flex items-center gap-[6px]">
       <Avatar text={option.nickname.charAt(0)} />
-      <span>{option.label}</span>
+      <span>{option.nickname}</span>
     </div>
   );
-  const getOptionValue = (option) => option.value;
+  const getOptionValue = (option) => option.nickname;
 
   return (
     <Modal onClose={onClose}>

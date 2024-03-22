@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import Image from 'next/image';
+import Link from 'next/link';
 import DashboardHeader from '@/components/common/Header/DashboardHeader';
 import Sidebar from '@/components/common/Sidebar/Sidebar';
 import useUserGet from '@/hooks/useUserGet';
@@ -9,7 +10,6 @@ import useDashboardInfo from '@/hooks/useDashboardInfo';
 import useModal from '@/hooks/useModal';
 import useGetDashboardsSidebar from '@/hooks/useGetDashboardsSidebar';
 import EditContent from '@/components/DashboardEdit/EditContent/EditContent';
-import Link from 'next/link';
 
 export async function getServerSideProps(context) {
   const { dashboardId } = context.params;
