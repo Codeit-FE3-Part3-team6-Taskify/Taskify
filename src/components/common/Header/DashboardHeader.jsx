@@ -55,7 +55,7 @@ export default function DashboardHeader({
                   />
                 )}
                 {isPopupOpen && (
-                  <div className="absolute right-2 md:left-6 lg:left-8 ">
+                  <div className="absolute top-full right-2 md:right-auto ">
                     <PopupMenu
                       setIsPopupOpen={setIsPopupOpen}
                       options={options}

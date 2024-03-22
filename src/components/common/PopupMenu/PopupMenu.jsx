@@ -1,14 +1,15 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-alert */
 /* eslint-disable object-shorthand */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
 import { openModal } from '@/features/modalSlice';
 import { axiosDelete } from '@/features/axios';
 import useOutsideClick from '@/hooks/useOutSideClick';
 import { deleteCard } from '@/features/columnsSlice';
-import { useRouter } from 'next/router';
 
 export default function PopupMenu({
   cardId,
