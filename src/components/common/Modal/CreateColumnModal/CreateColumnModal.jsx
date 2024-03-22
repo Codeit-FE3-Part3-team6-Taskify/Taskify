@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-return */
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { axiosPostJason } from '@/features/axios';
@@ -28,7 +29,7 @@ export default function InputModal({ onClose, dashboardId }) {
       });
       dispatch(addColumn({ data: res }));
     } catch (error) {
-      alert(error);
+      return;
     }
   };
 

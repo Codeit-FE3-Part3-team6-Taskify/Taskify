@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-return */
 import Modal from '../Modal';
 import UserInformationInput from '../../SignInput/UserInformationInput';
 import SelectMenu from '../../SelectMenu/SelectMenu';
@@ -35,7 +36,7 @@ export default function TodoModal({
         setFormValues((prev) => ({ ...prev, imageUrl: res.imageUrl }));
       }
     } catch (error) {
-      alert('이미지를 업로드하는데 실패했습니다.', error);
+      return;
     }
   };
 
