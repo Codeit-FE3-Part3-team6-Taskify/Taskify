@@ -1,4 +1,4 @@
-import LogoImg from '/images /LogoImg.svg';
+import LogoImg from './LogoImg.svg';
 import LogoImgWhite from './LogoImg_white.svg';
 import Logo from './Logo.svg';
 import LogoWhite from './Logo_white.svg';
