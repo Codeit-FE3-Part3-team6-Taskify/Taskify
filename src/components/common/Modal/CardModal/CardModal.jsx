@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import dayjs from 'dayjs';
 import Modal from '../Modal';
@@ -38,6 +38,13 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
   const [comment, setComment] = useState('');
   const [editComment, setEditComment] = useState();
 
+  const inputRef = useRef(null);
+
+  // 댓글달기 focus 상태
+  const [isCommentBoxFocused, setIsCommentBoxFocused] = useState(false);
+  // 달린 댓글 focus 상태
+  const [isCommentFocused, setIsCommentFocused] = useState({});
+
   const getComments = async () => {
     try {
       const { comments } = await axiosGet(`/comments?cardId=${cardId}`);
@@ -46,7 +53,8 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
         setComments(comments);
       }
     } catch (e) {
-      console.error('나의 정보를 가져오지 못했습니다.: ', e);
+      // eslint-disable-next-line no-alert
+      alert('댓글 불러올 수 없습니다. 다시 시도해주세요.');
     }
   };
 
@@ -173,6 +181,7 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
     } catch (e) {
       console.error(e);
     }
+    inputRef.current.focus();
   };
 
   // 팝업 메뉴
@@ -213,6 +222,7 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
     } catch (e) {
       console.error(e);
     }
+    inputRef.current.focus();
   };
 
   return (
@@ -324,7 +334,14 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
             {/* 댓글박스 */}
             <div className="flex flex-col gap-2 mt-[3px] md:mt-2 md:mb-1">
               <span className="text-sm md:text-base font-medium">댓글</span>
-              <div className="relative flex flex-col sign-input-base">
+              <div
+                className="relative flex flex-col sign-input-base"
+                style={{
+                  borderColor: isCommentBoxFocused ? '#5534DA' : '#D9D9D9',
+                }}
+                onFocus={() => setIsCommentBoxFocused(true)}
+                onBlur={() => setIsCommentBoxFocused(false)}
+              >
                 <textarea
                   className="text-xs md:text-sm resize-none max-h-[70px] md:max-h-[110px] overflow-y-auto focus:border-0 focus:outline-none cursor-text"
                   value={comment}
@@ -374,7 +391,26 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
                       </div>
                     </div>
                     {editCommentId === comment.id ? (
-                      <div className="sign-input-base relative flex flex-col ">
+                      <div
+                        className="sign-input-base relative flex flex-col "
+                        style={{
+                          borderColor: isCommentFocused[comment.id]
+                            ? '#5534DA'
+                            : '#D9D9D9',
+                        }}
+                        onFocus={() =>
+                          setIsCommentFocused((prev) => ({
+                            ...prev,
+                            [comment.id]: true,
+                          }))
+                        }
+                        onBlur={() =>
+                          setIsCommentFocused((prev) => ({
+                            ...prev,
+                            [comment.id]: false,
+                          }))
+                        }
+                      >
                         <textarea
                           className="text-xs md:text-sm resize-none max-h-[70px] md:max-h-[110px] overflow-y-auto focus:border-0 focus:outline-none cursor-text"
                           value={editComment}
