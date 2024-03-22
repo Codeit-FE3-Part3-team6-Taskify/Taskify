@@ -10,7 +10,7 @@ export default function DashboardDelete({ onClick }) {
     <button
       type="button"
       onClick={onClick}
-      className="button-reset md:text-lg sm:text-base md:w-[320px] md:h-[62px] sm:w-full sm:h-[52px] rounded-lg border-gray_D9D9D9 bg-gray_FAFAFA"
+      className="button-reset mt-3 md:text-lg sm:text-base md:w-[320px] md:h-[62px] sm:w-full sm:h-[52px] rounded-lg border-gray_D9D9D9 bg-gray_FAFAFA"
     >
       대시보드 삭제하기
     </button>

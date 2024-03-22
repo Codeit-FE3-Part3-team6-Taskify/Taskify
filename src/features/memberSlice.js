@@ -1,7 +1,10 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialValue = {};
+const initialValue = {
+  totalCount: 0,
+  currentPage: 1,
+};
 
 const memberList = createSlice({
   name: 'memberList',
@@ -28,10 +31,13 @@ const memberList = createSlice({
       state.members = filterMember;
       state.totalCount -= 1;
     },
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
   },
 });
 
-export const { setMembers, addMember, reset, deleteMember } =
+export const { setMembers, addMember, reset, deleteMember, setCurrentPage } =
   memberList.actions;
 
 export default memberList;
