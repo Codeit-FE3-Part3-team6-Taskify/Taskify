@@ -11,17 +11,16 @@ export default function Avatar({
 }) {
   const bgColor = backgroundColor || '#A3C4A2';
   const sizes = {
-    small: 'w-[22px] md:w-[24px] h-[22px] md:h-[24px] ',
-    medium: 'w-[26px] h-[26px]',
-    mediumCard: 'w-[26px] md:w-[34px] h-[26px] md:h-[34px]',
-    large: 'w-[34px] md:w-[38px] h-[34px] md:h-[38px]',
+    small: 'w-[22px] md:w-[24px] h-[22px] md:h-[24px] text-[10px] md:text-xs',
+    medium: 'w-[26px] h-[26px] text-xs',
+    mediumCard:
+      'w-[26px] md:w-[34px] h-[26px] md:h-[34px] text-xs md:text-base',
+    large: 'w-[34px] md:w-[38px] h-[34px] md:h-[38px] text-sm md:text-base',
   };
   const avatarSize = sizes[size] || sizes.medium; // 기본값 'medium'
 
   const avatarStyle = {
     backgroundColor: bgColor,
-    // width: avatarSize,
-    // height: avatarSize,
   };
 
   if (image) {
@@ -37,7 +36,7 @@ export default function Avatar({
     >
       {!image && (
         <span
-          className={`relative ${textColorRed ? 'text-[#D25B68]' : 'text-white_FFFFFF'} text-base font-semibold`}
+          className={`relative ${textColorRed ? 'text-[#D25B68]' : 'text-white_FFFFFF'}  font-semibold`}
         >
           {text}
         </span>
