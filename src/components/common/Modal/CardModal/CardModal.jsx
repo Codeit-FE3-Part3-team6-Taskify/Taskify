@@ -105,7 +105,8 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
 
   // 팝업 메뉴
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const togglePopup = () => {
+  const togglePopup = (e) => {
+    e.stopPropagation(); // 이벤트 버블링 방지-안되는데?
     setIsPopupOpen(!isPopupOpen);
   };
 
