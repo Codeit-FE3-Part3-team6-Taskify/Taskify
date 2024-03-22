@@ -18,7 +18,7 @@ import FacebookIcon from './FacebookIcon.svg';
 import InstaIcon from './InstaIcon.svg';
 import KebabIcon from './KebabIcon.svg';
 import MailIcon from './MailIcon.svg';
-import NoMailIcon from './NomailIcon.svg';
+import NoMailIcon from './NoMailIcon.svg';
 import PaginationArrow from './PaginationArrow.svg';
 import PenIcon from './PenIcon.svg';
 import SettingIcon from './SettingIcon.svg';
