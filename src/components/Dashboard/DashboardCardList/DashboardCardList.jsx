@@ -39,6 +39,7 @@ export default function DashboardCardList({
                       <DashboardCard
                         cardInfo={card}
                         columnTitle={columnTitle}
+                        columnId={id}
                       />
                     </div>
                   )}

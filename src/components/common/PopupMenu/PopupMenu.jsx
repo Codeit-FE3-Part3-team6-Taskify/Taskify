@@ -3,8 +3,9 @@
 import { useDispatch } from 'react-redux';
 import { openModal } from '@/features/modalSlice';
 import { axiosDelete } from '@/features/axios';
+import { deleteCard } from '@/features/columnsSlice';
 
-export default function PopupMenu({ cardId, onClose }) {
+export default function PopupMenu({ cardId, onClose, columnId }) {
   // TODO(조예진): 추후 재사용 가능하도록 수정
   const dispatch = useDispatch();
 
@@ -22,6 +23,7 @@ export default function PopupMenu({ cardId, onClose }) {
     try {
       await axiosDelete(`/cards/${cardId}`);
       console.log(cardId, '삭제합니당');
+      dispatch(deleteCard({ id: cardId, columnId }));
       onClose();
     } catch (e) {
       console.error(e);
