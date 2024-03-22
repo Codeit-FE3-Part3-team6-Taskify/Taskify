@@ -47,7 +47,6 @@ export default function CreateDashboardModal({ onClose }) {
     } catch (error) {
       // eslint-disable-next-line no-alert
       alert('대시보드 생성에 실패했습니다. 다시 시도해주세요.');
-      console.log(error);
     }
   };
 
