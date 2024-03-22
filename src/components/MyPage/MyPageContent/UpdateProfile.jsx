@@ -30,7 +30,7 @@ export default function UpdateProfile() {
         });
         setNextNickname(nickname);
       } catch (e) {
-        console.error('나의 정보를 가져오지 못했습니다.: ', e);
+        alert('나의 정보를 가져오지 못했습니다.: ', e);
       }
     };
     getMyInfo();

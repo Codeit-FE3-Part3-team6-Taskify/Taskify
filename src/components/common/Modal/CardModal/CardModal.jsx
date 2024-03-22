@@ -199,7 +199,6 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
                     text={cardData.assigneeUserName.charAt(0).toUpperCase()}
                   />
                 )}
-
                 <span className="text-xs md:text-sm">
                   {cardData.assigneeUserName}
                 </span>

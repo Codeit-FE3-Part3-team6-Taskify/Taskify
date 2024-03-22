@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import { useDispatch } from 'react-redux';
 import { deleteMember } from '@/features/memberSlice';
 import Avatar from '@/components/common/Avatar/Avatar';
@@ -14,7 +15,7 @@ export default function MemberListItem({ nickname, email, memberId }) {
       });
       dispatch(deleteMember({ data: res }));
     } catch (error) {
-      console.error('데이터 전송 실패:', error);
+      return;
     }
     window.location.reload();
   };
