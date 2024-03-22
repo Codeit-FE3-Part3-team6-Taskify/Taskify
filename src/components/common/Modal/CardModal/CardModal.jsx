@@ -16,7 +16,7 @@ import { KebabIcon, CloseIcon } from '@/../public/images';
 import PopupMenu from '../../PopupMenu/PopupMenu';
 import StatusTag from '../../StatusTag/StatusTag';
 
-export default function CardModal({ onClose, cardId, columnTitle }) {
+export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
   // TODO(조예진): updateTodo와 같은 코드는 나중에 따로 커스텀훅으로 분리할 것
   // 대시보드에서 카드클릭할 때, 컬럼 이름을 넘겨주는것으로 가정
 
@@ -41,7 +41,7 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
   const getComments = async () => {
     try {
       const { comments } = await axiosGet(`/comments?cardId=${cardId}`);
-      console.log(comments);
+      // console.log(comments);
       if (!comments.status) {
         setComments(comments);
       }
@@ -101,7 +101,7 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
             tags: res.tags,
             imageUrl: res.imageUrl,
           });
-          console.log(cardData);
+          // console.log(cardData);
           // console.log('id', res.assignee.id);
           // cardData.assigneeUserId에 해당하는 이메일 찾기
           const assigneeEmail = findMemberEmailById(res.assignee.id);
@@ -157,7 +157,7 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
   // }, []);
 
   const handlePostComment = async () => {
-    console.log('댓글 입력하기');
+    // console.log('댓글 입력하기');
     try {
       const res = await axiosPostJason('/comments', {
         content: comment,
@@ -165,7 +165,7 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
         columnId: cardData.columnId,
         dashboardId: cardData.dashboardId,
       });
-      console.log('res', res);
+      // console.log('res', res);
 
       // 입력값 초기화
       setComment('');
@@ -185,7 +185,7 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
   const handleDeleteComment = async (commentId) => {
     try {
       await axiosDelete(`/comments/${commentId}`);
-      console.log(commentId, '삭제합니당');
+      // console.log(commentId, '삭제합니당');
       getComments();
     } catch (e) {
       console.error(e);
@@ -205,8 +205,7 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
         content: editComment,
       });
       if (!res.status) {
-        console.log(res, '수정합니당');
-
+        // console.log(res, '수정합니당');
         setEditCommentId(-1);
         getComments();
       }
@@ -231,7 +230,11 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
             {/* 팝업 메뉴 */}
             {isPopupOpen && (
               <div className="relative right-2">
-                <PopupMenu cardId={cardId} onClose={onClose} />
+                <PopupMenu
+                  cardId={cardId}
+                  onClose={onClose}
+                  columnId={columnId}
+                />
               </div>
             )}
           </div>
