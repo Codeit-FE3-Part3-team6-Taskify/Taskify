@@ -19,6 +19,7 @@ const SelectMenu = ({
     const findOption = options.find(
       (option) => option.userId === assigneeUserId,
     );
+
     setSelectedOption(findOption || null);
   }, [assigneeUserId, options]);
 
