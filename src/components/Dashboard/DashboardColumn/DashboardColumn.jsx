@@ -70,6 +70,7 @@ export default function DashboardColumn({ title, id, dashboardId, openModal }) {
         <CtaAdd onClick={openAddCardModal} />
       </div>
       <DashboardCardList
+        columnTitle={title}
         cardList={cardList}
         id={id}
         scrollContainerRef={scrollContainerRef}
