@@ -55,13 +55,12 @@ export default function TagInput({ initialTag, setFormValues }) {
 
   return (
     <div
-      className="sign-input-base"
+      className="px-4 py-[15px] outline-none border-solid border-[1px] rounded-lg bg-white w-full h-auto "
       style={{ borderColor: isFocused ? '#5534DA' : '#D9D9D9' }}
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
     >
-      <div className="flex gap-[6px] ">
-        {/* flex-wrap */}
+      <div className="flex gap-[6px] flex-wrap">
         {tagList &&
           tagList.map((tag, index) => {
             return (
@@ -77,7 +76,7 @@ export default function TagInput({ initialTag, setFormValues }) {
           ref={inputRef}
           type="text"
           placeholder={tagList.length > 0 ? '' : '입력 후 Enter'}
-          className="flex w-full bg-transparent focus:border-0 focus:outline-none cursor-text"
+          className=" inline-flex  bg-transparent focus:border-0 focus:outline-none cursor-text"
           value={tagItem}
           onChange={(e) => setTagItem(e.target.value)}
           onKeyDown={onKeyDown}
