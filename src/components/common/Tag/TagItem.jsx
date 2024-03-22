@@ -19,7 +19,7 @@ export default function TagItem({ hasDelete, tag, onDelete }) {
       {hasDelete && (
         <button
           onClick={() => onDelete(tag)}
-          className="ml-2 w-4 h-4 flex justify-center items-center rounded-full bg-white"
+          className="ml-1 w-4 h-4 flex justify-center items-center rounded-full bg-white"
           style={{ color: color?.text }}
         >
           &times;
