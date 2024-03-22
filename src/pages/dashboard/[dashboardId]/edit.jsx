@@ -7,7 +7,7 @@ import CtaIcon from '@/components/common/Buttons/CtaIcon/CtaIcon';
 import { AddButtonEmpty, CrownIcon, SettingIcon } from '@/../public/images';
 import useDashboardInfo from '@/hooks/useDashboardInfo';
 import useModal from '@/hooks/useModal';
-import useGetDashboardsSidebar from '@/hooks/ useGetDashboardsSidebar';
+import useGetDashboardsSidebar from '@/hooks/useGetDashboardsSidebar';
 import EditContent from '@/components/DashboardEdit/EditContent/EditContent';
 import Link from 'next/link';
 
