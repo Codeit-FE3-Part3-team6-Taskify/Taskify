@@ -6,6 +6,7 @@ import columnList from './columnsSlice';
 import { dashboardList } from './dashboardListSlice';
 import { sidebarDashboardList } from './sidebarDashboardListSlice';
 import { invitationsDashboardList } from './invitationsDashboardListSlice';
+import invitedEmailListSlice from './invitedEmailListSlice';
 
 const rootReducer = {
   userInfo: userInfo.reducer,
@@ -15,6 +16,7 @@ const rootReducer = {
   dashboardList: dashboardList.reducer,
   sidebarDashboardList: sidebarDashboardList.reducer,
   invitationsDashboardList: invitationsDashboardList.reducer,
+  invitedEmailList: invitedEmailListSlice.reducer,
 };
 
 const store = configureStore({

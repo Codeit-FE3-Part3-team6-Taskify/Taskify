@@ -24,6 +24,7 @@ export default function AvatarGroup({ isMobile, participants }) {
               }}
             >
               <Avatar
+                size="large"
                 text={p.email.charAt(0).toUpperCase()}
                 backgroundColor={backgroundColors[index]}
               />
@@ -36,6 +37,7 @@ export default function AvatarGroup({ isMobile, participants }) {
               }}
             >
               <Avatar
+                size="large"
                 text={`+${participants.length - number}`}
                 backgroundColor={backgroundColors[backgroundColors.length - 1]}
                 textColorRed
