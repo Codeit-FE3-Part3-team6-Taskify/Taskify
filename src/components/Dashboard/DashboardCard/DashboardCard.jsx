@@ -14,10 +14,10 @@ export default function DashboardCard({ cardInfo }) {
   const { openModal } = useModal();
   const openCardModal = () => {
     // 모달 들어올 예정
-    openModal({
-      type: 'todoCard',
-      props: { cardId: 3979, columnTitle: 'To Do' },
-    });
+    // openModal({
+    //   type: 'todoCard',
+    //   props: { cardId: 3978, columnTitle: 'To Do' },
+    // }); 확인차 잠시 넣어놨습니다..
   };
 
   return (
