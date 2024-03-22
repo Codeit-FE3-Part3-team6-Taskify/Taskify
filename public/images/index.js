@@ -6,7 +6,7 @@ import CombinedLogo from './CombinedLogo.svg';
 import CombinedLogoWhite from './CombinedLogoWhite.svg';
 import AddImg from './AddImg.svg';
 import AddButtonEmpty from './AddButton_empty.svg';
-import AddButtonFill from './AddButton_fill.svg';
+import AddButtonFill from './AddButton_fIll.svg';
 import CalendarIcon from './CalendarIcon.svg';
 import CheckIcon from './CheckIcon.svg';
 import CloseIcon from './CloseIcon.svg';
