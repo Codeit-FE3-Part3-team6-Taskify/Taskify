@@ -1,4 +1,7 @@
 {
+  "parserOptions": {
+    "parser": "babel-eslint",
+  },
   "extends": ["airbnb", "plugin:prettier/recommended"],
   "plugins": ["react", "jsx-a11y", "import"],
   "rules": {

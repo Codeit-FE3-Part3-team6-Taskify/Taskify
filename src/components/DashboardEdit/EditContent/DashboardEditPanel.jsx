@@ -1,3 +1,5 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';

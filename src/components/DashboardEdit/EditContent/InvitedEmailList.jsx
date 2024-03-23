@@ -10,7 +10,7 @@ export default function InvitedEmailList({ dashboardId }) {
 
   const emails = useSelector((state) => state.invitedEmailList.invitations);
   const totalCount = useSelector((state) => state.invitedEmailList.totalCount);
-  const totalPage = totalCount ? Math.ceil(totalCount / 4) : 0;
+  const totalPage = totalCount ? Math.ceil(totalCount / 4) : 1;
 
   let content = null;
   if (loading) {

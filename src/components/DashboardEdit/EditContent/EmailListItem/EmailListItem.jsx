@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import { useDispatch } from 'react-redux';
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
 import { deleteEmails } from '@/features/invitedEmailListSlice';

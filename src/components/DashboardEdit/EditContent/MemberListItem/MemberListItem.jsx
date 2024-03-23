@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import { useDispatch } from 'react-redux';
 import { deleteMember } from '@/features/memberSlice';
 import Avatar from '@/components/common/Avatar/Avatar';
