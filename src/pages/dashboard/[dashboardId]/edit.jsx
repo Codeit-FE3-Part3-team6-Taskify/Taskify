@@ -49,6 +49,7 @@ export default function DashboardEdit({ dashboardId }) {
       <div className="flex flex-col flex-grow">
         <header>
           <DashboardHeader
+            divider
             title={dashboardInfo ? dashboardInfo.title : ''}
             userInfo={userInfo}
             participants={memberList}

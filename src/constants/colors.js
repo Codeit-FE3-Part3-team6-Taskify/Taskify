@@ -11,3 +11,11 @@ export const TAG_COLORS = [
   { background: '#DBF7E1', text: '#48D1A8' },
   { background: '#DEDDF3', text: '#312EBD' },
 ];
+
+export const BACKGROUND_COLORS = [
+  '#FFC85A',
+  '#FDD446',
+  '#9DD7ED',
+  '#C4B1A2',
+  '#A3C4A2',
+];
