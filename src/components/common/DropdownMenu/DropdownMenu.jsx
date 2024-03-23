@@ -28,15 +28,14 @@ export default function DropdownMenu({ initialStatus, options, onSelect }) {
     setSelectedOption(option);
     setIsOpen(false);
   };
-  const handleClick = (e) => {
-    e.stopPropagation(); // 이벤트 버블링 방지-안되는데?
-    setIsOpen(!isOpen);
+  const handleClick = () => {
+    setIsOpen((prev) => !prev);
   };
+
   return (
     <div className="relative flex flex-col gap-0.5">
       <button
         className=" flex items-start justify-between rounded-lg border border-gray_D9D9D9 focus:border-violet_5534DA py-[14px] px-4"
-        // onClick={() => setIsOpen(!isOpen)}
         onClick={handleClick}
       >
         {selectedOption ? (
