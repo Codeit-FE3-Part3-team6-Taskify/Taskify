@@ -52,7 +52,6 @@ export default function DashboardHeader({
                   text={userInfo.email.charAt(0).toUpperCase()}
                   onClick={togglePopup}
                 />
-
                 {isPopupOpen && (
                   <div className="absolute top-full right-2 md:right-auto ">
                     <PopupMenu

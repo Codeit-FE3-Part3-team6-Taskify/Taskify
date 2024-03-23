@@ -7,11 +7,13 @@ import { dashboardList } from './dashboardListSlice';
 import { sidebarDashboardList } from './sidebarDashboardListSlice';
 import { invitationsDashboardList } from './invitationsDashboardListSlice';
 import invitedEmailListSlice from './invitedEmailListSlice';
+import dashboardInfo from './dashboardInfoSlice';
 
 const rootReducer = {
   userInfo: userInfo.reducer,
   modal: modalSlice.reducer,
   memberList: memberList.reducer,
+  dashboardInfo: dashboardInfo.reducer,
   columnList: columnList.reducer,
   dashboardList: dashboardList.reducer,
   sidebarDashboardList: sidebarDashboardList.reducer,

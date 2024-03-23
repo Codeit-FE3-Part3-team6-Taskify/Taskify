@@ -8,16 +8,14 @@ import { axiosDelete } from '@/features/axios';
 export default function MemberListItem({ nickname, email, memberId }) {
   const dispatch = useDispatch();
 
-  const handleDeleteClick = async (memberId) => {
+  const handleDeleteClick = async () => {
     try {
-      const res = await axiosDelete(`/members/${memberId}`, {
-        memberId,
-      });
-      dispatch(deleteMember({ data: res }));
+      await axiosDelete(`/members/${memberId}`, {});
+      dispatch(deleteMember({ id: memberId }));
     } catch (error) {
+      // eslint-disable-next-line no-useless-return
       return;
     }
-    window.location.reload();
   };
 
   return (
@@ -29,7 +27,7 @@ export default function MemberListItem({ nickname, email, memberId }) {
       <CtaDefault
         size="small"
         color="white"
-        onClick={() => handleDeleteClick(memberId)}
+        onClick={() => handleDeleteClick()}
       >
         삭제
       </CtaDefault>

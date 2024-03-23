@@ -11,7 +11,7 @@ import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
 import useModal from '@/hooks/useModal';
 import useRedirectWithAccessToken from '@/hooks/useRedirectWithAccessToken';
 
-// Todo(노진석) : (미완성)api로직 등 추가해야함.
+// Todo(노진석) : 완성
 export default function SignInPage() {
   useRedirectWithAccessToken('/mydashboard');
   const dispatch = useDispatch();
@@ -48,7 +48,7 @@ export default function SignInPage() {
   return (
     <main className="w-full m-auto mt-36 mb-12 max-w-[351px] md:max-w-[520px] md:mt-60 lg:mt-[223px]">
       <SignLogo />
-      <form onSubmit={onSubmit} className="flex flex-col w-full m-auto gap-4">
+      <form onSubmit={onSubmit} className="flex flex-col mx-3 w-full gap-4">
         <UserInformationInput
           labelName="이메일"
           error={emailError}

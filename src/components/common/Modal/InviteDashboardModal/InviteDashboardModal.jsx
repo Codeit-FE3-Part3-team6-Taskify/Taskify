@@ -20,18 +20,11 @@ export default function InputModal({ onClose, dashboardId }) {
   const isInputEmpty = inputValue.trim() === '';
 
   const postInvitations = async () => {
-    try {
-      const res = await axiosPostJason(
-        `/dashboards/${dashboardId}/invitations`,
-        {
-          email: inputValue,
-        },
-      );
+    const res = await axiosPostJason(`/dashboards/${dashboardId}/invitations`, {
+      email: inputValue,
+    });
+    if (!res.status) {
       dispatch(addEmails({ data: res }));
-    } catch (error) {
-      // eslint-disable-next-line no-alert
-      // console.log(error);
-      alert('데이터 전송에 실패했습니다.');
     }
   };
 

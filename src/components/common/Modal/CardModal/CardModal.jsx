@@ -23,7 +23,7 @@ import PopupMenu from '../../PopupMenu/PopupMenu';
 import StatusTag from '../../StatusTag/StatusTag';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 
-export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
+export default function CardModal({ onClose, cardId, columnTitle }) {
   // TODO(조예진): updateTodo와 같은 코드는 나중에 따로 커스텀훅으로 분리할 것
   const observerRef = useRef(null);
   const scrollContainerRef = useRef(null);
@@ -135,8 +135,6 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
     setIsPopupOpen(!isPopupOpen);
   };
 
-  const editCardOptions = ['수정하기', '삭제하기'];
-
   // 댓글삭제
   const handleDeleteComment = async (commentId) => {
     try {
@@ -211,8 +209,8 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
                   cardId={cardId}
                   onClose={onClose}
                   setIsPopupOpen={setIsPopupOpen}
-                  columnId={columnId}
-                  options={editCardOptions}
+                  columnId={cardData.columnId}
+                  options={['수정하기', '삭제하기']}
                 />
               </div>
             )}

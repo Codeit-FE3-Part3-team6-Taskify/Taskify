@@ -40,7 +40,7 @@ export const axiosGet = async (url) => {
     const { data } = await axiosInstance.get(url);
     return data;
   } catch (e) {
-    return `api get error : ${e}`;
+    return e.response;
   }
 };
 
