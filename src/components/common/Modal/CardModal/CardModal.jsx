@@ -312,12 +312,13 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
             {/* 댓글박스 */}
 
             {/* 달린댓글 */}
-            <div
-              ref={scrollContainerRef}
-              className="flex flex-col h-[200px] overflow-scroll gap-1"
-            >
-              {comments.length > 0 &&
-                comments.map((comment) => (
+            {comments.length > 0 && (
+              <div
+                ref={scrollContainerRef}
+                className="flex flex-col max-h-[200px] overflow-y-auto gap-1"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
+                {comments.map((comment) => (
                   <div key={comment.id} className="flex gap-2">
                     <Avatar
                       size="mediumCard"
@@ -390,9 +391,10 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
                     </div>
                   </div>
                 ))}
-              {/* 달린댓글 */}
-              <div ref={observerRef} className="h-[1px]" />
-            </div>
+                {/* 달린댓글 */}
+                <div ref={observerRef} className="h-[1px]" />
+              </div>
+            )}
           </div>
 
           {/* 담당자 마감일 박스 */}
