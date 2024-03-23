@@ -81,10 +81,7 @@ export default function DashboardEdit({ dashboardId }) {
         </header>
         {dashboardInfo ? (
           <div className="flex flex-col justify-start gap-3 py-[17px] px-3 md:p-5 bg-gray_FAFAFA flex-grow">
-            <EditContent
-              dashboardId={dashboardId}
-              dashboardInfo={dashboardInfo}
-            />
+            <EditContent dashboardId={dashboardId} />
           </div>
         ) : (
           <div>Loading...</div>

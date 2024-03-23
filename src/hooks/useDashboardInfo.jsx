@@ -1,18 +1,19 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { axiosGet } from '@/features/axios';
 import { setMembers } from '@/features/memberSlice';
 import { reset, setColumn } from '@/features/columnsSlice';
+import { setDashboardInfo } from '@/features/dashboardInfoSlice';
 
 export default function useDashboardInfo(dashboardId) {
-  const [dashboardInfo, setDashboardInfo] = useState();
+  const dashboardInfo = useSelector((state) => state.dashboardInfo);
   const memberList = useSelector((state) => state.memberList.members);
   const columns = useSelector((state) => state.columnList);
   const dispatch = useDispatch();
 
   const getDashboardInfo = async () => {
     const res = await axiosGet(`/dashboards/${dashboardId}`);
-    setDashboardInfo(res);
+    dispatch(setDashboardInfo({ data: res }));
   };
   const getMemberList = async () => {
     const res = await axiosGet(
