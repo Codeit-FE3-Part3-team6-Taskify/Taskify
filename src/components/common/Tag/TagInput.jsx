@@ -2,12 +2,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 // eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
 import TagItem from './TagItem';
+import getRandomColorPair from '@/utils/getRandomColorPair';
 
 export default function TagInput({ initialTag, setFormValues }) {
   const inputRef = useRef(null);
   const [tagList, setTagList] = useState([]);
   const [tagItem, setTagItem] = useState('');
   const [isFocused, setIsFocused] = useState(false);
+  const [prevColorIndex, setPrevColorIndex] = useState(-1); // 이전 색상 상태
 
   useEffect(() => {
     if (initialTag && initialTag.length > 0) {
@@ -18,7 +20,11 @@ export default function TagInput({ initialTag, setFormValues }) {
 
   const addTagItem = () => {
     const updatedTagList = [...tagList];
-    updatedTagList.push(tagItem);
+    const colorIndex = getRandomColorPair(prevColorIndex);
+    const coloredTagItem = tagItem + colorIndex;
+
+    updatedTagList.push(coloredTagItem);
+
     setTagList(updatedTagList);
     setTagItem('');
     setFormValues((prevFormValues) => ({
@@ -27,6 +33,7 @@ export default function TagInput({ initialTag, setFormValues }) {
     }));
 
     inputRef.current.focus();
+    setPrevColorIndex(colorIndex);
   };
 
   const onKeyDown = (e) => {
@@ -48,13 +55,12 @@ export default function TagInput({ initialTag, setFormValues }) {
 
   return (
     <div
-      className="sign-input-base"
+      className="px-4 py-[15px] outline-none border-solid border-[1px] rounded-lg bg-white w-full h-auto "
       style={{ borderColor: isFocused ? '#5534DA' : '#D9D9D9' }}
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
     >
-      <div className="flex gap-[6px] ">
-        {/* flex-wrap */}
+      <div className="flex gap-[6px] flex-wrap">
         {tagList &&
           tagList.map((tag, index) => {
             return (
@@ -70,7 +76,7 @@ export default function TagInput({ initialTag, setFormValues }) {
           ref={inputRef}
           type="text"
           placeholder={tagList.length > 0 ? '' : '입력 후 Enter'}
-          className="flex w-full bg-transparent focus:border-0 focus:outline-none cursor-text"
+          className=" inline-flex  bg-transparent focus:border-0 focus:outline-none cursor-text"
           value={tagItem}
           onChange={(e) => setTagItem(e.target.value)}
           onKeyDown={onKeyDown}

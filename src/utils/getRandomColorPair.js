@@ -1,14 +1,13 @@
 import { TAG_COLORS } from '@/constants/colors';
 
-export default function getRandomColorPair(previousColor) {
-  let newColor;
-  do {
-    const randomIndex = Math.floor(Math.random() * TAG_COLORS.length);
-    newColor = TAG_COLORS[randomIndex];
-  } while (
-    newColor.background === previousColor?.background &&
-    newColor.text === previousColor?.text
-  );
+export default function getRandomColorPair(previousColorIndex) {
+  const availableIndexes = [];
+  TAG_COLORS.forEach((_, i) => {
+    if (i !== previousColorIndex) {
+      availableIndexes.push(i);
+    }
+  });
 
-  return newColor;
+  const randomIndex = Math.floor(Math.random() * availableIndexes.length);
+  return availableIndexes[randomIndex];
 }
