@@ -20,17 +20,15 @@ export default function InputModal({ onClose, dashboardId }) {
   const isInputEmpty = inputValue.trim() === '';
 
   const postInvitations = async () => {
-    try {
-      const res = await axiosPostJason(
-        `/dashboards/${dashboardId}/invitations`,
-        {
-          email: inputValue,
-        },
-      );
+    const res = await axiosPostJason(`/dashboards/${dashboardId}/invitations`, {
+      email: inputValue,
+    });
+    if (!res.status) {
       dispatch(addEmails({ data: res }));
-    } catch (error) {
-      // eslint-disable-next-line no-useless-return
-      return;
+    }
+    if (res.status) {
+      // eslint-disable-next-line no-alert
+      alert(res.data.message);
     }
   };
 
