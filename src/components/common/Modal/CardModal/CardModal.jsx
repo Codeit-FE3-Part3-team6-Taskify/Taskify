@@ -269,7 +269,7 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
               {cardData.tags.length > 0 && (
                 <>
                   <span className="relative w-[1px]  bg-gray_D9D9D9" />
-                  <div className="flex gap-[6px] ">
+                  <div className="flex gap-[6px] flex-wrap">
                     {cardData.tags.map((tag, index) => {
                       return <TagItem key={index} tag={tag} />;
                     })}

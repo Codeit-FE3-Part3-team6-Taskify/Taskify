@@ -48,7 +48,7 @@ export default function DropdownMenu({ initialStatus, options, onSelect }) {
       {isOpen && (
         <div
           ref={dropdownRef}
-          className="absolute top-full left-0 mt-1 w-full flex flex-col items-start gap-[13px] py-[14px] bg-white_FFFFFF  rounded-lg border border-gray_D9D9D9 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.08)] "
+          className="absolute z-10 top-full left-0 mt-1 w-full flex flex-col items-start gap-[13px] py-[14px] bg-white_FFFFFF  rounded-lg border border-gray_D9D9D9 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.08)] "
         >
           {options.map((option) => (
             <div
