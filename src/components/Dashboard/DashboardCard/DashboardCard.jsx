@@ -3,6 +3,7 @@
 /* eslint-disable react/no-array-index-key */
 import Image from 'next/image';
 import React from 'react';
+import dayjs from 'dayjs';
 import Avatar from '@/components/common/Avatar/Avatar';
 import { CalendarIcon } from '../../../../public/images';
 import TagItem from '@/components/common/Tag/TagItem';
@@ -40,7 +41,7 @@ export default function DashboardCard({ cardInfo, columnTitle }) {
       <section className="flex flex-col gap-[6px] md:w-full">
         <h5 className="text-lg font-medium mt-1 ">{title}</h5>
         <div className="flex flex-col md:flex-row md:items-center md:w-full md:gap-4 lg:flex-col lg:items-stretch lg:gap-0">
-          <div className="flex gap-[6px]">
+          <div className="flex gap-[6px] flex-wrap">
             {tags &&
               tags.map((tag, i) => (
                 <div
@@ -60,7 +61,7 @@ export default function DashboardCard({ cardInfo, columnTitle }) {
               alt="달력 아이콘"
             />
             <span className="text-xs font-medium text-gray_787486 md:text-sm">
-              {dueDate}
+              {dayjs(dueDate).format('YYYY.MM.DD')}
             </span>
             <span className="ml-auto">
               <Avatar
