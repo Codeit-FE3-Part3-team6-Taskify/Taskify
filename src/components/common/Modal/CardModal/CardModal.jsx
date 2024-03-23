@@ -3,7 +3,8 @@
 /* eslint-disable object-shorthand */
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable no-shadow */
-import { useEffect, useState } from 'react';
+/* eslint-disable consistent-return */
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import dayjs from 'dayjs';
 import Modal from '../Modal';
@@ -20,10 +21,13 @@ import useUserGet from '@/hooks/useUserGet';
 import { KebabIcon, CloseIcon } from '@/../public/images';
 import PopupMenu from '../../PopupMenu/PopupMenu';
 import StatusTag from '../../StatusTag/StatusTag';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 
 export default function CardModal({ onClose, cardId, columnTitle }) {
   // TODO(조예진): updateTodo와 같은 코드는 나중에 따로 커스텀훅으로 분리할 것
   // 대시보드에서 카드클릭할 때, 컬럼 이름을 넘겨주는것으로 가정
+  const observerRef = useRef(null);
+  const scrollContainerRef = useRef(null);
 
   const userInfo = useUserGet();
 
@@ -39,20 +43,44 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
   });
 
   // 댓글 관련 코드
+  const [loading, setLoading] = useState(false);
   const [comments, setComments] = useState([]);
+  const [currentCursorId, setCurrentCursorId] = useState(null);
   const [comment, setComment] = useState('');
   const [editComment, setEditComment] = useState();
   const [isCommentBoxFocused, setIsCommentBoxFocused] = useState(false);
   const [isCommentFocused, setIsCommentFocused] = useState({});
 
   const getComments = async () => {
+    setLoading(true);
     try {
-      const { comments } = await axiosGet(`/comments?cardId=${cardId}`);
+      const { comments, cursorId } = await axiosGet(
+        `/comments?size=4&cardId=${cardId}`,
+      );
       if (!comments.status) {
         setComments(comments);
+        setCurrentCursorId(cursorId);
       }
     } catch (e) {
-      alert('댓글 불러올 수 없습니다. 다시 시도해주세요.');
+      return e.response;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchMoreComments = async () => {
+    if (currentCursorId === null) return; // cursorId가 null이면 추가 데이터 요청하지 않음
+
+    try {
+      const { comments: newComments, cursorId } = await axiosGet(
+        `/comments?size=4&cursorId=${currentCursorId}&cardId=${cardId}`,
+      );
+      if (!newComments.status) {
+        setComments((prevComments) => [...prevComments, ...newComments]);
+        setCurrentCursorId(cursorId);
+      }
+    } catch (e) {
+      return e.response;
     }
   };
 
@@ -78,7 +106,7 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
         // 댓글 가져오기
         await getComments();
       } catch (e) {
-        alert('할일 데이터를 가져올 수 없습니다. 다시 시도해주세요.');
+        return e.response;
       }
     };
 
@@ -87,40 +115,39 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
 
   const handlePostComment = async () => {
     try {
-      await axiosPostJason('/comments', {
+      const newComment = await axiosPostJason('/comments', {
         content: comment,
         cardId: cardId,
         columnId: cardData.columnId,
         dashboardId: cardData.dashboardId,
       });
-
       // 입력값 초기화
       setComment('');
-      getComments();
+      setComments((prevComments) => [newComment, ...prevComments]);
       setIsCommentBoxFocused(false);
     } catch (e) {
-      alert('댓글을 달 수 없습니다. 다시 시도해주세요.');
+      return e.response;
     }
   };
 
   // 팝업 메뉴
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const togglePopup = (e) => {
-    e.stopPropagation(); // 이벤트 버블링 방지-안되는데?
+  const togglePopup = () => {
     setIsPopupOpen(!isPopupOpen);
   };
-
-  const editCardOptions = ['수정하기', '삭제하기'];
 
   // 댓글삭제
   const handleDeleteComment = async (commentId) => {
     try {
       await axiosDelete(`/comments/${commentId}`);
-      getComments();
+      setComments((currentComments) =>
+        currentComments.filter((comment) => comment.id !== commentId),
+      );
     } catch (e) {
-      alert('댓글을 삭제 할 수 없습니다. 다시 시도해주세요.');
+      return e.response;
     }
   };
+
   const [editCommentId, setEditCommentId] = useState(-1);
 
   const handleClickEditComment = (commentContent, commentId) => {
@@ -134,14 +161,34 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
       const res = await axiosPut(`/comments/${commentId}`, {
         content: editComment,
       });
+      const newContent = res.content;
       if (!res.status) {
         setEditCommentId(-1);
-        getComments();
+        setComments((currentComments) =>
+          currentComments.map((comment) =>
+            comment.id === commentId
+              ? { ...comment, content: newContent }
+              : comment,
+          ),
+        );
       }
     } catch (e) {
-      alert('댓글을 수정 할 수 없습니다. 다시 시도해주세요.');
+      return e.response;
     }
   };
+
+  const [mountTime, setMountTime] = useState(null);
+  useEffect(() => {
+    // 컴포넌트가 마운트되는 시점의 타임스탬프를 기록합니다.
+    setMountTime(Date.now());
+  }, []);
+
+  useIntersectionObserver(observerRef, scrollContainerRef, () => {
+    const now = Date.now();
+    if (!loading && now - mountTime > 500) {
+      fetchMoreComments();
+    }
+  });
 
   return (
     <Modal onClose={onClose}>
@@ -164,7 +211,7 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
                   onClose={onClose}
                   setIsPopupOpen={setIsPopupOpen}
                   columnId={cardData.columnId}
-                  options={editCardOptions}
+                  options={['수정하기', '삭제하기']}
                 />
               </div>
             )}
@@ -192,13 +239,16 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
                 담당자
               </span>
               <div className="flex gap-2 items-center">
-                {cardData.profileImageUrl && (
+                {cardData.profileImageUrl ? (
+                  <div className="relative rounded-full w-[26px] h-[26px] border-2 border-white_FFFFFF">
+                    <Image fill src={cardData.profileImageUrl} alt="profile" />
+                  </div>
+                ) : (
                   <Avatar
-                    size="mediumCard"
-                    image={cardData.profileImageUrl}
                     text={cardData.assigneeUserName.charAt(0).toUpperCase()}
                   />
                 )}
+
                 <span className="text-xs md:text-sm">
                   {cardData.assigneeUserName}
                 </span>
@@ -266,83 +316,95 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
             {/* 댓글박스 */}
 
             {/* 달린댓글 */}
-            {comments.length > 0 &&
-              comments.map((comment, index) => (
-                <div key={index} className="flex gap-2">
-                  {comment.author.profileImageUrl && (
-                    <Avatar
-                      size="mediumCard"
-                      image={comment.author.profileImageUrl}
-                      text={comment.author.nickname.charAt(0).toUpperCase()}
-                    />
-                  )}
-                  <div className="flex flex-col gap[6px] flex-grow">
-                    <div className="flex items-center gap-[6px] md:gap-2 text-xs md:text-sm font-semibold">
-                      <div>{comment.author.nickname}</div>
-
-                      <div className="text-[10px] md:text-xs text-gray_9FA6B2">
-                        {dayjs(comment.createdAt).format('YYYY.MM.DD HH:mm')}
+            <div
+              ref={scrollContainerRef}
+              className="flex flex-col h-[200px] overflow-scroll gap-1"
+            >
+              {comments.length > 0 &&
+                comments.map((comment) => (
+                  <div key={comment.id} className="flex gap-2">
+                    {comment.author.profileImageUrl ? (
+                      <div className="relative rounded-full w-[38px] h-[38px] border-2 border-white_FFFFFF">
+                        <Image
+                          fill
+                          src={comment.author.profileImageUrl}
+                          alt="profile"
+                        />
                       </div>
-                    </div>
-                    {editCommentId === comment.id ? (
-                      <CommentBox
-                        isFocused={isCommentFocused[comment.id]}
-                        onClick={() => handlePutComment(comment.id)}
-                        comment={editComment}
-                        setComment={setEditComment}
-                        onFocus={() =>
-                          setIsCommentFocused((prev) => ({
-                            ...prev,
-                            [comment.id]: true,
-                          }))
-                        }
-                        onBlur={() =>
-                          setIsCommentFocused((prev) => ({
-                            ...prev,
-                            [comment.id]: false,
-                          }))
-                        }
-                      />
                     ) : (
-                      <div className="text-xs md:text-sm ">
-                        {comment.content}
-                      </div>
+                      <Avatar
+                        text={comment.author.nickname.charAt(0).toUpperCase()}
+                      />
                     )}
+                    <div className="flex flex-col gap[6px] flex-grow">
+                      <div className="flex items-center gap-[6px] md:gap-2 text-xs md:text-sm font-semibold">
+                        <div>{comment.author.nickname}</div>
 
-                    {userInfo.id === comment.author.id && (
-                      <div className="flex gap-2 md:gap-3 mt-[2px] md:mt-[6px] text-[10px] md:text-xs text-gray_9FA6B2">
-                        {editCommentId === comment.id ? (
-                          <button
-                            className="underline"
-                            onClick={() => setEditCommentId(-1)}
-                          >
-                            취소
-                          </button>
-                        ) : (
-                          <button
-                            className="underline"
-                            onClick={() =>
-                              handleClickEditComment(
-                                comment.content,
-                                comment.id,
-                              )
-                            }
-                          >
-                            수정
-                          </button>
-                        )}
-                        <button
-                          className="underline"
-                          onClick={() => handleDeleteComment(comment.id)}
-                        >
-                          삭제
-                        </button>
+                        <div className="text-[10px] md:text-xs text-gray_9FA6B2">
+                          {dayjs(comment.createdAt).format('YYYY.MM.DD HH:mm')}
+                        </div>
                       </div>
-                    )}
+                      {editCommentId === comment.id ? (
+                        <CommentBox
+                          isFocused={isCommentFocused[comment.id]}
+                          onClick={() => handlePutComment(comment.id)}
+                          comment={editComment}
+                          setComment={setEditComment}
+                          onFocus={() =>
+                            setIsCommentFocused((prev) => ({
+                              ...prev,
+                              [comment.id]: true,
+                            }))
+                          }
+                          onBlur={() =>
+                            setIsCommentFocused((prev) => ({
+                              ...prev,
+                              [comment.id]: false,
+                            }))
+                          }
+                        />
+                      ) : (
+                        <div className="text-xs md:text-sm ">
+                          {comment.content}
+                        </div>
+                      )}
+
+                      {userInfo.id === comment.author.id && (
+                        <div className="flex gap-2 md:gap-3 mt-[2px] md:mt-[6px] text-[10px] md:text-xs text-gray_9FA6B2">
+                          {editCommentId === comment.id ? (
+                            <button
+                              className="underline"
+                              onClick={() => setEditCommentId(-1)}
+                            >
+                              취소
+                            </button>
+                          ) : (
+                            <button
+                              className="underline"
+                              onClick={() =>
+                                handleClickEditComment(
+                                  comment.content,
+                                  comment.id,
+                                )
+                              }
+                            >
+                              수정
+                            </button>
+                          )}
+                          <button
+                            className="underline"
+                            onClick={() => handleDeleteComment(comment.id)}
+                          >
+                            삭제
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
-            {/* 달린댓글 */}
+                ))}
+              {/* 달린댓글 */}
+              <div ref={observerRef} className="h-[1px]" />
+            </div>
           </div>
 
           {/* 담당자 마감일 박스 */}
@@ -352,10 +414,12 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
                 담당자
               </span>
               <div className="flex gap-2 items-center">
-                {cardData.profileImageUrl && (
+                {cardData.profileImageUrl ? (
+                  <div className="relative rounded-full w-[38px] h-[38px] border-2 border-white_FFFFFF">
+                    <Image fill src={cardData.profileImageUrl} alt="profile" />
+                  </div>
+                ) : (
                   <Avatar
-                    size="mediumCard"
-                    image={cardData.profileImageUrl}
                     text={cardData.assigneeUserName.charAt(0).toUpperCase()}
                   />
                 )}
