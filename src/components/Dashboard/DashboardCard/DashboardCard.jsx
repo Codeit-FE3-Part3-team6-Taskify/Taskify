@@ -40,7 +40,7 @@ export default function DashboardCard({ cardInfo, columnTitle }) {
       <section className="flex flex-col gap-[6px] md:w-full">
         <h5 className="text-lg font-medium mt-1 ">{title}</h5>
         <div className="flex flex-col md:flex-row md:items-center md:w-full md:gap-4 lg:flex-col lg:items-stretch lg:gap-0">
-          <div className="flex gap-[6px]">
+          <div className="flex gap-[6px] flex-wrap">
             {tags &&
               tags.map((tag, i) => (
                 <div
@@ -51,7 +51,7 @@ export default function DashboardCard({ cardInfo, columnTitle }) {
                 </div>
               ))}
           </div>
-          <div className="relative flex items-center gap-[6px] flex-auto">
+          <div className="relative flex items-center gap-[6px] flex-auto w-full">
             <Image
               className="relative top-[-1px]"
               width={18}
