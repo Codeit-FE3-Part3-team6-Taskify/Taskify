@@ -30,7 +30,7 @@ export default function InputModal({ onClose, dashboardId }) {
       dispatch(addEmails({ data: res }));
     } catch (error) {
       // eslint-disable-next-line no-alert
-      console.log(error);
+      // console.log(error);
       alert('데이터 전송에 실패했습니다.');
     }
   };
