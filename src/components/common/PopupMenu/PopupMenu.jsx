@@ -37,7 +37,7 @@ export default function PopupMenu({
           dispatch(deleteCard({ id: cardId, columnId }));
           onClose();
         } catch (e) {
-          alert('카드를 삭제 할 수 없습니다. 다시 시도해주세요.');
+          return;
         }
         break;
       case '로그아웃':

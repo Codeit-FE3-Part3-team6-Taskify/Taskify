@@ -25,7 +25,6 @@ import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 
 export default function CardModal({ onClose, cardId, columnTitle }) {
   // TODO(조예진): updateTodo와 같은 코드는 나중에 따로 커스텀훅으로 분리할 것
-  // 대시보드에서 카드클릭할 때, 컬럼 이름을 넘겨주는것으로 가정
   const observerRef = useRef(null);
   const scrollContainerRef = useRef(null);
 
@@ -239,15 +238,11 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
                 담당자
               </span>
               <div className="flex gap-2 items-center">
-                {cardData.profileImageUrl ? (
-                  <div className="relative rounded-full w-[26px] h-[26px] border-2 border-white_FFFFFF">
-                    <Image fill src={cardData.profileImageUrl} alt="profile" />
-                  </div>
-                ) : (
-                  <Avatar
-                    text={cardData.assigneeUserName.charAt(0).toUpperCase()}
-                  />
-                )}
+                <Avatar
+                  size="mediumCard"
+                  image={cardData?.profileImageUrl || null}
+                  text={cardData.assigneeUserName.charAt(0).toUpperCase()}
+                />
 
                 <span className="text-xs md:text-sm">
                   {cardData.assigneeUserName}
@@ -274,7 +269,7 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
               {cardData.tags.length > 0 && (
                 <>
                   <span className="relative w-[1px]  bg-gray_D9D9D9" />
-                  <div className="flex gap-[6px] ">
+                  <div className="flex gap-[6px] flex-wrap">
                     {cardData.tags.map((tag, index) => {
                       return <TagItem key={index} tag={tag} />;
                     })}
@@ -289,7 +284,6 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
             </div>
 
             {cardData.imageUrl && (
-              // 원본이미지비율에 맞게 높이를 조정하고 싶은데 안됨..
               <div className="relative w-full h-[168px] md:h-[255px]">
                 <Image
                   fill
@@ -316,26 +310,19 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
             {/* 댓글박스 */}
 
             {/* 달린댓글 */}
-            <div
-              ref={scrollContainerRef}
-              className="flex flex-col h-[200px] overflow-scroll gap-1"
-            >
-              {comments.length > 0 &&
-                comments.map((comment) => (
+            {comments.length > 0 && (
+              <div
+                ref={scrollContainerRef}
+                className="flex flex-col max-h-[200px] overflow-y-auto gap-1"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
+                {comments.map((comment) => (
                   <div key={comment.id} className="flex gap-2">
-                    {comment.author.profileImageUrl ? (
-                      <div className="relative rounded-full w-[38px] h-[38px] border-2 border-white_FFFFFF">
-                        <Image
-                          fill
-                          src={comment.author.profileImageUrl}
-                          alt="profile"
-                        />
-                      </div>
-                    ) : (
-                      <Avatar
-                        text={comment.author.nickname.charAt(0).toUpperCase()}
-                      />
-                    )}
+                    <Avatar
+                      size="mediumCard"
+                      image={comment?.author?.profileImageUrl || null}
+                      text={comment.author.nickname.charAt(0).toUpperCase()}
+                    />
                     <div className="flex flex-col gap[6px] flex-grow">
                       <div className="flex items-center gap-[6px] md:gap-2 text-xs md:text-sm font-semibold">
                         <div>{comment.author.nickname}</div>
@@ -402,9 +389,10 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
                     </div>
                   </div>
                 ))}
-              {/* 달린댓글 */}
-              <div ref={observerRef} className="h-[1px]" />
-            </div>
+                {/* 달린댓글 */}
+                <div ref={observerRef} className="h-[1px]" />
+              </div>
+            )}
           </div>
 
           {/* 담당자 마감일 박스 */}
@@ -414,15 +402,11 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
                 담당자
               </span>
               <div className="flex gap-2 items-center">
-                {cardData.profileImageUrl ? (
-                  <div className="relative rounded-full w-[38px] h-[38px] border-2 border-white_FFFFFF">
-                    <Image fill src={cardData.profileImageUrl} alt="profile" />
-                  </div>
-                ) : (
-                  <Avatar
-                    text={cardData.assigneeUserName.charAt(0).toUpperCase()}
-                  />
-                )}
+                <Avatar
+                  size="mediumCard"
+                  image={cardData?.profileImageUrl || null}
+                  text={cardData.assigneeUserName.charAt(0).toUpperCase()}
+                />
 
                 <span className="text-xs md:text-sm">
                   {cardData.assigneeUserName}
