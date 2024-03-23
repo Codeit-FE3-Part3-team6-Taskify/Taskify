@@ -5,9 +5,13 @@ import Avatar from '@/components/common/Avatar/Avatar';
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
 import { axiosDelete } from '@/features/axios';
 
-export default function MemberListItem({ nickname, email, memberId }) {
+export default function MemberListItem({
+  nickname,
+  email,
+  memberId,
+  profileImageUrl,
+}) {
   const dispatch = useDispatch();
-
   const handleDeleteClick = async () => {
     try {
       await axiosDelete(`/members/${memberId}`, {});
@@ -21,7 +25,11 @@ export default function MemberListItem({ nickname, email, memberId }) {
   return (
     <div className="w-full flex border-b pb-[20px] gap-y-2 md:items-center sm:pt-[20px] ">
       <div className="flex items-center gap-3 w-full">
-        <Avatar size="large" text={email.charAt(0).toUpperCase()} />
+        <Avatar
+          size="large"
+          image={profileImageUrl || null}
+          text={email.charAt(0).toUpperCase()}
+        />
         <span>{nickname}</span>
       </div>
       <CtaDefault
