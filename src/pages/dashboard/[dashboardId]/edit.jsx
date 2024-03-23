@@ -87,7 +87,7 @@ export default function DashboardEdit({ dashboardId }) {
             />
           </div>
         ) : (
-          <div>Loading...</div> // 금요일에 간단하게 Loading 추가하면 좋을듯
+          <div>Loading...</div>
         )}
       </div>
     </div>
