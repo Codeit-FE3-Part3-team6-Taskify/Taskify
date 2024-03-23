@@ -8,8 +8,10 @@ import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
 import UserInformationInput from '@/components/common/SignInput/UserInformationInput';
 import FileUpload from '@/components/common/FileUpload/FileUpload';
 import { AddImg } from '@/../public/images';
+import useModal from '@/hooks/useModal';
 
 export default function UpdateProfile() {
+  const { openModal } = useModal();
   const [myInfo, setMyInfo] = useState({
     email: '',
     nickname: '',
@@ -55,6 +57,10 @@ export default function UpdateProfile() {
               ...prev,
               nickname: nextNickname,
             }));
+            openModal({
+              type: 'alert',
+              props: { text: '내 정보가 변경되었습니다.' },
+            });
           }
         } catch (e) {
           alert('변경에 실패했습니다. 다시 시도해주세요.');
