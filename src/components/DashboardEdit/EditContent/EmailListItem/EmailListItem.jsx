@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-return */
 /* eslint-disable no-shadow */
 import { useDispatch } from 'react-redux';
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
@@ -7,20 +8,13 @@ import { axiosDelete } from '@/features/axios';
 export default function EmailListItem({ userEmail, dashboardId, invitedId }) {
   const dispatch = useDispatch();
 
-  const handleCancelClick = async (invitedId) => {
+  const handleCancelClick = async () => {
     try {
-      const res = await axiosDelete(
-        `/dashboards/${dashboardId}/invitations/${invitedId}`,
-        {
-          dashboardId,
-          invitationId: invitedId,
-        },
-      );
-      dispatch(deleteEmails({ data: res }));
+      await axiosDelete(`/dashboards/${dashboardId}/invitations/${invitedId}`);
+      dispatch(deleteEmails({ id: invitedId }));
     } catch (error) {
       return;
     }
-    window.location.reload();
   };
 
   return (
@@ -29,7 +23,7 @@ export default function EmailListItem({ userEmail, dashboardId, invitedId }) {
       <CtaDefault
         size="small"
         color="white"
-        onClick={() => handleCancelClick(invitedId)}
+        onClick={() => handleCancelClick()}
       >
         취소
       </CtaDefault>
