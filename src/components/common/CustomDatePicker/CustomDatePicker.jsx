@@ -1,18 +1,15 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
+import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import ko from 'date-fns/locale/ko'; // 한국어 설정 파일 불러오기
 import dayjs from 'dayjs';
-
-import { CalendarIcon } from '@/../public/images';
+import { CustomInput } from './CustomInput';
 
 export default function CustomDatePicker({ dueDate, setFormValues }) {
-  const inputRef = useRef();
   const initialDate = dueDate ? new Date(dueDate) : new Date();
   const [selectedDate, setSelectedDate] = useState(initialDate);
   const [isOpen, setIsOpen] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     setSelectedDate(initialDate);
@@ -34,21 +31,10 @@ export default function CustomDatePicker({ dueDate, setFormValues }) {
     }
   }, [dueDate]);
 
-  const handleFocus = () => {
-    console.log(inputRef.current);
-    if (inputRef.current) {
-      inputRef.current.classList.add('border-violet_5534DA');
-    }
-  };
-
-  const handleBlur = () => {
-    if (inputRef.current) {
-      inputRef.current.classList.remove('border-violet_5534DA');
-    }
-  };
-
   return (
     <DatePicker
+      locale={ko}
+      minDate={new Date()}
       selected={selectedDate}
       onChange={handleDateChange}
       showTimeSelect
@@ -58,9 +44,9 @@ export default function CustomDatePicker({ dueDate, setFormValues }) {
       dateFormat="yyyy.MM.dd HH:mm"
       customInput={
         <CustomInput
-          inputRef={inputRef}
-          handleFocus={handleFocus}
-          handleBlur={handleBlur}
+          isFocused={isFocused}
+          handleFocus={() => setIsFocused(true)}
+          handleBlur={() => setIsFocused(false)}
           value={selectedDate}
           onChange={(e) => setSelectedDate(e.target.value)}
           toggleCalendar={() => setIsOpen(!isOpen)}
@@ -70,27 +56,5 @@ export default function CustomDatePicker({ dueDate, setFormValues }) {
       onCalendarClose={() => setIsOpen(false)}
       onClickOutside={() => setIsOpen(false)}
     />
-  );
-}
-
-function CustomInput({
-  inputRef,
-  handleFocus,
-  handleBlur,
-  value,
-  toggleCalendar,
-  onChange,
-}) {
-  return (
-    <div
-      ref={inputRef}
-      className="w-full flex gap-[10px] items-center py-[10px] md:py-[14px] px-4 bg-white border border-gray-D9D9D9 rounded-md focus:outline-none focus:border-violet_5534DA"
-      onFocus={handleFocus}
-      onBlur={handleBlur}
-      onClick={toggleCalendar}
-    >
-      <Image src={CalendarIcon} alt="calendar" />
-      <input className="focus:outline-none" value={value} onChange={onChange} />
-    </div>
   );
 }
