@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable no-useless-return */
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
