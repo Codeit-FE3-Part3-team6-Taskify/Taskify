@@ -11,7 +11,7 @@ import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
 import useModal from '@/hooks/useModal';
 import useRedirectWithAccessToken from '@/hooks/useRedirectWithAccessToken';
 
-// Todo(노진석) : (미완성)api로직 등 추가해야함.
+// Todo(노진석) : 완성
 export default function SignInPage() {
   useRedirectWithAccessToken('/mydashboard');
   const dispatch = useDispatch();

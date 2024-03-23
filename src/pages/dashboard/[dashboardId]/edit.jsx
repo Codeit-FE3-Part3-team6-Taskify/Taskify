@@ -10,6 +10,7 @@ import useDashboardInfo from '@/hooks/useDashboardInfo';
 import useModal from '@/hooks/useModal';
 import useGetDashboardsSidebar from '@/hooks/useGetDashboardsSidebar';
 import EditContent from '@/components/DashboardEdit/EditContent/EditContent';
+import useRedirectWithAccessToken from '@/hooks/useRedirectWithAccessToken';
 
 export async function getServerSideProps(context) {
   const { dashboardId } = context.params;
@@ -22,6 +23,7 @@ export async function getServerSideProps(context) {
 }
 
 export default function DashboardEdit({ dashboardId }) {
+  useRedirectWithAccessToken();
   const { openModal } = useModal();
   const userInfo = useUserGet();
   const { sidebarNextPage, sidebarPrevPage, sidebarCurrentPage } =

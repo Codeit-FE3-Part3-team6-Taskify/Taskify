@@ -17,7 +17,6 @@ import useRedirectWithAccessToken from '@/hooks/useRedirectWithAccessToken';
 
 export default function SignUpPage() {
   useRedirectWithAccessToken('/mydashboard');
-  useRedirectWithAccessToken();
   const router = useRouter();
   const [formValues, setFormValues] = useState({
     email: '',
