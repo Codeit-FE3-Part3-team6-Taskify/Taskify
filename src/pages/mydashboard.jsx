@@ -6,8 +6,10 @@ import useGetDashboardsSidebar from '@/hooks/useGetDashboardsSidebar';
 import useGetDashboards from '@/hooks/useGetDashboards';
 import useGetInvitedDashboards from '@/hooks/useGetInvitedDashboards';
 import useGetUsers from '@/hooks/useGetUsers';
+import useRedirectWithAccessToken from '@/hooks/useRedirectWithAccessToken';
 
 export default function myDashboard() {
+  useRedirectWithAccessToken();
   const { userData } = useGetUsers();
   const { nextPage, prevPage, currentPage } = useGetDashboards();
   const { sidebarNextPage, sidebarPrevPage, sidebarCurrentPage } =

@@ -66,23 +66,41 @@ const columnList = createSlice({
       state[findColumn].cardList = filterCard;
     },
     changeCard: (state, action) => {
-      const { data, columnId, id } = action.payload;
+      const { data, columnId, id, index } = action.payload;
       const findColumn = state.findIndex((column) => column.id === columnId);
       const findCard = state[findColumn].cardList.findIndex(
         (card) => card.id === id,
       );
       if (state[findColumn].id === data.columnId) {
-        const result = [
-          ...state[findColumn].cardList.slice(0, findCard),
-          data,
-          ...state[findColumn].cardList.slice(findCard + 1),
-        ];
-        state[findColumn].cardList = result;
+        if (findCard >= 0 && !index) {
+          const result = [
+            ...state[findColumn].cardList.slice(0, findCard),
+            data,
+            ...state[findColumn].cardList.slice(findCard + 1),
+          ];
+          state[findColumn].cardList = result;
+        } else if (index > 0) {
+          const findChangeColumn = state.findIndex(
+            (column) => column.id === data.columnId,
+          );
+          state[findChangeColumn].cardList = [
+            ...state[findChangeColumn].cardList.slice(0, index),
+            data,
+            ...state[findChangeColumn].cardList.slice(index),
+          ];
+        } else if (index === 0) {
+          const findChangeColumn = state.findIndex(
+            (column) => column.id === data.columnId,
+          );
+          state[findChangeColumn].cardList = [
+            data,
+            ...state[findChangeColumn].cardList.slice(index),
+          ];
+        }
       } else {
         const findChangeColumn = state.findIndex(
           (column) => column.id === data.columnId,
         );
-        const { index } = action.payload;
         if (index) {
           state[findChangeColumn].cardList = [
             ...state[findChangeColumn].cardList.slice(0, index),

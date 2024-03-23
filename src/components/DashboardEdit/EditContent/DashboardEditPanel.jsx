@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-useless-return */
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Image from 'next/image';
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
 import { CheckIconWhite } from '@/../public/images';
@@ -9,14 +10,18 @@ import { circleColorList } from '@/utils/circleColorList';
 import { axiosPut } from '@/features/axios';
 import TableBox from '@/components/common/Table/TableBox';
 import UserInformationInput from '@/components/common/SignInput/UserInformationInput';
+import { setDashboardInfo } from '@/features/dashboardInfoSlice';
+import { changeSidebarDashboard } from '@/features/sidebarDashboardListSlice';
 
-export default function DashboardEditPanel({ dashboardId, dashboardInfo }) {
-  const [inputValue, setInputValue] = useState('');
-  const [selectedColor, setSelectedColor] = useState('');
+export default function DashboardEditPanel({ dashboardId }) {
+  const dashboardInfo = useSelector((state) => state.dashboardInfo);
+  const dispatch = useDispatch();
+  const [selectedColor, setSelectedColor] = useState();
   const [dashboardChange, setDashboardChange] = useState({
     title: dashboardInfo.title,
     color: dashboardInfo.color,
   });
+  const [inputValue, setInputValue] = useState(dashboardInfo.title);
   const findColorName = (dashboardColor) => {
     const selectedColorName = Object.keys(circleColorList).find(
       (key) => circleColorList[key] === dashboardColor,
@@ -49,8 +54,9 @@ export default function DashboardEditPanel({ dashboardId, dashboardInfo }) {
         title: inputValue,
         color: colorCode,
       };
-      await axiosPut(`/dashboards/${dashboardId}`, body);
-      window.location.reload();
+      const res = await axiosPut(`/dashboards/${dashboardId}`, body);
+      dispatch(setDashboardInfo({ data: res }));
+      dispatch(changeSidebarDashboard({ data: res }));
     } catch (error) {
       return;
     }
@@ -70,6 +76,7 @@ export default function DashboardEditPanel({ dashboardId, dashboardInfo }) {
           </span>
           <UserInformationInput
             onChange={handleInputChange}
+            value={inputValue}
             placeholder="이름을 입력해 주세요."
           />
         </div>
