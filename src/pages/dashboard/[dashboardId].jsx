@@ -69,6 +69,7 @@ export default function DashboardPage({ dashboardId }) {
             }
             buttons={
               <DashboardHeaderButton
+                createdByMe={dashboardInfo ? dashboardInfo.createdByMe : false}
                 invitationClick={handleOpenInvitation}
                 settingClick={settingClick}
               />
