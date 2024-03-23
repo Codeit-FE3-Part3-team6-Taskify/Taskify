@@ -14,9 +14,7 @@ export default function EditContent({ dashboardId }) {
 
   const handleDashboardDelete = async () => {
     try {
-      await axiosDelete(`/dashboards/${dashboardId}/`, {
-        dashboardId,
-      });
+      await axiosDelete(`/dashboards/${dashboardId}`);
       router.push('/mydashboard');
     } catch (error) {
       return;
