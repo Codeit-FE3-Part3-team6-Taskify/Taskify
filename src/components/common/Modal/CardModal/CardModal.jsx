@@ -21,7 +21,7 @@ import { KebabIcon, CloseIcon } from '@/../public/images';
 import PopupMenu from '../../PopupMenu/PopupMenu';
 import StatusTag from '../../StatusTag/StatusTag';
 
-export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
+export default function CardModal({ onClose, cardId, columnTitle }) {
   // TODO(조예진): updateTodo와 같은 코드는 나중에 따로 커스텀훅으로 분리할 것
   // 대시보드에서 카드클릭할 때, 컬럼 이름을 넘겨주는것으로 가정
 
@@ -160,7 +160,7 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
                   cardId={cardId}
                   onClose={onClose}
                   setIsPopupOpen={setIsPopupOpen}
-                  columnId={columnId}
+                  columnId={cardData.columnId}
                 />
               </div>
             )}
