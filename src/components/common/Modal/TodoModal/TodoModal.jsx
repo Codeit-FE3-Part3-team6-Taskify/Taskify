@@ -76,7 +76,10 @@ export default function TodoModal({
 
   const getOptionLabel = (option) => (
     <div className="flex items-center gap-[6px]">
-      <Avatar text={option.nickname.charAt(0)} />
+      <Avatar
+        image={option.profileImageUrl || null}
+        text={option.nickname.charAt(0)}
+      />
       <span>{option.nickname}</span>
     </div>
   );

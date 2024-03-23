@@ -26,6 +26,7 @@ export default function MemberListEdit({ dashboardId }) {
           nickname={member.nickname}
           email={member.email}
           memberId={member.id}
+          profileImageUrl={member.profileImageUrl}
         />
       ));
   }

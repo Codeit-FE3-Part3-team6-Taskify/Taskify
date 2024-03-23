@@ -25,6 +25,7 @@ export default function AvatarGroup({ isMobile, participants }) {
             >
               <Avatar
                 size="large"
+                image={p.profileImageUrl || null}
                 text={p.email.charAt(0).toUpperCase()}
                 backgroundColor={backgroundColors[index]}
               />
