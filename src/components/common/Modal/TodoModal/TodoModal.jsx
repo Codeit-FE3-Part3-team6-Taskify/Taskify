@@ -50,13 +50,14 @@ export default function TodoModal({
       width: '100%',
       height: '100%',
       borderRadius: '8px',
-      padding: '11px 16px',
+      padding: '9px 16px',
       fontSize: '16px',
-      borderColor: state.isFocused ? '#5534DA' : provided.borderColor,
+      borderColor: state.isFocused ? '#5534DA' : '#D9D9D9',
       '&:hover': {
-        borderColor: state.isFocused ? '#5534DA' : provided.borderColor,
+        borderColor: state.isFocused ? '#5534DA' : '#D9D9D9',
       },
       boxShadow: 'none',
+      cursor: 'pointer',
     }),
     singleValue: (provided, state) => ({
       ...provided,
@@ -87,25 +88,27 @@ export default function TodoModal({
         <div className="text-xl md:text-2xl font-bold ">
           {isUpdate ? '할 일 수정' : '할 일 생성'}
         </div>
-        {isUpdate && (
-          <div className="w-full">
-            <div className="mb-2">상태</div>
-            {dropdownMenu}
+
+        <div className="flex flex-col md:flex-row justify-between items-start w-full gap-4">
+          {isUpdate && (
+            <div className="w-full md:w-1/2">
+              <div className="mb-2">상태</div>
+              {dropdownMenu}
+            </div>
+          )}
+
+          <div className="w-full md:w-1/2">
+            <div className="mb-2">담당자</div>
+            <SelectMenu
+              formValues={formValues}
+              assigneeUserId={formValues.assigneeUserId}
+              options={assigneeOptions}
+              customStyles={customStyles}
+              getOptionLabel={getOptionLabel}
+              getOptionValue={getOptionValue}
+              setFormValues={setFormValues}
+            />
           </div>
-        )}
-
-        <div className="w-full">
-          <div className="mb-2">담당자</div>
-
-          <SelectMenu
-            formValues={formValues}
-            assigneeUserId={formValues.assigneeUserId}
-            options={assigneeOptions}
-            customStyles={customStyles}
-            getOptionLabel={getOptionLabel}
-            getOptionValue={getOptionValue}
-            setFormValues={setFormValues}
-          />
         </div>
 
         <div className="w-full">

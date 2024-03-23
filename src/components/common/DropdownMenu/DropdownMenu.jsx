@@ -33,9 +33,9 @@ export default function DropdownMenu({ initialStatus, options, onSelect }) {
     setIsOpen(!isOpen);
   };
   return (
-    <div className="flex flex-col gap-0.5">
+    <div className="relative flex flex-col gap-0.5">
       <button
-        className="flex items-start justify-between rounded-lg border border-gray_D9D9D9 focus:border-violet_5534DA py-[13px] px-4"
+        className=" flex items-start justify-between rounded-lg border border-gray_D9D9D9 focus:border-violet_5534DA py-[14px] px-4"
         // onClick={() => setIsOpen(!isOpen)}
         onClick={handleClick}
       >
@@ -49,7 +49,7 @@ export default function DropdownMenu({ initialStatus, options, onSelect }) {
       {isOpen && (
         <div
           ref={dropdownRef}
-          className="flex flex-col items-start gap-[13px] py-[13px]  rounded-lg border border-gray_D9D9D9 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.08)] "
+          className="absolute top-full left-0 mt-1 w-full flex flex-col items-start gap-[13px] py-[14px] bg-white_FFFFFF  rounded-lg border border-gray_D9D9D9 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.08)] "
         >
           {options.map((option) => (
             <div

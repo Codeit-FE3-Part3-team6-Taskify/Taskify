@@ -46,14 +46,12 @@ export default function DashboardHeader({
           {userInfo && userInfo.email && userInfo.nickname ? (
             <div className="flex justify-between items-center gap-3">
               <div>
-                {userInfo.profileImageUrl && (
-                  <Avatar
-                    image={userInfo.profileImageUrl || null}
-                    size="large"
-                    text={userInfo.email.charAt(0).toUpperCase()}
-                    onClick={togglePopup}
-                  />
-                )}
+                <Avatar
+                  image={userInfo?.profileImageUrl || null}
+                  size="large"
+                  text={userInfo.email.charAt(0).toUpperCase()}
+                  onClick={togglePopup}
+                />
                 {isPopupOpen && (
                   <div className="absolute top-full right-2 md:right-auto ">
                     <PopupMenu

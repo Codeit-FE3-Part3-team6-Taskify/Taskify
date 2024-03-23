@@ -23,7 +23,6 @@ import StatusTag from '../../StatusTag/StatusTag';
 
 export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
   // TODO(조예진): updateTodo와 같은 코드는 나중에 따로 커스텀훅으로 분리할 것
-  // 대시보드에서 카드클릭할 때, 컬럼 이름을 넘겨주는것으로 가정
 
   const userInfo = useUserGet();
 
@@ -192,13 +191,12 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
                 담당자
               </span>
               <div className="flex gap-2 items-center">
-                {cardData.profileImageUrl && (
-                  <Avatar
-                    size="mediumCard"
-                    image={cardData.profileImageUrl}
-                    text={cardData.assigneeUserName.charAt(0).toUpperCase()}
-                  />
-                )}
+                <Avatar
+                  size="mediumCard"
+                  image={cardData?.profileImageUrl || null}
+                  text={cardData.assigneeUserName.charAt(0).toUpperCase()}
+                />
+
                 <span className="text-xs md:text-sm">
                   {cardData.assigneeUserName}
                 </span>
@@ -239,7 +237,6 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
             </div>
 
             {cardData.imageUrl && (
-              // 원본이미지비율에 맞게 높이를 조정하고 싶은데 안됨..
               <div className="relative w-full h-[168px] md:h-[255px]">
                 <Image
                   fill
@@ -269,13 +266,12 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
             {comments.length > 0 &&
               comments.map((comment, index) => (
                 <div key={index} className="flex gap-2">
-                  {comment.author.profileImageUrl && (
-                    <Avatar
-                      size="mediumCard"
-                      image={comment.author.profileImageUrl}
-                      text={comment.author.nickname.charAt(0).toUpperCase()}
-                    />
-                  )}
+                  <Avatar
+                    size="mediumCard"
+                    image={comment?.author?.profileImageUrl || null}
+                    text={comment.author.nickname.charAt(0).toUpperCase()}
+                  />
+
                   <div className="flex flex-col gap[6px] flex-grow">
                     <div className="flex items-center gap-[6px] md:gap-2 text-xs md:text-sm font-semibold">
                       <div>{comment.author.nickname}</div>
@@ -352,13 +348,11 @@ export default function CardModal({ onClose, cardId, columnTitle, columnId }) {
                 담당자
               </span>
               <div className="flex gap-2 items-center">
-                {cardData.profileImageUrl && (
-                  <Avatar
-                    size="mediumCard"
-                    image={cardData.profileImageUrl}
-                    text={cardData.assigneeUserName.charAt(0).toUpperCase()}
-                  />
-                )}
+                <Avatar
+                  size="mediumCard"
+                  image={cardData?.profileImageUrl || null}
+                  text={cardData.assigneeUserName.charAt(0).toUpperCase()}
+                />
 
                 <span className="text-xs md:text-sm">
                   {cardData.assigneeUserName}
