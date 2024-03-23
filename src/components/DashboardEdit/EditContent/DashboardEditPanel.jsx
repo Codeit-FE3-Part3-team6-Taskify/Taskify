@@ -11,6 +11,7 @@ import { axiosPut } from '@/features/axios';
 import TableBox from '@/components/common/Table/TableBox';
 import UserInformationInput from '@/components/common/SignInput/UserInformationInput';
 import { setDashboardInfo } from '@/features/dashboardInfoSlice';
+import { changeSidebarDashboard } from '@/features/sidebarDashboardListSlice';
 
 export default function DashboardEditPanel({ dashboardId }) {
   const dashboardInfo = useSelector((state) => state.dashboardInfo);
@@ -55,6 +56,7 @@ export default function DashboardEditPanel({ dashboardId }) {
       };
       const res = await axiosPut(`/dashboards/${dashboardId}`, body);
       dispatch(setDashboardInfo({ data: res }));
+      dispatch(changeSidebarDashboard({ data: res }));
     } catch (error) {
       return;
     }
