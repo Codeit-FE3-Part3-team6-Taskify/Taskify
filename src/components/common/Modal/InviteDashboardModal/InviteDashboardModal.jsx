@@ -26,6 +26,10 @@ export default function InputModal({ onClose, dashboardId }) {
     if (!res.status) {
       dispatch(addEmails({ data: res }));
     }
+    if (res.status) {
+      // eslint-disable-next-line no-alert
+      // alert(res.data.message);
+    }
   };
 
   const handleButtonClick = () => {
