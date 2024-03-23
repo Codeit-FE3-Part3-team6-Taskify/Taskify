@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-return */
 import Modal from '../Modal';
 import UserInformationInput from '../../SignInput/UserInformationInput';
 import SelectMenu from '../../SelectMenu/SelectMenu';
@@ -35,7 +36,7 @@ export default function TodoModal({
         setFormValues((prev) => ({ ...prev, imageUrl: res.imageUrl }));
       }
     } catch (error) {
-      console.error('이미지를 업로드하는데 실패했습니다.', error);
+      return;
     }
   };
 
@@ -75,10 +76,10 @@ export default function TodoModal({
   const getOptionLabel = (option) => (
     <div className="flex items-center gap-[6px]">
       <Avatar text={option.nickname.charAt(0)} />
-      <span>{option.label}</span>
+      <span>{option.nickname}</span>
     </div>
   );
-  const getOptionValue = (option) => option.value;
+  const getOptionValue = (option) => option.nickname;
 
   return (
     <Modal onClose={onClose}>

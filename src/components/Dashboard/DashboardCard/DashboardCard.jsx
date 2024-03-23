@@ -6,12 +6,17 @@ import React from 'react';
 import Avatar from '@/components/common/Avatar/Avatar';
 import { CalendarIcon } from '../../../../public/images';
 import TagItem from '@/components/common/Tag/TagItem';
+import useModal from '@/hooks/useModal';
 
 // Todo(노진석) : 카드 기능완성하기
-export default function DashboardCard({ cardInfo }) {
-  const { title, dueDate, tags, imageUrl, assignee } = cardInfo;
+export default function DashboardCard({ cardInfo, columnTitle, columnId }) {
+  const { title, dueDate, tags, imageUrl, assignee, id } = cardInfo;
+  const { openModal } = useModal();
   const openCardModal = () => {
-    // 모달 들어올 예정
+    openModal({
+      type: 'todoCard',
+      props: { cardId: id, columnTitle, columnId },
+    });
   };
 
   return (

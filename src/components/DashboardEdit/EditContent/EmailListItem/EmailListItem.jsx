@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import { useDispatch } from 'react-redux';
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
 import { deleteEmails } from '@/features/invitedEmailListSlice';
@@ -17,7 +18,7 @@ export default function EmailListItem({ userEmail, dashboardId, invitedId }) {
       );
       dispatch(deleteEmails({ data: res }));
     } catch (error) {
-      console.error('데이터 전송 실패:', error);
+      return;
     }
     window.location.reload();
   };

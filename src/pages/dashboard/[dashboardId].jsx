@@ -1,6 +1,6 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import DashboardHeader from '@/components/common/Header/DashboardHeader';
 import Sidebar from '@/components/common/Sidebar/Sidebar';
@@ -34,6 +34,10 @@ export default function DashboardPage({ dashboardId }) {
     handleOpenAddColumnsModal,
     openModal,
   } = useDashboardUtilityFunctions(dashboardId, columns);
+  const router = useRouter();
+  const settingClick = () => {
+    router.push(`/dashboard/${dashboardId}/edit`);
+  };
 
   return (
     <div className="flex w-screen">
@@ -62,7 +66,10 @@ export default function DashboardPage({ dashboardId }) {
               ) : null
             }
             buttons={
-              <DashboardHeaderButton invitationClick={handleOpenInvitation} />
+              <DashboardHeaderButton
+                invitationClick={handleOpenInvitation}
+                settingClick={settingClick}
+              />
             }
           />
         </header>

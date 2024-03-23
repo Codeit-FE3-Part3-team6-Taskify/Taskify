@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-return */
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
@@ -14,17 +16,16 @@ export default function DashboardEditPanel({ dashboardId, dashboardInfo }) {
     title: dashboardInfo.title,
     color: dashboardInfo.color,
   });
-
-  useEffect(() => {
-    findColorName(dashboardChange.color);
-  }, []);
-
   const findColorName = (dashboardColor) => {
     const selectedColorName = Object.keys(circleColorList).find(
       (key) => circleColorList[key] === dashboardColor,
     );
     setSelectedColor(selectedColorName);
   };
+
+  useEffect(() => {
+    findColorName(dashboardChange.color);
+  }, []);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -50,7 +51,7 @@ export default function DashboardEditPanel({ dashboardId, dashboardInfo }) {
       await axiosPut(`/dashboards/${dashboardId}`, body);
       window.location.reload();
     } catch (error) {
-      console.error('데이터 전송 실패:', error);
+      return;
     }
   };
 
