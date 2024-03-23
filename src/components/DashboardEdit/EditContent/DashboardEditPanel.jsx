@@ -1,5 +1,6 @@
-/* eslint-disable no-useless-return */
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-useless-return */
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
@@ -72,7 +73,7 @@ export default function DashboardEditPanel({ dashboardId, dashboardInfo }) {
             placeholder="이름을 입력해 주세요."
           />
         </div>
-        <div className="flex justify-between items-center flex-wrap mb-[18px] md:w-[287px]">
+        <div className="flex lg:justify-between md:justify-start items-center flex-wrap mb-[18px] md:w-[287px]">
           {Object.keys(circleColorList).map((color) => (
             <button
               key={color}
