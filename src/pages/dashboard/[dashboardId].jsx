@@ -40,6 +40,9 @@ export default function DashboardPage({ dashboardId }) {
   const settingClick = () => {
     router.push(`/dashboard/${dashboardId}/edit`);
   };
+  if (!dashboardInfo || !memberList || !columns) {
+    return null;
+  }
 
   return (
     <div className="flex w-screen">
