@@ -41,7 +41,8 @@ export default function PopupMenu({
         }
         break;
       case '로그아웃':
-        // TODO(조예진): 로그아웃 처리
+        localStorage.clear();
+        router.push('/');
         break;
       case '내 정보':
         router.push('/mypage');
