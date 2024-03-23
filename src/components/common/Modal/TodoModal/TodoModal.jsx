@@ -9,7 +9,7 @@ import CtaDefault from '../../Buttons/CtaDefault/CtaDefault';
 import Avatar from '../../Avatar/Avatar';
 import { axiosPostFormData } from '@/features/axios';
 
-// TODO(조예진): 미완성- CustomDatePicker 디자인 수정
+// TODO(조예진): 완성
 
 export default function TodoModal({
   isUpdate,
