@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import axios from 'axios';
 
 const axiosInstance = axios.create({
@@ -52,7 +53,6 @@ export const axiosPostJason = async (url, body) => {
     });
     return data;
   } catch (e) {
-    console.log(`api post error : ${e.response.data.message}`);
     return e.response;
   }
 };
@@ -67,7 +67,6 @@ export const axiosPostFormData = async (url, body) => {
     });
     return data;
   } catch (e) {
-    console.log(`api post error : ${e}`);
     return e.response;
   }
 };
@@ -81,7 +80,6 @@ export const axiosPut = async (url, body) => {
     });
     return data;
   } catch (e) {
-    console.log(`api put error : ${e.response.data.message}`);
     return e.response;
   }
 };
