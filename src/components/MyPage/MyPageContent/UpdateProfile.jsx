@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState, useEffect } from 'react';
@@ -29,7 +30,7 @@ export default function UpdateProfile() {
         });
         setNextNickname(nickname);
       } catch (e) {
-        console.error('나의 정보를 가져오지 못했습니다.: ', e);
+        alert('나의 정보를 가져오지 못했습니다.: ', e);
       }
     };
     getMyInfo();
@@ -56,7 +57,7 @@ export default function UpdateProfile() {
             }));
           }
         } catch (e) {
-          console.log('내 정보 업데이트 실패');
+          alert('변경에 실패했습니다. 다시 시도해주세요.');
         }
         return;
       }
@@ -82,11 +83,11 @@ export default function UpdateProfile() {
             }));
           }
         } catch (e) {
-          console.log('내 정보 업데이트 실패');
+          alert('변경에 실패했습니다. 다시 시도해주세요.');
         }
       }
     } catch (error) {
-      console.error('이미지를 업로드하는데 실패했습니다.', error);
+      alert('이미지를 업로드하는데 실패했습니다. 다시 시도해주세요.');
     }
   };
 

@@ -18,7 +18,7 @@ export default function EmailListItem({ userEmail, dashboardId, invitedId }) {
       );
       dispatch(deleteEmails({ data: res }));
     } catch (error) {
-      console.error('데이터 전송 실패:', error);
+      return;
     }
     window.location.reload();
   };

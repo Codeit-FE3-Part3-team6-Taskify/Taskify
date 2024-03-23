@@ -4,7 +4,7 @@ import MyPageContent from '@/components/MyPage/MyPageContent/MyPageContent';
 import useGetDashboardsSidebar from '@/hooks/useGetDashboardsSidebar';
 import useUserGet from '@/hooks/useUserGet';
 
-// TODO(조예진) : 완성
+// TODO(조예진) : 완성.
 export default function MyPage() {
   const userInfo = useUserGet();
   const { sidebarNextPage, sidebarPrevPage, sidebarCurrentPage } =

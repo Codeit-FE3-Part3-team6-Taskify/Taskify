@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-return */
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
@@ -45,9 +46,7 @@ export default function CreateDashboardModal({ onClose }) {
 
       onClose();
     } catch (error) {
-      // eslint-disable-next-line no-alert
-      alert('대시보드 생성에 실패했습니다. 다시 시도해주세요.');
-      console.log(error);
+      return;
     }
   };
 

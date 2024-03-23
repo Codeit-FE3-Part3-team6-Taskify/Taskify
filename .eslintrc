@@ -2,6 +2,18 @@
   "parserOptions": {
     "parser": "babel-eslint",
   },
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false,
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+    },
+    "babelOptions": {
+      "presets": ["@babel/preset-react"],
+    },
+  },
   "extends": ["airbnb", "plugin:prettier/recommended"],
   "plugins": ["react", "jsx-a11y", "import"],
   "rules": {

@@ -71,7 +71,7 @@ const columnList = createSlice({
       const findCard = state[findColumn].cardList.findIndex(
         (card) => card.id === id,
       );
-      if (findColumn === data.columnId) {
+      if (state[findColumn].id === data.columnId) {
         const result = [
           ...state[findColumn].cardList.slice(0, findCard),
           data,
@@ -83,11 +83,18 @@ const columnList = createSlice({
           (column) => column.id === data.columnId,
         );
         const { index } = action.payload;
-        state[findChangeColumn].cardList = [
-          ...state[findChangeColumn].cardList.slice(0, index),
-          data,
-          ...state[findChangeColumn].cardList.slice(index),
-        ];
+        if (index) {
+          state[findChangeColumn].cardList = [
+            ...state[findChangeColumn].cardList.slice(0, index),
+            data,
+            ...state[findChangeColumn].cardList.slice(index),
+          ];
+        } else {
+          state[findChangeColumn].cardList = [
+            data,
+            ...state[findChangeColumn].cardList,
+          ];
+        }
       }
     },
     setCount: (state, action) => {
