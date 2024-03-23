@@ -73,7 +73,7 @@ export default function DashboardEditPanel({ dashboardId, dashboardInfo }) {
             placeholder="이름을 입력해 주세요."
           />
         </div>
-        <div className="flex justify-between items-center flex-wrap mb-[18px] md:w-[287px]">
+        <div className="flex lg:justify-between md:justify-start items-center flex-wrap mb-[18px] md:w-[287px]">
           {Object.keys(circleColorList).map((color) => (
             <button
               key={color}

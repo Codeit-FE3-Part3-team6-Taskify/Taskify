@@ -24,7 +24,7 @@ export default function EmailListItem({ userEmail, dashboardId, invitedId }) {
   };
 
   return (
-    <div className="w-full flex justify-between border-b pb-[20px] gap-y-2 md:items-center md:pt-[20px]">
+    <div className="w-full flex justify-between border-b gap-y-2 md:items-center sm:py-[20px]">
       <h1>{userEmail}</h1>
       <CtaDefault
         size="small"
