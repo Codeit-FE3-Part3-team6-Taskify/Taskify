@@ -3,9 +3,11 @@ import DashboardHeader from '@/components/common/Header/DashboardHeader';
 import MyPageContent from '@/components/MyPage/MyPageContent/MyPageContent';
 import useGetDashboardsSidebar from '@/hooks/useGetDashboardsSidebar';
 import useUserGet from '@/hooks/useUserGet';
+import useRedirectWithAccessToken from '@/hooks/useRedirectWithAccessToken';
 
 // TODO(조예진) : 완성.
 export default function MyPage() {
+  useRedirectWithAccessToken();
   const userInfo = useUserGet();
   const { sidebarNextPage, sidebarPrevPage, sidebarCurrentPage } =
     useGetDashboardsSidebar();

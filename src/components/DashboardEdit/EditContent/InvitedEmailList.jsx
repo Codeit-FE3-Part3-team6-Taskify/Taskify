@@ -23,7 +23,7 @@ export default function InvitedEmailList({ dashboardId }) {
         key={email.id}
         userEmail={email.invitee.email}
         invitedId={email.id}
-        dashboardId={email.id}
+        dashboardId={email.dashboard.id}
       />
     ));
   }

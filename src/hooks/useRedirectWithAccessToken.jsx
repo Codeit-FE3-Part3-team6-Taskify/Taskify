@@ -9,9 +9,15 @@ export default function useRedirectWithAccessToken(url) {
   const router = useRouter();
   const execute = () => {
     if (!token) {
+      if (url) {
+        return;
+      }
+      router.push('/signin');
       return;
     }
-    router.push(url);
+    if (url) {
+      router.push(url);
+    }
   };
 
   useEffect(() => {
