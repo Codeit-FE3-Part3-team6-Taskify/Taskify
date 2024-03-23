@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable no-useless-return */
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
@@ -97,6 +98,7 @@ export default function UpdateTodo({ onClose, cardId }) {
             data: res,
           }),
         );
+
         onClose();
       }
     } catch (e) {
