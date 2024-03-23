@@ -1,32 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import ko from 'date-fns/locale/ko'; // 한국어 설정 파일 불러오기
 import dayjs from 'dayjs';
-
-import { CalendarIcon } from '@/../public/images';
+import { CustomInput } from './CustomInput';
 
 export default function CustomDatePicker({ dueDate, setFormValues }) {
   const initialDate = dueDate ? new Date(dueDate) : new Date();
   const [selectedDate, setSelectedDate] = useState(initialDate);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
-  // 할일 수정 - 마감일을 가져옴
   useEffect(() => {
     setSelectedDate(initialDate);
   }, [dueDate]);
 
   const handleDateChange = (date) => {
     const formattedDate = dayjs(date).format('YYYY-MM-DD HH:mm');
-
     setFormValues((prev) => ({
       ...prev,
       dueDate: formattedDate,
     }));
-
     setSelectedDate(date);
+    setIsOpen(false);
   };
 
-  //  할일 생성 - 날짜 선택 안 하면 현재시각을 마감일로 지정
   useEffect(() => {
     if (!dueDate) {
       handleDateChange(new Date());
@@ -35,15 +33,28 @@ export default function CustomDatePicker({ dueDate, setFormValues }) {
 
   return (
     <DatePicker
-      showIcon
-      showTimeSelect
-      dateFormat="yyyy.MM.dd HH:mm"
-      shouldCloseOnSelect
+      locale={ko}
+      minDate={new Date()}
       selected={selectedDate}
       onChange={handleDateChange}
-      icon={<Image src={CalendarIcon} alt="calendar" />}
-      placeholderText="날짜를 입력해 주세요"
-      className="w-full  py-[15px] px-4 bg-white border border-gray-D9D9D9 rounded-md p-2 focus:outline-none focus:border-violet_5534DA"
+      showTimeSelect
+      timeFormat="HH:mm"
+      timeIntervals={10}
+      timeCaption="시간"
+      dateFormat="yyyy.MM.dd HH:mm"
+      customInput={
+        <CustomInput
+          isFocused={isFocused}
+          handleFocus={() => setIsFocused(true)}
+          handleBlur={() => setIsFocused(false)}
+          value={selectedDate}
+          onChange={(e) => setSelectedDate(e.target.value)}
+          toggleCalendar={() => setIsOpen(!isOpen)}
+        />
+      }
+      open={isOpen}
+      onCalendarClose={() => setIsOpen(false)}
+      onClickOutside={() => setIsOpen(false)}
     />
   );
 }

@@ -3,6 +3,7 @@
 /* eslint-disable react/no-array-index-key */
 import Image from 'next/image';
 import React from 'react';
+import dayjs from 'dayjs';
 import Avatar from '@/components/common/Avatar/Avatar';
 import { CalendarIcon } from '../../../../public/images';
 import TagItem from '@/components/common/Tag/TagItem';
@@ -60,10 +61,14 @@ export default function DashboardCard({ cardInfo, columnTitle }) {
               alt="달력 아이콘"
             />
             <span className="text-xs font-medium text-gray_787486 md:text-sm">
-              {dueDate}
+              {dayjs(dueDate).format('YYYY.MM.DD')}
             </span>
             <span className="ml-auto">
-              <Avatar size="small" text={assignee.nickname[0].toUpperCase()} />
+              <Avatar
+                image={assignee.profileImageUrl || null}
+                size="small"
+                text={assignee.nickname[0].toUpperCase()}
+              />
             </span>
           </div>
         </div>

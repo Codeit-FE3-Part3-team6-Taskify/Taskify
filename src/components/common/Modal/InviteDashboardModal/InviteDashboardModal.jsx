@@ -28,7 +28,7 @@ export default function InputModal({ onClose, dashboardId }) {
     }
     if (res.status) {
       // eslint-disable-next-line no-alert
-      alert(res.data.message);
+      // alert(res.data.message);
     }
   };
 

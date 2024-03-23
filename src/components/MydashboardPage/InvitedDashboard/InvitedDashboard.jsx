@@ -53,7 +53,7 @@ export default function InvitedDashboard({ fetchMore, loading, updateTitle }) {
       dispatch(removeInvitations(response));
     } catch (error) {
       // eslint-disable-next-line no-alert
-      alert('다시 시도해주세요.');
+      // alert('다시 시도해주세요.');
     }
   };
 
@@ -69,7 +69,7 @@ export default function InvitedDashboard({ fetchMore, loading, updateTitle }) {
       dispatch(removeInvitations(response));
     } catch (error) {
       // eslint-disable-next-line no-alert
-      alert('다시 시도해주세요.');
+      // alert('다시 시도해주세요.');
     }
   };
 

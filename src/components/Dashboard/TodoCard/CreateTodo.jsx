@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-alert */
 /* eslint-disable object-shorthand */
 /* eslint-disable import/order */
@@ -38,7 +39,7 @@ export default function CreateTodo({ onClose, dashboardId, columnId }) {
         onClose();
       }
     } catch (e) {
-      alert('카드를 생성할 수 없습니다. 다시 시도해주세요.');
+      return e.response;
     }
   };
 
