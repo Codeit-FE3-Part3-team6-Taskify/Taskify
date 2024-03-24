@@ -68,7 +68,7 @@ export default function DashboardEditPanel({ dashboardId }) {
     <TableBox>
       <div className="relative flex flex-col gap-4 md:gap-6">
         <h2 className="mb-2 text-xl md:text-2xl font-bold">
-          {dashboardChange.title}
+          {dashboardInfo.title}
         </h2>
         <div>
           <span className="text-base md:text-lg font-medium">
