@@ -29,15 +29,47 @@
 ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"> ![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-%23764ABC.svg?style=for-the-badge&logo=redux&logoColor=white)
  ![Tailwind CSS](https://img.shields.io/badge/Tailwind-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white) ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white) <img src="https://img.shields.io/badge/prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white"> <img src="https://img.shields.io/badge/gitmoji-ffdd67?style=for-the-badge&logo=gitmoji&logoColor=white"> ![Day.js](https://img.shields.io/badge/Day.js-%23007ACC?style=for-the-badge&logo=javascript&logoColor=white) ![React Datepicker](https://img.shields.io/badge/React_Datepicker-%23000000?style=for-the-badge&logo=react&logoColor=61DAFB)
-![date-fns](https://img.shields.io/badge/date--fns-%23AA4226?style=for-the-badge) ![React Select](https://img.shields.io/badge/React_Select-%2361DAFB?style=for-the-badge&logo=react&logoColor=white)
+![date-fns](https://img.shields.io/badge/date--fns-%23AA4226?style=for-the-badge) ![React Select](https://img.shields.io/badge/React_Select-%2361DAFB?style=for-the-badge&logo=react&logoColor=white) <img src="https://img.shields.io/badge/beautiful_dnd-68BC71?style=for-the-badge&logo=beautiful_dnd&logoColor=white">
 
 
 ## 💬 Community
 
-![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white) <a href=https://deeply-tibia-5e9.notion.site/Codeit-FE-Sprint-6-8382f5e32f444c4288d134dbd1df64dd><img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white"></a> ![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)
+<img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white"> ![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)
 
 ## 🚢 Deploy
 
-<a href='https://tourmaline-lebkuchen-4fc027.netlify.app'><img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=Netlify&logoColor=white"></a> <a href='https://65b8ddb9cef6e3d48fbf66d9-filttgsnsz.chromatic.com/?path=/docs/atoms-button-disabledaskquestionbutton--docs'><img src="https://img.shields.io/badge/storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white"></a>
+![Babel](https://img.shields.io/badge/Babel-F9DC3E?style=for-the-badge&logo=babel&logoColor=black) ![Vercel](https://img.shields.io/badge/Vercel-%23000000?style=for-the-badge&logo=vercel&logoColor=white)
+
 
 <br/>
+
+---
+
+# ✨로컬 환경 - 설치 및 실행 가이드
+
+## 1. Getting the sources
+
+```bash
+git clone https://github.com/Codeit-FE3-part3-team6-Taskify/Taskify.git
+cd Taskify
+```
+
+## 2. Install packages
+
+```bash
+npm install
+```
+
+## 3. Run development server
+
+```bash
+npm run start
+```
+
+<br>
+
+---
+
+# ✨ Feature
+
+## 1. 메인 페이지
