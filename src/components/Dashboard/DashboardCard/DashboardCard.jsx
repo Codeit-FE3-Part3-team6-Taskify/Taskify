@@ -52,7 +52,7 @@ export default function DashboardCard({ cardInfo, columnTitle }) {
                 </div>
               ))}
           </div>
-          <div className="relative flex items-center gap-[6px] flex-auto">
+          <div className="relative flex items-center gap-[6px] flex-auto w-full">
             <Image
               className="relative top-[-1px]"
               width={18}

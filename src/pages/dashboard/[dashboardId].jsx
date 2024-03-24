@@ -68,11 +68,12 @@ export default function DashboardPage({ dashboardId }) {
               ) : null
             }
             buttons={
-              <DashboardHeaderButton
-                createdByMe={dashboardInfo ? dashboardInfo.createdByMe : false}
-                invitationClick={handleOpenInvitation}
-                settingClick={settingClick}
-              />
+              dashboardInfo && dashboardInfo.createdByMe ? (
+                <DashboardHeaderButton
+                  invitationClick={handleOpenInvitation}
+                  settingClick={settingClick}
+                />
+              ) : null
             }
           />
         </header>

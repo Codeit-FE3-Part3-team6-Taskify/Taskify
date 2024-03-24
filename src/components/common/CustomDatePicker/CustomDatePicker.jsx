@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable import/no-extraneous-dependencies */
+import React, { useState, useEffect, useRef } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import ko from 'date-fns/locale/ko'; // 한국어 설정 파일 불러오기
@@ -10,6 +11,7 @@ export default function CustomDatePicker({ dueDate, setFormValues }) {
   const [selectedDate, setSelectedDate] = useState(initialDate);
   const [isOpen, setIsOpen] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const ref = useRef();
 
   useEffect(() => {
     setSelectedDate(initialDate);
@@ -50,6 +52,7 @@ export default function CustomDatePicker({ dueDate, setFormValues }) {
           value={selectedDate}
           onChange={(e) => setSelectedDate(e.target.value)}
           toggleCalendar={() => setIsOpen(!isOpen)}
+          ref={ref}
         />
       }
       open={isOpen}
