@@ -8,12 +8,10 @@
 
 **Codeit FE Sprint 3기 - 6팀**
 
-|  Name  |                      Github                      |
-| :----: | :----------------------------------------------: |
-| 심은주 |       [@nyaknya](https://github.com/nyaknya)       |
-| 조예진 |     [@yejiniee](https://github.com/yejiniee)     |
-| 노진석 | [@SiWooJinSeok](https://github.com/SiWooJinSeok) |
-| 송상훈 |    [@Song-Sang](https://github.com/Song-Sang)    |
+|  Name  |                      Github                      |  Name  |                      Github                      |
+| :----: | :----------------------------------------------: | :----: | :----------------------------------------------: |
+| 심은주 |       [@nyaknya](https://github.com/nyaknya)       | 조예진 |     [@yejiniee](https://github.com/yejiniee)     |
+| 노진석 | [@SiWooJinSeok](https://github.com/SiWooJinSeok) | 송상훈 |    [@Song-Sang](https://github.com/Song-Sang)    |
 
 ## ⏲️ Duration
 
@@ -161,6 +159,28 @@ npm run start
 # ✨ Project Architecture
 
 ## 🔁 User Flow
+
 ![2024-03-24_185307](https://github.com/Song-Sang/Taskify/assets/152246452/34901786-afb1-40b0-abeb-eaaa0871818c)
 
 ## 📁 Folder structure
+
+```bash
+├── public
+│   ├── images
+├── code
+│   ├── components
+│   │   ├──common
+│   │   ├──Dashboard
+│   │   ├──MyDashboard
+│   │   ├──MyPage
+│   │        .
+│   │        .
+│   │        .
+│   ├── constnsts
+│   ├── features
+│   └── hooks
+│   └── pages
+│   └── styles
+│   └── utils
+└── run.sh
+``` 
