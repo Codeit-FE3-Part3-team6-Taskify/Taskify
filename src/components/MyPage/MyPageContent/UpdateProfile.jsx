@@ -1,15 +1,21 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-alert */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { axiosPostFormData, axiosPut, axiosGet } from '@/features/axios';
 import TableBox from '@/components/common/Table/TableBox';
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
 import UserInformationInput from '@/components/common/SignInput/UserInformationInput';
 import FileUpload from '@/components/common/FileUpload/FileUpload';
 import { AddImg } from '@/../public/images';
+import useModal from '@/hooks/useModal';
+import { addUserInfo, changeNickname } from '@/features/userInfoSlice';
 
 export default function UpdateProfile() {
+  const dispatch = useDispatch();
+  const { openModal } = useModal();
   const [myInfo, setMyInfo] = useState({
     email: '',
     nickname: '',
@@ -30,7 +36,7 @@ export default function UpdateProfile() {
         });
         setNextNickname(nickname);
       } catch (e) {
-        alert('나의 정보를 가져오지 못했습니다.: ', e);
+        return e.response;
       }
     };
     getMyInfo();
@@ -49,15 +55,19 @@ export default function UpdateProfile() {
             nickname: nextNickname,
             profileImageUrl: myInfo.profileImageUrl,
           });
-
           if (!updatedMyInfo.status) {
+            dispatch(changeNickname({ nickname: nextNickname }));
             setMyInfo((prev) => ({
               ...prev,
               nickname: nextNickname,
             }));
+            openModal({
+              type: 'alert',
+              props: { text: '내 정보가 변경되었습니다.' },
+            });
           }
         } catch (e) {
-          alert('변경에 실패했습니다. 다시 시도해주세요.');
+          return;
         }
         return;
       }
@@ -76,6 +86,7 @@ export default function UpdateProfile() {
           });
 
           if (!updatedMyInfo.status) {
+            dispatch(addUserInfo({ ...updatedMyInfo }));
             setMyInfo((prev) => ({
               ...prev,
               nickname: nextNickname,
@@ -83,11 +94,11 @@ export default function UpdateProfile() {
             }));
           }
         } catch (e) {
-          alert('변경에 실패했습니다. 다시 시도해주세요.');
+          return e.response;
         }
       }
-    } catch (error) {
-      alert('이미지를 업로드하는데 실패했습니다. 다시 시도해주세요.');
+    } catch (e) {
+      return e.response;
     }
   };
 

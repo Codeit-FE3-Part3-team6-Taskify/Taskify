@@ -5,31 +5,37 @@ import Avatar from '@/components/common/Avatar/Avatar';
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
 import { axiosDelete } from '@/features/axios';
 
-export default function MemberListItem({ nickname, email, memberId }) {
+export default function MemberListItem({
+  nickname,
+  email,
+  memberId,
+  profileImageUrl,
+}) {
   const dispatch = useDispatch();
-
-  const handleDeleteClick = async (memberId) => {
+  const handleDeleteClick = async () => {
     try {
-      const res = await axiosDelete(`/members/${memberId}`, {
-        memberId,
-      });
-      dispatch(deleteMember({ data: res }));
+      await axiosDelete(`/members/${memberId}`, {});
+      dispatch(deleteMember({ id: memberId }));
     } catch (error) {
+      // eslint-disable-next-line no-useless-return
       return;
     }
-    window.location.reload();
   };
 
   return (
-    <div className="w-full flex border-b pb-[20px] gap-y-2 md:items-center md:pt-[20px] ">
+    <div className="w-full flex border-b pb-[20px] gap-y-2 md:items-center sm:pt-[20px] ">
       <div className="flex items-center gap-3 w-full">
-        <Avatar size="large" text={email.charAt(0).toUpperCase()} />
+        <Avatar
+          size="large"
+          image={profileImageUrl || null}
+          text={email.charAt(0).toUpperCase()}
+        />
         <span>{nickname}</span>
       </div>
       <CtaDefault
         size="small"
         color="white"
-        onClick={() => handleDeleteClick(memberId)}
+        onClick={() => handleDeleteClick()}
       >
         삭제
       </CtaDefault>

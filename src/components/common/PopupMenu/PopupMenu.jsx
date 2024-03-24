@@ -37,11 +37,12 @@ export default function PopupMenu({
           dispatch(deleteCard({ id: cardId, columnId }));
           onClose();
         } catch (e) {
-          alert('카드를 삭제 할 수 없습니다. 다시 시도해주세요.');
+          return;
         }
         break;
       case '로그아웃':
-        // TODO(조예진): 로그아웃 처리
+        localStorage.clear();
+        router.push('/');
         break;
       case '내 정보':
         router.push('/mypage');
@@ -49,7 +50,6 @@ export default function PopupMenu({
       case '내 대시보드':
         router.push('/mydashboard');
         break;
-
       default:
         break;
     }

@@ -88,9 +88,11 @@ export default function UpdateTodo({ onClose, cardId }) {
       const res = await axiosPut(`cards/${cardId}`, updatedFormValues);
 
       if (!res.status) {
-        dispatch(
-          deleteCard({ columnId: initialFormValues.columnId, id: cardId }),
-        );
+        if (initialFormValues.columnId !== res.columnId) {
+          dispatch(
+            deleteCard({ columnId: initialFormValues.columnId, id: cardId }),
+          );
+        }
         dispatch(
           changeCard({
             id: cardId,
@@ -98,7 +100,6 @@ export default function UpdateTodo({ onClose, cardId }) {
             data: res,
           }),
         );
-
         onClose();
       }
     } catch (e) {

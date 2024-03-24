@@ -1,5 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import getRandomColor from '@/utils/getRandomColor';
+
 // Todo(조예진) : 완성
 export default function Avatar({
   size = 'medium',
@@ -9,7 +11,7 @@ export default function Avatar({
   backgroundColor,
   textColorRed,
 }) {
-  const bgColor = backgroundColor || '#A3C4A2';
+  const bgColor = backgroundColor || getRandomColor();
   const sizes = {
     small: 'w-[22px] md:w-[24px] h-[22px] md:h-[24px] text-[10px] md:text-xs',
     medium: 'w-[26px] h-[26px] text-xs',

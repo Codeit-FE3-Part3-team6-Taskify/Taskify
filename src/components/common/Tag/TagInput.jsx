@@ -1,11 +1,10 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 // eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
 import TagItem from './TagItem';
 import getRandomColorPair from '@/utils/getRandomColorPair';
 
 export default function TagInput({ initialTag, setFormValues }) {
-  const inputRef = useRef(null);
   const [tagList, setTagList] = useState([]);
   const [tagItem, setTagItem] = useState('');
   const [isFocused, setIsFocused] = useState(false);
@@ -32,7 +31,6 @@ export default function TagInput({ initialTag, setFormValues }) {
       tags: updatedTagList,
     }));
 
-    inputRef.current.focus();
     setPrevColorIndex(colorIndex);
   };
 
@@ -49,8 +47,6 @@ export default function TagInput({ initialTag, setFormValues }) {
       ...prevFormValues,
       tags: filteredTagList,
     }));
-
-    inputRef.current.focus();
   };
 
   return (
@@ -73,7 +69,6 @@ export default function TagInput({ initialTag, setFormValues }) {
             );
           })}
         <input
-          ref={inputRef}
           type="text"
           placeholder={tagList.length > 0 ? '' : '입력 후 Enter'}
           className=" inline-flex  bg-transparent focus:border-0 focus:outline-none cursor-text"

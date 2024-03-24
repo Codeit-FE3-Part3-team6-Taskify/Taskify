@@ -66,35 +66,47 @@ const columnList = createSlice({
       state[findColumn].cardList = filterCard;
     },
     changeCard: (state, action) => {
-      const { data, columnId, id } = action.payload;
+      const { data, columnId, id, index } = action.payload;
       const findColumn = state.findIndex((column) => column.id === columnId);
-      const findCard = state[findColumn].cardList.findIndex(
-        (card) => card.id === id,
+      const findChangeColumn = state.findIndex(
+        (column) => column.id === data.columnId,
       );
       if (state[findColumn].id === data.columnId) {
-        const result = [
-          ...state[findColumn].cardList.slice(0, findCard),
-          data,
-          ...state[findColumn].cardList.slice(findCard + 1),
-        ];
-        state[findColumn].cardList = result;
-      } else {
-        const findChangeColumn = state.findIndex(
-          (column) => column.id === data.columnId,
+        const findCard = state[findColumn].cardList.findIndex(
+          (card) => card.id === id,
         );
-        const { index } = action.payload;
-        if (index) {
+        if (findCard >= 0 && !index) {
+          const result = [
+            ...state[findColumn].cardList.slice(0, findCard),
+            data,
+            ...state[findColumn].cardList.slice(findCard + 1),
+          ];
+          state[findColumn].cardList = result;
+        }
+        if (index > 0) {
           state[findChangeColumn].cardList = [
             ...state[findChangeColumn].cardList.slice(0, index),
             data,
             ...state[findChangeColumn].cardList.slice(index),
           ];
-        } else {
+        }
+        if (index === 0) {
           state[findChangeColumn].cardList = [
             data,
             ...state[findChangeColumn].cardList,
           ];
         }
+      } else if (state[findColumn].id !== data.columnId && index) {
+        state[findChangeColumn].cardList = [
+          ...state[findChangeColumn].cardList.slice(0, index),
+          data,
+          ...state[findChangeColumn].cardList.slice(index),
+        ];
+      } else {
+        state[findChangeColumn].cardList = [
+          data,
+          ...state[findChangeColumn].cardList,
+        ];
       }
     },
     setCount: (state, action) => {

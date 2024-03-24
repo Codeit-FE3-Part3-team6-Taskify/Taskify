@@ -1,15 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import Image from 'next/image';
-import Link from 'next/link';
 import DashboardHeader from '@/components/common/Header/DashboardHeader';
 import Sidebar from '@/components/common/Sidebar/Sidebar';
 import useUserGet from '@/hooks/useUserGet';
 import CtaIcon from '@/components/common/Buttons/CtaIcon/CtaIcon';
-import { AddButtonEmpty, CrownIcon, SettingIcon } from '@/../public/images';
+import { AddButtonEmpty, CrownIcon } from '@/../public/images';
 import useDashboardInfo from '@/hooks/useDashboardInfo';
 import useModal from '@/hooks/useModal';
 import useGetDashboardsSidebar from '@/hooks/useGetDashboardsSidebar';
 import EditContent from '@/components/DashboardEdit/EditContent/EditContent';
+import useRedirectWithAccessToken from '@/hooks/useRedirectWithAccessToken';
 
 export async function getServerSideProps(context) {
   const { dashboardId } = context.params;
@@ -22,6 +22,7 @@ export async function getServerSideProps(context) {
 }
 
 export default function DashboardEdit({ dashboardId }) {
+  useRedirectWithAccessToken();
   const { openModal } = useModal();
   const userInfo = useUserGet();
   const { sidebarNextPage, sidebarPrevPage, sidebarCurrentPage } =
@@ -48,6 +49,7 @@ export default function DashboardEdit({ dashboardId }) {
       <div className="flex flex-col flex-grow">
         <header>
           <DashboardHeader
+            divider
             title={dashboardInfo ? dashboardInfo.title : ''}
             userInfo={userInfo}
             participants={memberList}
@@ -64,9 +66,6 @@ export default function DashboardEdit({ dashboardId }) {
             buttons={
               // 기능 넣기
               <div className="flex gap-[16px]">
-                <Link href={`/dashboard/${dashboardId}/edit`}>
-                  <CtaIcon imageSrc={SettingIcon}>관리</CtaIcon>
-                </Link>
                 <CtaIcon
                   onClick={handleOpenInvitation}
                   imageSrc={AddButtonEmpty}
@@ -79,13 +78,10 @@ export default function DashboardEdit({ dashboardId }) {
         </header>
         {dashboardInfo ? (
           <div className="flex flex-col justify-start gap-3 py-[17px] px-3 md:p-5 bg-gray_FAFAFA flex-grow">
-            <EditContent
-              dashboardId={dashboardId}
-              dashboardInfo={dashboardInfo}
-            />
+            <EditContent dashboardId={dashboardId} />
           </div>
         ) : (
-          <div>Loading...</div> // 금요일에 간단하게 Loading 추가하면 좋을듯
+          <div>Loading...</div>
         )}
       </div>
     </div>

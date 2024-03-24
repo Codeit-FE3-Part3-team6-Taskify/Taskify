@@ -12,6 +12,7 @@ import CtaAdd from '@/components/common/Buttons/CtaAdd/CtaAdd';
 import useGetDashboardsSidebar from '@/hooks/useGetDashboardsSidebar';
 import useDashboardUtilityFunctions from '@/hooks/useDashboardUtilityFunctions';
 import DashboardHeaderButton from '@/components/Dashboard/DashboardHeaderButton/DashboardHeaderButton';
+import useRedirectWithAccessToken from '@/hooks/useRedirectWithAccessToken';
 
 export async function getServerSideProps(context) {
   const { dashboardId } = context.params;
@@ -24,6 +25,7 @@ export async function getServerSideProps(context) {
 }
 
 export default function DashboardPage({ dashboardId }) {
+  useRedirectWithAccessToken();
   const userInfo = useUserGet();
   const { sidebarNextPage, sidebarPrevPage, sidebarCurrentPage } =
     useGetDashboardsSidebar();
@@ -66,10 +68,12 @@ export default function DashboardPage({ dashboardId }) {
               ) : null
             }
             buttons={
-              <DashboardHeaderButton
-                invitationClick={handleOpenInvitation}
-                settingClick={settingClick}
-              />
+              dashboardInfo && dashboardInfo.createdByMe ? (
+                <DashboardHeaderButton
+                  invitationClick={handleOpenInvitation}
+                  settingClick={settingClick}
+                />
+              ) : null
             }
           />
         </header>

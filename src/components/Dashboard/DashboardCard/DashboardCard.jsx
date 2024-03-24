@@ -3,19 +3,20 @@
 /* eslint-disable react/no-array-index-key */
 import Image from 'next/image';
 import React from 'react';
+import dayjs from 'dayjs';
 import Avatar from '@/components/common/Avatar/Avatar';
 import { CalendarIcon } from '../../../../public/images';
 import TagItem from '@/components/common/Tag/TagItem';
 import useModal from '@/hooks/useModal';
 
 // Todo(노진석) : 카드 기능완성하기
-export default function DashboardCard({ cardInfo, columnTitle, columnId }) {
+export default function DashboardCard({ cardInfo, columnTitle }) {
   const { title, dueDate, tags, imageUrl, assignee, id } = cardInfo;
   const { openModal } = useModal();
   const openCardModal = () => {
     openModal({
       type: 'todoCard',
-      props: { cardId: id, columnTitle, columnId },
+      props: { cardId: id, columnTitle },
     });
   };
 
@@ -40,7 +41,7 @@ export default function DashboardCard({ cardInfo, columnTitle, columnId }) {
       <section className="flex flex-col gap-[6px] md:w-full">
         <h5 className="text-lg font-medium mt-1 ">{title}</h5>
         <div className="flex flex-col md:flex-row md:items-center md:w-full md:gap-4 lg:flex-col lg:items-stretch lg:gap-0">
-          <div className="flex gap-[6px]">
+          <div className="flex gap-[6px] flex-wrap">
             {tags &&
               tags.map((tag, i) => (
                 <div
@@ -51,7 +52,7 @@ export default function DashboardCard({ cardInfo, columnTitle, columnId }) {
                 </div>
               ))}
           </div>
-          <div className="relative flex items-center gap-[6px] flex-auto">
+          <div className="relative flex items-center gap-[6px] flex-auto w-full">
             <Image
               className="relative top-[-1px]"
               width={18}
@@ -60,10 +61,14 @@ export default function DashboardCard({ cardInfo, columnTitle, columnId }) {
               alt="달력 아이콘"
             />
             <span className="text-xs font-medium text-gray_787486 md:text-sm">
-              {dueDate}
+              {dayjs(dueDate).format('YYYY.MM.DD')}
             </span>
             <span className="ml-auto">
-              <Avatar size="small" text={assignee.nickname[0].toUpperCase()} />
+              <Avatar
+                image={assignee.profileImageUrl || null}
+                size="small"
+                text={assignee.nickname[0].toUpperCase()}
+              />
             </span>
           </div>
         </div>

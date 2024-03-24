@@ -31,28 +31,33 @@ const SelectMenu = ({
     }));
   };
 
-  const CustomOption = ({ data, isSelected, ...props }) => (
-    <components.Option {...props}>
-      <div
-        className={`flex items-center gap-[6px] ${isSelected ? 'pl-0' : 'pl-[41px]'}`}
-      >
-        {isSelected && (
-          <Image
-            src={CheckIcon}
-            style={{ marginLeft: 8, marginRight: 5 }}
-            width={22}
-            height={22}
-            alt="selected"
-          />
-        )}
-        <span className="">
-          <Avatar text={data.nickname.charAt(0)} />
-        </span>
+  const CustomOption = ({ data, isSelected, ...props }) => {
+    return (
+      <components.Option {...props}>
+        <div
+          className={`flex items-center gap-[6px] ${isSelected ? 'pl-0' : 'pl-[41px]'}`}
+        >
+          {isSelected && (
+            <Image
+              src={CheckIcon}
+              style={{ marginLeft: 8, marginRight: 5 }}
+              width={22}
+              height={22}
+              alt="selected"
+            />
+          )}
+          <span className="">
+            <Avatar
+              image={data.profileImageUrl || null}
+              text={data.nickname.charAt(0)}
+            />
+          </span>
 
-        <span>{data.nickname}</span>
-      </div>
-    </components.Option>
-  );
+          <span>{data.nickname}</span>
+        </div>
+      </components.Option>
+    );
+  };
 
   const CustomDropdownIndicator = (props) => (
     <components.DropdownIndicator {...props}>

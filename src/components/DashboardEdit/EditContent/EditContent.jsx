@@ -9,14 +9,12 @@ import InvitedEmailList from './InvitedEmailList';
 import DashboardDelete from '@/components/common/Buttons/DashboardDelete/DashboardDelete';
 import { axiosDelete } from '@/features/axios';
 
-export default function EditContent({ dashboardId, dashboardInfo }) {
+export default function EditContent({ dashboardId }) {
   const router = useRouter();
 
   const handleDashboardDelete = async () => {
     try {
-      await axiosDelete(`/dashboards/${dashboardId}/`, {
-        dashboardId,
-      });
+      await axiosDelete(`/dashboards/${dashboardId}`);
       router.push('/mydashboard');
     } catch (error) {
       return;
@@ -39,10 +37,7 @@ export default function EditContent({ dashboardId, dashboardInfo }) {
         </span>
         <span className="text-sm md:text-base font-medium">돌아가기</span>
       </Link>
-      <DashboardEditPanel
-        dashboardId={dashboardId}
-        dashboardInfo={dashboardInfo}
-      />
+      <DashboardEditPanel dashboardId={dashboardId} />
       <MemberListEdit dashboardId={dashboardId} />
       <InvitedEmailList dashboardId={dashboardId} />
       <DashboardDelete onClick={handleDashboardDelete} />

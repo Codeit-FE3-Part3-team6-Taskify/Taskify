@@ -16,19 +16,23 @@ const invitedEmailListSlice = createSlice({
       state.totalCount = totalCount;
     },
     addEmails: (state, action) => {
-      return {
-        invitations: [...state.invitations, action.payload.member],
-        totalCount: state.totalCount + 1,
-      };
+      const newEmail = action.payload.data;
+      if (state.invitations) {
+        state.invitations = [newEmail, ...state.invitations];
+      } else {
+        state.invitations = [newEmail];
+      }
+
+      state.totalCount += 1;
     },
     reset: () => {
       return initialValue;
     },
     deleteEmails: (state, action) => {
-      const filterMember = state.invitations.filter(
-        (member) => member.id !== action.payload.id,
+      const filterInvitations = state.invitations.filter(
+        (invitations) => invitations.id !== action.payload.id,
       );
-      state.invitations = filterMember;
+      state.invitations = filterInvitations;
       state.totalCount -= 1;
     },
     setEmailCurrentPage: (state, action) => {

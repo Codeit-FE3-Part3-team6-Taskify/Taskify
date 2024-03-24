@@ -1,4 +1,5 @@
 /* eslint-disable object-shorthand */
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { axiosPostJason } from '@/features/axios';
 import Modal from '../Modal';
@@ -6,6 +7,7 @@ import UserInformationInput from '@/components/common/SignInput/UserInformationI
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
 import ToastNotification from '../../ToastNotification/ToastNotification';
 import { checkSignEmail } from '@/utils/validation';
+import { addEmails } from '@/features/invitedEmailListSlice';
 
 export default function InputModal({ onClose, dashboardId }) {
   const [inputValue, setInputValue] = useState('');
@@ -13,16 +15,20 @@ export default function InputModal({ onClose, dashboardId }) {
     isVisible: false,
     message: '',
   });
+
+  const dispatch = useDispatch();
   const isInputEmpty = inputValue.trim() === '';
 
   const postInvitations = async () => {
-    try {
-      await axiosPostJason(`/dashboards/${dashboardId}/invitations`, {
-        email: inputValue,
-      });
-    } catch (error) {
+    const res = await axiosPostJason(`/dashboards/${dashboardId}/invitations`, {
+      email: inputValue,
+    });
+    if (!res.status) {
+      dispatch(addEmails({ data: res }));
+    }
+    if (res.status) {
       // eslint-disable-next-line no-alert
-      alert('데이터 전송에 실패했습니다.');
+      // alert(res.data.message);
     }
   };
 

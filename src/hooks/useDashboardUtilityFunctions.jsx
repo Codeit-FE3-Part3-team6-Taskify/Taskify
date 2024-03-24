@@ -64,6 +64,7 @@ export default function useDashboardUtilityFunctions(dashboardId, columns) {
         index: destination.index,
       }),
     );
+
     dispatch(
       plusCount({
         count: 1,

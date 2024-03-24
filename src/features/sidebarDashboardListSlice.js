@@ -26,6 +26,19 @@ export const sidebarDashboardList = createSlice({
     setSidebarCurrentPage: (state, action) => {
       state.sidebarCurrentPage = action.payload;
     },
+    changeSidebarDashboard: (state, action) => {
+      const { data } = action.payload;
+      const findIndex = state.sidebarDashboards.findIndex(
+        (dashboard) => dashboard.id === data.id,
+      );
+      if (findIndex >= 0) {
+        state.sidebarDashboards = [
+          ...state.sidebarDashboards.slice(0, findIndex),
+          data,
+          ...state.sidebarDashboards.slice(findIndex + 1),
+        ];
+      }
+    },
   },
 });
 
@@ -33,4 +46,5 @@ export const {
   setSidebarDashboards,
   addSidebarDashboard,
   setSidebarCurrentPage,
+  changeSidebarDashboard,
 } = sidebarDashboardList.actions;

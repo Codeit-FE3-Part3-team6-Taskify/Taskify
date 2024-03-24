@@ -17,7 +17,6 @@ export const dashboardList = createSlice({
     },
     addDashboard: (state, action) => {
       state.totalCount += 1;
-
       if (state.currentPage === 1) {
         const newDashboards = [action.payload, ...state.dashboards];
         state.dashboards = newDashboards.slice(0, 6);
