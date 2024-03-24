@@ -91,6 +91,7 @@ npm run dev
 
 - 로그인이 되어있다면 '나의 대시보드' 페이지로 이동합니다.
 - 로그인이 되어있지 않다면 상단에 <로그인, 회원가입 버튼>을 통해 해당 페이지로 이동합니다.
+![ezgif com-crop](https://github.com/Song-Sang/Taskify/assets/152246452/a87c6311-c445-4c91-831f-e11279df5d4e)
 
 ## 2. 로그인 페이지
 
