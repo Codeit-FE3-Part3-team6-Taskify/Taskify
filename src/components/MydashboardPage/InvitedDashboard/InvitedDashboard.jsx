@@ -5,8 +5,10 @@ import { NoMailIcon, SearchIcon } from '@/../public/images';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import CtaDefault from '../../common/Buttons/CtaDefault/CtaDefault';
 import useDebounce from '@/hooks/useDebounce';
-import { axiosPut } from '@/features/axios';
+import { axiosGet, axiosPut } from '@/features/axios';
 import { removeInvitations } from '@/features/invitationsDashboardListSlice';
+import { addSidebarDashboard } from '@/features/sidebarDashboardListSlice';
+import { addDashboard } from '@/features/dashboardListSlice';
 
 // 송상훈 TODO :
 export default function InvitedDashboard({ fetchMore, loading, updateTitle }) {
@@ -50,6 +52,9 @@ export default function InvitedDashboard({ fetchMore, loading, updateTitle }) {
         `https://sp-taskify-api.vercel.app/3-6/invitations/${invitationId}`,
         body,
       );
+      const data = await axiosGet(`/dashboards/${response.dashboard.id}`);
+      dispatch(addDashboard(data));
+      dispatch(addSidebarDashboard(data));
       dispatch(removeInvitations(response));
     } catch (error) {
       // eslint-disable-next-line no-alert
