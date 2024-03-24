@@ -166,8 +166,8 @@ npm run start
 
 ```bash
 ├── public
-│   ├── images
-├── code
+│   └── images
+├── src
 │   ├── components
 │   │   ├──common
 │   │   ├──Dashboard
@@ -178,9 +178,9 @@ npm run start
 │   │        .
 │   ├── constnsts
 │   ├── features
-│   └── hooks
-│   └── pages
-│   └── styles
+│   ├──  hooks
+│   ├──  pages
+│   ├── styles
 │   └── utils
 └── run.sh
 ``` 
