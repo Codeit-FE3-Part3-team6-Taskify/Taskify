@@ -1,5 +1,9 @@
 # ✨프로젝트 소개
 
+## 🚢 Deploy
+
+https://taskify-roan-five.vercel.app/?_vercel_share=ndjiOAde48mH4oNPBcm13hNZM0XWQinW
+
 ## ☀️ Project Topic
 
 우리의 시간을 효율적으로 관리하기 위해, 다양한 일정 및 시간 관리 기능을 제공하는 일정관리 플랫폼 
@@ -33,11 +37,6 @@
 ## 💬 Community
 
 <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white"> ![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)
-
-## 🚢 Deploy
-
-![Babel](https://img.shields.io/badge/Babel-F9DC3E?style=for-the-badge&logo=babel&logoColor=black) ![Vercel](https://img.shields.io/badge/Vercel-%23000000?style=for-the-badge&logo=vercel&logoColor=white)
-
 
 <br/>
 
@@ -87,11 +86,16 @@ npm run dev
   - 사용자의 현재 대시보드 목록을 보여줍니다.(페이지네이션)
   - <+ 버튼>을 통해 '새로운 대시보드 생성' 모달을 띄웁니다.
 
+<br>
+<img src="https://github.com/Song-Sang/Taskify/assets/152246452/8a0d619a-b69f-4cfe-b1b6-2cf3bcb1675f" alt="초대하기" width="480" height="270">
+
 ## 1. 랜딩 페이지
 
 - 로그인이 되어있다면 '나의 대시보드' 페이지로 이동합니다.
 - 로그인이 되어있지 않다면 상단에 <로그인, 회원가입 버튼>을 통해 해당 페이지로 이동합니다.
-![ezgif com-crop](https://github.com/Song-Sang/Taskify/assets/152246452/a87c6311-c445-4c91-831f-e11279df5d4e)
+
+<br>
+<img src="https://github.com/Song-Sang/Taskify/assets/152246452/5db0b3d8-7ca7-4add-9bc7-4e42f1adcddb" alt="랜딩" width="480" height="270">
 
 ## 2. 로그인 페이지
 
@@ -102,6 +106,10 @@ npm run dev
 - 비밀번호는 해당 인풋의 아이콘을 통해 숨기거나 나타낼 수 있습니다.
 - 로그인 성공시 액세스 토큰을 발급합니다.
 
+<br>
+<img src="https://github.com/Song-Sang/Taskify/assets/152246452/5736506e-3235-4ec8-a452-d05996d6bd1b" alt="로그인" width="480" height="270">
+
+
 ## 3. 회원가입 페이지
 
 - <로고 버튼>은 랜딩 페이지로 이동합니다.
@@ -109,6 +117,9 @@ npm run dev
 - 각 인풋 요소는 유효하지 않은 정보가 입력되었을시 경고창을 보여줍니다.
 - 모든 인풋 요소가 채워지고 경고창이 없다면 <가입하기 버튼>이 활성화 됩니다.
 - 중복 이메일 가입 시도는 모달창을 통해 거절됩니다.
+
+<br>
+<img src="https://github.com/Song-Sang/Taskify/assets/152246452/632fe702-fba8-4c2e-8cd7-5bf9df86b4c0" alt="회원가입" width="480" height="270">
 
 ## 4. 나의 대시보드 페이지 (헤더, 사이드바)
 
@@ -119,6 +130,10 @@ npm run dev
   - 두 요소가 모두 충족되지 않았을 경우 <생성 버튼>은 비활성화 됩니다.
 - 내가 생성한 대시보드는 '왕관 아이콘'을 통해 확인 가능합니다.
 - '초대받은 대시보드' 영역을 통해 타인이 생성한 대시보드의 초대요청에 응하거나 거절할 수 있습니다.(무한스크롤)
+
+<br>
+<img src="https://github.com/Song-Sang/Taskify/assets/152246452/0bcd8f6a-525e-4c62-82be-25d9e93ecf4b" alt="나의대시보드" width="480" height="270">
+
 
 ## 5. 대시보드 페이지 (헤더, 사이드바)
 
@@ -138,6 +153,12 @@ npm run dev
       - 필수 항목을 입력하지 않으면 <수정 버튼>은 비활성화 됩니다
 - 생성된 '할 일 카드'들은 생성된 컬럼 사이를 드래그 앤 드롭으로 이동 가능합니다.
 
+<br>
+<img src="https://github.com/Song-Sang/Taskify/assets/152246452/49ded428-c1a3-4f8c-87f5-220ad8aa2f8a" alt="컬럼생성" width="480" height="270">  <img src="https://github.com/Song-Sang/Taskify/assets/152246452/81896808-48ee-4126-88bb-22d8a318ac6c" alt="할일생성" width="480" height="270">
+
+<br>
+<img src="https://github.com/Song-Sang/Taskify/assets/152246452/baa92e05-d509-447c-8977-61ad9859a6f6" alt="할일수정" width="480" height="270">
+
 ## 6. 대시보드 관리 페이지 (헤더, 사이드바)
 
 - 대시보드 페이지에서 생성자가 본인인 경우, 헤더의 <관리> 버튼을 통해 접근할 수 있습니다.
@@ -146,12 +167,18 @@ npm run dev
 - 해당 대시보드의 현재 초대 목록을 확인할 수 있습니다. (페이지네이션)
 - <대시보드 삭제하기 버튼>을 통해 해당 대시보드을 전체 삭제할 수 있습니다.
 
+<br>
+<img src="https://github.com/Song-Sang/Taskify/assets/152246452/234c53d4-1d01-427e-9afd-c00ced09f610" alt="대시보드관리" width="480" height="270">
+
 ## 7. 계정 관리 페이지 (헤더, 사이드바)
 
 - 헤더의 <프로필 버튼> 드롭다운의 <내 정보 버튼> 클릭을 통해 접근할 수 있습니다.
 - 프로필 이미지와, 닉네임을 변경할 수 있습니다.
 - 비밀번호를 변경할 수 있습니다.
   - 모든 인풋 요소가 채워지고 경고창이 없다면 <변경 버튼>이 활성화 됩니다.
+
+<br>
+<img src="https://github.com/Song-Sang/Taskify/assets/152246452/c7e1f0bd-7b5c-4112-8fbd-79bfc8401921" alt="계정관리" width="480" height="270">
 
 <br/>
 
@@ -243,26 +270,30 @@ npm run dev
 
 ## 👍🏻 Keep
 
-- 자신이 맡은 부분을 기한 내에 마무리하여 PR을 올리고, 코드 리뷰와 코드 수정을 꼼꼼히 했다.
-
 - 모두 최선을 다해 각자의 역할에 맡게 잘 해냈다.
 
-- 팀원이 능동적으로 일거리를 찾아서 척척 다 해결해서 멋있다 !
+- 한명도 빠짐없이 소통이 잘 되어서 프로젝트 진행 자체에 어려움은 전혀 없었다.
 
-- 새로운 기술에 대한 두려움이 없다.
+- 다들 첫 프로젝트에 비해 확실히 기본 기능 구현 자체에 어려움은 덜 느꼈고 그래서 다양한 라이브러리와, 새로운 로직 적용에 다 같이 집중할 수 있었다.
+
+- 각자의 기능 구현에 사용된 코드를 볼 일이 잦아서 상대방 코드의 장단점을 볼 기회가 많아서 좋았다.  
 
 ## 🤔 Problem
 
-- 로딩, 에러 처리를 못했다는 것. 로딩중 이거나 에러가 났을 때 임시로 보여줄 컴포넌트를 만들지 못해서 아쉽다.
+- 시간이 예상보다 촉박해서 기능 구현에 집중하느라 챙기지 못한 것들이 많은 듯 싶다.
 
-- 스토리북이 익숙하지 않아 만드는 데 어려움이 있었다.
+- 특히 Tailwind를 처음 사용해서 그런지 디자인적인 측면에서 아쉬운점이 많이 보인다.
 
-- 추가 기능을 더 넣었으면 좋았을 것 같다.
+- 짜여져 있는 API 내에서 프로젝트를 진행하다보니 API로직 관련으로도 원하는 기능을 구현하지 못하는 경우가 많다는걸 종종 느꼈다.
+
+- 아직은 팀프로젝트에 익숙하지는 않아서 서로의 로직이 자주 연결되는 프로젝트를 하다보니 결과적으로 불필요한 코드들도 있고, 컨벤션이 깔끔하게 지켜지지 않은 부분도 있는거같다.
+
 
 ## 🔥 Try
 
-- 발표가 끝이나면 모두에게 칭찬해주기!
+- 앞으로의 프로젝트에서는 진행 중간중간 다 같이 리팩토링을 거쳐서 코드를 정리하고 다음 기능 개발을 하는 방법을 시도해보고싶다.
 
-- 프론트엔드 마스터가 되자!!
+- 이번 프로젝트도 종료 후 기록해 놓은 문제점들을 리팩토링 하는 시간을 가져야겠다.
+
 
 <br/>
