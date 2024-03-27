@@ -10,6 +10,8 @@ import { openModal } from '@/features/modalSlice';
 import { axiosDelete } from '@/features/axios';
 import useOutsideClick from '@/hooks/useOutSideClick';
 import { deleteCard } from '@/features/columnsSlice';
+import { resetDashboardList } from '@/features/dashboardListSlice';
+import { resetSideDashboard } from '@/features/sidebarDashboardListSlice';
 
 export default function PopupMenu({
   cardId,
@@ -41,6 +43,8 @@ export default function PopupMenu({
         }
         break;
       case '로그아웃':
+        dispatch(resetDashboardList());
+        dispatch(resetSideDashboard());
         localStorage.clear();
         router.push('/');
         break;
