@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import { openModal } from '@/features/modalSlice';
 import { axiosDelete } from '@/features/axios';
 import useOutsideClick from '@/hooks/useOutSideClick';
-import { deleteCard } from '@/features/columnsSlice';
+import { deleteCard, reset } from '@/features/columnsSlice';
 import { resetDashboardList } from '@/features/dashboardListSlice';
 import { resetSideDashboard } from '@/features/sidebarDashboardListSlice';
 
@@ -43,10 +43,13 @@ export default function PopupMenu({
         }
         break;
       case '로그아웃':
-        dispatch(resetDashboardList());
-        dispatch(resetSideDashboard());
-        localStorage.clear();
+        setTimeout(() => {
+          dispatch(resetDashboardList());
+          dispatch(resetSideDashboard());
+          dispatch(reset());
+        }, 1000);
         router.push('/');
+        localStorage.clear();
         break;
       case '내 정보':
         router.push('/mypage');
