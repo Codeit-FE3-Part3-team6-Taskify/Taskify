@@ -239,6 +239,7 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
               </span>
               <div className="flex gap-2 items-center">
                 <Avatar
+                  userId={cardData?.assigneeUserId}
                   size="mediumCard"
                   image={cardData?.profileImageUrl || null}
                   text={cardData.assigneeUserName.charAt(0).toUpperCase()}
@@ -319,6 +320,7 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
                 {comments.map((comment) => (
                   <div key={comment.id} className="flex gap-2">
                     <Avatar
+                      userId={comment?.author?.id}
                       size="mediumCard"
                       image={comment?.author?.profileImageUrl || null}
                       text={comment.author.nickname.charAt(0).toUpperCase()}
@@ -403,6 +405,7 @@ export default function CardModal({ onClose, cardId, columnTitle }) {
               </span>
               <div className="flex gap-2 items-center">
                 <Avatar
+                  userId={cardData?.assigneeUserId}
                   size="mediumCard"
                   image={cardData?.profileImageUrl || null}
                   text={cardData.assigneeUserName.charAt(0).toUpperCase()}

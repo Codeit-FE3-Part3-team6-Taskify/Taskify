@@ -23,6 +23,7 @@ export default function MemberListEdit({ dashboardId }) {
       .map((member) => (
         <MemberListItem
           key={member.id}
+          userId={member.userId}
           nickname={member.nickname}
           email={member.email}
           memberId={member.id}

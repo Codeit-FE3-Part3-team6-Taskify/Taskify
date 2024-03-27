@@ -74,15 +74,18 @@ export default function TodoModal({
     }),
   };
 
-  const getOptionLabel = (option) => (
-    <div className="flex items-center gap-[6px]">
-      <Avatar
-        image={option.profileImageUrl || null}
-        text={option.nickname.charAt(0)}
-      />
-      <span>{option.nickname}</span>
-    </div>
-  );
+  const getOptionLabel = (option) => {
+    return (
+      <div className="flex items-center gap-[6px]">
+        <Avatar
+          userId={option.userId}
+          image={option.profileImageUrl || null}
+          text={option.nickname.charAt(0)}
+        />
+        <span>{option.nickname}</span>
+      </div>
+    );
+  };
   const getOptionValue = (option) => option.nickname;
 
   return (
