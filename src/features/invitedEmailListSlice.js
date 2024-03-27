@@ -17,7 +17,12 @@ const invitedEmailListSlice = createSlice({
     },
     addEmails: (state, action) => {
       const newEmail = action.payload.data;
-      state.invitations.push(newEmail);
+      if (state.invitations) {
+        state.invitations = [newEmail, ...state.invitations];
+      } else {
+        state.invitations = [newEmail];
+      }
+
       state.totalCount += 1;
     },
     reset: () => {

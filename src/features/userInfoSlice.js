@@ -19,6 +19,6 @@ const userInfo = createSlice({
   },
 });
 
-export const { addUserInfo, reset } = userInfo.actions;
+export const { addUserInfo, reset, changeNickname } = userInfo.actions;
 
 export default userInfo;

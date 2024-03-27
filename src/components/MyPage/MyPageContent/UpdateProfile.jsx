@@ -3,6 +3,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { axiosPostFormData, axiosPut, axiosGet } from '@/features/axios';
 import TableBox from '@/components/common/Table/TableBox';
 import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
@@ -10,8 +11,10 @@ import UserInformationInput from '@/components/common/SignInput/UserInformationI
 import FileUpload from '@/components/common/FileUpload/FileUpload';
 import { AddImg } from '@/../public/images';
 import useModal from '@/hooks/useModal';
+import { addUserInfo, changeNickname } from '@/features/userInfoSlice';
 
 export default function UpdateProfile() {
+  const dispatch = useDispatch();
   const { openModal } = useModal();
   const [myInfo, setMyInfo] = useState({
     email: '',
@@ -52,8 +55,8 @@ export default function UpdateProfile() {
             nickname: nextNickname,
             profileImageUrl: myInfo.profileImageUrl,
           });
-
           if (!updatedMyInfo.status) {
+            dispatch(changeNickname({ nickname: nextNickname }));
             setMyInfo((prev) => ({
               ...prev,
               nickname: nextNickname,
@@ -83,6 +86,7 @@ export default function UpdateProfile() {
           });
 
           if (!updatedMyInfo.status) {
+            dispatch(addUserInfo({ ...updatedMyInfo }));
             setMyInfo((prev) => ({
               ...prev,
               nickname: nextNickname,
