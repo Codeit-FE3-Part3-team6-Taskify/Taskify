@@ -92,6 +92,10 @@ export default function UpdateProfile() {
               nickname: nextNickname,
               profileImageUrl: nextProfileImageUrl,
             }));
+            openModal({
+              type: 'alert',
+              props: { text: '내 정보가 변경되었습니다.' },
+            });
           }
         } catch (e) {
           return e.response;
