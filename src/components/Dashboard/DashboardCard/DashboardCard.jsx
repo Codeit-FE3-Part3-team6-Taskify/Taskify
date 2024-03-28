@@ -65,6 +65,7 @@ export default function DashboardCard({ cardInfo, columnTitle }) {
             </span>
             <span className="ml-auto">
               <Avatar
+                userId={assignee.id}
                 image={assignee.profileImageUrl || null}
                 size="small"
                 text={assignee.nickname[0].toUpperCase()}

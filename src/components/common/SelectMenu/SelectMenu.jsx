@@ -48,6 +48,7 @@ const SelectMenu = ({
           )}
           <span className="">
             <Avatar
+              userId={data.userId}
               image={data.profileImageUrl || null}
               text={data.nickname.charAt(0)}
             />
