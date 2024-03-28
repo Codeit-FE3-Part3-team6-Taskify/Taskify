@@ -11,6 +11,7 @@ export default function MemberListItem({
   email,
   memberId,
   profileImageUrl,
+  isOwner,
 }) {
   const dispatch = useDispatch();
   const handleDeleteClick = async () => {
@@ -34,13 +35,19 @@ export default function MemberListItem({
         />
         <span>{nickname}</span>
       </div>
-      <CtaDefault
-        size="small"
-        color="white"
-        onClick={() => handleDeleteClick()}
-      >
-        삭제
-      </CtaDefault>
+      {isOwner ? (
+        <span className="text-sm text-violet_5534DA whitespace-nowrap text-center px-4">
+          관리자
+        </span>
+      ) : (
+        <CtaDefault
+          size="small"
+          color="white"
+          onClick={() => handleDeleteClick()}
+        >
+          삭제
+        </CtaDefault>
+      )}
     </div>
   );
 }

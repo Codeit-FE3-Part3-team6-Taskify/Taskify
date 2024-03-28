@@ -48,7 +48,7 @@ export default function InvitedEmailList({ dashboardId }) {
           />
         </div>
       </div>
-      <div className=" md:h-[404px] sm:max-h-[337px]">
+      <div className=" md:max-h-[500px] sm:max-h-[340px]">
         <h3 className="text-gray_9FA6B2 mt-5">이메일</h3>
         {content}
       </div>
