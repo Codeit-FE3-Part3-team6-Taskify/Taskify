@@ -39,6 +39,7 @@ export const sidebarDashboardList = createSlice({
         ];
       }
     },
+    resetSideDashboard: () => initialValue,
   },
 });
 
@@ -47,4 +48,5 @@ export const {
   addSidebarDashboard,
   setSidebarCurrentPage,
   changeSidebarDashboard,
+  resetSideDashboard,
 } = sidebarDashboardList.actions;
