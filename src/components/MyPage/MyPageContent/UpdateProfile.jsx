@@ -130,6 +130,7 @@ export default function UpdateProfile() {
               <UserInformationInput
                 value={nextNickname}
                 onChange={(e) => setNextNickname(e.target.value)}
+                placeholder="닉네임을 입력해주세요."
               />
             </div>
           </div>

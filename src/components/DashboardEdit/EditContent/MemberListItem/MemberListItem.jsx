@@ -6,6 +6,7 @@ import CtaDefault from '@/components/common/Buttons/CtaDefault/CtaDefault';
 import { axiosDelete } from '@/features/axios';
 
 export default function MemberListItem({
+  userId,
   nickname,
   email,
   memberId,
@@ -26,6 +27,7 @@ export default function MemberListItem({
     <div className="w-full flex border-b pb-[20px] gap-y-2 md:items-center sm:pt-[20px] ">
       <div className="flex items-center gap-3 w-full">
         <Avatar
+          userId={userId}
           size="large"
           image={profileImageUrl || null}
           text={email.charAt(0).toUpperCase()}
