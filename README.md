@@ -210,7 +210,7 @@ npm run dev
 │   ├──  pages
 │   ├── styles
 │   └── utils
-└── run.sh
+
 ```
 
 <br/>
