@@ -25,8 +25,13 @@ export const dashboardList = createSlice({
     setCurrentPage: (state, action) => {
       state.currentPage = action.payload;
     },
+    resetDashboardList: () => initialValue,
   },
 });
 
-export const { setDashboards, addDashboard, setCurrentPage } =
-  dashboardList.actions;
+export const {
+  setDashboards,
+  addDashboard,
+  setCurrentPage,
+  resetDashboardList,
+} = dashboardList.actions;

@@ -18,17 +18,17 @@ export default function MemberListEdit({ dashboardId }) {
   } else if (!members || members.length <= 1) {
     content = <h1>초대된 멤버가 없습니다.</h1>;
   } else {
-    content = members
-      .slice(1)
-      .map((member) => (
-        <MemberListItem
-          key={member.id}
-          nickname={member.nickname}
-          email={member.email}
-          memberId={member.id}
-          profileImageUrl={member.profileImageUrl}
-        />
-      ));
+    content = members.map((member) => (
+      <MemberListItem
+        key={member.id}
+        userId={member.userId}
+        nickname={member.nickname}
+        email={member.email}
+        memberId={member.id}
+        profileImageUrl={member.profileImageUrl}
+        isOwner={member.isOwner}
+      />
+    ));
   }
 
   return (

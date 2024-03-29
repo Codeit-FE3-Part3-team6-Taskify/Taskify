@@ -1,5 +1,4 @@
 import Avatar from './Avatar';
-import { BACKGROUND_COLORS } from '@/constants/colors';
 
 // Todo(조예진) : 완성
 export default function AvatarGroup({ isMobile, participants }) {
@@ -21,7 +20,7 @@ export default function AvatarGroup({ isMobile, participants }) {
                 size="large"
                 image={p.profileImageUrl || null}
                 text={p.email.charAt(0).toUpperCase()}
-                backgroundColor={BACKGROUND_COLORS[index]}
+                userId={p.userId}
               />
             </span>
           ))}
@@ -34,7 +33,6 @@ export default function AvatarGroup({ isMobile, participants }) {
               <Avatar
                 size="large"
                 text={`+${participants.length - number}`}
-                backgroundColor="#F4D7DA"
                 textColorRed
               />
             </span>

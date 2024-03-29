@@ -47,6 +47,7 @@ export default function DashboardHeader({
             <div className="flex justify-between items-center gap-3">
               <div>
                 <Avatar
+                  userId={userInfo?.id}
                   image={userInfo?.profileImageUrl || null}
                   size="large"
                   text={userInfo.email.charAt(0).toUpperCase()}
